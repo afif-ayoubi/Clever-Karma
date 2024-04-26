@@ -7,7 +7,7 @@ class LoginUserUseCase {
   final UsersRepository repository;
   LoginUserUseCase(this.repository);
 
-  Future<Either<Failure, User>> call(User user) async {
+  Future<Either<Failure, Unit>> call(User user) async {
     return repository.login(user);
   }
 }
