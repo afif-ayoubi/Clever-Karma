@@ -4,6 +4,7 @@ import 'package:mobile/features/auth/domain/entities/user.dart';
 
 import 'package:mobile/core/common_domain/repository/base_repository.dart';
 
-abstract class UsersRepository extends BaseRepository {
-  Future<Either<Failure, User>> login(User user);
+abstract class UsersRepository extends BaseRepository<User> {
+  Future<Either<Failure, Unit>> login(User user);
+  Future<Either<Failure,Unit>> logout();
 }
