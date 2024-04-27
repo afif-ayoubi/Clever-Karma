@@ -12,7 +12,9 @@ class UsersRepositoryImpl implements UsersRepository {
   final UserLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
   UsersRepositoryImpl(
-      this.localDataSource, this.remoteDataSource, this.networkInfo);
+      {required this.localDataSource,
+      required this.remoteDataSource,
+      required this.networkInfo});
   @override
   Future<Either<Failure, Unit>> create(user) {
     final UserModel userModel = UserModel.fromUser(user);
@@ -53,8 +55,6 @@ class UsersRepositoryImpl implements UsersRepository {
     // TODO: implement logout
     throw UnimplementedError();
   }
-  Future<Either<Failure, Unit>> _getMessage(Fu){
 
-  }
-
+  Future<Either<Failure, Unit>> _getMessage(Fu) {}
 }

@@ -12,7 +12,7 @@ abstract class UserRemoteDataSource {
 const baseURL="http://localhost:3000";
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
-  UserRemoteDataSourceImpl(this.client);
+  UserRemoteDataSourceImpl({required this.client});
   @override
   Future<Unit> createUser(UserModel user) {
     // TODO: implement createUser
