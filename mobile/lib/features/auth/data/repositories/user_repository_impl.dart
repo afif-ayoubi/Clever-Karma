@@ -3,23 +3,19 @@ import 'package:mobile/core/error/failures.dart';
 import 'package:mobile/core/network/network_info.dart';
 import 'package:mobile/features/auth/data/datasources/user_local_data_source.dart';
 import 'package:mobile/features/auth/data/datasources/user_remote_data_source.dart';
+import 'package:mobile/features/auth/data/models/user_model.dart';
 import 'package:mobile/features/auth/domain/entities/user.dart';
 import 'package:mobile/features/auth/domain/repositories/user_repository.dart';
 
 class UsersRepositoryImpl implements UsersRepository {
-  final UserRemoteDataSource userRemoteDataSource;
-  final UserLocalDataSource userLocalDataSource;
+  final UserRemoteDataSource remoteDataSource;
+  final UserLocalDataSource localDataSource;
   final NetworkInfo networkInfo;
   UsersRepositoryImpl(
-      this.userLocalDataSource, this.userRemoteDataSource, this.networkInfo);
+      this.localDataSource, this.remoteDataSource, this.networkInfo);
   @override
   Future<Either<Failure, Unit>> create(user) {
-    if(networkInfo.isConnected){
-      try{
-        userRemoteDataSource.createUser(user);
-        return Right(unit);
-      }
-    }
+    final UserModel userModel = UserModel.fromUser(user);
   }
 
   @override
@@ -57,4 +53,8 @@ class UsersRepositoryImpl implements UsersRepository {
     // TODO: implement logout
     throw UnimplementedError();
   }
+  Future<Either<Failure, Unit>> _getMessage(Fu){
+
+  }
+
 }

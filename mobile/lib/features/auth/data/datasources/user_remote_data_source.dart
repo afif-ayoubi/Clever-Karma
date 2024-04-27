@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
+import 'package:http/http.dart' as http;
 
 abstract class UserRemoteDataSource {
   Future<Unit> createUser(UserModel user);
@@ -8,8 +9,10 @@ abstract class UserRemoteDataSource {
   Future<Unit> updateUser(UserModel user);
   Future<UserModel> getUser();
 }
-
+const baseURL="http://localhost:3000";
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
+  final http.Client client;
+  UserRemoteDataSourceImpl(this.client);
   @override
   Future<Unit> createUser(UserModel user) {
     // TODO: implement createUser
@@ -39,5 +42,4 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     // TODO: implement updateUser
     throw UnimplementedError();
   }
-
 }
