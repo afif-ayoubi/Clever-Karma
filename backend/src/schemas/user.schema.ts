@@ -3,7 +3,8 @@ import { USER_ROLES } from 'src/utils/user_roles_enum';
 import { NotificationSchema, Notification } from './notification.schema';
 import { Location, LocationSchema } from './location.schema';
 import { UserInfo } from './user_info.schema';
-import { OrganizationDetail } from './organization_datail.schema';
+import { OrganizationDetail, OrganizationDetailSchema } from './organization_datail.schema';
+import { Follower, FollowerSchema } from './follower_schema';
 @Schema()
 export class User {
 
@@ -20,12 +21,14 @@ export class User {
 
     @Prop({ type: UserInfo, })
     userInfo?: UserInfo;
-    @Prop({ type: OrganizationDetail })
+    @Prop({ type: OrganizationDetailSchema })
     organizationDetail?: OrganizationDetail;
     @Prop({ type: LocationSchema, })
     location?: Location;
     @Prop({ type: [NotificationSchema], default: [] })
     notification: Notification[];
+    @Prop({ type:FollowerSchema, })
+    followers?: Follower;
 
 
 }
