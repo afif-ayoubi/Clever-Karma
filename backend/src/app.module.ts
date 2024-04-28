@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './users/users.module';
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://127.0.0.1/backend'),
+  imports: [MongooseModule.forRoot('mongodb://localhost/backend'),
     UserModule
   ],
   controllers: [AppController],

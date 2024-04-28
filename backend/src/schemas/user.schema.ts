@@ -3,6 +3,7 @@ import { USER_ROLES } from 'src/utils/user_roles_enum';
 import { NotificationSchema, Notification } from './notification.schema';
 import { Location, LocationSchema } from './location.schema';
 import { UserInfo } from './user_info.schema';
+import { OrganizationDetail } from './organization_datail.schema';
 @Schema()
 export class User {
 
@@ -16,15 +17,16 @@ export class User {
     password: string;
     @Prop({ enum: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.ORGANIZATION], default: USER_ROLES.USER })
     role: string;
-    @Prop()
-    image?: String;
 
     @Prop({ type: UserInfo, })
     userInfo?: UserInfo;
+    @Prop({ type: OrganizationDetail })
+    organizationDetail?: OrganizationDetail;
     @Prop({ type: LocationSchema, })
     location?: Location;
     @Prop({ type: [NotificationSchema], default: [] })
     notification: Notification[];
+
 
 }
 export const UserSchema = SchemaFactory.createForClass(User);

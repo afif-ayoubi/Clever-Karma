@@ -7,5 +7,7 @@ export class UserInfo {
     gender?: String;
     @Prop()
     dateOfBirth?: Date;
+    @Prop()
+    image?: String;
 }
 export const UserInfoSchema = SchemaFactory.createForClass(UserInfo);
