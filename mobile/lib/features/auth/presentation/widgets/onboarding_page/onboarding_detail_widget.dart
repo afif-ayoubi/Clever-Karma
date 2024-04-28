@@ -8,10 +8,13 @@ class OnBoardingDetailWidget extends StatelessWidget {
   final String title;
   final String body;
   final bool isFirst;
+    final VoidCallback onPressed;
+
   final String imgPath;
   const OnBoardingDetailWidget(
       {super.key,
       required this.title,
+      required this.onPressed,
       required this.body,
       this.isFirst = false,
       required this.imgPath});
@@ -51,7 +54,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                       "What issues matter most to you",
                       style: theme.bodyLarge,
                       textAlign: TextAlign.center,
-                    )..animate().fade(delay: 2.seconds).slideY(curve: Curves.easeInOut,),
+                    ).animate().fade(delay: 2.seconds).slideY(curve: Curves.easeInOut,),
                   ),
                 ],
               ),
@@ -61,7 +64,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
               left: 0,
               right: 0,
               child: Center(
-                child: OnBoardingBtn(onPressed: () {}),
+                child: OnBoardingBtn(onPressed: onPressed),
               ),
             ),
           ],

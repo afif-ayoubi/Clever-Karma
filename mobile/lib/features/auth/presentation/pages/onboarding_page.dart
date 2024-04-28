@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/features/auth/presentation/widgets/onboarding_page/onboarding_detail_widget.dart';
 
-class OnBoardingPage extends StatelessWidget {
+class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(context),
-    );
-  }
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
-Widget _buildBody(BuildContext context) {
+class _OnBoardingPageState extends State<OnBoardingPage> {
+  int currentIndex = 0;
+
   List<Map<String, dynamic>> onBoardingData = [
     {
       'title': "Find Your Passion",
@@ -33,17 +31,32 @@ Widget _buildBody(BuildContext context) {
       'imgPath': '',
     },
   ];
-  return SizedBox(
-     child:  ListView.builder(
-        itemCount: onBoardingData.length,
-        itemBuilder: (context, index) {
-          return OnBoardingDetailWidget(
-            title: onBoardingData[index]['title'],
-            body: onBoardingData[index]['body'],
-            isFirst: onBoardingData[index]['isFirst'],
-            imgPath: onBoardingData[index]['imgPath'],
-          );
-        },
-      )
-  );
+  void _incrementIndex() {
+    setState(() {
+      currentIndex = (currentIndex + 1) % onBoardingData.length;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildBody(BuildContext context) {
+    return SizedBox(
+        child: ListView.builder(
+      itemCount: onBoardingData.length,
+      itemBuilder: (context, index) {
+        return OnBoardingDetailWidget(
+          title: onBoardingData[index]['title'],
+          body: onBoardingData[index]['body'],
+          isFirst: onBoardingData[index]['isFirst'],
+          imgPath: onBoardingData[index]['imgPath'],
+          onPressed: _incrementIndex,
+        );
+      },
+    ));
+  }
 }

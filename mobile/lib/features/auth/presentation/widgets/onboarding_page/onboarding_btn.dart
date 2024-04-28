@@ -3,7 +3,7 @@
 import 'package:mobile/core/theme/hex_color.dart';
 
   class OnBoardingBtn extends StatelessWidget {
-    final void Function() onPressed;
+  final VoidCallback onPressed;
     const OnBoardingBtn({super.key, required this.onPressed});
 
     @override
