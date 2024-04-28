@@ -41,11 +41,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
    String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure _:
-        return serverFailureMessage;
+        return SERVER_FAILURE_MESSAGE;
       case EmptyCacheFailure _:
-        return emptyCacheFailureMessage;
+        return EMPTY_CACHE_FAILURE_MESSAGE;
       case OfflineFailure _:
-        return offlineFailureMessage;
+        return OFFLINE_FAILURE_MESSAGE;
       default:
         return "Unexpected  Error, Please try again later";
     }
