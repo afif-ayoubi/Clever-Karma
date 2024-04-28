@@ -41,7 +41,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                     child: Text(
                       "Find Your Passion",
                       style: theme.displayLarge,
-                    ).animate().fade(duration: 1.seconds).slideY(curve: Curves.easeInOut,),
+                    ).animate().fade(delay: 1.seconds).slideY(curve: Curves.easeInOut,),
                   ),
                   Padding(
                     padding: isFirst
@@ -51,7 +51,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                       "What issues matter most to you",
                       style: theme.bodyLarge,
                       textAlign: TextAlign.center,
-                    )..animate().fade(duration: 2.seconds).slideY(curve: Curves.easeInOut,),
+                    )..animate().fade(delay: 2.seconds).slideY(curve: Curves.easeInOut,),
                   ),
                 ],
               ),
