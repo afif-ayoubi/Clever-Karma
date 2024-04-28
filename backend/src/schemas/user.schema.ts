@@ -2,6 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { USER_ROLES } from 'src/utils/user_roles_enum';
 import { NotificationSchema, Notification } from './notification.schema';
 import { Location, LocationSchema } from './location.schema';
+import { UserInfo } from './user_info.schema';
 @Schema()
 export class User {
 
@@ -17,17 +18,11 @@ export class User {
     role: string;
     @Prop()
     image?: String;
-    @Prop()
-    phone?: number;
-    @Prop()
-    gender?: String;
-    @Prop()
-    dateOfBirth?: Date;
-    @Prop({ type: LocationSchema, default: {} })
+
+    @Prop({ type: UserInfo, })
+    userInfo?: UserInfo;
+    @Prop({ type: LocationSchema, })
     location?: Location;
-
-
-
     @Prop({ type: [NotificationSchema], default: [] })
     notification: Notification[];
 
