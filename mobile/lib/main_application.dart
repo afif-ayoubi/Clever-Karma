@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/theme/app_theme.dart';
-import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import 'package:mobile/routes/app_routes.dart';
 import 'injection_container.dart' as di;

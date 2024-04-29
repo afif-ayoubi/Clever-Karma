@@ -74,7 +74,6 @@ abstract class PEdgeInsets {
   static final allBig = REdgeInsets.all(LayoutConstrains.m4);
   static final horizontal =
       REdgeInsets.symmetric(horizontal: LayoutConstrains.m3);
-
   static final vertical = REdgeInsets.symmetric(vertical: LayoutConstrains.m3.h,horizontal: 0);
   static final dVertical = REdgeInsets.symmetric(vertical: LayoutConstrains.xxl1,horizontal: 0);
   static final dHorizontal =
