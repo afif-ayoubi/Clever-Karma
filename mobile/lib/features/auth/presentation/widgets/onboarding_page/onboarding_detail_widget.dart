@@ -31,7 +31,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
       ),
       child: Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
+        height: 100.sh,
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(imgPath),

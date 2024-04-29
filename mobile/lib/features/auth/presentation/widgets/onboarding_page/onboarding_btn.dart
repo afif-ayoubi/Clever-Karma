@@ -15,6 +15,9 @@ import 'package:mobile/core/theme/hex_color.dart';
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: HexColor.whiteColor,
+              shape:  RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50.r),
+              ),
           ),
           child: const Icon(Icons.arrow_forward_ios_sharp),
         ),

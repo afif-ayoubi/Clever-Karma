@@ -35,4 +35,20 @@ ThemeData appThemeData = ThemeData(
           borderRadius: BorderRadius.circular(10.0.r),
           borderSide: const BorderSide(color: HexColor.lightColor)),
       
-    ));
+    ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: HexColor.primaryColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(25.r),
+      ),
+      textStyle: TextStyle(
+        fontSize: FontSize.s16,
+        fontWeight: FontWeightManager.semiBold,
+        color: HexColor.whiteColor,
+
+      ),
+    )
+  ),
+
+);
