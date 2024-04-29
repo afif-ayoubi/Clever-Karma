@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -7,10 +8,31 @@ import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_
 
 import '../common_widgets/custom_btn.dart';
 
-Future<void> authPopUp({ required BuildContext context,required String title,required String body}) {
+Future<void> authPopUp(
+    {required BuildContext context,
+    required String title,
+    required String body,
+    required String btnText,
+    required String caption,
+    required VoidCallback onPressed,
+    bool isLogin = true}) {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   return showGeneralDialog(
+    transitionDuration: const Duration(milliseconds: 400),
+    transitionBuilder: (_, a1,__, widget) {
+      Tween<Offset> offset =Tween();
+      offset= Tween<Offset>(begin: const Offset(0,-1), end: Offset.zero);
+      return SlideTransition(
+       position: offset.animate(
+          CurvedAnimation(
+            parent: a1,
+            curve: Curves.ease,
+          ),
+       ),child: widget,
+      );
+    },
     barrierLabel: "Label",
     barrierDismissible: true,
     context: context,
@@ -29,7 +51,7 @@ Future<void> authPopUp({ required BuildContext context,required String title,req
                 horizontal: 20.w,
               ),
               padding: EdgeInsets.symmetric(
-                  vertical: keyboardIsOpen ? 0.h : 55.h, horizontal: 15.w),
+                  vertical: keyboardIsOpen ? 0.h : 50.h, horizontal: 15.w),
               decoration: BoxDecoration(
                 color: HexColor.whiteColor,
                 borderRadius: BorderRadius.circular(30.r),
@@ -41,16 +63,14 @@ Future<void> authPopUp({ required BuildContext context,required String title,req
                     children: [
                       Center(
                         child: Text(
-                          "Sign in",
+                          title,
                           style: theme.displayMedium,
                         ),
                       ),
-                      SizedBox(
-                        height: 28.h,
-                      ),
+                     Gap(28.h),
                       Center(
                         child: Text(
-                          "Welcome back! Sign in to continue\nmaking a difference.",
+                          body,
                           textAlign: TextAlign.center,
                           style: theme.bodyMedium,
                         ),
@@ -58,37 +78,48 @@ Future<void> authPopUp({ required BuildContext context,required String title,req
                       Gap(40.h),
                       CustomTextField(
                           labelText: "Email", controller: emailController),
-                      Gap(20.h),
+                      Gap(isLogin ? 20.h : 15.h),
                       CustomTextField(
                         labelText: "Password",
                         controller: passwordController,
                         showVisibility: true,
                       ),
-                      Gap(5.h),
-                      Text(
-                        "Forgot Password?",
-                        style: theme.bodyMedium,
-                      ),
+                      Gap(isLogin ? 5.h : 15.h),
+                      isLogin
+                          ? Text(
+                              "Forgot Password?",
+                              style: theme.bodyMedium,
+                            )
+                          : CustomTextField(
+                              labelText: "Confirm Password",
+                              controller: confirmPasswordController,
+                              showVisibility: true,
+                            ),
                       Gap(
-                        70.h,
+                        isLogin ? 70.h : 30.h,
                       ),
-                      CustomBtn(text: "Sign in", onPressed: () {}),
+                      CustomBtn(text: btnText, onPressed: (){}),
                       Gap(5.h),
                       Center(
                         child: RichText(
-                            text: TextSpan(children: [
-                          TextSpan(
-                            text: "Don't have an account? ",
-                            style: theme.bodyMedium,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: caption,
+                                style: theme.bodyMedium,
+                              ),
+                              TextSpan(
+                                text: btnText,
+                                style: theme.bodyMedium!.copyWith(
+                                  color: HexColor.secondaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = onPressed,
+                              ),
+                            ],
                           ),
-                          TextSpan(
-                            text: "Sign up",
-                            style: theme.bodyMedium!.copyWith(
-                              color: HexColor.secondaryColor,
-                            ),
-                          )
-                        ])),
-                      )
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -101,5 +132,6 @@ Future<void> authPopUp({ required BuildContext context,required String title,req
   ).then((_) {
     emailController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
   });
 }

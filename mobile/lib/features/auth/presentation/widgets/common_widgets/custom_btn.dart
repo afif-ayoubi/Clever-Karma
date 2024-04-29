@@ -20,7 +20,7 @@ class CustomBtn extends StatelessWidget {
         borderRadius: BorderRadius.circular(25.r),
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: Text(text,
             style: theme.bodyMedium!.copyWith(
                 color: HexColor.whiteColor,

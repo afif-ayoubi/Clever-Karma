@@ -50,7 +50,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                       title,
                       textAlign: TextAlign.center,
                       style: theme.displayLarge,
-                    ).animate().fade(delay: 1.seconds).slideY(
+                    ).animate().fade(delay: 0.5.seconds).slideY(
                           curve: Curves.easeInOut,
                         ),
                   ),
@@ -61,7 +61,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                       body,
                       style: theme.bodyLarge,
                       textAlign: TextAlign.center,
-                    ).animate().fade(delay: 2.seconds).slideY(
+                    ).animate().fade(delay: 1.5.seconds).slideY(
                           curve: Curves.easeInOut,
                         ),
                   ),

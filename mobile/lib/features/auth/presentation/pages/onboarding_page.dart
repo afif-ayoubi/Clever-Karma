@@ -33,13 +33,61 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
       'imgPath': AppImages.onBoardingImg3,
     },
   ];
+
+  Map<String, dynamic> signIn = {
+    'title': "Sign In",
+    'body': "Welcome back! Sign in to continue\nmaking a difference.",
+    'btnText': "Sign In",
+    'caption': "Don't have an account?",
+    'isLogin': true,
+  };
+
+  Map<String, dynamic> signUp = {
+    'title': "Sign Up",
+    'body': "Unlock your potential to make a\n difference. ",
+    'btnText': "Sign Up",
+    'caption': "Already have an account?",
+    'isLogin': false,
+  };
+
+  late Map<String, dynamic> currentAuthData;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      currentAuthData = signIn;
+    });
+  }
+
   void _incrementIndex() {
     if (currentIndex < onBoardingData.length - 1) {
       setState(() {
         currentIndex += 1;
       });
     } else {
-      authPopUp(context);
+      Future.delayed(Duration(milliseconds: 800), () {
+        authPopUp(
+          context: context,
+          title: currentAuthData['title'],
+          body: currentAuthData['body'],
+          btnText: currentAuthData['btnText'],
+          caption: currentAuthData['caption'],
+          isLogin: currentAuthData['isLogin'],
+          onPressed: () {
+            print('hello');
+            setState(() {
+              if (currentAuthData == signIn) {
+                currentAuthData = signUp;
+                print(currentAuthData);
+              } else {
+                currentAuthData = signIn;
+              }
+            });
+          },
+        );
+      });
+
     }
   }
 
