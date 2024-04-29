@@ -12,15 +12,19 @@ class CustomBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return Container(
-      width: width ?? 1.sw,
+      width: width ?? 100.sw,
       height: 45.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.r),
       ),
       child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(text),
+        onPressed: () {},
+        child: Text(text,
+            style: theme.bodyMedium!.copyWith(
+                color: HexColor.whiteColor,
+                fontWeight: FontWeightManager.semiBold)),
       ),
     );
   }
