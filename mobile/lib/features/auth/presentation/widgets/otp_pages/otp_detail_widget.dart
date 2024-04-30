@@ -3,14 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
+import '../../../../../core/constants/assets_manager.dart';
 import '../common_widgets/custom_btn.dart';
 import '../common_widgets/custom_textfield.dart';
 import 'app_bar.dart';
 
 class OtpDetailWidget extends StatelessWidget {
-  const OtpDetailWidget({
-    super.key,
-  });
+  final String title;
+  final String body;
+  final String textBtn;
+  final VoidCallback onPressed;
+
+  const OtpDetailWidget(
+      {super.key,
+      required this.title,
+      required this.body,
+      required this.textBtn,
+      required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -35,10 +44,10 @@ class OtpDetailWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              Text('Forgot Password?', style: theme.displayMedium),
+              Text(title, style: theme.displayMedium),
               Gap(45.h),
               Text(
-                "Enter your email address\nto reset password?",
+                body,
                 textAlign: TextAlign.center,
                 style: theme.bodyLarge!.copyWith(color: Colors.black),
               ),
@@ -50,8 +59,8 @@ class OtpDetailWidget extends StatelessWidget {
               ),
               Gap(100.h),
               CustomBtn(
-                text: "Continue",
-                onPressed: () {},
+                text: textBtn,
+                onPressed: onPressed,
                 width: true,
               ),
             ],

@@ -45,8 +45,8 @@ Future<void> authPopUp(
       final MediaQueryData mediaQuery = MediaQuery.of(context);
       final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
       return Center(
-        child: Builder(
-          builder: (BuildContext context) {
+        child: StatefulBuilder(
+          builder: (BuildContext context,setState) {
             return Container(
               height: 600.h,
               margin: EdgeInsets.symmetric(
@@ -89,7 +89,7 @@ Future<void> authPopUp(
                       Gap(isLogin ? 5.h : 15.h),
                       isLogin
                           ? GestureDetector(
-                        onTap: onPressed2,
+                        onTap: onPressed,
                             child: Text(
                                 "Forgot Password?",
                                 style: theme.bodyMedium,
@@ -103,7 +103,7 @@ Future<void> authPopUp(
                       Gap(
                         isLogin ? 70.h : 30.h,
                       ),
-                      CustomBtn(text: btnText, onPressed: () {}),
+                      CustomBtn(text: btnText, onPressed: onPressed2),
                       Gap(5.h),
                       Center(
                         child: RichText(

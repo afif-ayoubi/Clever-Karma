@@ -15,13 +15,15 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    return Scaffold(
-        body: _buildBody());
+    return Scaffold(body: _buildBody());
   }
 
   Widget _buildBody() {
-    return const OtpDetailWidget();
+    return  OtpDetailWidget(
+      title: 'Forgot Password?',
+      body: 'Enter your email address\nto reset password?',
+      textBtn: 'Continue',
+      onPressed: () {},
+    );
   }
 }
-
