@@ -10,9 +10,9 @@ import '../common_widgets/custom_btn.dart';
 
 Future<void> authPopUp({required BuildContext context,
 
-  required VoidCallback onPressed,
-  required VoidCallback onPressed2,
-  required VoidCallback onPressed3,
+  required VoidCallback forgotOnPressed,
+  required VoidCallback btnOnPressed,
+  required VoidCallback btnTextOnPressed,
   required Map<String, dynamic> currentAuthData}) {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -51,7 +51,7 @@ Future<void> authPopUp({required BuildContext context,
                 horizontal: 20.w,
               ),
               padding: EdgeInsets.symmetric(
-                  vertical: keyboardIsOpen ? 0.h : 50.h, horizontal: 15.w),
+                  vertical: keyboardIsOpen ? 0 : 50, horizontal: 15).r,
               decoration: BoxDecoration(
                 color: HexColor.whiteColor,
                 borderRadius: BorderRadius.circular(30.r),
@@ -87,7 +87,7 @@ Future<void> authPopUp({required BuildContext context,
                       Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
                       currentAuthData['isLogin']
                           ? GestureDetector(
-                        onTap: onPressed,
+                        onTap: forgotOnPressed,
                         child: Text(
                           "Forgot Password?",
                           style: theme.bodyMedium,
@@ -101,7 +101,7 @@ Future<void> authPopUp({required BuildContext context,
                       Gap(
                         currentAuthData['isLogin'] ? 70.h : 30.h,
                       ),
-                      CustomBtn(text:currentAuthData['btnText'] , onPressed: onPressed2),
+                      CustomBtn(text:currentAuthData['btnText'] , onPressed: btnOnPressed),
                       Gap(5.h),
                       Center(
                         child: RichText(
@@ -117,11 +117,9 @@ Future<void> authPopUp({required BuildContext context,
                                   color: HexColor.secondaryColor,
                                 ),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    setState(() {
-                                      onPressed3();
-                                    });
-                                  },
+                                  ..onTap = ()=>setState((){
+                                    btnTextOnPressed();
+                                  }),
                               ),
                             ],
                           ),

@@ -13,11 +13,13 @@ class OtpDetailWidget extends StatelessWidget {
   final String body;
   final String textBtn;
   final VoidCallback onPressed;
+  final bool? isOtpVerificationPage;
 
   const OtpDetailWidget(
       {super.key,
       required this.title,
       required this.body,
+         this.isOtpVerificationPage=false,
       required this.textBtn,
       required this.onPressed});
 
@@ -27,7 +29,7 @@ class OtpDetailWidget extends StatelessWidget {
     final theme = Theme.of(context).textTheme;
     return SafeArea(
       child: Padding(
-        padding: EdgeInsets.all(20.w),
+        padding: const EdgeInsets.all(20).r,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -53,7 +55,7 @@ class OtpDetailWidget extends StatelessWidget {
               ),
               Gap(35.h),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 15.0.w),
+                padding:const  EdgeInsets.symmetric(horizontal: 15.0).r,
                 child: CustomTextField(
                     labelText: "Email", controller: emailController),
               ),

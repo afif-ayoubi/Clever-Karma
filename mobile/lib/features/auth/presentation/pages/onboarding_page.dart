@@ -73,12 +73,14 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         authPopUp(
             currentAuthData: currentAuthData,
             context: context,
-            onPressed: () {},
-            onPressed2: () {
+            forgotOnPressed: () {
               context.push(Routes.forgotPasswordRoute);
             },
-            onPressed3: () {
-              print('hello');
+            btnOnPressed: () {
+
+            },
+            btnTextOnPressed: () {
+              print('convert to ${currentAuthData == signIn ? signUp : signIn}');
               setState(() {
                 currentAuthData = currentAuthData == signIn ? signUp : signIn;
               });

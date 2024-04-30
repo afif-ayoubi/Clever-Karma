@@ -18,7 +18,6 @@ export class User {
     password: string;
     @Prop({ enum: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.ORGANIZATION], default: USER_ROLES.USER })
     role: string;
-
     @Prop({ type: UserInfo, })
     userInfo?: UserInfo;
     @Prop({ type: OrganizationDetailSchema })
