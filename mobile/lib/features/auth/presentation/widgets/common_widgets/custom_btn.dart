@@ -5,7 +5,7 @@ import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomBtn extends StatelessWidget {
-  final bool? width;
+  final bool width;
   final String text;
   final VoidCallback onPressed;
   const CustomBtn({super.key, this.width=false, required this.text,required this.onPressed});
@@ -14,7 +14,7 @@ class CustomBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     return Container(
-      width: width! ? 175.w:100.sw,
+      width: width ? 175.w:100.sw,
       height: 45.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.r),
