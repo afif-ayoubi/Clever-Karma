@@ -8,20 +8,16 @@ import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_
 
 import '../common_widgets/custom_btn.dart';
 
-Future<void> authPopUp(
-    {required BuildContext context,
-    required String title,
-    required String body,
-    required String btnText,
-    required String caption,
-    required VoidCallback onPressed,
-      required VoidCallback onPressed2,
-      required VoidCallback onPressed3,
-    bool isLogin = true}) {
+Future<void> authPopUp({required BuildContext context,
+
+  required VoidCallback onPressed,
+  required VoidCallback onPressed2,
+  required VoidCallback onPressed3,
+  required Map<String, dynamic> currentAuthData}) {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
-      TextEditingController();
+  TextEditingController();
   return showGeneralDialog(
     transitionDuration: const Duration(milliseconds: 600),
     transitionBuilder: (_, a1, __, widget) {
@@ -41,12 +37,14 @@ Future<void> authPopUp(
     barrierDismissible: true,
     context: context,
     pageBuilder: (context, _, __) {
-      final theme = Theme.of(context).textTheme;
+      final theme = Theme
+          .of(context)
+          .textTheme;
       final MediaQueryData mediaQuery = MediaQuery.of(context);
       final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
       return Center(
         child: StatefulBuilder(
-          builder: (BuildContext context,setState) {
+          builder: (BuildContext context, setState) {
             return Container(
               height: 600.h,
               margin: EdgeInsets.symmetric(
@@ -65,14 +63,14 @@ Future<void> authPopUp(
                     children: [
                       Center(
                         child: Text(
-                          title,
+                          currentAuthData['title'],
                           style: theme.displayMedium,
                         ),
                       ),
                       Gap(28.h),
                       Center(
                         child: Text(
-                          body,
+                          currentAuthData['body'],
                           textAlign: TextAlign.center,
                           style: theme.bodyMedium,
                         ),
@@ -80,46 +78,50 @@ Future<void> authPopUp(
                       Gap(40.h),
                       CustomTextField(
                           labelText: "Email", controller: emailController),
-                      Gap(isLogin ? 20.h : 15.h),
+                      Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
                       CustomTextField(
                         labelText: "Password",
                         controller: passwordController,
                         showVisibility: true,
                       ),
-                      Gap(isLogin ? 5.h : 15.h),
-                      isLogin
+                      Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
+                      currentAuthData['isLogin']
                           ? GestureDetector(
                         onTap: onPressed,
-                            child: Text(
-                                "Forgot Password?",
-                                style: theme.bodyMedium,
-                              ),
-                          )
+                        child: Text(
+                          "Forgot Password?",
+                          style: theme.bodyMedium,
+                        ),
+                      )
                           : CustomTextField(
-                              labelText: "Confirm Password",
-                              controller: confirmPasswordController,
-                              showVisibility: true,
-                            ),
-                      Gap(
-                        isLogin ? 70.h : 30.h,
+                        labelText: "Confirm Password",
+                        controller: confirmPasswordController,
+                        showVisibility: true,
                       ),
-                      CustomBtn(text: btnText, onPressed: onPressed2),
+                      Gap(
+                        currentAuthData['isLogin'] ? 70.h : 30.h,
+                      ),
+                      CustomBtn(text:currentAuthData['btnText'] , onPressed: onPressed2),
                       Gap(5.h),
                       Center(
                         child: RichText(
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: caption,
+                                text:currentAuthData['caption'] ,
                                 style: theme.bodyMedium,
                               ),
                               TextSpan(
-                                text: btnText,
+                                text: currentAuthData['btnText'],
                                 style: theme.bodyMedium!.copyWith(
                                   color: HexColor.secondaryColor,
                                 ),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = onPressed3,
+                                  ..onTap = () {
+                                    setState(() {
+                                      onPressed3();
+                                    });
+                                  },
                               ),
                             ],
                           ),

@@ -6,7 +6,6 @@ import 'package:mobile/features/auth/presentation/widgets/onboarding_page/onboar
 import 'package:mobile/routes/app_routes.dart';
 import 'package:mobile/routes/class_routes.dart';
 
-
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
 
@@ -72,29 +71,18 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
     } else {
       Future.delayed(Duration.zero, () {
         authPopUp(
-          context: context,
-          title: currentAuthData['title'],
-          body: currentAuthData['body'],
-          btnText: currentAuthData['btnText'],
-          caption: currentAuthData['caption'],
-          isLogin: currentAuthData['isLogin'],
-          onPressed: () {
-            print('hello');
-            setState(() {
-              if (currentAuthData == signIn) {
-                currentAuthData = signUp;
-                print(currentAuthData);
-              } else {
-                currentAuthData = signIn;
-              }
+            currentAuthData: currentAuthData,
+            context: context,
+            onPressed: () {},
+            onPressed2: () {
+              context.push(Routes.forgotPasswordRoute);
+            },
+            onPressed3: () {
+              print('hello');
+              setState(() {
+                currentAuthData = currentAuthData == signIn ? signUp : signIn;
+              });
             });
-          },
-          onPressed2: (){
-            context.push(Routes.forgotPasswordRoute);
-          },
-          onPressed3: (){
-          }
-        );
       });
     }
   }
