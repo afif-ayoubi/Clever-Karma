@@ -20,7 +20,7 @@ class ForgotPassword extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
 
-        body: _buildBody(context)); 
+        body: _buildBody(context));
   }
 
   Widget _buildBody(BuildContext context) {
@@ -29,7 +29,7 @@ class ForgotPassword extends StatelessWidget {
       body: 'Enter your email address\nto reset password?',
       textBtn: 'Continue',
       onPressed: () {
-        context.go(Routes.otpVerificationRoute);
+        context.push(Routes.otpVerificationRoute);
       },
     );
   }
