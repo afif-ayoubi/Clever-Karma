@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../core/theme/hex_color.dart';
 
 class OtpVerificationField extends StatefulWidget {
   final ValueChanged<String>? onOtpEntered;
@@ -61,7 +60,6 @@ class _OtpVerificationFieldState extends State<OtpVerificationField> {
             },
             decoration:  InputDecoration(
               contentPadding: const EdgeInsets.all(8).r,
-
             ),
           ),
         );

@@ -7,7 +7,9 @@ class OtpVerificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildBody());
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: _buildBody());
   }
 
   Widget _buildBody() {
@@ -15,6 +17,7 @@ class OtpVerificationPage extends StatelessWidget {
       title: 'OTP verification',
       body: 'check your email to see  the\nverification code',
       textBtn: 'Submit',
+      isOtpVerificationPage: true,
       onPressed: () {},
     );
   }

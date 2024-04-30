@@ -17,7 +17,10 @@ class ForgotPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildBody(context));
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+
+        body: _buildBody(context)); 
   }
 
   Widget _buildBody(BuildContext context) {
