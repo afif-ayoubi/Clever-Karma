@@ -15,13 +15,15 @@ Future<void> authPopUp(
     required String btnText,
     required String caption,
     required VoidCallback onPressed,
+      required VoidCallback onPressed2,
+      required VoidCallback onPressed3,
     bool isLogin = true}) {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
       TextEditingController();
   return showGeneralDialog(
-    transitionDuration: const Duration(milliseconds: 400),
+    transitionDuration: const Duration(milliseconds: 600),
     transitionBuilder: (_, a1, __, widget) {
       Tween<Offset> offset = Tween();
       offset = Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero);
@@ -86,10 +88,13 @@ Future<void> authPopUp(
                       ),
                       Gap(isLogin ? 5.h : 15.h),
                       isLogin
-                          ? Text(
-                              "Forgot Password?",
-                              style: theme.bodyMedium,
-                            )
+                          ? GestureDetector(
+                        onTap: onPressed2,
+                            child: Text(
+                                "Forgot Password?",
+                                style: theme.bodyMedium,
+                              ),
+                          )
                           : CustomTextField(
                               labelText: "Confirm Password",
                               controller: confirmPasswordController,
@@ -114,7 +119,7 @@ Future<void> authPopUp(
                                   color: HexColor.secondaryColor,
                                 ),
                                 recognizer: TapGestureRecognizer()
-                                  ..onTap = onPressed,
+                                  ..onTap = onPressed3,
                               ),
                             ],
                           ),

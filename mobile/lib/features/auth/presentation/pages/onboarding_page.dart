@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:mobile/features/auth/presentation/widgets/auth_page/auth_popup.dart';
 import 'package:mobile/features/auth/presentation/widgets/onboarding_page/onboarding_detail_widget.dart';
+import 'package:mobile/routes/app_routes.dart';
+import 'package:mobile/routes/class_routes.dart';
+
 
 class OnBoardingPage extends StatefulWidget {
   const OnBoardingPage({super.key});
@@ -66,7 +70,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         currentIndex += 1;
       });
     } else {
-      Future.delayed(const Duration(milliseconds: 800), () {
+      Future.delayed(Duration.zero, () {
         authPopUp(
           context: context,
           title: currentAuthData['title'],
@@ -85,6 +89,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
               }
             });
           },
+          onPressed2: (){
+            context.push(Routes.forgotPasswordRoute);
+          },
+          onPressed3: (){
+          }
         );
       });
     }
