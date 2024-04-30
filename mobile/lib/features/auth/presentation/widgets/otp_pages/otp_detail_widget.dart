@@ -56,7 +56,7 @@ class OtpDetailWidget extends StatelessWidget {
             ),
             Gap(35.h),
             isOtpVerificationPage
-                ? const Center(child: OtpVerificationField())
+                ? const OtpVerificationField()
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                     child: CustomTextField(

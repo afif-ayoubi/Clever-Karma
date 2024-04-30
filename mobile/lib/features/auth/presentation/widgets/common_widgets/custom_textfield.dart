@@ -47,6 +47,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
               keyboardType: widget.keyboardNumber ? TextInputType.number : null,
               style: theme.bodyMedium!.copyWith(color: HexColor.textInputColor),
               decoration: InputDecoration(
+                contentPadding: const EdgeInsets.all(8).r,
+
                 suffixIcon: widget.showVisibility!
                     ? GestureDetector(
                         onTap: () {

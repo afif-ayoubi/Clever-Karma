@@ -60,74 +60,76 @@ Future<void> authPopUp({required BuildContext context,
 
                 resizeToAvoidBottomInset: false,
 
-                body: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Center(
-                      child: Text(
-                        currentAuthData['title'],
-                        style: theme.displayMedium,
-                      ),
-                    ),
-                    Gap(28.h),
-                    Center(
-                      child: Text(
-                        currentAuthData['body'],
-                        textAlign: TextAlign.center,
-                        style: theme.bodyMedium,
-                      ),
-                    ),
-                    Gap(40.h),
-                    CustomTextField(
-                        labelText: "Email", controller: emailController),
-                    Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
-                    CustomTextField(
-                      labelText: "Password",
-                      controller: passwordController,
-                      showVisibility: true,
-                    ),
-                    Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
-                    currentAuthData['isLogin']
-                        ? GestureDetector(
-                      onTap: forgotOnPressed,
-                      child: Text(
-                        "Forgot Password?",
-                        style: theme.bodyMedium,
-                      ),
-                    )
-                        : CustomTextField(
-                      labelText: "Confirm Password",
-                      controller: confirmPasswordController,
-                      showVisibility: true,
-                    ),
-                    Gap(
-                      currentAuthData['isLogin'] ? 70.h : 30.h,
-                    ),
-                    CustomBtn(text:currentAuthData['btnText'] , onPressed: btnOnPressed),
-                    Gap(5.h),
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          children: [
-                            TextSpan(
-                              text:currentAuthData['caption'] ,
-                              style: theme.bodyMedium,
-                            ),
-                            TextSpan(
-                              text: currentAuthData['btnText'],
-                              style: theme.bodyMedium!.copyWith(
-                                color: HexColor.secondaryColor,
-                              ),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = ()=>setState((){
-                                  btnTextOnPressed();
-                                }),
-                            ),
-                          ],
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Text(
+                          currentAuthData['title'],
+                          style: theme.displayMedium,
                         ),
                       ),
-                    ),
-                  ],
+                      Gap(28.h),
+                      Center(
+                        child: Text(
+                          currentAuthData['body'],
+                          textAlign: TextAlign.center,
+                          style: theme.bodyMedium,
+                        ),
+                      ),
+                      Gap(40.h),
+                      CustomTextField(
+                          labelText: "Email", controller: emailController),
+                      Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
+                      CustomTextField(
+                        labelText: "Password",
+                        controller: passwordController,
+                        showVisibility: true,
+                      ),
+                      Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
+                      currentAuthData['isLogin']
+                          ? GestureDetector(
+                        onTap: forgotOnPressed,
+                        child: Text(
+                          "Forgot Password?",
+                          style: theme.bodyMedium,
+                        ),
+                      )
+                          : CustomTextField(
+                        labelText: "Confirm Password",
+                        controller: confirmPasswordController,
+                        showVisibility: true,
+                      ),
+                      Gap(
+                        currentAuthData['isLogin'] ? 70.h : 30.h,
+                      ),
+                      CustomBtn(text:currentAuthData['btnText'] , onPressed: btnOnPressed),
+                      Gap(5.h),
+                      Center(
+                        child: RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text:currentAuthData['caption'] ,
+                                style: theme.bodyMedium,
+                              ),
+                              TextSpan(
+                                text: currentAuthData['btnText'],
+                                style: theme.bodyMedium!.copyWith(
+                                  color: HexColor.secondaryColor,
+                                ),
+                                recognizer: TapGestureRecognizer()
+                                  ..onTap = ()=>setState((){
+                                    btnTextOnPressed();
+                                  }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
