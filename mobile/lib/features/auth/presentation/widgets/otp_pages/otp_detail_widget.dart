@@ -7,7 +7,7 @@ import 'package:mobile/core/theme/hex_color.dart';
 import '../../../../../core/constants/assets_manager.dart';
 import '../common_widgets/custom_btn.dart';
 import '../common_widgets/custom_textfield.dart';
-import 'app_bar.dart';
+import '../common_widgets/app_bar.dart';
 import 'otp_verification_field.dart';
 
 class OtpDetailWidget extends StatelessWidget {

@@ -18,9 +18,9 @@ class CustomAppBar extends StatelessWidget {
         width: 25.w,
         decoration: BoxDecoration(
           color: HexColor.primaryColor,
-          borderRadius: BorderRadius.circular(25.r)
+          borderRadius: BorderRadius.circular(12.5.r)
         ),
-        child: Icon(Icons.arrow_back_ios_new_sharp, color: HexColor.whiteColor, size: 20.sp,)
+        child: Icon(Icons.arrow_back_ios_new_sharp, color: HexColor.whiteColor, size: 15.sp,)
       ),
     );
   }
