@@ -32,12 +32,15 @@ class _OtpVerificationFieldState extends State<OtpVerificationField> {
           height: 45.h,
           margin: EdgeInsets.only(right: 30.r),
           child: TextFormField(
-            style: theme.bodyLarge,
+            style: theme.bodyLarge!.copyWith(color: Colors.black),
             controller: _controllers[index],
             focusNode: _focusNodes[index],
             keyboardType: TextInputType.number,
             textAlign: TextAlign.center,
+            maxLength: 1,
             onChanged: (value) {
+              print("Text Field $index: $value");
+
               if (value.isNotEmpty) {
                 if (index < 3) {
                   _focusNodes[index + 1].requestFocus();
@@ -59,6 +62,7 @@ class _OtpVerificationFieldState extends State<OtpVerificationField> {
             },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.all(8).r,
+              counterText: "",
             ),
           ),
         );

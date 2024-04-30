@@ -76,11 +76,10 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
             forgotOnPressed: () {
               context.push(Routes.forgotPasswordRoute);
             },
-            btnOnPressed: () {
-
-            },
+            btnOnPressed: () {},
             btnTextOnPressed: () {
-              print('convert to ${currentAuthData == signIn ? signUp : signIn}');
+              print(
+                  'convert to ${currentAuthData == signIn ? signUp : signIn}');
               setState(() {
                 currentAuthData = currentAuthData == signIn ? signUp : signIn;
               });
@@ -92,6 +91,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: _buildBody(context),
     );
   }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/theme/hex_color.dart';
 
 import '../../../../../core/constants/assets_manager.dart';
 import '../common_widgets/custom_btn.dart';
@@ -15,12 +16,14 @@ class OtpDetailWidget extends StatelessWidget {
   final String textBtn;
   final VoidCallback onPressed;
   final bool isOtpVerificationPage;
+  final bool isResetPasswordPage;
 
   const OtpDetailWidget(
       {super.key,
       required this.title,
       required this.body,
       this.isOtpVerificationPage = false,
+      this.isResetPasswordPage = false,
       required this.textBtn,
       required this.onPressed});
 
@@ -29,7 +32,6 @@ class OtpDetailWidget extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     final theme = Theme.of(context).textTheme;
     return SafeArea(
-
       child: Padding(
         padding: const EdgeInsets.all(20).r,
         child: Column(
@@ -62,6 +64,12 @@ class OtpDetailWidget extends StatelessWidget {
                     child: CustomTextField(
                         labelText: "Email", controller: emailController),
                   ),
+            isOtpVerificationPage
+                ? const Divider(
+                    color: HexColor.primaryColor,
+                    thickness: 1,
+                  )
+                : const SizedBox(),
             Gap(100.h),
             CustomBtn(
               text: textBtn,
