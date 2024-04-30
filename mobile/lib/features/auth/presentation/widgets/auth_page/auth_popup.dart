@@ -16,21 +16,23 @@ Future<void> authPopUp(
     required String caption,
     required VoidCallback onPressed,
     bool isLogin = true}) {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
   return showGeneralDialog(
     transitionDuration: const Duration(milliseconds: 400),
-    transitionBuilder: (_, a1,__, widget) {
-      Tween<Offset> offset =Tween();
-      offset= Tween<Offset>(begin: const Offset(0,-1), end: Offset.zero);
+    transitionBuilder: (_, a1, __, widget) {
+      Tween<Offset> offset = Tween();
+      offset = Tween<Offset>(begin: const Offset(0, -1), end: Offset.zero);
       return SlideTransition(
-       position: offset.animate(
+        position: offset.animate(
           CurvedAnimation(
             parent: a1,
             curve: Curves.ease,
           ),
-       ),child: widget,
+        ),
+        child: widget,
       );
     },
     barrierLabel: "Label",
@@ -38,13 +40,11 @@ Future<void> authPopUp(
     context: context,
     pageBuilder: (context, _, __) {
       final theme = Theme.of(context).textTheme;
-
+      final MediaQueryData mediaQuery = MediaQuery.of(context);
+      final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
       return Center(
         child: Builder(
           builder: (BuildContext context) {
-            final MediaQueryData mediaQuery = MediaQuery.of(context);
-            final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
-
             return Container(
               height: 600.h,
               margin: EdgeInsets.symmetric(
@@ -67,7 +67,7 @@ Future<void> authPopUp(
                           style: theme.displayMedium,
                         ),
                       ),
-                     Gap(28.h),
+                      Gap(28.h),
                       Center(
                         child: Text(
                           body,
@@ -98,7 +98,7 @@ Future<void> authPopUp(
                       Gap(
                         isLogin ? 70.h : 30.h,
                       ),
-                      CustomBtn(text: btnText, onPressed: (){}),
+                      CustomBtn(text: btnText, onPressed: () {}),
                       Gap(5.h),
                       Center(
                         child: RichText(

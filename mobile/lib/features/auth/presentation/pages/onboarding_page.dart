@@ -66,7 +66,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
         currentIndex += 1;
       });
     } else {
-      Future.delayed(Duration(milliseconds: 800), () {
+      Future.delayed(const Duration(milliseconds: 800), () {
         authPopUp(
           context: context,
           title: currentAuthData['title'],
@@ -87,7 +87,6 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           },
         );
       });
-
     }
   }
 
