@@ -43,6 +43,7 @@ class OtpDetailWidget extends StatelessWidget {
             Container(
               height: 130.h,
               width: 160.w,
+              margin: const EdgeInsets.only(bottom: 5).r,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25.r),
                 image: const DecorationImage(
