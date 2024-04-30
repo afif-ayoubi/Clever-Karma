@@ -10,5 +10,6 @@ class AppRoutes {
         GoRoute(path: Routes.initRoute,builder: ((context,state)=>const OnBoardingPage())),
         GoRoute(path: Routes.forgotPasswordRoute,builder: ((context,state)=>const ForgotPassword())),
         GoRoute(path: Routes.otpVerificationRoute,builder: ((context,state)=>const OtpVerificationPage()))
+        GoRoute(path: Routes.resetPasswordRoute,builder: ((context,state)=>const OtpVerificationPage()))
       ]);
 }
