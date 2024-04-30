@@ -50,13 +50,14 @@ Future<void> authPopUp({required BuildContext context,
               margin: EdgeInsets.symmetric(
                 horizontal: 20.w,
               ),
-              padding: EdgeInsets.symmetric(
-                  vertical: keyboardIsOpen ? 0 : 50, horizontal: 15).r,
+              padding: const EdgeInsets.symmetric(
+                  vertical:  50, horizontal: 15).r,
               decoration: BoxDecoration(
                 color: HexColor.whiteColor,
                 borderRadius: BorderRadius.circular(30.r),
               ),
               child: Scaffold(
+
                 resizeToAvoidBottomInset: false,
 
                 body: Column(
