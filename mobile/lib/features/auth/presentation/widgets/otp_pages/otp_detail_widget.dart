@@ -41,7 +41,7 @@ class OtpDetailWidget extends StatelessWidget {
             const Align(alignment: Alignment.topLeft, child: CustomAppBar()),
             Gap(60.h),
             Container(
-              height: 127.h,
+              height: 130.h,
               width: 160.w,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25.r),
@@ -63,7 +63,7 @@ class OtpDetailWidget extends StatelessWidget {
                 ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                     child: CustomTextField(
-                      controller: confirmPasswordController,
+                      controller: passwordController,
                       hintText: "New Password",
                     ),
                   )
