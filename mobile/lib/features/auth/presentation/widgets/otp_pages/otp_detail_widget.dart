@@ -12,7 +12,7 @@ import 'otp_verification_field.dart';
 
 class OtpDetailWidget extends StatelessWidget {
   final String title;
-  final String body;
+  final String? body;
   final String textBtn;
   final VoidCallback onPressed;
   final bool isOtpVerificationPage;
@@ -21,7 +21,7 @@ class OtpDetailWidget extends StatelessWidget {
   const OtpDetailWidget(
       {super.key,
       required this.title,
-      required this.body,
+      this.body,
       this.isOtpVerificationPage = false,
       this.isResetPasswordPage = false,
       required this.textBtn,
@@ -30,6 +30,8 @@ class OtpDetailWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    TextEditingController confirmPasswordController = TextEditingController();
     final theme = Theme.of(context).textTheme;
     return SafeArea(
       child: Padding(
@@ -50,27 +52,43 @@ class OtpDetailWidget extends StatelessWidget {
               ),
             ),
             Text(title, style: theme.displayMedium),
-            Gap(45.h),
+            Gap(isResetPasswordPage ? 30.h : 45.h),
             Text(
-              body,
+              body ?? "",
               textAlign: TextAlign.center,
               style: theme.bodyLarge!.copyWith(color: Colors.black),
             ),
-            Gap(35.h),
-            isOtpVerificationPage
-                ? const OtpVerificationField()
-                : Padding(
+            Gap(isResetPasswordPage ? 0.h : 35.h),
+            isResetPasswordPage
+                ? Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                     child: CustomTextField(
-                        labelText: "Email", controller: emailController),
-                  ),
-            isOtpVerificationPage
-                ? const Divider(
-                    color: HexColor.primaryColor,
-                    thickness: 1,
+                      controller: confirmPasswordController,
+                      hintText: "New Password",
+                    ),
                   )
-                : const SizedBox(),
-            Gap(100.h),
+                : isOtpVerificationPage
+                    ? const OtpVerificationField()
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
+                        child: CustomTextField(
+                            labelText: "Email", controller: emailController),
+                      ),
+            isResetPasswordPage
+                ? Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
+                    child: CustomTextField(
+                        hintText: "Confirm Password",
+                        controller: confirmPasswordController),
+                  )
+                : isOtpVerificationPage
+                    ? const Divider(
+                        color: HexColor.primaryColor,
+                        thickness: 1,
+                      )
+                    : const SizedBox(),
+            Gap(isResetPasswordPage?110.h:100.h),
+            Gap(isOtpVerificationPage ? 8.h : 0.h),
             CustomBtn(
               text: textBtn,
               onPressed: onPressed,
