@@ -34,6 +34,10 @@ ThemeData appThemeData = ThemeData(
     focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(10.0.r),
         borderSide: const BorderSide(color: HexColor.lightColor)),
+    hintStyle: TextStyle(
+        fontSize: FontSize.s16,
+        fontWeight: FontWeightManager.regular,
+        color: HexColor.textInputColor),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
