@@ -70,14 +70,29 @@ class _SideMenuState extends State<SideMenu> {
                       },
                       isActive: selectedMenu == menu,
                     )),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, top: 40, bottom: 16).r,
-                  child: Text("History".toUpperCase(),
-                      style: theme.displayMedium!.copyWith(
-                        color: HexColor.textInputColor,
-                      )),
-                ),
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 50),
+                      child: ListTile(
+                        onTap: () {},
+                        leading: SizedBox(
+                          height: 34.h,
+                          width: 34.w,
+                          child: const Icon(
+                            Icons.logout_outlined,
+                            color: Colors.white,
+                          ),
+                        ),
+                        title: const Text(
+                          'Sign Out',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           )),

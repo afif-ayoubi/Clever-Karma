@@ -33,7 +33,7 @@ List<RiveAsset> sideMenus = [
   RiveAsset(
       artboard: "BELL",
       stateMacineName: "BELL_Interactivity",
-      title: "Something",
+      title: "Notifications",
       src: 'assets/RiveAssets/icons.riv',number: 2),
   RiveAsset(
       artboard: "CHAT",
