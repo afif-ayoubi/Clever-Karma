@@ -52,26 +52,22 @@ Future<void> authPopUp(
                 child: Container(
                   height: 600.h,
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 15)
+                      const EdgeInsets.symmetric( horizontal: 15)
                           .r,
                   child: SingleChildScrollView(
                     child: SafeArea(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Center(
-                            child: Text(
-                              currentAuthData['title'],
-                              style: theme.displayMedium,
-                            ),
+                          Text(
+                            currentAuthData['title'],
+                            style: theme.displayMedium,
                           ),
                           Gap(28.h),
-                          Center(
-                            child: Text(
-                              currentAuthData['body'],
-                              textAlign: TextAlign.center,
-                              style: theme.bodyMedium,
-                            ),
+                          Text(
+                            currentAuthData['body'],
+                            textAlign: TextAlign.center,
+                            style: theme.bodyMedium,
                           ),
                           Gap(40.h),
                           CustomTextField(
@@ -86,9 +82,12 @@ Future<void> authPopUp(
                           currentAuthData['isLogin']
                               ? GestureDetector(
                                   onTap: forgotOnPressed,
-                                  child: Text(
-                                    "Forgot Password?",
-                                    style: theme.bodyMedium,
+                                  child: Align(
+                                    alignment: Alignment.bottomLeft,
+                                    child: Text(
+                                      "Forgot Password?",
+                                      style: theme.bodyMedium,
+                                    ),
                                   ),
                                 )
                               : CustomTextField(

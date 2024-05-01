@@ -12,6 +12,6 @@ class ProfilePage extends StatelessWidget {
   }
 
   Widget _buildBody() {
-    return ProfileDetailWidget();
+    return const ProfileDetailWidget();
   }
 }

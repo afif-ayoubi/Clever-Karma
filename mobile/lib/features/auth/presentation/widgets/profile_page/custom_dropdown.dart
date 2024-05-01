@@ -2,37 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
-class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({
+class CustomDropDown extends StatefulWidget {
+  const CustomDropDown({
     super.key,
     required this.value,
-    this.hint,
     required this.list,
-    this.bankCardStyle = false,
-    required this.width,
     this.lockIcon = false,
-    required this.isDate,
     this.textCenter=false,
   });
   final String? value;
   final List<String> list;
-  final double width;
-  final bool isDate;
   final bool lockIcon;
   final bool textCenter;
-  final bool bankCardStyle;
-  final String? hint;
 
   @override
-  State<DropDownWidget> createState() => _DropDownWidgetState();
+  State<CustomDropDown> createState() => _CustomDropDownState();
 }
 
-class _DropDownWidgetState extends State<DropDownWidget> {
+class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: SizedBox(
-        width: widget.width,
         height: 45.h,
         child: DropdownButtonFormField<String>(
           menuMaxHeight: 200.h,

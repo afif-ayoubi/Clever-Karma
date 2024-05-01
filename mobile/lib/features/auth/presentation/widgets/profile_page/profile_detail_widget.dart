@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile/core/theme/hex_color.dart';
+import 'package:mobile/features/auth/presentation/widgets/profile_page/custom_dropdown.dart';
 
 import '../common_widgets/app_bar.dart';
 import '../common_widgets/custom_textfield.dart';
@@ -70,7 +71,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                   ),
                   child: _image == null
                       ? Icon(
-                          Icons.person_outline,
+                          CupertinoIcons.person,
                           size: 140.r,
                           color: HexColor.lightColor,
                         )
@@ -93,6 +94,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                 labelText: 'Email',
               ),
               Gap(10.h),
+              // CustomDropDown(value: 'value', list: list, )
             ],
           ),
         ),
