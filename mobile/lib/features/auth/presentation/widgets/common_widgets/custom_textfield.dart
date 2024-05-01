@@ -11,14 +11,17 @@ class CustomTextField extends StatefulWidget {
   final VoidCallback? onTap;
   final bool? enable;
   final bool keyboardNumber;
+  final bool isDate;
 
   const CustomTextField(
       {super.key,
       this.keyboardNumber = false,
       this.enable = true,
       this.labelText,
+      this.isDate = false,
       required this.controller,
-      this.onTap, required this.hintText,
+      this.onTap,
+      required this.hintText,
       this.showVisibility = false,
       this.validator});
 
@@ -40,6 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           SizedBox(
             height: 45.h,
             child: TextFormField(
+              readOnly: widget.isDate ? true : false,
               enabled: widget.enable,
               onTap: widget.onTap,
               obscureText: widget.showVisibility! ? !obscure : obscure,
@@ -48,23 +52,43 @@ class _CustomTextFieldState extends State<CustomTextField> {
               keyboardType: widget.keyboardNumber ? TextInputType.number : null,
               style: theme.bodyMedium!.copyWith(color: Colors.black54),
               decoration: InputDecoration(
-                hintText: widget.hintText??"",
+                hintText: widget.hintText ?? "",
                 contentPadding: const EdgeInsets.all(8).r,
-                suffixIcon: widget.showVisibility!
+                suffixIcon: widget.isDate
                     ? GestureDetector(
                         onTap: () {
-                          setState(() {
-                            obscure = !obscure;
+                          showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(1960),
+                                  lastDate: DateTime.now())
+                              .then((value) {
+                            if (value != null) {
+                              widget.controller.text =
+                                  value.toString().substring(0, 10);
+                            }
                           });
                         },
-                        child: Icon(
-                          !obscure
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
-                          size: 27,
+                        child: const Icon(
+                          Icons.arrow_drop_down_circle,
+                          color: HexColor.secondaryColor,
                         ),
                       )
-                    : null,
+                    : widget.showVisibility!
+                        ? GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                obscure = !obscure;
+                              });
+                            },
+                            child: Icon(
+                              !obscure
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
+                              size: 27,
+                            ),
+                          )
+                        : null,
               ),
               validator: widget.validator,
             ),

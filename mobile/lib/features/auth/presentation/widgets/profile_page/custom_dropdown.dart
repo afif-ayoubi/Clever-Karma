@@ -41,7 +41,7 @@ class _CustomDropDownState extends State<CustomDropDown> {
                 return null;
               },
               decoration: InputDecoration(
-                contentPadding: const EdgeInsets.fromLTRB(6, 10, 10, 10).r,
+                contentPadding: const EdgeInsets.fromLTRB(6, 10, 13, 10).r,
               ),
               icon: const Icon(
                 Icons.arrow_drop_down_circle,

@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,22 +20,15 @@ class ProfileDetailWidget extends StatefulWidget {
 class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
   File? _image;
   final ImagePicker picker = ImagePicker();
-  List<String> genderList = [
-    'male',
-    'female',
-  ];
+  List<String> genderList = ['male', 'female'];
   String? gender;
+  final TextEditingController _firstNameController = TextEditingController();
+  final TextEditingController _lastNameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
 
-  final TextEditingController _firstNameController = TextEditingController();
-
-  final TextEditingController _lastNameController = TextEditingController();
-
-  final TextEditingController _emailController = TextEditingController();
-
-  final TextEditingController _phoneController = TextEditingController();
-
-  Future getImage() async {
+  Future<void> getImage() async {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
     setState(() {
       if (image != null) {
@@ -45,35 +37,6 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
         print('No image selected.');
       }
     });
-  }
-
-  Future<DateTime?> _showDateTime() async {
-    final DateTime? pickDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1960),
-        lastDate: DateTime.now());
-    if (pickDate != null) {
-      setState(() {
-        _dateController.text = DateFormat('yyyy-MM-dd').format(pickDate);
-      });
-    }
-    return null;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _dateController.dispose();
-    _firstNameController.dispose();
-    _lastNameController.dispose();
-    _emailController.dispose();
-    _phoneController.dispose();
-    super.dispose();
   }
 
   @override
@@ -107,33 +70,51 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                 ),
               ),
               Gap(25.h),
-              CustomTextField(
-                hintText: 'John',
-                controller: _firstNameController,
-                labelText: 'First Name',
-              ),
-              Gap(10.h),
-              CustomTextField(
-                hintText: 'Doe',
-                controller: _lastNameController,
-                labelText: 'Last Name',
-              ),
-              Gap(10.h),
-              CustomTextField(
-                hintText: 'john@gmail.com',
-                controller: _emailController,
-                labelText: 'Email',
-              ),
-              Gap(10.h),
-              CustomDropDown(
-                hint: "gender",
-                labelText: "Gender",
-                list: genderList,
-                value: gender,
-              )
+              _FieldSection(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _FieldSection() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
+      child: Column(
+        children: [
+          CustomTextField(
+            hintText: 'John',
+            controller: _firstNameController,
+            labelText: 'First Name',
+          ),
+          Gap(10.h),
+          CustomTextField(
+            hintText: 'Doe',
+            controller: _lastNameController,
+            labelText: 'Last Name',
+          ),
+          Gap(10.h),
+          CustomTextField(
+            hintText: 'john@gmail.com',
+            controller: _emailController,
+            labelText: 'Email',
+          ),
+          Gap(10.h),
+          CustomDropDown(
+            hint: "gender",
+            labelText: "Gender",
+            list: genderList,
+            value: gender,
+          ),
+          Gap(10.h),
+          CustomTextField(
+            hintText: 'Date of Birth',
+            controller: _dateController,
+            labelText: 'Date of Birth',
+            isDate: true,
+          ),
+        ],
       ),
     );
   }
