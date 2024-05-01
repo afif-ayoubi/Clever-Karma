@@ -73,6 +73,7 @@ class OtpDetailWidget extends StatelessWidget {
                     : Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                         child: CustomTextField(
+                          hintText: 'john@gmail.com',
                             labelText: "Email", controller: emailController),
                       ),
             isResetPasswordPage

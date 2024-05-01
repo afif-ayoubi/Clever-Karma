@@ -33,21 +33,24 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
       }
     });
   }
+
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
 
-@override
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
   @override
   void dispose() {
     // TODO: implement dispose
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,16 +83,19 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
               ),
               Gap(25.h),
               CustomTextField(
+                hintText: 'John',
                 controller: _firstNameController,
                 labelText: 'First Name',
               ),
               Gap(10.h),
               CustomTextField(
+                hintText: 'Doe',
                 controller: _lastNameController,
                 labelText: 'Last Name',
               ),
               Gap(10.h),
               CustomTextField(
+                hintText: 'john@gmail.com',
                 controller: _emailController,
                 labelText: 'Email',
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../../../core/theme/hex_color.dart';
 import '../../../../routes/class_routes.dart';
 import '../widgets/auth_page/auth_popup.dart';
@@ -81,11 +80,12 @@ class _AuthPageState extends State<AuthPage> {
         btnOnPressed: () {},
         btnTextOnPressed: () {
           Navigator.of(context).pop();
-          _recallAuth(context);
           print('convert to ${currentAuthData == signIn ? signUp : signIn}');
           setState(() {
             currentAuthData = currentAuthData == signIn ? signUp : signIn;
           });
+          _recallAuth(context);
+
         },
       );
     });

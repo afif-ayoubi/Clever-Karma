@@ -9,7 +9,7 @@ import 'package:mobile/routes/class_routes.dart';
 
 class AppRoutes {
   static final GoRouter goRouter =
-      GoRouter(initialLocation: Routes.authRoute, routes: [
+      GoRouter(initialLocation: Routes.profileRoute, routes: [
     GoRoute(
         path: Routes.initRoute,
         builder: ((context, state) =>const  OnBoardingPage())),

@@ -4,7 +4,7 @@ import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? labelText;
-  final String? hintText;
+  final String hintText;
   final TextEditingController controller;
   final FormFieldValidator<String?>? validator;
   final bool? showVisibility;
@@ -18,8 +18,7 @@ class CustomTextField extends StatefulWidget {
       this.enable = true,
       this.labelText,
       required this.controller,
-      this.onTap,
-        this.hintText,
+      this.onTap, required this.hintText,
       this.showVisibility = false,
       this.validator});
 
@@ -47,7 +46,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               controller: widget.controller,
               textAlignVertical: TextAlignVertical.center,
               keyboardType: widget.keyboardNumber ? TextInputType.number : null,
-              style: theme.bodyMedium!.copyWith(color: HexColor.textInputColor),
+              style: theme.bodyMedium!.copyWith(color: Colors.black54),
               decoration: InputDecoration(
                 hintText: widget.hintText??"",
                 contentPadding: const EdgeInsets.all(8).r,

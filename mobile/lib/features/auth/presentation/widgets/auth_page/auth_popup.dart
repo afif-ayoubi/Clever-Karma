@@ -66,9 +66,12 @@ Future<void> authPopUp(
                       ),
                       Gap(40.h),
                       CustomTextField(
-                          labelText: "Email", controller: emailController),
+                          hintText: "john@gmail.com",
+                          labelText: "Email",
+                          controller: emailController),
                       Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
                       CustomTextField(
+                        hintText: "Password",
                         labelText: "Password",
                         controller: passwordController,
                         showVisibility: true,
@@ -86,6 +89,7 @@ Future<void> authPopUp(
                               ),
                             )
                           : CustomTextField(
+                              hintText: "Password",
                               labelText: "Confirm Password",
                               controller: confirmPasswordController,
                               showVisibility: true,
