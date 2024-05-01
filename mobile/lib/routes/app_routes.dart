@@ -7,9 +7,11 @@ import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
 import 'package:mobile/routes/class_routes.dart';
 
+import '../features/opportunities/presentation/widgets/home_page/side_menu.dart';
+
 class AppRoutes {
   static final GoRouter goRouter =
-      GoRouter(initialLocation: Routes.profileRoute, routes: [
+      GoRouter(initialLocation: Routes.sideRoute, routes: [
     GoRoute(
         path: Routes.initRoute,
         builder: ((context, state) =>const  OnBoardingPage())),
@@ -27,6 +29,8 @@ class AppRoutes {
         builder: ((context, state) => const ProfilePage())),
     GoRoute(
         path: Routes.authRoute,
-        builder: ((context, state) => const AuthPage())),
+        builder: ((context, state) => const AuthPage())),    GoRoute(
+        path: Routes.sideRoute,
+        builder: ((context, state) => const SideMenu())),
   ]);
 }
