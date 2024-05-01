@@ -13,6 +13,9 @@ class AuthPage extends StatefulWidget {
 }
 
 class _AuthPageState extends State<AuthPage> {
+  late TextEditingController _emailController;
+  late TextEditingController _passwordController ;
+  late TextEditingController _confirmPasswordController ;
 
   Map<String, dynamic> signIn = {
     'title': "Sign In",
@@ -34,10 +37,21 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void initState() {
+    _emailController = TextEditingController();
+    _passwordController = TextEditingController();
+    _confirmPasswordController = TextEditingController();
     super.initState();
     Future.delayed(Duration.zero, () {
       currentAuthData = signIn;
+      _toggleAuth(context);
     });
+  }
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,26 +62,38 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildBody() {
-    void _toggleAuth() {
-      Future.delayed(Duration.zero, () {
-        authPopUp(
-            currentAuthData: currentAuthData,
-            context: context,
-            forgotOnPressed: () {
-              context.push(Routes.forgotPasswordRoute);
-            },
-            btnOnPressed: () {},
-            btnTextOnPressed: () {
-              print(
-                  'convert to ${currentAuthData == signIn ? signUp : signIn}');
-              setState(() {
-                currentAuthData = currentAuthData == signIn ? signUp : signIn;
-              });
-            });
-      });
-    }
     return Container(
       color: HexColor.primaryColor,
     );
+  }
+
+  void _toggleAuth(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      authPopUp(
+        emailController: _emailController,
+        passwordController: _passwordController,
+        confirmPasswordController: _confirmPasswordController,
+        currentAuthData: currentAuthData ,
+        context: context,
+        forgotOnPressed: () {
+          context.push(Routes.forgotPasswordRoute);
+        },
+        btnOnPressed: () {},
+        btnTextOnPressed: () {
+          Navigator.of(context).pop();
+          _recallAuth(context);
+          print('convert to ${currentAuthData == signIn ? signUp : signIn}');
+          setState(() {
+            currentAuthData = currentAuthData == signIn ? signUp : signIn;
+          });
+        },
+      );
+    });
+  }
+
+  void _recallAuth(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      _toggleAuth(context);
+    });
   }
 }
