@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile/core/theme/hex_color.dart';
+import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_btn.dart';
 import '../common_widgets/app_bar.dart';
 import '../common_widgets/custom_textfield.dart';
 import 'custom_dropdown.dart';
@@ -70,7 +71,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                 ),
               ),
               Gap(25.h),
-              _FieldSection(),
+              _fieldSection(),
             ],
           ),
         ),
@@ -78,7 +79,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
     );
   }
 
-  Widget _FieldSection() {
+  Widget _fieldSection() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
       child: Column(
@@ -114,6 +115,19 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
             labelText: 'Date of Birth',
             isDate: true,
           ),
+          Gap(10.h),
+          CustomTextField(
+            hintText: '961 81305090',
+            controller: _phoneController,
+            labelText: 'Phone Number',
+          ),
+          Gap(25.h),
+          CustomBtn(
+            text: "Save",
+            onPressed: () {},
+            width: true,
+          ),
+          Gap(40.h)
         ],
       ),
     );
