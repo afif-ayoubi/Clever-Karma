@@ -1,5 +1,5 @@
 import 'dart:io';
-
+import 'package:intl/intl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -7,10 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobile/core/theme/hex_color.dart';
-import 'package:mobile/features/auth/presentation/widgets/profile_page/custom_dropdown.dart';
-
 import '../common_widgets/app_bar.dart';
 import '../common_widgets/custom_textfield.dart';
+import 'custom_dropdown.dart';
 
 class ProfileDetailWidget extends StatefulWidget {
   const ProfileDetailWidget({super.key});
@@ -22,6 +21,20 @@ class ProfileDetailWidget extends StatefulWidget {
 class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
   File? _image;
   final ImagePicker picker = ImagePicker();
+  List<String> genderList = [
+    'male',
+    'female',
+  ];
+  String? gender;
+  final TextEditingController _dateController = TextEditingController();
+
+  final TextEditingController _firstNameController = TextEditingController();
+
+  final TextEditingController _lastNameController = TextEditingController();
+
+  final TextEditingController _emailController = TextEditingController();
+
+  final TextEditingController _phoneController = TextEditingController();
 
   Future getImage() async {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -34,20 +47,32 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
     });
   }
 
-  final TextEditingController _firstNameController = TextEditingController();
-  final TextEditingController _lastNameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
+  Future<DateTime?> _showDateTime() async {
+    final DateTime? pickDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1960),
+        lastDate: DateTime.now());
+    if (pickDate != null) {
+      setState(() {
+        _dateController.text = DateFormat('yyyy-MM-dd').format(pickDate);
+      });
+    }
+    return null;
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _dateController.dispose();
+    _firstNameController.dispose();
+    _lastNameController.dispose();
+    _emailController.dispose();
+    _phoneController.dispose();
     super.dispose();
   }
 
@@ -100,7 +125,12 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                 labelText: 'Email',
               ),
               Gap(10.h),
-              // CustomDropDown(value: 'value', list: list, )
+              CustomDropDown(
+                hint: "gender",
+                labelText: "Gender",
+                list: genderList,
+                value: gender,
+              )
             ],
           ),
         ),
