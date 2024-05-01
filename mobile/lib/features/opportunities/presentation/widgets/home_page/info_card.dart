@@ -28,7 +28,7 @@ class InfoCard extends StatelessWidget {
       subtitle: Text(
         'Potential Volunteer',
         style: TextStyle(
-          color: HexColor.whiteColor,
+          color: HexColor.textInputColor,
         ),
       ),
     );

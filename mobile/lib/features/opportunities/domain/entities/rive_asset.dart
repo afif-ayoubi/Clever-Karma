@@ -24,22 +24,16 @@ List<RiveAsset> sideMenus = [
       title: "Home",
       src: 'assets/RiveAssets/icons.riv'),
   RiveAsset(
-      artboard: "SEARCH",
-      stateMacineName: "SEARCH_Interactivity",
-      title: "Search",
-      src: 'assets/RiveAssets/icons.riv',
-      number: 4),
-  RiveAsset(
       artboard: "LIKE/STAR",
       stateMacineName: "STAR_Interactivity",
-      title: "Favorites",
+      title: "Following",
       src: 'assets/RiveAssets/icons.riv',
       number: 1),
 
   RiveAsset(
       artboard: "BELL",
       stateMacineName: "BELL_Interactivity",
-      title: "BMI",
+      title: "Something",
       src: 'assets/RiveAssets/icons.riv',number: 2),
   RiveAsset(
       artboard: "CHAT",
