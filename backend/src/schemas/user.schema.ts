@@ -15,7 +15,7 @@ export class User {
     @Prop({ required: true, unique: true })
     email: string;
     @Prop({ required: true })
-    password: string;   
+    password: string;
     @Prop({ enum: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.ORGANIZATION], default: USER_ROLES.USER })
     role: string;
     @Prop({ type: UserInfo, })
@@ -24,9 +24,9 @@ export class User {
     organizationDetail?: OrganizationDetail;
     @Prop({ type: LocationSchema, })
     location?: Location;
-    @Prop({ type: [NotificationSchema], default: [] })
-    notification: Notification[];
-    @Prop({ type:FollowerSchema, })
+    @Prop({ type: [NotificationSchema] })
+    notification?: Notification[];
+    @Prop({ type: FollowerSchema, })
     followers?: Follower;
 
 
