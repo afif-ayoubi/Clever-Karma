@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/opportunities/domain/entities/rive_asset.dart';
 import 'package:rive/rive.dart';
 
@@ -36,7 +37,7 @@ class SideMenuTitle extends StatelessWidget {
               width: isActive ? 288.w : 0,
               child: Container(
                 decoration: const BoxDecoration(
-                    // color:AppTheme.thirdColor,
+                    color:HexColor.secondaryColor,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),

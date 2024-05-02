@@ -5,16 +5,17 @@ import 'package:mobile/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:mobile/features/auth/presentation/pages/otp_verification_screen.dart';
 import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
+import 'package:mobile/features/opportunities/presentation/pages/entry_page.dart';
 import 'package:mobile/routes/class_routes.dart';
 
-import '../features/opportunities/presentation/widgets/home_page/side_menu.dart';
+import '../features/opportunities/presentation/widgets/entry_page/side_menu.dart';
 
 class AppRoutes {
   static final GoRouter goRouter =
-      GoRouter(initialLocation: Routes.sideRoute, routes: [
+      GoRouter(initialLocation: Routes.entryPage, routes: [
     GoRoute(
         path: Routes.initRoute,
-        builder: ((context, state) =>const  OnBoardingPage())),
+        builder: ((context, state) => const OnBoardingPage())),
     GoRoute(
         path: Routes.forgotPasswordRoute,
         builder: ((context, state) => const ForgotPassword())),
@@ -29,8 +30,9 @@ class AppRoutes {
         builder: ((context, state) => const ProfilePage())),
     GoRoute(
         path: Routes.authRoute,
-        builder: ((context, state) => const AuthPage())),    GoRoute(
-        path: Routes.sideRoute,
-        builder: ((context, state) => const SideMenu())),
+        builder: ((context, state) => const AuthPage())),
+    GoRoute(
+        path: Routes.entryPage,
+        builder: ((context, state) => const EntryPage())),
   ]);
 }

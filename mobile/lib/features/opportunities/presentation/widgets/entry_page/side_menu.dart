@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/opportunities/core/rive_utils.dart';
 import 'package:mobile/features/opportunities/domain/entities/rive_asset.dart';
-import 'package:mobile/features/opportunities/presentation/widgets/home_page/side_menu_title.dart';
+import 'package:mobile/features/opportunities/presentation/widgets/entry_page/side_menu_title.dart';
 import 'package:rive/rive.dart';
 
 import 'info_card.dart';

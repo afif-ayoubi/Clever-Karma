@@ -5,5 +5,5 @@ class Routes{
   static const String resetPasswordRoute = '/resetPassword';
   static const String profileRoute = '/profile';
   static const String authRoute = '/auth';
-  static const String sideRoute='/sideMenu';
+  static const String entryPage='/entry';
 }
