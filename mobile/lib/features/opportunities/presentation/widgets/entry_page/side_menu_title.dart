@@ -33,12 +33,12 @@ class SideMenuTitle extends StatelessWidget {
               curve: Curves.fastOutSlowIn,
               duration: const Duration(milliseconds: 300),
               height: 56.h,
-              left: 0,
+              left: 0.r,
               width: isActive ? 288.w : 0,
               child: Container(
-                decoration: const BoxDecoration(
+                decoration:  BoxDecoration(
                     color:HexColor.secondaryColor,
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                    borderRadius: BorderRadius.all(const Radius.circular(12).w)),
               ),
             ),
             ListTile(

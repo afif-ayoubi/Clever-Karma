@@ -18,10 +18,10 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
+  RiveAsset selectedMenu = sideMenus.first;
+
   @override
   Widget build(BuildContext context) {
-    RiveAsset selectedMenu = sideMenus.first;
-
     final theme = Theme.of(context).textTheme;
     return Scaffold(
       body: Container(
@@ -47,7 +47,7 @@ class _SideMenuState extends State<SideMenu> {
                       menu: menu,
                       press: () async {
                         menu.input!.change(true);
-                        Future.delayed(const Duration(milliseconds: 1), () {
+                        Future.delayed(const Duration(milliseconds: 2), () {
                           menu.input!.change(false);
                         });
                         setState(() {
@@ -55,10 +55,13 @@ class _SideMenuState extends State<SideMenu> {
                         });
                         switch (menu.number) {
                           case 1:
+                            print(selectedMenu == menu);
                             break;
                           case 2:
+                            print(selectedMenu == menu);
                             break;
                           case 3:
+                            print(selectedMenu == menu);
                             break;
                         }
                       },
