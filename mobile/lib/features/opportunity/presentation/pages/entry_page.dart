@@ -51,7 +51,7 @@ class _EntryPageState extends State<EntryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isSideMenuClosed ? null : HexColor.primaryColor,
+      backgroundColor: isSideMenuClosed ? HexColor.primaryColor: HexColor.backgroundColor,
       body: Stack(
         children: [
           AnimatedPositioned(

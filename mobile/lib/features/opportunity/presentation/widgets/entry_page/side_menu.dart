@@ -27,7 +27,7 @@ class _SideMenuState extends State<SideMenu> {
       body: Container(
           width: 288.w,
           height: double.infinity,
-          color: HexColor.primaryColor,
+          color: HexColor.backgroundColor,
           child: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
