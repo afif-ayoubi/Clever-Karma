@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/hex_color.dart';
-import 'package:mobile/features/opportunities/presentation/widgets/entry_page/home.dart';
 import 'package:rive/rive.dart';
 
 import '../../core/rive_utils.dart';
@@ -75,7 +74,7 @@ class _EntryPageState extends State<EntryPage>
                         borderRadius: isSideMenuClosed
                             ? BorderRadius.all(const Radius.circular(0).w)
                             : BorderRadius.all(const Radius.circular(24).w),
-                        child: const Home()))),
+                        child: const HomePage()))),
           ),
           AnimatedPositioned(
             duration: const Duration(milliseconds: 200),

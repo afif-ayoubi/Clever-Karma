@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomDropDown extends StatefulWidget {
@@ -23,12 +24,11 @@ class CustomDropDown extends StatefulWidget {
 class _CustomDropDownState extends State<CustomDropDown> {
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.labelText ?? "", style: theme.bodyMedium),
+        Text(widget.labelText ?? "", style: context.bodyMedium),
         DropdownButtonHideUnderline(
           child: SizedBox(
             height: 45.h,
@@ -48,9 +48,9 @@ class _CustomDropDownState extends State<CustomDropDown> {
                 color: HexColor.secondaryColor,
               ),
               hint: Text(widget.hint,
-                  style: theme.bodyMedium!
+                  style: context.bodyMedium!
                       .copyWith(color: HexColor.textInputColor)),
-              style: theme.bodyMedium!.copyWith(color: Colors.black54),
+              style: context.bodyMedium!.copyWith(color: Colors.black54),
               value: widget.value,
               items: widget.list.map<DropdownMenuItem<String>>((String? value) {
                 return DropdownMenuItem<String>(

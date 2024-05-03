@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -34,12 +35,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.labelText ?? "", style: theme.bodyMedium),
+          Text(widget.labelText ?? "", style: context.bodyMedium),
           SizedBox(
             height: 45.h,
             child: TextFormField(
@@ -50,7 +50,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               controller: widget.controller,
               textAlignVertical: TextAlignVertical.center,
               keyboardType: widget.keyboardNumber ? TextInputType.number : null,
-              style: theme.bodyMedium!.copyWith(color: Colors.black54),
+              style: context.bodyMedium!.copyWith(color: Colors.black54),
               decoration: InputDecoration(
                 hintText: widget.hintText ?? "",
                 contentPadding: const EdgeInsets.all(8).r,

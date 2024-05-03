@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/features/auth/presentation/widgets/onboarding_page/onboarding_btn.dart';
 
 class OnBoardingDetailWidget extends StatelessWidget {
@@ -22,7 +23,6 @@ class OnBoardingDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
 
     return PageView.builder(
       itemBuilder:(context,index)=> Container(
@@ -45,7 +45,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                     child: Text(
                       title,
                       textAlign: TextAlign.center,
-                      style: theme.displayLarge,
+                      style: context.displayLarge,
                     ).animate().fade(delay: 0.5.seconds).slideY(
                           curve: Curves.easeInOut,
                         ),
@@ -55,7 +55,7 @@ class OnBoardingDetailWidget extends StatelessWidget {
                     key: ValueKey(body),
                     child: Text(
                       body,
-                      style: theme.bodyLarge,
+                      style: context.bodyLarge,
                       textAlign: TextAlign.center,
                     ).animate().fade(delay: 1.5.seconds).slideY(
                           curve: Curves.easeInOut,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/opportunities/core/rive_utils.dart';
 import 'package:mobile/features/opportunities/domain/entities/rive_asset.dart';
@@ -22,7 +23,6 @@ class _SideMenuState extends State<SideMenu> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
     return Scaffold(
       body: Container(
           width: 288.w,
@@ -39,7 +39,7 @@ class _SideMenuState extends State<SideMenu> {
                       const EdgeInsets.only(left: 24, top: 24, bottom: 16).r,
                   child: Text(
                     "Browse".toUpperCase(),
-                    style: theme.displayMedium!
+                    style: context.displayMedium!
                         .copyWith(color: HexColor.textInputColor),
                   ),
                 ),

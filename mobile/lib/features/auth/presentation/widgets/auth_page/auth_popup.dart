@@ -3,6 +3,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_textfield.dart';
 
@@ -36,7 +37,6 @@ Future<void> authPopUp(
     barrierDismissible: false,
     context: context,
     pageBuilder: (context, _, __) {
-      final theme = Theme.of(context).textTheme;
       final MediaQueryData mediaQuery = MediaQuery.of(context);
       final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
       return Center(
@@ -56,13 +56,13 @@ Future<void> authPopUp(
                     children: [
                       Text(
                         currentAuthData['title'],
-                        style: theme.displayMedium,
+                        style: context.displayMedium,
                       ),
                       Gap(28.h),
                       Text(
                         currentAuthData['body'],
                         textAlign: TextAlign.center,
-                        style: theme.bodyMedium,
+                        style: context.bodyMedium,
                       ),
                       Gap(40.h),
                       CustomTextField(
@@ -84,7 +84,7 @@ Future<void> authPopUp(
                                 alignment: Alignment.bottomLeft,
                                 child: Text(
                                   "Forgot Password?",
-                                  style: theme.bodyMedium,
+                                  style: context.bodyMedium,
                                 ),
                               ),
                             )
@@ -107,11 +107,11 @@ Future<void> authPopUp(
                             children: [
                               TextSpan(
                                 text: currentAuthData['caption'],
-                                style: theme.bodyMedium,
+                                style: context.bodyMedium,
                               ),
                               TextSpan(
                                   text: currentAuthData['btnText'],
-                                  style: theme.bodyMedium!.copyWith(
+                                  style: context.bodyMedium!.copyWith(
                                     color: HexColor.secondaryColor,
                                   ),
                                   recognizer: TapGestureRecognizer()

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/constants/font_manager.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomBtn extends StatelessWidget {
@@ -12,7 +13,6 @@ class CustomBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
     return Container(
       width: width ? 175.w:100.sw,
       height: 45.h,
@@ -22,7 +22,7 @@ class CustomBtn extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(text,
-            style: theme.bodyMedium!.copyWith(
+            style: context.bodyMedium!.copyWith(
                 color: HexColor.whiteColor,
                 fontWeight: FontWeightManager.semiBold)),
       ),

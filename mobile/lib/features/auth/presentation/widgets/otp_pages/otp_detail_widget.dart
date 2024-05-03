@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 import '../../../../../core/constants/assets_manager.dart';
@@ -32,7 +33,6 @@ class OtpDetailWidget extends StatelessWidget {
     final TextEditingController emailController = TextEditingController();
     TextEditingController passwordController = TextEditingController();
     TextEditingController confirmPasswordController = TextEditingController();
-    final theme = Theme.of(context).textTheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(20).r,
@@ -52,12 +52,12 @@ class OtpDetailWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Text(title, style: theme.displayMedium),
+            Text(title, style: context.displayMedium),
             Gap(isResetPasswordPage ? 30.h : 45.h),
             Text(
               body ?? "",
               textAlign: TextAlign.center,
-              style: theme.bodyLarge!.copyWith(color: Colors.black),
+              style: context.bodyLarge!.copyWith(color: Colors.black),
             ),
             Gap(isResetPasswordPage ? 0.h : 35.h),
             isResetPasswordPage

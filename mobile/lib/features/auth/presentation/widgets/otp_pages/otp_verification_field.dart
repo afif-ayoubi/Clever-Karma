@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 
 class OtpVerificationField extends StatefulWidget {
   final ValueChanged<String>? onOtpEntered;
@@ -23,7 +24,6 @@ class _OtpVerificationFieldState extends State<OtpVerificationField> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context).textTheme;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(4, (index) {
@@ -32,7 +32,7 @@ class _OtpVerificationFieldState extends State<OtpVerificationField> {
           height: 45.h,
           margin: EdgeInsets.only(right: 30.r),
           child: TextFormField(
-            style: theme.bodyLarge!.copyWith(color: Colors.black),
+            style: context.bodyLarge!.copyWith(color: Colors.black),
             controller: _controllers[index],
             focusNode: _focusNodes[index],
             keyboardType: TextInputType.number,
