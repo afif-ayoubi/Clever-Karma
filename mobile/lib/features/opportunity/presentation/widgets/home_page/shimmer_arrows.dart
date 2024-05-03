@@ -50,6 +50,7 @@ class _ShimmerArrowsState extends State<ShimmerArrows>
             Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
             Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
             Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
+            Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
           ],
         ),
       ),

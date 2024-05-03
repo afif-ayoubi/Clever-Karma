@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
           child: Column(
             children: [
-              Gap(100.h),
+              Gap(140.h),
               Text("Select Your Cause",
                   style: context.displayLarge!.copyWith(
                       fontWeight: FontWeightManager.regular,
@@ -63,13 +63,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Positioned.fill(
                       top: null,
-                      child: Column(
-                        children: [
-                          PageIndicators(
-                            roomSelectorNotifier: roomSelectorNotifier,
-                            pageNotifier: pageNotifier,
-                          ),
-                        ],
+                      child: Padding(
+                        padding:  const EdgeInsets.only(bottom: 50).r,
+                        child: Column(
+                          children: [
+                            PageIndicators(
+                              roomSelectorNotifier: roomSelectorNotifier,
+                              pageNotifier: pageNotifier,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ],

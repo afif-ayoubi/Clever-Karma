@@ -25,14 +25,11 @@ class ParallaxImageCard extends StatelessWidget {
     image: DecorationImage(
       image: AssetImage(imageUrl),
       fit: BoxFit.cover,
-      colorFilter:
-      const ColorFilter.mode(Colors.black26, BlendMode.colorBurn),
-      alignment: Alignment(lerpDouble(.5, -.5, parallaxValue)!, 0),
     ),
   );
 
   BoxDecoration get _vignetteDecoration => BoxDecoration(
-    borderRadius: BorderRadius.all(Radius.circular(12).w),
+    borderRadius: BorderRadius.all(const Radius.circular(12).w),
     gradient: const RadialGradient(
       radius: 2,
       colors: [Colors.transparent, Colors.black],

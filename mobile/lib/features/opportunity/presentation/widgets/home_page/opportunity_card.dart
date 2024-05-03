@@ -49,7 +49,7 @@ class OpportunityCard extends StatelessWidget {
           ),
 
           Padding(
-            padding: const EdgeInsets.only(bottom: 200).r,
+            padding: const EdgeInsets.only(bottom: 170,top: 40).r,
             child: Transform(
               transform: Matrix4.translationValues(0, -90 * value, 0),
               child: GestureDetector(
@@ -107,8 +107,8 @@ class AnimatedUpwardArrows extends StatelessWidget {
           Gap(24.h),
           Container(
             margin: const EdgeInsets.only(bottom: 12),
-            height: 4,
-            width: 120,
+            height: 4.h,
+            width: 120.w,
             decoration:  BoxDecoration(
               color: HexColor.whiteColor,
               borderRadius: BorderRadius.all(const Radius.circular(8).w),
@@ -130,8 +130,6 @@ class VerticalOpportunityTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final dx = 50 * animationValue;
-    // final opacity = 1 - animationValue;
     return Align(
       alignment: Alignment.centerLeft,
       child: RotatedBox(
@@ -140,7 +138,7 @@ class VerticalOpportunityTitle extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(left: 40.h, right: 20.h, top: 12.w),
             child: Text(
-              opportunity.name.replaceAll(' ', ''),
+              opportunity.name,
               maxLines: 1,
               style: context.displayLarge!.copyWith(color: HexColor.whiteColor),
             ),
