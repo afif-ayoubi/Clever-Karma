@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/core/constants/icons_manager.dart';
 
-
 class ShimmerArrows extends StatefulWidget {
   const ShimmerArrows({super.key});
 
@@ -44,12 +43,15 @@ class _ShimmerArrowsState extends State<ShimmerArrows>
           child: child,
         );
       },
-      child: const Column(
-        children: [
-          Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
-          Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
-          Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
-        ],
+      child: const ColorFiltered(
+        colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
+        child: Column(
+          children: [
+            Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
+            Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
+            Align(heightFactor: .4, child: Icon(IconManager.arrowUp)),
+          ],
+        ),
       ),
     );
   }
