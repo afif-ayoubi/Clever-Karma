@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
-import 'package:mobile/features/opportunity/presentation/widgets/home_page/opportunity_view.dart';
 
-import '../widgets/home_page/lighted_backround.dart';
-import '../widgets/home_page/page_indicators.dart';
+import '../widgets/entry_page/home_page/lighted_backround.dart';
+import '../widgets/entry_page/home_page/opportunity_view.dart';
+import '../widgets/entry_page/home_page/page_indicators.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

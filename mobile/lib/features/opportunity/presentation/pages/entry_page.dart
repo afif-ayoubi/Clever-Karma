@@ -6,8 +6,8 @@ import 'package:mobile/core/theme/hex_color.dart';
 import 'package:rive/rive.dart';
 
 import '../../core/rive_utils.dart';
-import '../widgets/entry_page/menu_btn.dart';
-import '../widgets/entry_page/side_menu.dart';
+import '../widgets/entry_page/side_menu/menu_btn.dart';
+import '../widgets/entry_page/side_menu/side_menu.dart';
 import 'home_page.dart';
 
 class EntryPage extends StatefulWidget {

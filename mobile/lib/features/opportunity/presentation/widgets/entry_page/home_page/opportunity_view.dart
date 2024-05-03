@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../domain/entities/opportunity.dart';
+import '../../../../domain/entities/opportunity.dart';
 import 'opportunity_card.dart';
 
 

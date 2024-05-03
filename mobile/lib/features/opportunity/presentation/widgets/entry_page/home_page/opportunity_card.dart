@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/opportunity/domain/entities/opportunity.dart';
-import 'package:mobile/features/opportunity/presentation/widgets/home_page/parallax_image_card.dart';
+import 'package:mobile/features/opportunity/presentation/widgets/entry_page/home_page/parallax_image_card.dart';
 
 import 'background_card.dart';
 import 'shimmer_arrows.dart';
@@ -51,7 +51,7 @@ class OpportunityCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 170,top: 40).r,
             child: Transform(
-              transform: Matrix4.translationValues(0, -90 * value, 0),
+              transform: Matrix4.translationValues(0, -160 * value, 0),
               child: GestureDetector(
                 onTap: onTap,
                 onVerticalDragUpdate: (details) {

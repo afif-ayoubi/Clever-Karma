@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../core/theme/hex_color.dart';
+import '../../../../../../core/theme/hex_color.dart';
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
