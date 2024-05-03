@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -20,7 +21,7 @@ class CustomAppBar extends StatelessWidget {
           color: HexColor.primaryColor,
           borderRadius: BorderRadius.circular(12.5.r)
         ),
-        child: Icon(Icons.arrow_back_ios_new_sharp, color: HexColor.whiteColor, size: 15.sp,)
+        child: Icon(IconManager.arrowBack, color: HexColor.whiteColor, size: 15.sp,)
       ),
     );
   }

@@ -1,5 +1,6 @@
   import 'package:flutter/material.dart';
   import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
   class OnBoardingBtn extends StatelessWidget {
@@ -19,7 +20,7 @@ import 'package:mobile/core/theme/hex_color.dart';
                 borderRadius: BorderRadius.circular(50.r),
               ),
           ),
-          child: const Icon(Icons.arrow_forward_ios_sharp),
+          child:  const Icon(IconManager.arrowForward)
         ),
       );
     }
