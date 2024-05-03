@@ -15,29 +15,29 @@ class RiveAsset {
   set setInput(SMIBool status) {
     input = status;
   }
+  static List<RiveAsset> sideMenus = [
+    RiveAsset(
+        artboard: "HOME",
+        stateMacineName: "HOME_interactivity",
+        title: "Home",
+        src: 'assets/RiveAssets/icons.riv'),
+    RiveAsset(
+        artboard: "LIKE/STAR",
+        stateMacineName: "STAR_Interactivity",
+        title: "Following",
+        src: 'assets/RiveAssets/icons.riv',
+        number: 1),
+
+    RiveAsset(
+        artboard: "BELL",
+        stateMacineName: "BELL_Interactivity",
+        title: "Notifications",
+        src: 'assets/RiveAssets/icons.riv',number: 2),
+    RiveAsset(
+        artboard: "CHAT",
+        stateMacineName: "CHAT_Interactivity",
+        title: "Help",
+        src: 'assets/RiveAssets/icons.riv',number: 3),
+  ];
 
 }
-List<RiveAsset> sideMenus = [
-  RiveAsset(
-      artboard: "HOME",
-      stateMacineName: "HOME_interactivity",
-      title: "Home",
-      src: 'assets/RiveAssets/icons.riv'),
-  RiveAsset(
-      artboard: "LIKE/STAR",
-      stateMacineName: "STAR_Interactivity",
-      title: "Following",
-      src: 'assets/RiveAssets/icons.riv',
-      number: 1),
-
-  RiveAsset(
-      artboard: "BELL",
-      stateMacineName: "BELL_Interactivity",
-      title: "Notifications",
-      src: 'assets/RiveAssets/icons.riv',number: 2),
-  RiveAsset(
-      artboard: "CHAT",
-      stateMacineName: "CHAT_Interactivity",
-      title: "Help",
-      src: 'assets/RiveAssets/icons.riv',number: 3),
-];

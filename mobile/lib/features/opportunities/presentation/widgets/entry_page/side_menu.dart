@@ -19,7 +19,7 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  RiveAsset selectedMenu = sideMenus.first;
+  RiveAsset selectedMenu = RiveAsset.sideMenus.first;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class _SideMenuState extends State<SideMenu> {
                         .copyWith(color: HexColor.textInputColor),
                   ),
                 ),
-                ...sideMenus.map((menu) => SideMenuTitle(
+                ...RiveAsset.sideMenus.map((menu) => SideMenuTitle(
                       menu: menu,
                       press: () async {
                         menu.input!.change(true);
