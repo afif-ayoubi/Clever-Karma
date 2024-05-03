@@ -8,7 +8,6 @@ import 'package:mobile/features/opportunity/presentation/widgets/home_page/oppor
 import '../widgets/home_page/lighted_backround.dart';
 import '../widgets/home_page/page_indicators.dart';
 
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -48,8 +47,10 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             children: [
               Gap(100.h),
-              Text("Select Your Cause", style: context.displayLarge!.copyWith(fontWeight: FontWeightManager.regular)),
-
+              Text("Select Your Cause",
+                  style: context.displayLarge!.copyWith(
+                      fontWeight: FontWeightManager.regular,
+                      fontSize: FontSize.s30)),
               Expanded(
                 child: Stack(
                   fit: StackFit.expand,

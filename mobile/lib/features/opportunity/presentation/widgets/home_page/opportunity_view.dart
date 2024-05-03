@@ -26,49 +26,52 @@ class OpportunityView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<double>(
-      valueListenable: pageNotifier,
-      builder: (_, page, __) => ValueListenableBuilder(
-        valueListenable: roomSelectorNotifier,
-        builder: (_, selected, __) => PageView.builder(
-          clipBehavior: Clip.none,
-          itemCount: Opportunity.fakeData.length,
-          controller: controller,
-          itemBuilder: (_, index) {
-            final percent = page - index;
-            final isSelected = selected == index;
-            final opportunity = Opportunity.fakeData[index];
-            return AnimatedContainer(
-              duration: kThemeAnimationDuration,
-              curve: Curves.fastOutSlowIn,
-              transform: _getOutTranslate(percent, selected, index),
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: OpportunityCard(
-                percent: percent,
-                expand: isSelected,
-                opportunity: opportunity,
-                onSwipeUp: () => roomSelectorNotifier.value = index,
-                onSwipeDown: () => roomSelectorNotifier.value = -1,
-                onTap: () async {
-                  // if (isSelected) {
-                  //   await Navigator.push(
-                  //     context,
-                  //     PageRouteBuilder<void>(
-                  //       transitionDuration: const Duration(milliseconds: 800),
-                  //       reverseTransitionDuration:
-                  //       const Duration(milliseconds: 800),
-                  //       pageBuilder: (_, animation, __) => FadeTransition(
-                  //         opacity: animation,
-                  //         child: RoomDetailScreen(opportunity: opportunity),
-                  //       ),
-                  //     ),
-                  //   );
-                  //   roomSelectorNotifier.value = -1;
-                  // }
-                },
-              ),
-            );
-          },
+    return Padding(
+      padding:  EdgeInsets.only(top: 30.h),
+      child: ValueListenableBuilder<double>(
+        valueListenable: pageNotifier,
+        builder: (_, page, __) => ValueListenableBuilder(
+          valueListenable: roomSelectorNotifier,
+          builder: (_, selected, __) => PageView.builder(
+            clipBehavior: Clip.none,
+            itemCount: Opportunity.fakeData.length,
+            controller: controller,
+            itemBuilder: (_, index) {
+              final percent = page - index;
+              final isSelected = selected == index;
+              final opportunity = Opportunity.fakeData[index];
+              return AnimatedContainer(
+                duration: kThemeAnimationDuration,
+                curve: Curves.fastOutSlowIn,
+                transform: _getOutTranslate(percent, selected, index),
+                padding: const EdgeInsets.symmetric(horizontal: 16).r,
+                child: OpportunityCard(
+                  percent: percent,
+                  expand: isSelected,
+                  opportunity: opportunity,
+                  onSwipeUp: () => roomSelectorNotifier.value = index,
+                  onSwipeDown: () => roomSelectorNotifier.value = -1,
+                  onTap: () async {
+                    // if (isSelected) {
+                    //   await Navigator.push(
+                    //     context,
+                    //     PageRouteBuilder<void>(
+                    //       transitionDuration: const Duration(milliseconds: 800),
+                    //       reverseTransitionDuration:
+                    //       const Duration(milliseconds: 800),
+                    //       pageBuilder: (_, animation, __) => FadeTransition(
+                    //         opacity: animation,
+                    //         child: RoomDetailScreen(opportunity: opportunity),
+                    //       ),
+                    //     ),
+                    //   );
+                    //   roomSelectorNotifier.value = -1;
+                    // }
+                  },
+                ),
+              );
+            },
+          ),
         ),
       ),
     );
