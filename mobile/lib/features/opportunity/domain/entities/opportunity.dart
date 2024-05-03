@@ -10,10 +10,10 @@ class Opportunity {
 
   static List<Opportunity> fakeData = [
     const Opportunity(
-        id: 1, name: 'blood1', imageUrl: AppImages.onBoardingImg1),
+        id: 1, name: 'blood Donation', imageUrl: AppImages.onBoardingImg1),
     const Opportunity(
-        id: 2, name: 'blood12', imageUrl: AppImages.onBoardingImg1),
+        id: 2, name: 'blood Section', imageUrl: AppImages.onBoardingImg1),
     const Opportunity(
-        id: 3, name: 'blood13', imageUrl: AppImages.onBoardingImg1),
+        id: 3, name: 'blood Room', imageUrl: AppImages.onBoardingImg1),
   ];
 }
