@@ -14,7 +14,7 @@ class LightedBackground extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        const ColoredBox(color: HexColor.lightColor),
+        const ColoredBox(color: HexColor.primaryColor),
         Transform.scale(
           scale: 2,
           alignment: Alignment.center,
@@ -24,15 +24,6 @@ class LightedBackground extends StatelessWidget {
               ..rotateY(1.4)
               ..rotateX(0.1)
               ..setTranslationRaw(90, -80, 0),
-            // child:  DecoratedBox(
-            //   decoration: BoxDecoration(
-            //     gradient: RadialGradient(
-            //       focal: Alignment.topCenter,
-            //       center: Alignment(0, -0.55),
-            //       colors: HexColor.dimmedLightColors,
-            //     ),
-            //   ),
-            // ),
           ),
         ),
         child,
