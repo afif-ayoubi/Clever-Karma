@@ -1,4 +1,4 @@
-import { Body, Controller, Get, HttpException, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, HttpException, Param, Patch, Post } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create_user.dto";
 import mongoose from "mongoose";
@@ -21,6 +21,10 @@ export class UsersController {
         if (!isValid) throw new HttpException("Invalid id", 404);
         const findUser = await this.userService.getUserById(id);
         if (!findUser) throw new HttpException("User not found", 404);
+    }
+    @Patch(':id')
+    updateUser(@Param('id') id: string, @Body() createUserDto: CreateUserDto) {
+        return this.userService.updateUser(id, createUserDto);
     }
 
 }

@@ -17,4 +17,5 @@ export class UsersService {
     getUserById(id:String){
         return this.userModel.findById(id);
     }
+    
 }
