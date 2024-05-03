@@ -9,6 +9,7 @@ import 'package:rive/rive.dart';
 import '../../core/rive_utils.dart';
 import '../widgets/entry_page/menu_btn.dart';
 import '../widgets/entry_page/side_menu.dart';
+import 'home_page.dart';
 
 class EntryPage extends StatefulWidget {
   const EntryPage({super.key});

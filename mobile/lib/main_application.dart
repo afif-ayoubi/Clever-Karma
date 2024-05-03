@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, child) => MaterialApp.router(
           title: 'Clever Karma',
-          theme: appThemeData,
+          theme: AppTheme.brightTheme,
           debugShowCheckedModeBanner: false,
           routerConfig: AppRoutes.goRouter,
         ),
