@@ -5,10 +5,10 @@ import 'package:mobile/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:mobile/features/auth/presentation/pages/otp_verification_screen.dart';
 import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
-import 'package:mobile/features/opportunities/presentation/pages/entry_page.dart';
 import 'package:mobile/routes/class_routes.dart';
 
-import '../features/opportunities/presentation/widgets/entry_page/side_menu.dart';
+import '../features/opportunity/presentation/pages/entry_page.dart';
+
 
 class AppRoutes {
   static final GoRouter goRouter =
