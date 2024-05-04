@@ -6,4 +6,5 @@ class Routes{
   static const String profileRoute = '/profile';
   static const String authRoute = '/auth';
   static const String entryPage='/entry';
+  static const String organizationsPage='/organizations';
 }
