@@ -10,10 +10,9 @@ import 'package:mobile/routes/class_routes.dart';
 
 import '../features/opportunity/presentation/pages/entry_page.dart';
 
-
 class AppRoutes {
   static final GoRouter goRouter =
-      GoRouter(initialLocation: Routes.entryPage, routes: [
+      GoRouter(initialLocation: Routes.organizationsPage, routes: [
     GoRoute(
         path: Routes.initRoute,
         builder: ((context, state) => const OnBoardingPage())),
@@ -35,7 +34,7 @@ class AppRoutes {
     GoRoute(
         path: Routes.entryPage,
         builder: ((context, state) => const EntryPage())),
-        GoRoute(
+    GoRoute(
         path: Routes.organizationsPage,
         builder: ((context, state) => const OrganizationsPage())),
   ]);
