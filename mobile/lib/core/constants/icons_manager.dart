@@ -8,4 +8,6 @@ abstract class IconManager{
   static const IconData favorite = Icons.favorite_border_outlined;
   static const IconData people = Icons.people_outline;
   static const IconData organization = Icons.apartment_sharp;
+  static const IconData search = Icons.search;
+  static const IconData filter = Icons.filter_alt;
 }
