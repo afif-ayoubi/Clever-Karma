@@ -51,59 +51,64 @@ class _EntryPageState extends State<EntryPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: isSideMenuClosed ? HexColor.primaryColor: HexColor.backgroundColor,
-      body: Stack(
-        children: [
-          AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
-              curve: Curves.fastOutSlowIn,
-              left: isSideMenuClosed ? -288.r : 0,
-              width: 288.w,
-              height: MediaQuery.of(context).size.height,
-              child: const SideMenu()),
-          Transform(
-            alignment: Alignment.center,
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..rotateY(animation.value - 30 * animation.value * pi / 180),
-            child: Transform.translate(
-                offset: Offset(animation.value * 265, 0),
-                child: Transform.scale(
-                    scale: scaleAnimation.value,
-                    child: ClipRRect(
-                        borderRadius: isSideMenuClosed
-                            ? BorderRadius.all(const Radius.circular(0).w)
-                            : BorderRadius.all(const Radius.circular(24).w),
-                        child: const HomePage()))),
-          ),
-          AnimatedPositioned(
+      backgroundColor:
+          isSideMenuClosed ? HexColor.primaryColor : HexColor.backgroundColor,
+      body: _buildBody(),
+    );
+  }
+
+  Widget _buildBody() {
+    return Stack(
+      children: [
+        AnimatedPositioned(
             duration: const Duration(milliseconds: 200),
             curve: Curves.fastOutSlowIn,
-            top: 16.h,
-            left: isSideMenuClosed ? 0 : 220.w,
-            child: MenuBtn(
-              riveOnInit: (artboard) {
-                StateMachineController controller = RiveUtils.getRiveController(
-                    artboard,
-                    stateMachineName: "State Machine");
-                isSideBarClosed = controller.findSMI("isOpen") as SMIBool;
-                isSideBarClosed.value = true;
-              },
-              press: () {
-                isSideBarClosed.value = !isSideBarClosed.value;
-                if (isSideMenuClosed) {
-                  _animationController.forward();
-                } else {
-                  _animationController.reverse();
-                }
-                setState(() {
-                  isSideMenuClosed = isSideBarClosed.value;
-                });
-              },
-            ),
-          )
-        ],
-      ),
+            left: isSideMenuClosed ? -288.r : 0,
+            width: 288.w,
+            height: MediaQuery.of(context).size.height,
+            child: const SideMenu()),
+        Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.identity()
+            ..setEntry(3, 2, 0.001)
+            ..rotateY(animation.value - 30 * animation.value * pi / 180),
+          child: Transform.translate(
+              offset: Offset(animation.value * 265, 0),
+              child: Transform.scale(
+                  scale: scaleAnimation.value,
+                  child: ClipRRect(
+                      borderRadius: isSideMenuClosed
+                          ? BorderRadius.all(const Radius.circular(0).w)
+                          : BorderRadius.all(const Radius.circular(24).w),
+                      child: const HomePage()))),
+        ),
+        AnimatedPositioned(
+          duration: const Duration(milliseconds: 200),
+          curve: Curves.fastOutSlowIn,
+          top: 16.h,
+          left: isSideMenuClosed ? 0 : 220.w,
+          child: MenuBtn(
+            riveOnInit: (artboard) {
+              StateMachineController controller = RiveUtils.getRiveController(
+                  artboard,
+                  stateMachineName: "State Machine");
+              isSideBarClosed = controller.findSMI("isOpen") as SMIBool;
+              isSideBarClosed.value = true;
+            },
+            press: () {
+              isSideBarClosed.value = !isSideBarClosed.value;
+              if (isSideMenuClosed) {
+                _animationController.forward();
+              } else {
+                _animationController.reverse();
+              }
+              setState(() {
+                isSideMenuClosed = isSideBarClosed.value;
+              });
+            },
+          ),
+        )
+      ],
     );
   }
 }
