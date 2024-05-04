@@ -10,4 +10,5 @@ abstract class IconManager{
   static const IconData organization = Icons.apartment_sharp;
   static const IconData search = Icons.search;
   static const IconData filter = Icons.filter_alt;
+  static const IconData location= Icons.location_on_outlined;
 }
