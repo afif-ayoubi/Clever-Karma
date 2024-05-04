@@ -9,7 +9,7 @@ import 'package:mobile/features/opportunity/domain/entities/rive_asset.dart';
 import 'package:mobile/features/opportunity/presentation/widgets/entry_page/side_menu/side_menu_title.dart';
 import 'package:rive/rive.dart';
 
-import 'info_card.dart';
+import '../widgets/entry_page/side_menu/info_card.dart';
 
 
 class SideMenu extends StatefulWidget {
