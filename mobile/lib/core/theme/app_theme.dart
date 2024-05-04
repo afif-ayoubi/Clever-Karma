@@ -21,6 +21,10 @@ abstract class AppTheme{
         fontSize: FontSize.s16,
         fontWeight: FontWeightManager.regular,
       ),
+      bodySmall: TextStyle(
+        fontSize: FontSize.s14,
+        fontWeight: FontWeightManager.regular,
+      ),
     ),
     inputDecorationTheme: InputDecorationTheme(
       enabledBorder: OutlineInputBorder(

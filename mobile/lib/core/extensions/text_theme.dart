@@ -15,3 +15,7 @@ extension DisplayLarge on BuildContext {
 extension DisplayMedium on BuildContext {
   TextStyle? get displayMedium => Theme.of(this).textTheme.displayMedium;
 }
+
+extension BodySmall on BuildContext {
+  TextStyle? get bodySmall => Theme.of(this).textTheme.bodySmall;
+}
