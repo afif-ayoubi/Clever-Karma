@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 import '../../../../../core/constants/icons_manager.dart';
@@ -53,9 +54,7 @@ class _SearchFormState extends State<SearchForm> {
                   height: 50.h,
                   child: TextField(
                     controller: textController,
-                    style: const TextStyle(
-                      color: HexColor.searchColor,
-                    ),
+                    style: context.bodyMedium!.copyWith(color: HexColor.searchColor),
                     onEditingComplete: () async {},
                     decoration: InputDecoration(
                         contentPadding: const EdgeInsets.only(bottom: 2).r,
