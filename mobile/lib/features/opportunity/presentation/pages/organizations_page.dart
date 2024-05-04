@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
@@ -67,10 +66,13 @@ class OrganizationsPage extends StatelessWidget {
           ),
           Gap(10.h),
           Expanded(
-            child: ListView.builder(
-              itemCount: 1,
+            child: ListView.separated(
+              itemCount: 4,
               itemBuilder: (context, index) {
                 return const OrganizationCard();
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return Gap(10.h);
               },
             ),
           ),

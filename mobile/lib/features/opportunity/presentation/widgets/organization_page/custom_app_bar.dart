@@ -5,7 +5,9 @@ import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomAppBar extends StatelessWidget {
-  const CustomAppBar({super.key});
+  const CustomAppBar({super.key, this.isLast = false});
+
+  final bool isLast;
 
   @override
   Widget build(BuildContext context) {
