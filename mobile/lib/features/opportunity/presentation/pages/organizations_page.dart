@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 import '../widgets/organization_page/custom_app_bar.dart';
+import '../widgets/organization_page/organization_card.dart';
 import '../widgets/organization_page/search_form.dart';
 
 class OrganizationsPage extends StatelessWidget {
@@ -24,17 +26,20 @@ class OrganizationsPage extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-          Container(
-            height: 160.h,
-            decoration: BoxDecoration(
-              color: HexColor.primaryColor,
-              borderRadius: BorderRadius.only(
-                bottomLeft: const Radius.circular(50).r,
-                bottomRight: const Radius.circular(50).r,
-              ),
-            ),
+          SizedBox(
+            height: 190.h,
             child: Stack(
               children: [
+                Container(
+                  height: 160.h,
+                  decoration: BoxDecoration(
+                    color: HexColor.primaryColor,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: const Radius.circular(50).r,
+                      bottomRight: const Radius.circular(50).r,
+                    ),
+                  ),
+                ),
                 Positioned(
                   top: 20.r,
                   left: 20.r,
@@ -52,8 +57,21 @@ class OrganizationsPage extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SearchForm(inSearchScreen: true),
+                Positioned(
+                    bottom: 0.r,
+                    left: 10.r,
+                    right: 10.r,
+                    child: const SearchForm(inSearchScreen: true)),
               ],
+            ),
+          ),
+          Gap(10.h),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return const OrganizationCard();
+              },
             ),
           ),
         ],
