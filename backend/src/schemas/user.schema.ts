@@ -5,7 +5,7 @@ import { Location, LocationSchema } from './location.schema';
 import { UserInfo } from './user_info.schema';
 import { OrganizationDetail, OrganizationDetailSchema } from './organization_datail.schema';
 import { Follower, FollowerSchema } from './follower_schema';
-import { hash } from 'bcrypt';
+import { hash,compare } from 'bcrypt';
 @Schema()
 export class User {
 

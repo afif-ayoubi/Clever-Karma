@@ -4,6 +4,8 @@ import { Model } from "mongoose";
 import { User } from "src/schemas/user.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { UserResponseType } from "./types/user_response_type";
+import { loginDto } from "./dto/login_dto";
+import { compare } from "bcrypt";
 
 @Injectable()
 export class UsersService {
@@ -14,6 +16,13 @@ export class UsersService {
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
+    async loginUser(loginDto: loginDto): Promise<User> {
+        const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
+        if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
+        const isPasswordCorrect=await compare(loginDto.password,user.password);
+        if (!isPasswordCorrect) throw new HttpException("incorrect password", HttpStatus.UNPROCESSABLE_ENTITY);
+        return user;
+    }
     getUsers() {
         return this.userModel.find();
     }
@@ -23,9 +32,9 @@ export class UsersService {
     buildUserResponse(user: User): UserResponseType {
         return {
             firstName: user.firstName,
-            lastName: user.lastName, 
+            lastName: user.lastName,
             email: user.email,
-            role: user.role, 
+            role: user.role,
         };
     }
 

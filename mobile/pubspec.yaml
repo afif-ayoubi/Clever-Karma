@@ -51,7 +51,7 @@ dependencies:
   rive: ^0.13.2
   url_launcher: ^6.2.6
   google_maps_flutter: ^2.6.1
-  location: ^6.0.1
+  location: ^5.0.0
   flutter_polyline_points: ^2.0.0
 dev_dependencies:
   flutter_test:

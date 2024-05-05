@@ -3,6 +3,7 @@ import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create_user.dto";
 import mongoose from "mongoose";
 import { UserResponseType } from "./types/user_response_type";
+import { loginDto } from "./dto/login_dto";
 
 @Controller('users')
 export class UsersController {
