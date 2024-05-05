@@ -6,6 +6,7 @@ import { CreateUserDto } from "./dto/create_user.dto";
 import { UserResponseType } from "./types/user_response_type";
 import { loginDto } from "./dto/login_dto";
 import { compare } from "bcrypt";
+import { sign } from 'jsonwebtoken';
 
 @Injectable()
 export class UsersService {
@@ -35,7 +36,11 @@ export class UsersService {
             lastName: user.lastName,
             email: user.email,
             role: user.role,
+            token:this.generateJwt(user)
         };
     }
+    generateJwt(user:User):string {
+        return sign({email:user.email,role:user.role},'JWT_SECERET',);
 
+}
 }
