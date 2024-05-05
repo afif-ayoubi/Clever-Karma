@@ -24,12 +24,12 @@ export class UsersController {
         return this.userService.getUsers();
     }
     @Get(':id')
-    async getUserById(@Param('id') id: string) {
+    async getUserById(@Param('id') id: string):Promise<UserResponseType> {
         const isValid =mongoose.Types.ObjectId.isValid(id);
         if (!isValid) throw new HttpException("Invalid id", 404);
         const findUser = await this.userService.getUserById(id);
         if (!findUser) throw new HttpException("User not found", 404);
-        return findUser;
+        return this.userService.buildUserResponse(findUser);
     }
     // @Patch(':id')
     // updateUser(@Param('id') id: string, @Body() createUserDto: CreateUserDto) {

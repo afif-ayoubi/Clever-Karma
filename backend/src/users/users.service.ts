@@ -40,7 +40,10 @@ export class UsersService {
         };
     }
     generateJwt(user:User):string {
-        return sign({email:user.email,role:user.role},'JWT_SECERET',);
+        return sign({email:user.email},'JWT_SECERET',);
 
+}
+async findByEmail(email:string):Promise<User>{
+    return this.userModel.findOne({email});
 }
 }
