@@ -4,21 +4,21 @@ import { USER_ROLES } from "src/utils/user_roles_enum";
 export class CreateUserDto {
     @IsNotEmpty()
     @IsString()
-    firstName: string;
+    readonly firstName: string;
 
     @IsNotEmpty()
     @IsString()
-    lastName: string;
+    readonly lastName: string;
 
     @IsNotEmpty()
     @IsEmail({ require_tld: true }, { message: "Invalid email format" })
-    email: string;
+    readonly email: string;
 
     @IsNotEmpty()
-    password: string;
+    readonly password: string;
 
     @IsNotEmpty()
     @IsString()
     @IsIn(Object.values(USER_ROLES), { message: "Invalid role" })
-    role: string;
+    readonly role: string;
 }
