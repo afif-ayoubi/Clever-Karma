@@ -5,6 +5,7 @@ import { Location, LocationSchema } from './location.schema';
 import { UserInfo } from './user_info.schema';
 import { OrganizationDetail, OrganizationDetailSchema } from './organization_datail.schema';
 import { Follower, FollowerSchema } from './follower_schema';
+import { hash } from 'bcrypt';
 @Schema()
 export class User {
 
@@ -14,7 +15,7 @@ export class User {
     lastName: string;
     @Prop({ required: true, unique: true })
     email: string;
-    @Prop({ required: true })
+    @Prop({ required: true ,select:false})
     password: string;
     @Prop({ enum: [USER_ROLES.ADMIN, USER_ROLES.USER, USER_ROLES.ORGANIZATION], default: USER_ROLES.USER })
     role: string;
@@ -32,3 +33,7 @@ export class User {
 
 }
 export const UserSchema = SchemaFactory.createForClass(User);
+UserSchema.pre<User>('save',async function (next:Function) {
+this.password= await hash(this.password,10);
+next();
+});
