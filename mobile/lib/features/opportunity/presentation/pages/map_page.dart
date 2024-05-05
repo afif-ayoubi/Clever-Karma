@@ -4,6 +4,7 @@ import 'package:location/location.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 
 import '../../core/constants/map.dart';
+import '../widgets/map_page/map_form.dart';
 
 class MapPage extends StatefulWidget {
   const MapPage({super.key});
@@ -23,8 +24,6 @@ class _MapPageState extends State<MapPage> {
   LatLng? currentPosition;
   Map<PolylineId, Polyline> polylines = {};
 
-
-
   @override
   void initState() {
     // TODO: implement initState
@@ -33,11 +32,13 @@ class _MapPageState extends State<MapPage> {
       await initializeMap();
     });
   }
+
   Future<void> initializeMap() async {
     await fetchLocationUpdates();
     final coordinates = await fetchPolylinePoints();
     generatePolyLineFromPoints(coordinates);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,43 +46,16 @@ class _MapPageState extends State<MapPage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : GoogleMap(
-              initialCameraPosition: CameraPosition(
-                target: _center,
-                zoom: 13.0,
-              ),
-              markers: {
-                Marker(
-                  markerId: const MarkerId('currentLocation'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  position: currentPosition!,
-                  infoWindow: const InfoWindow(
-                    title: 'Here you are!',
-                    snippet: 'My location',
-                  ),
-                ),
-                Marker(
-                  markerId: const MarkerId('1'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  position: _center,
-                  infoWindow: const InfoWindow(
-                    title: 'Central City Blood Donation Center',
-                    snippet: 'Lebanon, Beirut - 1.1 km from you',
-                  ),
-                ),
-                Marker(
-                  markerId: const MarkerId('2'),
-                  icon: BitmapDescriptor.defaultMarker,
-                  position: _tripoliCoordinates,
-                  infoWindow: const InfoWindow(
-                    title: 'Central City Blood Donation Center',
-                    snippet: 'Lebanon, Beirut - 1.1 km from you',
-                  ),
-                ),
-              },
-              polylines: Set<Polyline>.of(polylines.values),
-            ),
+          : _map(),
     );
+  }
+
+  Widget _map() {
+    return MapForm(
+        center: _center,
+        currentPosition: currentPosition,
+        tripoliCoordinates: _tripoliCoordinates,
+        polylines: polylines);
   }
 
   Future<void> fetchLocationUpdates() async {
