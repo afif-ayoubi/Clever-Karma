@@ -5,6 +5,7 @@ import 'package:mobile/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:mobile/features/auth/presentation/pages/otp_verification_screen.dart';
 import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
+import 'package:mobile/features/opportunity/presentation/pages/map_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/organizations_page.dart';
 import 'package:mobile/routes/class_routes.dart';
 
@@ -12,7 +13,7 @@ import '../features/opportunity/presentation/pages/entry_page.dart';
 
 class AppRoutes {
   static final GoRouter goRouter =
-      GoRouter(initialLocation: Routes.organizationsPage, routes: [
+      GoRouter(initialLocation: Routes.mapPage, routes: [
     GoRoute(
         path: Routes.initRoute,
         builder: ((context, state) => const OnBoardingPage())),
@@ -37,5 +38,7 @@ class AppRoutes {
     GoRoute(
         path: Routes.organizationsPage,
         builder: ((context, state) => const OrganizationsPage())),
+    GoRoute(
+        path: Routes.mapPage, builder: ((context, state) => const MapPage())),
   ]);
 }
