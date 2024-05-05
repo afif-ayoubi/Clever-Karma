@@ -3,9 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/hex_color.dart';
+import 'package:mobile/features/opportunity/core/utils/rive_utils.dart';
 import 'package:rive/rive.dart';
 
-import '../../core/rive_utils.dart';
 import '../widgets/entry_page/side_menu/menu_btn.dart';
 import 'side_menu.dart';
 import 'home_page.dart';
