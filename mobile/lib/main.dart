@@ -1,6 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'features/opportunity/core/external_api/notifications.dart';
+import 'features/opportunity/core/services/notifications.dart';
 import 'injection_container.dart' as di;
 import 'main_application.dart';
 import 'firebase_options.dart';

@@ -1,4 +1,8 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile/routes/class_routes.dart';
+
+import '../../../../routes/app_routes.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Handling a background message: ${message.messageId}');
@@ -17,7 +21,18 @@ class FirebaseApi {
   final _firebaseMessaging = FirebaseMessaging.instance;
 
   void handleMessage(RemoteMessage? message) {
-    if(message ==null) return;
+    if (message == null) return;
+    navigatorKey.currentContext!.go(Routes.entryPage);
+  }
+
+  Future initPushNotifications() async {
+    await FirebaseMessaging.instance
+        .setForegroundNotificationPresentationOptions(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    FirebaseMessaging.instance.getInitialMessage().then(handleMessage);
   }
 
   Future<void> initNotifications() async {
