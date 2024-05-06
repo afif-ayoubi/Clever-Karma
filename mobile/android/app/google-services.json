@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "957908399416",
+    "project_id": "clever-karma-152f3",
+    "storage_bucket": "clever-karma-152f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:957908399416:android:fca275ca28ea021d4e7dcd",
+        "android_client_info": {
+          "package_name": "com.example.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPRwvbtTPWoZoMuZiXMwePaJHsbIuwzf8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
