@@ -1,9 +1,21 @@
+import 'dart:convert';
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/routes/class_routes.dart';
 
 import '../../../../routes/app_routes.dart';
+
+void notificationTapBackground(NotificationResponse notificationResponse) {
+  print('notification(${notificationResponse.id}) action tapped: '
+      '${notificationResponse.actionId} with'
+      ' payload: ${notificationResponse.payload}');
+  if (notificationResponse.input?.isNotEmpty ?? false) {
+    print(
+        'notification action tapped with input: ${notificationResponse.input}');
+  }
+}
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
   print('Handling a background message: ${message.messageId}');
@@ -15,7 +27,8 @@ Future<void> handleBackgroundMessage(RemoteMessage message) async {
 class NotificationService {
   NotificationService._privateConstructor();
 
-  static final NotificationService _instance = NotificationService._privateConstructor();
+  static final NotificationService _instance =
+  NotificationService._privateConstructor();
 
   static NotificationService get instance => _instance;
 
@@ -45,8 +58,32 @@ class NotificationService {
       final notification = message.notification;
       if (notification == null) return;
       _localNotifications.show(notification.hashCode, notification.title,
-          notification.body, const NotificationDetails());
+          notification.body, notificationDetail(),
+          payload: jsonEncode(message.toMap()));
     });
+  }
+
+  Future initLocalNotifications() async {
+    final android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    final ios = DarwinInitializationSettings();
+    final initializationSettings =
+    InitializationSettings(android: android, iOS: ios);
+    await _localNotifications.initialize(initializationSettings,
+        onDidReceiveNotificationResponse: notificationTapBackground);
+    final platform = _localNotifications.resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>();
+    await platform?.createNotificationChannel(_androidChannel);
+  }
+
+  NotificationDetails notificationDetail() {
+    return NotificationDetails(
+        android: AndroidNotificationDetails(
+          _androidChannel.id,
+          _androidChannel.name,
+          channelDescription: _androidChannel.description,
+          importance: _androidChannel.importance,
+          icon: '@mipmap/ic_launcher',
+        ));
   }
 
   Future<void> initNotifications() async {
@@ -54,16 +91,6 @@ class NotificationService {
     final fcmToken = await _firebaseMessaging.getToken();
     print('Firebase token: $fcmToken');
     initPushNotifications();
-  }
-
-  notificationDetail() {
-    return NotificationDetails(
-        android: AndroidNotificationDetails(
-      _androidChannel.id,
-      _androidChannel.name,
-      channelDescription: _androidChannel.description,
-      importance: _androidChannel.importance,
-      icon: '@mipmap/ic_launcher',
-    ));
+    initLocalNotifications();
   }
 }
