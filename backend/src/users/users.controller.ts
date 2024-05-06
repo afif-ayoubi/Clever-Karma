@@ -5,8 +5,9 @@ import mongoose from "mongoose";
 import { UserResponseType } from "./types/user_response_type";
 import { loginDto } from "./dto/login_dto";
 import { ExpressRequest } from "./middlewares/auth.middleware";
+import { updateUserDto } from "./dto/update_user.dto";
 
-@Controller('users')
+@Controller('user')
 export class UsersController {
     constructor(private userService: UsersService) { }
     @Post('/create')
@@ -20,26 +21,31 @@ export class UsersController {
         const user = await this.userService.loginUser(loginDto);
         return this.userService.buildUserResponse(user);
     }
-    @Get()
+    @Get('/all')
     getUsers() {
         return this.userService.getUsers();
     }
-    @Get(':id')
-    async getUserById(@Param('id') id: string): Promise<UserResponseType> {
-        const isValid = mongoose.Types.ObjectId.isValid(id);
-        if (!isValid) throw new HttpException("Invalid id", 404);
-        const findUser = await this.userService.getUserById(id);
-        if (!findUser) throw new HttpException("User not found", 404);
-        return this.userService.buildUserResponse(findUser);
-    }
+    // @Get(':id')
+    // async getUserById(@Param('id') id: string): Promise<UserResponseType> {
+    //     const isValid = mongoose.Types.ObjectId.isValid(id);
+    //     if (!isValid) throw new HttpException("Invalid id", 404);
+    //     const findUser = await this.userService.getUserById(id);
+    //     if (!findUser) throw new HttpException("User not found", 404);
+    //     return this.userService.buildUserResponse(findUser);
+    // }
     @Get()
     async currentUser(@Request() request: ExpressRequest): Promise<UserResponseType> {
         if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
         return this.userService.buildUserResponse(request.user);
     }
-    // @Patch(':id')
-    // updateUser(@Param('id') id: string, @Body() createUserDto: CreateUserDto) {
-    //     return this.userService.updateUser(id, createUserDto);
-    // }
 
+    @Patch()
+    async updateUser(@Request() request: ExpressRequest, @Body() updateUserDto: updateUserDto): Promise<UserResponseType> {
+        if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+        const userId = request.user._id.toString();
+        const updatedUser = await this.userService.updateUser(userId, updateUserDto);
+        return this.userService.buildUserResponse(updatedUser);
+
+
+    }
 }

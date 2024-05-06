@@ -7,43 +7,54 @@ import { UserResponseType } from "./types/user_response_type";
 import { loginDto } from "./dto/login_dto";
 import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
+import { HydratedDocument } from 'mongoose';
+
+export type UserDocument = HydratedDocument<User>;
+
 
 @Injectable()
 export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>) { }
-    async createUser(createUserDto: CreateUserDto): Promise<User> {
+    async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: createUserDto.email });
         if (user) throw new HttpException("Email is already taken", HttpStatus.UNPROCESSABLE_ENTITY);
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
-    async loginUser(loginDto: loginDto): Promise<User> {
+    async loginUser(loginDto: loginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
-        const isPasswordCorrect=await compare(loginDto.password,user.password);
+        const isPasswordCorrect = await compare(loginDto.password, user.password);
         if (!isPasswordCorrect) throw new HttpException("incorrect password", HttpStatus.UNPROCESSABLE_ENTITY);
         return user;
     }
-    getUsers() {
+    getUsers(): Promise<User[]> {
         return this.userModel.find();
     }
-    getUserById(id: String) {
+    getUserById(id: String): Promise<User> {
         return this.userModel.findById(id);
     }
-    buildUserResponse(user: User): UserResponseType {
+    async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
+        const user= this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+        if(!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
+        return user;
+    }
+    buildUserResponse(user: UserDocument): UserResponseType {
         return {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
             role: user.role,
-            token:this.generateJwt(user)
+            token: this.generateJwt(user)
         };
     }
-    generateJwt(user:User):string {
-        return sign({email:user.email},'JWT_SECERET',);
+    generateJwt(user: UserDocument): string {
+        const userId = user._id.toString();
 
-}
-async findByEmail(email:string):Promise<User>{
-    return this.userModel.findOne({email});
-}
+        return sign({ email: user.email }, 'JWT_SECERET',);
+
+    }
+    async findById(id: string): Promise<UserDocument> {
+        return this.userModel.findById({ id });
+    }
 }

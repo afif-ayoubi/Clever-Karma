@@ -1,11 +1,10 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
-import { User } from "src/schemas/user.schema";
 import { verify } from "jsonwebtoken";
-import { UsersService } from "../users.service";
+import { UserDocument, UsersService } from "../users.service";
 
 export interface ExpressRequest extends Request {
-    user?: User
+    user?: UserDocument
 }
 
 @Injectable()
@@ -19,8 +18,8 @@ export class AuthMiddleware implements NestMiddleware {
         }
         const token = req.headers['authorization'].split(' ')[1];
         try {
-            const decoded = verify(token, 'JWT_SECRET') as { email: string };
-            const user = await this.userService.findByEmail(decoded.email);
+            const decoded = verify(token, 'JWT_SECRET') as { id: string };
+            const user = await this.userService.findById(decoded.id);
             req.user = user;
             next();
         } catch (e) {
