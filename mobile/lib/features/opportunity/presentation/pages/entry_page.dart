@@ -50,6 +50,7 @@ class _EntryPageState extends State<EntryPage>
 
   @override
   Widget build(BuildContext context) {
+    final message=ModalRoute.of(context)?.settings.arguments ;
     return Scaffold(
       backgroundColor:
           isSideMenuClosed ? HexColor.primaryColor : HexColor.backgroundColor,
