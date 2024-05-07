@@ -32,9 +32,7 @@ export class UsersService {
     getUsers(): Promise<User[]> {
         return this.userModel.find();
     }
-    getUserById(id: String): Promise<User> {
-        return this.userModel.findById(id);
-    }
+
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
         const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);

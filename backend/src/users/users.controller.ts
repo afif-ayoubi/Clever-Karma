@@ -26,14 +26,7 @@ export class UsersController {
         console.log('hello')
         return this.userService.getUsers();
     }
-    // @Get(':id')
-    // async getUserById(@Param('id') id: string): Promise<UserResponseType> {
-    //     const isValid = mongoose.Types.ObjectId.isValid(id);
-    //     if (!isValid) throw new HttpException("Invalid id", 404);
-    //     const findUser = await this.userService.getUserById(id);
-    //     if (!findUser) throw new HttpException("User not found", 404);
-    //     return this.userService.buildAuthUserResponse(findUser);
-    // }
+
     @Get()
     async currentUser(@Request() request: ExpressRequest): Promise<UserResponseType> {
         if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
