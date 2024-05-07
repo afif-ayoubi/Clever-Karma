@@ -1,16 +1,16 @@
 import { IsEmail, IsNotEmpty, IsString } from "class-validator";
+import { userInfoDto } from "./user_info.dto";
 
 export class updateUserDto{
-    @IsNotEmpty()
     @IsString()
     readonly firstName: string;
 
-    @IsNotEmpty()
     @IsString()
     readonly lastName: string;
 
-    @IsNotEmpty()
     @IsEmail({ require_tld: true }, { message: "Invalid email format" })
     readonly email: string;
 
-}
+    readonly userInfo:userInfoDto;
+
+}   
