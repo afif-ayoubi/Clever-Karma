@@ -15,6 +15,7 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
     print(
         'notification action tapped with input: ${notificationResponse.input}');
   }
+  navigatorKey.currentContext!.go(Routes.entryPage);
 }
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
@@ -28,7 +29,7 @@ class NotificationService {
   NotificationService._privateConstructor();
 
   static final NotificationService _instance =
-  NotificationService._privateConstructor();
+      NotificationService._privateConstructor();
 
   static NotificationService get instance => _instance;
 
@@ -67,9 +68,10 @@ class NotificationService {
     final android = AndroidInitializationSettings('@mipmap/ic_launcher');
     final ios = DarwinInitializationSettings();
     final initializationSettings =
-    InitializationSettings(android: android, iOS: ios);
+        InitializationSettings(android: android, iOS: ios);
     await _localNotifications.initialize(initializationSettings,
-        onDidReceiveNotificationResponse: notificationTapBackground);
+        onDidReceiveNotificationResponse: notificationTapBackground,
+        onDidReceiveBackgroundNotificationResponse: notificationTapBackground);
     final platform = _localNotifications.resolvePlatformSpecificImplementation<
         AndroidFlutterLocalNotificationsPlugin>();
     await platform?.createNotificationChannel(_androidChannel);
@@ -78,12 +80,12 @@ class NotificationService {
   NotificationDetails notificationDetail() {
     return NotificationDetails(
         android: AndroidNotificationDetails(
-          _androidChannel.id,
-          _androidChannel.name,
-          channelDescription: _androidChannel.description,
-          importance: _androidChannel.importance,
-          icon: '@mipmap/ic_launcher',
-        ));
+      _androidChannel.id,
+      _androidChannel.name,
+      channelDescription: _androidChannel.description,
+      importance: _androidChannel.importance,
+      icon: '@mipmap/ic_launcher',
+    ));
   }
 
   Future<void> initNotifications() async {
