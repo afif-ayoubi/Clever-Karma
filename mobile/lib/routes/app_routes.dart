@@ -10,13 +10,14 @@ import 'package:mobile/features/opportunity/presentation/pages/map_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/organizations_page.dart';
 import 'package:mobile/routes/class_routes.dart';
 
+import '../features/live_streaming/presentation/pages/live_streaming.dart';
 import '../features/opportunity/presentation/pages/entry_page.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   static final GoRouter goRouter = GoRouter(
-      initialLocation: Routes.authRoute,
+      initialLocation: '/live',
       navigatorKey: navigatorKey,
       routes: [
         GoRoute(
@@ -45,6 +46,8 @@ class AppRoutes {
             builder: ((context, state) => const OrganizationsPage())),
         GoRoute(
             path: Routes.mapPage,
-            builder: ((context, state) => const MapPage())),
+            builder: ((context, state) => const MapPage())),  GoRoute(
+            path: "/live",
+            builder: ((context, state) => const LiveStreaming())),
       ]);
 }
