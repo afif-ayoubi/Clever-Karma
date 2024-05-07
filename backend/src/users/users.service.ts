@@ -3,7 +3,7 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { User } from "src/schemas/user.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
-import { UserResponseType } from "./types/user_response_type";
+import { UserResponseType } from "./types/auth_user_response_type";
 import { loginDto } from "./dto/login_dto";
 import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
@@ -39,7 +39,7 @@ export class UsersService {
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
         return user;
     }
-    buildUserResponse(user: UserDocument): UserResponseType {
+    buildAuthUserResponse(user: UserDocument): UserResponseType {
         return {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -55,6 +55,6 @@ export class UsersService {
         return sign({ userId: userId }, 'JWT_SECRET');
     }
     async findById(id: Types.ObjectId): Promise<UserDocument> {
-        return this.userModel.findById( id );
+        return this.userModel.findById(id);
     }
 }
