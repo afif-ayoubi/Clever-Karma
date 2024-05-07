@@ -3,14 +3,14 @@ import { IsDate, IsNotEmpty, IsString } from "class-validator";
 export class uderInfoDto {
     @IsNotEmpty()
     @IsString()
-    phone?: number;
+    readonly phone?: number;
     @IsNotEmpty()
     @IsString()
-    gender?: String;
+    readonly gender?: String;
     @IsNotEmpty()
     @IsDate()
-    dateOfBirth?: Date;
+    readonly dateOfBirth?: Date;
     @IsNotEmpty()
     @IsString()
-    image?: String;
+    readonly image?: String;
 }
