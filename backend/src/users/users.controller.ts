@@ -49,19 +49,5 @@ export class UsersController {
 
 
     }
-    @Post('/logout')
-    async logout(@Request() request: ExpressRequest): Promise<{ message: string }> {
-        
-        request.user = null;
-        return {
-            message: "Logout successfully"
-        }
-    }
-       // @Post('/logout')
-        // async logout(@Request() req): Promise<{ message: string }> {
-        //     req.session.destroy();
-        //     return {
-        //         message: "Logout successfully"
-        //     }
-        // }
+    
 }
