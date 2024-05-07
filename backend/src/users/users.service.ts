@@ -27,13 +27,17 @@ export class UsersService {
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
         const isPasswordCorrect = await compare(loginDto.password, user.password);
         if (!isPasswordCorrect) throw new HttpException("incorrect password", HttpStatus.UNPROCESSABLE_ENTITY);
-        return user;
+        return user;    
     }
     getUsers(): Promise<User[]> {
         return this.userModel.find();
     }
 
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
+        const existingUser = await this.userModel.findOne({ email: updateUserDto.email });
+        if (existingUser && existingUser._id.toString() !== id) {
+          throw new HttpException("Email already exists", HttpStatus.CONFLICT);
+        }
         const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
         return user;
