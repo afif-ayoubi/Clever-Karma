@@ -2,6 +2,7 @@ import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
 import { UserDocument, UsersService } from "../users.service";
+import { Types } from "mongoose";
 
 export interface ExpressRequest extends Request {
     user?: UserDocument
@@ -18,7 +19,7 @@ export class AuthMiddleware implements NestMiddleware {
         }
         const token = req.headers['authorization'].split(' ')[1];
         try {
-            const decoded = verify(token, 'JWT_SECRET') as { userId: string };
+            const decoded = verify(token, 'JWT_SECRET') as { userId: Types.ObjectId };
             const user = await this.userService.findById(decoded.userId);
             req.user = user;
             next();

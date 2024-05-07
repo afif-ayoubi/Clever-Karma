@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { User } from "src/schemas/user.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { UserResponseType } from "./types/user_response_type";
@@ -35,8 +35,8 @@ export class UsersService {
         return this.userModel.findById(id);
     }
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
-        const user= this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
-        if(!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
+        const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+        if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
         return user;
     }
     buildUserResponse(user: UserDocument): UserResponseType {
@@ -46,17 +46,15 @@ export class UsersService {
             email: user.email,
             role: user.role,
             token: this.generateJwt(user),
-            id:user._id.toString()
-            
+            id: user._id
+
         };
     }
     generateJwt(user: UserDocument): string {
-        const userId = user._id.toString();
-
-        return sign({ userId: userId }, 'JWT_SECERET',);
-
+        const userId = user._id;
+        return sign({ userId: userId }, 'JWT_SECRET');
     }
-    async findById(id: string): Promise<UserDocument> {
-        return this.userModel.findById({ id });
+    async findById(id: Types.ObjectId): Promise<UserDocument> {
+        return this.userModel.findById( id );
     }
 }

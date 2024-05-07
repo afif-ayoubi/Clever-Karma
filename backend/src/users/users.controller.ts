@@ -23,6 +23,7 @@ export class UsersController {
     }
     @Get('/all')
     getUsers() {
+        console.log('hello')
         return this.userService.getUsers();
     }
     // @Get(':id')
