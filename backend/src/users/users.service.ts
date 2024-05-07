@@ -3,11 +3,12 @@ import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { User } from "src/schemas/user.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
-import { UserResponseType } from "./types/auth_user_response_type";
+import { UserAuthResponseType } from "./types/auth_user_response_type";
 import { loginDto } from "./dto/login_dto";
 import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
+import { UserResponseType } from "./types/user_response_type";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -39,7 +40,16 @@ export class UsersService {
         if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
         return user;
     }
-    buildAuthUserResponse(user: UserDocument): UserResponseType {
+    buildUserResponse(user: UserDocument): UserResponseType {
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            id: user._id
+        };
+    }
+    buildAuthUserResponse(user: UserDocument): UserAuthResponseType {
         return {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -50,6 +60,7 @@ export class UsersService {
 
         };
     }
+
     generateJwt(user: UserDocument): string {
         const userId = user._id;
         return sign({ userId: userId }, 'JWT_SECRET');
