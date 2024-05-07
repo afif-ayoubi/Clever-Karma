@@ -45,13 +45,15 @@ export class UsersService {
             lastName: user.lastName,
             email: user.email,
             role: user.role,
-            token: this.generateJwt(user)
+            token: this.generateJwt(user),
+            id:user._id.toString()
+            
         };
     }
     generateJwt(user: UserDocument): string {
         const userId = user._id.toString();
 
-        return sign({ email: user.email }, 'JWT_SECERET',);
+        return sign({ userId: userId }, 'JWT_SECERET',);
 
     }
     async findById(id: string): Promise<UserDocument> {
