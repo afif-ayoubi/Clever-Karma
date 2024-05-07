@@ -9,6 +9,7 @@ import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_response_type";
+import { userInfo } from "os";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -48,7 +49,8 @@ export class UsersService {
             lastName: user.lastName,
             email: user.email,
             role: user.role,
-            id: user._id
+            id: user._id,
+            userInfo: user.userInfo,
         };
     }
     buildAuthUserResponse(user: UserDocument): UserAuthResponseType {
