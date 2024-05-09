@@ -1,21 +1,21 @@
 import { Type } from "class-transformer";
 import { IsNotEmpty, IsString, Validate, ValidateNested } from "class-validator";
-import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_opportunity.dto";
+import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
 
 export class OrganizationDto {
     @IsString()
     @IsNotEmpty()
-    aboutUs: string;
+    readonly aboutUs: string;
 
     @IsString()
     @IsNotEmpty()
-    howToVolunteer: string;
+    readonly howToVolunteer: string;
 
     @IsString()
     @IsNotEmpty()
-    imageUrl: string;
+    readonly imageUrl: string;
 
     @ValidateNested({ each: true })
     @Type(() =>VolunteeringSectionDto) 
-    volunteeringSection: VolunteeringSectionDto;   
+    readonly volunteeringSection: VolunteeringSectionDto;   
 }
