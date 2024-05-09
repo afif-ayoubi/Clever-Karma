@@ -5,6 +5,7 @@ import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
 import { NotificationSchema } from "src/schemas/notification.schema";
 import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
+import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
 
 @Module({
     imports: [
@@ -22,8 +23,8 @@ import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
                 schema: UserInfoSchema,
             },
             {
-                name: Orga,
-                schema: UserInfoSchema,
+                name: OrganizationDetail.name,
+                schema: OrganizationDetailSchema,
             },
         ])
     ],
