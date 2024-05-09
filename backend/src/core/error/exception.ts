@@ -17,8 +17,3 @@ export class ModelConflictException extends HttpException {
     }
 
 }
-export class InvalidVolunteeringSectionException extends HttpException {
-    constructor(message: string) {
-        super(message, HttpStatus.BAD_REQUEST);
-    }
-}
