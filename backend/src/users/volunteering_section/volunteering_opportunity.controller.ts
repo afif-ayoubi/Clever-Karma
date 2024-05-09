@@ -3,7 +3,7 @@ import { VolunteeringSectionService } from "./volunteering_opportunity.service";
 import { CreatedVolunteeringSectionDto } from "./dto/created_volunteering_opportunity.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 
-@Controller('volunteering_section')
+@Controller('section')
 export class VolunteeringSectionController {
     constructor(private volunteeringSectionService :VolunteeringSectionService ) {}
 
