@@ -3,13 +3,13 @@ import { IsNotEmpty, IsString } from "class-validator";
 export class VolunteeringSectionDto {
     @IsString()
     @IsNotEmpty()
-    name: string;
+    readonly name: string;
     
     @IsString()
     @IsNotEmpty()
-    description: string;
+    readonly description: string;
 
     @IsString()
     @IsNotEmpty()
-    imageUrl: string;
+    readonly imageUrl: string;
 }
