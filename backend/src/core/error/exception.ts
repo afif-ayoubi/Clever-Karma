@@ -11,6 +11,12 @@ export class ModelUnprocessableEnitityException extends HttpException {
     }
 
 }
+export class ModelConflictException extends HttpException {
+    constructor(message: string) {
+        super(message, HttpStatus.CONFLICT);
+    }
+
+}
 export class InvalidVolunteeringSectionException extends HttpException {
     constructor(message: string) {
         super(message, HttpStatus.BAD_REQUEST);
