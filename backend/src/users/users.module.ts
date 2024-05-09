@@ -11,6 +11,8 @@ import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 import { VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";
 import { VolunteeringSectionController } from "./volunteering_section/volunteering_opportunity.controller";
 import { VolunteeringSectionService } from "./volunteering_section/volunteering_opportunity.service";
+import { OrganizationController } from "./organization/organization.controller";
+import { OrganizationService } from "./organization/organization.service";
 
 @Module({
     imports: [
@@ -46,8 +48,8 @@ import { VolunteeringSectionService } from "./volunteering_section/volunteering_
         ])
     ],
     providers: [
-        UsersService, VolunteeringSectionService],
-    controllers: [UsersController, VolunteeringSectionController],
+        UsersService, VolunteeringSectionService, OrganizationService],
+    controllers: [UsersController, VolunteeringSectionController, OrganizationController],
     exports: [UsersService]
 })
 export class UserModule { }
