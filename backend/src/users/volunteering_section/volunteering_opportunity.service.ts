@@ -26,4 +26,7 @@ export class VolunteeringSectionService {
 
         return updatedVolunteeringOpportunity;
     }
+    async getAllVolunteeringOpportunities(): Promise<VolunteeringSection[]> {
+        return this.volunteeringSectionModel.find();
+    }
 }
