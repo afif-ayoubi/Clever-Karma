@@ -17,5 +17,5 @@ export class OrganizationDto {
 
     @ValidateNested({ each: true })
     @Type(() =>VolunteeringSectionDto) 
-    readonly volunteeringSection: VolunteeringSectionDto;   
+    readonly VolunteeringSection: VolunteeringSectionDto;   
 }
