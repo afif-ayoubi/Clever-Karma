@@ -1,7 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class MapForm extends StatelessWidget {
+class MapForm extends StatefulWidget {
   const MapForm({
     super.key,
     required LatLng center,
@@ -16,17 +18,28 @@ class MapForm extends StatelessWidget {
   final Map<PolylineId, Polyline> polylines;
 
   @override
+  State<MapForm> createState() => _MapFormState();
+}
+
+class _MapFormState extends State<MapForm> {
+  final Completer<GoogleMapController> _controller =
+  Completer<GoogleMapController>();
+
+  @override
   Widget build(BuildContext context) {
     return GoogleMap(
       initialCameraPosition: CameraPosition(
-        target: _center,
+        target: widget._center,
         zoom: 13.0,
       ),
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      },
       markers: {
         Marker(
           markerId: const MarkerId('currentLocation'),
           icon: BitmapDescriptor.defaultMarker,
-          position: currentPosition!,
+          position: widget.currentPosition!,
           infoWindow: const InfoWindow(
             title: 'Here you are!',
             snippet: 'My location',
@@ -35,7 +48,7 @@ class MapForm extends StatelessWidget {
         Marker(
           markerId: const MarkerId('1'),
           icon: BitmapDescriptor.defaultMarker,
-          position: _center,
+          position: widget._center,
           infoWindow: const InfoWindow(
             title: 'Central City Blood Donation Center',
             snippet: 'Lebanon, Beirut - 1.1 km from you',
@@ -44,14 +57,14 @@ class MapForm extends StatelessWidget {
         Marker(
           markerId: const MarkerId('2'),
           icon: BitmapDescriptor.defaultMarker,
-          position: _tripoliCoordinates,
+          position: widget._tripoliCoordinates,
           infoWindow: const InfoWindow(
             title: 'Central City Blood Donation Center',
             snippet: 'Lebanon, Beirut - 1.1 km from you',
           ),
         ),
       },
-      polylines: Set<Polyline>.of(polylines.values),
+      // polylines: Set<Polyline>.of(widget.polylines.values),
     );
   }
 }

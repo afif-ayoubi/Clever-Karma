@@ -57,6 +57,7 @@ dependencies:
   flutter_local_notifications: ^17.1.2
   flutter_native_splash: ^2.4.0
   zego_uikit_prebuilt_live_streaming: ^3.5.4
+  geolocator: ^11.0.0
 
 flutter_native_splash:
   android: true
