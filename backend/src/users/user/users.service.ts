@@ -47,6 +47,7 @@ export class UsersService {
 
 
     buildUserResponse(user: UserDocument): UserResponseType {
+
         return {
             firstName: user.firstName,
             lastName: user.lastName,
@@ -73,6 +74,7 @@ export class UsersService {
         return sign({ userId: userId }, 'JWT_SECRET');
     }
     async findById(id: Types.ObjectId): Promise<UserDocument> {
+    
         return this.userModel.findById(id);
     }
 }

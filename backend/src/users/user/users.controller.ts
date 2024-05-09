@@ -10,7 +10,7 @@ import { UpdateUserDto } from "./dto/update_user.dto";
 @Controller('user')
 export class UsersController {
     constructor(private userService: UsersService) { }
-   
+
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
         const user = await this.userService.createUser(createUserDto);
@@ -30,6 +30,7 @@ export class UsersController {
     @Get()
     async currentUser(@Request() request: ExpressRequest): Promise<UserResponseType> {
         if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+
         return this.userService.buildUserResponse(request.user);
     }
 
