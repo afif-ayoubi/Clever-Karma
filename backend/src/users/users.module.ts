@@ -4,6 +4,7 @@ import { User, UserSchema } from "src/schemas/user.schema";
 import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
 import { NotificationSchema } from "src/schemas/notification.schema";
+import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
 
 @Module({
     imports: [
@@ -15,7 +16,15 @@ import { NotificationSchema } from "src/schemas/notification.schema";
             {
                 name: Notification.name,
                 schema: NotificationSchema,
-            }
+            },
+            {
+                name: UserInfo.name,
+                schema: UserInfoSchema,
+            },
+            {
+                name: Orga,
+                schema: UserInfoSchema,
+            },
         ])
     ],
     providers: [
