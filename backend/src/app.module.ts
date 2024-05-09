@@ -2,7 +2,7 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './users/users.module';
 import { AuthMiddleware } from './users/middlewares/auth.middleware';
-import { UsersService } from './users/users.service';
+import { UsersService } from './users/user/users.service';
 
 @Module({
   imports: [MongooseModule.forRoot('mongodb://localhost/backend'),

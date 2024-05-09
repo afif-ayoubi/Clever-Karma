@@ -1,7 +1,7 @@
 import { Injectable, NestMiddleware } from "@nestjs/common";
 import { Request, Response, NextFunction } from "express";
 import { verify } from "jsonwebtoken";
-import { UserDocument, UsersService } from "../users.service";
+import { UserDocument, UsersService } from "../user/users.service";
 import { Types } from "mongoose";
 
 export interface ExpressRequest extends Request {

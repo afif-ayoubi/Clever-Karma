@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
 import { MongooseModule, Schema } from "@nestjs/mongoose";
 import { User, UserSchema } from "src/schemas/user.schema";
-import { UsersService } from "./users.service";
-import { UsersController } from "./users.controller";
+import { UsersService } from "./user/users.service";
+import { UsersController } from "./user/users.controller";
 import { NotificationSchema, Notifications } from "src/schemas/notification.schema";
 import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
 import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
-import {  UserLocation, UserLocationSchema } from "src/schemas/location.schema";
+import { UserLocation, UserLocationSchema } from "src/schemas/location.schema";
 import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/schemas/volunteering_opportunity.schema";
 

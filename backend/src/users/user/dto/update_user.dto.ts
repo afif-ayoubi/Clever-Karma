@@ -1,8 +1,8 @@
 import { Type } from "class-transformer";
-import { IsDate, IsDateString, IsEmail, IsIn, IsOptional, IsString, ValidateNested } from "class-validator";
-import { USER_GENDERS } from "src/utils/user_genders_enum";
+import { IsDateString, IsEmail, IsIn, IsOptional, IsString, ValidateNested } from "class-validator";
+import { USER_GENDERS } from "src/users/user/utils/user_genders_enum";
 
-export class userInfoDto {
+export class UserInfoDto {
     @IsOptional()
     @IsString()
     readonly phone?: number;
@@ -18,7 +18,7 @@ export class userInfoDto {
     readonly image?: String;
 }
 
-export class updateUserDto {
+export class UpdateUserDto {
     @IsOptional()
     @IsString()
     readonly firstName: string;
@@ -30,7 +30,7 @@ export class updateUserDto {
     readonly email: string;
     @IsOptional()
     @ValidateNested({ each: true })
-    @Type(() => userInfoDto)
-    readonly userInfo: userInfoDto;
+    @Type(() => UserInfoDto)
+    readonly userInfo: UserInfoDto;
 
 }
