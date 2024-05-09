@@ -7,6 +7,7 @@ import { NotificationSchema } from "src/schemas/notification.schema";
 import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
 import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
 import { LocationSchema } from "src/schemas/location.schema";
+import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 
 @Module({
     imports: [
@@ -32,8 +33,8 @@ import { LocationSchema } from "src/schemas/location.schema";
                 schema: LocationSchema,
             },
             {
-                name: OrganizationDetail.name,
-                schema: OrganizationDetailSchema,
+                name: Follower.name,
+                schema: FollowerSchema,
             },
         ])
     ],
