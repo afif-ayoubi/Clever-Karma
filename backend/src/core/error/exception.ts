@@ -1,13 +1,18 @@
 import { HttpException, HttpStatus } from '@nestjs/common';
 
 export class ModelNotFoundException extends HttpException {
-  constructor(message: string) {
-    super(message, HttpStatus.NOT_FOUND);
-  }
+    constructor(message: string) {
+        super(message, HttpStatus.NOT_FOUND);
+    }
 }
+export class ModelUnprocessableEnitityException extends HttpException {
+    constructor(message: string) {
+        super(message, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
 
+}
 export class InvalidVolunteeringSectionException extends HttpException {
-  constructor(message: string) {
-    super(message, HttpStatus.BAD_REQUEST);
-  }
+    constructor(message: string) {
+        super(message, HttpStatus.BAD_REQUEST);
+    }
 }
