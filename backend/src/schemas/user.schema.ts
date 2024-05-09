@@ -1,11 +1,11 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { USER_ROLES } from 'src/utils/user_roles_enum';
-import { NotificationSchema, Notification } from './notification.schema';
-import { Location, LocationSchema } from './location.schema';
+import { NotificationSchema, Notifications } from './notification.schema';
 import { UserInfo } from './user_info.schema';
 import { OrganizationDetail, OrganizationDetailSchema } from './organization_datail.schema';
 import { Follower, FollowerSchema } from './follower_schema';
 import { hash,compare } from 'bcrypt';
+import { UserLocation, UserLocationSchema } from './location.schema';
 @Schema()
 export class User {
 
@@ -23,10 +23,10 @@ export class User {
     userInfo?: UserInfo;
     @Prop({ type: OrganizationDetailSchema })
     organizationDetail?: OrganizationDetail;
-    @Prop({ type: LocationSchema, })
-    location?: Location;
+    @Prop({ type: UserLocationSchema, })
+    location?: UserLocation;
     @Prop({ type: [NotificationSchema] })
-    notification?: Notification[];
+    notification?: Notifications[];
     @Prop({ type: FollowerSchema, })
     followers?: Follower;
 

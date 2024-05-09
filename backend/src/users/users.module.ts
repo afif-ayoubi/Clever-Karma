@@ -3,10 +3,10 @@ import { MongooseModule, Schema } from "@nestjs/mongoose";
 import { User, UserSchema } from "src/schemas/user.schema";
 import { UsersService } from "./users.service";
 import { UsersController } from "./users.controller";
-import { NotificationSchema } from "src/schemas/notification.schema";
+import { NotificationSchema, Notifications } from "src/schemas/notification.schema";
 import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
 import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
-import { LocationSchema } from "src/schemas/location.schema";
+import {  UserLocation, UserLocationSchema } from "src/schemas/location.schema";
 import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/schemas/volunteering_opportunity.schema";
 
@@ -18,7 +18,7 @@ import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/sche
                 schema: UserSchema,
             },
             {
-                name: Notification.name,
+                name: Notifications.name,
                 schema: NotificationSchema,
             },
             {
@@ -30,8 +30,8 @@ import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/sche
                 schema: OrganizationDetailSchema,
             },
             {
-                name: Location.name,
-                schema: LocationSchema,
+                name: UserLocation.name,
+                schema: UserLocationSchema,
             },
             {
                 name: Follower.name,

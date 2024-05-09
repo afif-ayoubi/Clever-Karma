@@ -1,10 +1,10 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
-export class Location {
+export class UserLocation {
     @Prop()
     latitude?: string;
     @Prop()
     longitude?: string;
 }
-export const LocationSchema = SchemaFactory.createForClass(Location);
+export const UserLocationSchema = SchemaFactory.createForClass(UserLocation);
