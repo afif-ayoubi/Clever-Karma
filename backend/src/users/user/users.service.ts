@@ -9,6 +9,8 @@ import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_response_type";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { LoginDto } from "./dto/login_dto";
+import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
+import { ERROR_MESSAGES } from "src/core/constants/error_message";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -20,15 +22,16 @@ export class UsersService {
     
     async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: createUserDto.email });
-        if (user) throw new HttpException("Email is already taken", HttpStatus.UNPROCESSABLE_ENTITY);
+        if (user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
+
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
-        if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
+        if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         const isPasswordCorrect = await compare(loginDto.password, user.password);
-        if (!isPasswordCorrect) throw new HttpException("incorrect password", HttpStatus.UNPROCESSABLE_ENTITY);
+        if (!isPasswordCorrect) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.INCORRECT_PASSWORD);
         return user;
     }
     getUsers(): Promise<User[]> {
@@ -38,10 +41,10 @@ export class UsersService {
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: updateUserDto.email });
         if (existingUser && existingUser._id.toString() !== id) {
-            throw new HttpException("Email already exists", HttpStatus.CONFLICT);
+            throw  new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
         }
         const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
-        if (!user) throw new HttpException("User not found", HttpStatus.UNPROCESSABLE_ENTITY);
+        if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         return user;
     }
 
