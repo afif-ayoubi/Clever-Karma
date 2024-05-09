@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
-import { VolunteeringSectionService } from "./volunteering_opportunity.service";
-import { VolunteeringSectionDto } from "./dto/volunteering_opportunity.dto";
+import { VolunteeringSectionService } from "./volunteering_Section.service";
+import { VolunteeringSectionDto } from "./dto/volunteering_Section.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 
 @Controller('section')
@@ -10,18 +10,18 @@ export class VolunteeringSectionController {
     @Post('')
     async createSection(@Body() createdVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
 
-        return this.volunteeringSectionService.createdUserVolunteeringOpportunity(createdVolunteeringSectionDto);
+        return this.volunteeringSectionService.createdVolunteeringSection(createdVolunteeringSectionDto);
     }
     @Delete(':id')
     async deleteSection(@Param('id') id: string): Promise<{ message: string }> {
 
-        await this.volunteeringSectionService.deleteVolunteeringOpportunity(id);
-        return { message: 'Volunteering opportunity deleted successfully' };
+        await this.volunteeringSectionService.deleteVolunteeringSection(id);
+        return { message: 'Volunteering Section deleted successfully' };
     }
 
     @Patch(':id')
     async updateSection(@Param('id') id: string, @Body() updatedVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
-        return this.volunteeringSectionService.updateVolunteeringOpportunity(id, updatedVolunteeringSectionDto);
+        return this.volunteeringSectionService.updateVolunteeringSection(id, updatedVolunteeringSectionDto);
     }
     @Get('')
     async getAllSections(): Promise<VolunteeringSection[]> {

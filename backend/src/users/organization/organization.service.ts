@@ -8,4 +8,5 @@ import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema
 export class OrganizationService {
     constructor(@InjectModel(OrganizationDetail.name) private organizationSectionModel: Model<OrganizationDetail>
     ) { }
+    async created
 }

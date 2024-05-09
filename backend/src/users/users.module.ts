@@ -9,8 +9,8 @@ import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organi
 import { UserLocation, UserLocationSchema } from "src/schemas/location.schema";
 import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 import { VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";
-import { VolunteeringSectionController } from "./volunteering_section/volunteering_opportunity.controller";
-import { VolunteeringSectionService } from "./volunteering_section/volunteering_opportunity.service";
+import { VolunteeringSectionController } from "./volunteering_section/volunteering_section.controller";
+import { VolunteeringSectionService } from "./volunteering_section/volunteering_section.service";
 import { OrganizationController } from "./organization/organization.controller";
 import { OrganizationService } from "./organization/organization.service";
 
