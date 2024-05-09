@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
 import { VolunteeringSectionService } from "./volunteering_opportunity.service";
 import { VolunteeringSectionDto } from "./dto/volunteering_opportunity.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
@@ -22,6 +22,10 @@ export class VolunteeringSectionController {
     @Patch(':id')
     async updateSection(@Param('id') id: string, @Body() updatedVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
         return this.volunteeringSectionService.updateVolunteeringOpportunity(id, updatedVolunteeringSectionDto);
+    }
+    @Get('')
+    async getAllSections(): Promise<VolunteeringSection[]> {
+        return this.volunteeringSectionService.getAllVolunteeringOpportunities();
     }
 
 }
