@@ -9,14 +9,12 @@ export class VolunteeringSectionController {
     constructor(private volunteeringSectionService: VolunteeringSectionService) { }
 
     @Post('')
-    async createSection(@Request() request: ExpressRequest, @Body() createdVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
-        if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+    async createSection( @Body() createdVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
 
         return this.volunteeringSectionService.createdUserVolunteeringOpportunity(createdVolunteeringSectionDto);
     }
     @Delete(':id')
-    async deleteSection(@Request() request: ExpressRequest, @Param('id') id: string): Promise<{ message: string }> {
-        if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
+    async deleteSection( @Param('id') id: string): Promise<{ message: string }> {
 
         await this.volunteeringSectionService.deleteVolunteeringOpportunity(id);
         return { message: 'Volunteering opportunity deleted successfully' };

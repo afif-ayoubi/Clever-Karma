@@ -29,14 +29,12 @@ export class UsersController {
 
     @Get()
     async currentUser(@Request() request: ExpressRequest): Promise<UserResponseType> {
-        if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
 
         return this.userService.buildUserResponse(request.user);
     }
 
     @Patch()
     async updateUser(@Request() request: ExpressRequest, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseType> {
-        if (!request.user) throw new HttpException("UNAUTHORIZED", HttpStatus.UNAUTHORIZED);
         const userId = request.user._id.toString();
         const updatedUser = await this.userService.updateUser(userId, updateUserDto);
         return this.userService.buildUserResponse(updatedUser);
