@@ -1,11 +1,11 @@
 import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
-import { VolunteeringSectionService } from "./volunteering_Section.service";
 import { VolunteeringSectionDto } from "./dto/volunteering_Section.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
+import { VolunteeringSectionService } from "./volunteering_section.service";
 
 @Controller('section')
 export class VolunteeringSectionController {
-    constructor(private volunteeringSectionService: VolunteeringSectionService) { }
+    constructor(private volunteeringSectionService: VolunteeringSectionService ) { }
 
     @Post('')
     async createSection(@Body() createdVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {

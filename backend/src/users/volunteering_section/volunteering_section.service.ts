@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
-import { VolunteeringSection } from "src/schemas/volunteering_Section.schema";
 import { VolunteeringSectionDto } from "./dto/volunteering_section.dto";
+import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 
 @Injectable()
 export class VolunteeringSectionService {
