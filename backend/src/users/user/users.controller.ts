@@ -3,7 +3,6 @@ import { UsersService } from "./users.service";
 import { UserAuthResponseType } from "./types/auth_user_response_type";
 import { ExpressRequest } from "../middlewares/auth.middleware";
 import { UserResponseType } from "./types/user_response_type";
-import { VolunteeringOpportunity } from "src/schemas/volunteering_opportunity.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { LoginDto } from "./dto/login_dto";
 import { UpdateUserDto } from "./dto/update_user.dto";

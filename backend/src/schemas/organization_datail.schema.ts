@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { VolunteeringOpportunity } from './volunteering_opportunity.schema';
+import { VolunteeringSection } from './volunteering_opportunity.schema';
 
 @Schema()
 export class OrganizationDetail {
@@ -9,8 +9,8 @@ export class OrganizationDetail {
     howToVolunteer: string;
     @Prop({ required: true })
     imageUrl: string;
-    @Prop({ required: true, type: VolunteeringOpportunity })
-    VolunteeringOpportunity: VolunteeringOpportunity;
+    @Prop({ required: true, type: VolunteeringSection })
+    VolunteeringSection: VolunteeringSection;
 
 }
 export const OrganizationDetailSchema = SchemaFactory.createForClass(OrganizationDetail);

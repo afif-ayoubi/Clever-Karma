@@ -1,7 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 
 @Schema()
-export class VolunteeringOpportunity {
+export class VolunteeringSection {
     @Prop({ required: true })
     name: string;
     @Prop({ required: true })
@@ -10,4 +10,4 @@ export class VolunteeringOpportunity {
     imageUrl: string;
 
 }
-export const VolunteeringOpportunitySchema = SchemaFactory.createForClass(VolunteeringOpportunity);
+export const VolunteeringSectionSchema = SchemaFactory.createForClass(VolunteeringSection);

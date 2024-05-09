@@ -8,7 +8,7 @@ import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
 import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
 import { UserLocation, UserLocationSchema } from "src/schemas/location.schema";
 import { Follower, FollowerSchema } from "src/schemas/follower_schema";
-import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/schemas/volunteering_opportunity.schema";
+import {  VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";
 
 @Module({
     imports: [
@@ -38,8 +38,8 @@ import { VolunteeringOpportunity, VolunteeringOpportunitySchema } from "src/sche
                 schema: FollowerSchema,
             },
             {
-                name: VolunteeringOpportunity.name,
-                schema: VolunteeringOpportunitySchema,
+                name: VolunteeringSection.name,
+                schema: VolunteeringSectionSchema,
             },
         ])
     ],

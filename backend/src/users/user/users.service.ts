@@ -7,7 +7,6 @@ import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_response_type";
-import { VolunteeringOpportunity } from "src/schemas/volunteering_opportunity.schema";
 import { CreateUserDto } from "./dto/create_user.dto";
 import { LoginDto } from "./dto/login_dto";
 
