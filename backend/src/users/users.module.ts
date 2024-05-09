@@ -5,7 +5,7 @@ import { UsersService } from "./user/users.service";
 import { UsersController } from "./user/users.controller";
 import { NotificationSchema, Notifications } from "src/schemas/notification.schema";
 import { UserInfo, UserInfoSchema } from "src/schemas/user_info.schema";
-import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_datail.schema";
+import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organization_detail.schema";
 import { UserLocation, UserLocationSchema } from "src/schemas/location.schema";
 import { Follower, FollowerSchema } from "src/schemas/follower_schema";
 import { VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";

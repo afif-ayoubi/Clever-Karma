@@ -13,7 +13,12 @@ import { UsersService } from './users/user/users.service';
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes({
+    consumer.apply(AuthMiddleware).exclude(
+      {path:'user/create',method:RequestMethod.POST},
+      {path:'user/login',method:RequestMethod.POST},
+    )
+    
+    .forRoutes({
       path: '*',
       method: RequestMethod.ALL
     })

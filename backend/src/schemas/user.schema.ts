@@ -2,7 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { USER_ROLES } from 'src/users/user/utils/user_roles_enum';
 import { NotificationSchema, Notifications } from './notification.schema';
 import { UserInfo } from './user_info.schema';
-import { OrganizationDetail, OrganizationDetailSchema } from './organization_datail.schema';
+import { OrganizationDetail, OrganizationDetailSchema } from './organization_detail.schema';
 import { Follower, FollowerSchema } from './follower_schema';
 import { hash, compare } from 'bcrypt';
 import { UserLocation, UserLocationSchema } from './location.schema';
