@@ -1,15 +1,14 @@
 import { Body, Controller, Delete, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
 import { VolunteeringSectionService } from "./volunteering_opportunity.service";
-import { CreatedVolunteeringSectionDto } from "./dto/created_volunteering_opportunity.dto";
+import { VolunteeringSectionDto } from "./dto/volunteering_opportunity.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
-import { ExpressRequest } from "../middlewares/auth.middleware";
 
 @Controller('section')
 export class VolunteeringSectionController {
     constructor(private volunteeringSectionService: VolunteeringSectionService) { }
 
     @Post('')
-    async createSection(@Body() createdVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
+    async createSection(@Body() createdVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
 
         return this.volunteeringSectionService.createdUserVolunteeringOpportunity(createdVolunteeringSectionDto);
     }
@@ -21,7 +20,7 @@ export class VolunteeringSectionController {
     }
 
     @Patch(':id')
-    async updateSection(@Param('id') id: string, @Body() updatedVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
+    async updateSection(@Param('id') id: string, @Body() updatedVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
         return this.volunteeringSectionService.updateVolunteeringOpportunity(id, updatedVolunteeringSectionDto);
     }
 

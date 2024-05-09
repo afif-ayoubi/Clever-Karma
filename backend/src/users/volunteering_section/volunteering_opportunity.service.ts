@@ -2,14 +2,14 @@ import { HttpException, HttpStatus, Injectable, NotFoundException } from "@nestj
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
-import { CreatedVolunteeringSectionDto } from "./dto/created_volunteering_opportunity.dto";
+import { VolunteeringSectionDto } from "./dto/volunteering_opportunity.dto";
 
 @Injectable()
 export class VolunteeringSectionService {
     constructor(@InjectModel(VolunteeringSection.name) private volunteeringSectionModel: Model<VolunteeringSection>
     ) { }
 
-    async createdUserVolunteeringOpportunity(createdVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
+    async createdUserVolunteeringOpportunity(createdVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
         const createdVolunteeringSection = new this.volunteeringSectionModel(createdVolunteeringSectionDto);
         return createdVolunteeringSection.save();
 
@@ -20,7 +20,7 @@ export class VolunteeringSectionService {
             throw new NotFoundException(`Volunteering opportunity with ID ${id} not found`);
         }
     }
-    async updateVolunteeringOpportunity(id: string, updatedVolunteeringSectionDto: CreatedVolunteeringSectionDto): Promise<VolunteeringSection> {
+    async updateVolunteeringOpportunity(id: string, updatedVolunteeringSectionDto: VolunteeringSectionDto): Promise<VolunteeringSection> {
         const updatedVolunteeringOpportunity = await this.volunteeringSectionModel.findByIdAndUpdate(id, updatedVolunteeringSectionDto, { new: true });
         if (!updatedVolunteeringOpportunity) throw new HttpException("Section not found", HttpStatus.UNPROCESSABLE_ENTITY);
 
