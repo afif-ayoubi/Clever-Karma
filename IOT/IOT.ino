@@ -62,4 +62,12 @@ void loop() {
   const int cleanAirValue = 700; 
   const int smokeDetectedValue = 500; 
 
+   if (sensorValue >= cleanAirValue) {
+    Serial.println("Smoke: No smoke detected");
+  } else if (sensorValue <= smokeDetectedValue) {
+    Serial.println("Smoke: Smoke detected!");
+  } else {
+    Serial.println("Smoke: Possible smoke detected");
+  }
+
 }
