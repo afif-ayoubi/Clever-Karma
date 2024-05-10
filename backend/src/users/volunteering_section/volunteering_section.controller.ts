@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch,
 import { VolunteeringSectionDto } from "./dto/volunteering_Section.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 import { VolunteeringSectionService } from "./volunteering_section.service";
+import { SUCCESS_METHODS } from "src/core/constants/success_message";
 
 @Controller('section')
 export class VolunteeringSectionController {
@@ -16,7 +17,7 @@ export class VolunteeringSectionController {
     async deleteSection(@Param('id') id: string): Promise<{ message: string }> {
 
         await this.volunteeringSectionService.deleteVolunteeringSection(id);
-        return { message: 'Volunteering Section deleted successfully' };
+        return { message: SUCCESS_METHODS.VOLUNTEERING_SECTION_DELETED };
     }
 
     @Patch(':id')
