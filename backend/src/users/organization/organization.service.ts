@@ -21,12 +21,15 @@ export class OrganizationService {
             description: volunteeringSectionDto.description,
             imageUrl: volunteeringSectionDto.imageUrl
         });
-        
+
         if (!existingVolunteeringSection) throw new ModelNotFoundException(ERROR_MESSAGES.INVALID_VOLUNTEERING_SECTION_VALUES);
 
 
 
         const createOrganization = new this.organizationSectionModel(organizationDto);
         return createOrganization.save();
+    }
+    async getAllOrganizations(): Promise<OrganizationDetail[]> {
+        return this.organizationSectionModel.find().exec();
     }
 }
