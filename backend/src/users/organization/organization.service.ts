@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, Types } from "mongoose";
 import { OrganizationDetail } from "src/schemas/organization_detail.schema";
 import { OrganizationDto } from "./dto/organization.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
@@ -30,10 +30,12 @@ export class OrganizationService {
         return createOrganization.save();
     }
     async getAllOrganizations(): Promise<OrganizationDetail[]> {
-        return this.organizationSectionModel.find().exec();
+        return this.organizationSectionModel.find();
     }
     async deleteOrganization(id:string): Promise<void> {
-        const organization = await this.organizationSectionModel.findByIdAndDelete(id);
-        if (!organization) throw new NotFoundException(ERROR_MESSAGES.ORGANIZATION_NOT_FOUND);
+        if (!Types.ObjectId.isValid(id)) throw new ModelNotFoundException(ERROR_MESSAGES.INVALID_Id);
+        
+        const organization = await this.organizationSectionModel.findOneAndDelete();
+        if (!organization) throw new ModelNotFoundException(ERROR_MESSAGES.ORGANIZATION_NOT_FOUND);
     }
 }
