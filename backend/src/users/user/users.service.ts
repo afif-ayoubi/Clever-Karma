@@ -8,7 +8,7 @@ import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_response_type";
 import { CreateUserDto } from "./dto/create_user.dto";
-import { LoginDto } from "./dto/login_dto";
+import { LoginDto } from "./dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 
@@ -19,9 +19,9 @@ export type UserDocument = HydratedDocument<User>;
 export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>,
     ) { }
-    
+
     async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
-        const user = await this.userModel.findOne({ email: createUserDto.email });
+        const user = (await this.userModel.findOne({ email: createUserDto.email }));
         if (user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
 
         const createdUser = new this.userModel(createUserDto);
@@ -41,7 +41,7 @@ export class UsersService {
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: updateUserDto.email });
         if (existingUser && existingUser._id.toString() !== id) {
-            throw  new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
+            throw new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
         }
         const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
@@ -60,6 +60,7 @@ export class UsersService {
             userInfo: user.userInfo,
         };
     }
+   
     buildAuthUserResponse(user: UserDocument): UserAuthResponseType {
         return {
             firstName: user.firstName,
@@ -67,7 +68,7 @@ export class UsersService {
             email: user.email,
             role: user.role,
             token: this.generateJwt(user),
-            id: user._id
+            id: user._id,
 
         };
     }
@@ -77,7 +78,7 @@ export class UsersService {
         return sign({ userId: userId }, 'JWT_SECRET');
     }
     async findById(id: Types.ObjectId): Promise<UserDocument> {
-    
+
         return this.userModel.findById(id);
     }
 }
