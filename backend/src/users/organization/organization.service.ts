@@ -32,4 +32,8 @@ export class OrganizationService {
     async getAllOrganizations(): Promise<OrganizationDetail[]> {
         return this.organizationSectionModel.find().exec();
     }
+    async deleteOrganization(id:string): Promise<void> {
+        const organization = await this.organizationSectionModel.findByIdAndDelete(id);
+        if (!organization) throw new NotFoundException(ERROR_MESSAGES.ORGANIZATION_NOT_FOUND);
+    }
 }
