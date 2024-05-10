@@ -27,7 +27,9 @@ void loop() {
   }
 
   float rzero = gasSensor.getRZero();
-    float ppm = gasSensor.getPPM();
+  float ppm = gasSensor.getPPM();
+
+  int sensorValue = analogRead(MQ2_ANALOG_PIN);
 
   Serial.print("Humidity: ");
   Serial.print(humidity);
