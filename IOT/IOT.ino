@@ -22,7 +22,9 @@ void loop() {
     Serial.println("Failed to read from DHT sensor!");
     return;
   }
-
+  
+  float rzero = gasSensor.getRZero();
+  float ppm = gasSensor.getPPM();
 
 
   Serial.print("Humidity: ");
@@ -31,6 +33,10 @@ void loop() {
   Serial.print("Temperature: ");
   Serial.print(temperature);
   Serial.println(" °C");
+
+  
+  Serial.print("MQ-135 PPM: ");
+  Serial.println(ppm);
 
 
 
