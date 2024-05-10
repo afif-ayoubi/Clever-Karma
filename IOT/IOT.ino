@@ -29,7 +29,7 @@ void loop() {
   float rzero = gasSensor.getRZero();
   float ppm = gasSensor.getPPM();
 
-  int sensorValue = analogRead(MQ2_ANALOG_PIN);
+  int mq2Value = analogRead(MQ2_ANALOG_PIN);
 
   Serial.print("Humidity: ");
   Serial.print(humidity);
@@ -41,6 +41,8 @@ void loop() {
 
   Serial.print("MQ-135 PPM: ");
   Serial.println(ppm);
+  Serial.print("MQ-2 value: ");
+  Serial.println(mq2Value);
 
   const float goodThreshold = 400.0;
   const float moderateThreshold = 1000.0;
@@ -62,9 +64,9 @@ void loop() {
   const int cleanAirValue = 700; 
   const int smokeDetectedValue = 500; 
 
-   if (sensorValue >= cleanAirValue) {
+   if (mq2Value >= cleanAirValue) {
     Serial.println("Smoke: No smoke detected");
-  } else if (sensorValue <= smokeDetectedValue) {
+  } else if (mq2Value <= smokeDetectedValue) {
     Serial.println("Smoke: Smoke detected!");
   } else {
     Serial.println("Smoke: Possible smoke detected");
