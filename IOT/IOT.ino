@@ -1,9 +1,11 @@
 #include <DHT.h>
+#include "MQ135.h"
+
 #define DHTPIN 15  
 #define DHTTYPE DHT22       
 
-
 DHT dht(DHTPIN, DHTTYPE);
+MQ135 gasSensor = MQ135(MQ135_ANALOG_PIN);
 
 void setup() {
   Serial.begin(115200);
