@@ -7,5 +7,6 @@ export const ERROR_MESSAGES={
     USER_NOT_FOUND: 'User not found',
     INCORRECT_PASSWORD: 'incorrect password',
     EMAIL_ALREADY_TAKEN: 'Email is already taken',
+    INVALID_Id: 'Invalid id provided',
 
 }
