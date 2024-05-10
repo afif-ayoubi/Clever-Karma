@@ -59,4 +59,7 @@ void loop() {
     Serial.println("Air quality: Hazardous");
   }
 
+  const int cleanAirValue = 700; 
+  const int smokeDetectedValue = 500; 
+
 }
