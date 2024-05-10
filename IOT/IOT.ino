@@ -5,6 +5,7 @@
 #define DHTTYPE DHT22       
 
 #define MQ135_ANALOG_PIN 33 
+#define MQ2_ANALOG_PIN 34
 
 DHT dht(DHTPIN, DHTTYPE);
 MQ135 gasSensor = MQ135(MQ135_ANALOG_PIN);
