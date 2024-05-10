@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Post } from "@nestjs/common";
 import { OrganizationService } from "./organization.service";
 import { OrganizationDto } from "./dto/organization.dto";
 import { OrganizationDetail } from "src/schemas/organization_detail.schema";
@@ -13,5 +13,10 @@ import { OrganizationDetail } from "src/schemas/organization_detail.schema";
     @Get('')
     async getOrganizations(): Promise<OrganizationDetail[]> {
         return this.organizationService.getAllOrganizations();
+    }
+    @Delete(':id')
+    async deleteOrganization(@Body() id: string): Promise<{message:string}> {
+        await  this.organizationService.deleteOrganization(id);
+        return {message: 'Organization deleted successfully'};
     }
  }
