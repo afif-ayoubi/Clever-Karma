@@ -3,9 +3,9 @@ import { UsersService } from "./users.service";
 import { UserAuthResponseType } from "./types/auth_user_response_type";
 import { ExpressRequest } from "../middlewares/auth.middleware";
 import { UserResponseType } from "./types/user_response_type";
-import { CreateUserDto } from "./dto/userdto/create_user.dto";
-import { LoginDto } from "./dto/userdto/login.dto";
-import { UpdateUserDto } from "./dto/userdto/update_user.dto";
+import { CreateUserDto } from "./dto/user_dto/create_user.dto";
+import { LoginDto } from "./dto/user_dto/login.dto";
+import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
 
 @Controller('user')

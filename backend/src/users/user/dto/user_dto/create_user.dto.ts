@@ -1,7 +1,4 @@
 import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, validate } from "class-validator";
-import { USER_ROLES } from "src/users/user/utils/user_roles_enum";
-import { LocationDto } from "./location.dto";
-import { Type } from "class-transformer";
 
 
 
@@ -23,7 +20,5 @@ export class CreateUserDto {
 
     readonly role: string;
 
-    @ValidateNested({ each: true })
-    @Type(() => LocationDto)
-    location: LocationDto
+  
 }

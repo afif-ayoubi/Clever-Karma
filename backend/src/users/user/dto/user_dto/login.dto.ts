@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested } from "class-validator";
-import { LocationDto } from "./location.dto";
+import { LocationDto } from "../organization_dto/location.dto";
 import { Type } from "class-transformer";
 
 export class LoginDto {

@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from "@nestjs/comm
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { OrganizationDetail } from "src/schemas/organization_detail.schema";
-import { OrganizationDto } from "./dto/organization.dto";
+import { OrganizationDto } from "../user/dto/organization_dto/organization.dto";
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 import { ModelNotFoundException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";

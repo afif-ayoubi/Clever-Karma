@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { OrganizationService } from "./organization.service";
-import { OrganizationDto } from "./dto/organization.dto";
+import { OrganizationDto } from "../user/dto/organization_dto/organization.dto";
 import { OrganizationDetail } from "src/schemas/organization_detail.schema";
 import { SUCCESS_METHODS } from "src/core/constants/success_message";
 
