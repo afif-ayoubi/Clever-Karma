@@ -5,7 +5,6 @@
     import { OrganizationDetail, OrganizationDetailSchema } from './organization_detail.schema';
     import { Follower, FollowerSchema } from './follower_schema';
     import { hash, compare } from 'bcrypt';
-    import { UserLocation, UserLocationSchema } from './location.schema';
     @Schema()
     export class User {
 
@@ -23,8 +22,7 @@
         userInfo?: UserInfo;
         @Prop({ type: OrganizationDetailSchema })
         organizationDetail?: OrganizationDetail;
-        @Prop({ type: UserLocationSchema, })
-        location?: UserLocation;
+    
         @Prop({ type: [NotificationSchema] })
         notification?: Notifications[];
         @Prop({ type: FollowerSchema, })
