@@ -21,9 +21,6 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly password: string;
 
-    @IsNotEmpty()
-    @IsString()
-    @IsIn(Object.values(USER_ROLES), { message: "Invalid role" })
     readonly role: string;
 
     @ValidateNested({ each: true })

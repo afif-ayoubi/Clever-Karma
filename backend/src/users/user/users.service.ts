@@ -7,8 +7,8 @@ import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_response_type";
-import { CreateUserDto } from "./dto/create_user.dto";
-import { LoginDto } from "./dto/login.dto";
+import { CreateUserDto } from "./dto/userdto/create_user.dto";
+import { LoginDto } from "./dto/userdto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 
@@ -60,7 +60,7 @@ export class UsersService {
             userInfo: user.userInfo,
         };
     }
-   
+
     buildAuthUserResponse(user: UserDocument): UserAuthResponseType {
         return {
             firstName: user.firstName,
