@@ -54,7 +54,6 @@ export class CreateOrganizationDto {
 
     readonly isActive: boolean;
 
-    @IsNotEmpty()
     @ValidateNested({ each: true })
     @Type(() => OrganizationDetailDto)
     readonly organizationDetail: OrganizationDetailDto
