@@ -52,7 +52,7 @@
     Firebase.reconnectNetwork(true);
     dht.begin();
   }
-
+  
   void loop() {
     if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 5000 || sendDataPrevMillis == 0)) {
       sendDataPrevMillis = millis();
@@ -70,7 +70,7 @@
       jsonData.set("mq2Value", mq2Value);
 
       if(Firebase.RTDB.setJSON(&fbdo, "/sensorData", &jsonData)){
-        Serial.println();Serial.print(jsonData.raw());
+        Serial.print(jsonData.raw());
         Serial.print("- successfully saved  to:" + fbdo.dataPath());
         Serial.println(" (" +fbdo.dataType() + ")");
       }else{
