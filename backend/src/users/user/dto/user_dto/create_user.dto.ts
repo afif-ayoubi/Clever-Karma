@@ -2,6 +2,7 @@ import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, valida
 
 
 
+
 export class CreateUserDto {
     @IsNotEmpty()
     @IsString()

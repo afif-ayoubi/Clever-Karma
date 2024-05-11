@@ -1,24 +1,26 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
 import { UsersService } from "./users.service";
-import { UserAuthResponseType } from "./types/auth_user_response_type";
+import { UserAuthResponseType } from "./types/user_type/auth_user_response_type";
 import { ExpressRequest } from "../middlewares/auth.middleware";
-import { UserResponseType } from "./types/user_response_type";
+import { UserResponseType } from "./types/user_type/user_response_type";
 import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
+import { CreateOrganizationDto } from "./dto/organization_dto/create_organization.dto";
+import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 
 @Controller('user')
 export class UsersController {
     constructor(private userService: UsersService) { }
     @Post('/create-organization')
-    async createOrganization(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
-        const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.ORGANIZATION });
-        return this.userService.buildAuthUserResponse(user);
+    async createOrganization(@Body() createOrganizationDto: CreateOrganizationDto): Promise<OrganizationAuthResponseType> {
+        const user = await this.userService.createOrganization({ ...createOrganizationDto, role: USER_ROLES.ORGANIZATION });
+        return this.userService.buildCreateOrganizationResponse(user);
     }
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
-        const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.USER });
+        const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.USER, });
 
         return this.userService.buildAuthUserResponse(user);
     }

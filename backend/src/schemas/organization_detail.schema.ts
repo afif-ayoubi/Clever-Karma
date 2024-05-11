@@ -10,6 +10,8 @@ export class OrganizationDetail {
     howToVolunteer: string;
     @Prop({ required: true })
     imageUrl: string;
+    @Prop({  default: false})
+    isActive: boolean;
     @Prop({ type: OrganizationLocationSchema, })
     location?: OrganizationLocation;
     @Prop({ required: true, type: VolunteeringSection })

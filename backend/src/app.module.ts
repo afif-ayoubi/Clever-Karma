@@ -16,6 +16,7 @@ export class AppModule {
     consumer.apply(AuthMiddleware).exclude(
       {path:'user/create',method:RequestMethod.POST},
       {path:'user/login',method:RequestMethod.POST},
+      {path:'user/create-organization',method:RequestMethod.POST},
     )
     
     .forRoutes({

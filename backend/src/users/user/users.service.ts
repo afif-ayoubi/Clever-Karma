@@ -2,15 +2,17 @@ import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
 import { User } from "src/schemas/user.schema";
-import { UserAuthResponseType } from "./types/auth_user_response_type";
+import { UserAuthResponseType } from "./types/user_type/auth_user_response_type";
 import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
 import { HydratedDocument } from 'mongoose';
-import { UserResponseType } from "./types/user_response_type";
+import { UserResponseType } from "./types/user_type/user_response_type";
 import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
+import { CreateOrganizationDto } from "./dto/organization_dto/create_organization.dto";
+import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -27,6 +29,14 @@ export class UsersService {
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
+    async createOrganization(createOrganizationDto: CreateOrganizationDto): Promise<UserDocument> {
+        const organization = (await this.userModel.findOne({ email: createOrganizationDto.email }));
+        if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
+
+        const createdOrganization = new this.userModel(createOrganizationDto);
+        return createdOrganization.save();
+    }
+
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
@@ -72,7 +82,17 @@ export class UsersService {
 
         };
     }
+    buildCreateOrganizationResponse(user: UserDocument): OrganizationAuthResponseType {
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            id: user._id,
+            organizationDetail: user.organizationDetail,
+        }
 
+    }
     generateJwt(user: UserDocument): string {
         const userId = user._id;
         return sign({ userId: userId }, 'JWT_SECRET');

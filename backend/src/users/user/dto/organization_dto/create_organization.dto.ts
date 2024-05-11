@@ -1,10 +1,39 @@
-import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, validate } from "class-validator";
+import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, validate, IsNumber, isNotEmpty } from "class-validator";
 import { Type } from "class-transformer";
-import { OrganizationLocation } from "src/schemas/location.schema";
-import { OrganizationDto } from "./organization.dto";
+import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
+
+export class LocationDto {
+    @IsOptional()
+    @IsNumber()
+    readonly longitude: number;
 
 
+    @IsOptional()
+    @IsNumber()
+    readonly latitude: number;
+}
 
+export class OrganizationDetailDto {
+    @IsString()
+    @IsNotEmpty()
+    readonly aboutUs: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly howToVolunteer: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly imageUrl: string;
+    @IsNotEmpty()
+    @ValidateNested({ each: true })
+    @Type(() => LocationDto)
+    readonly location: LocationDto
+
+    @ValidateNested({ each: true })
+    @Type(() => VolunteeringSectionDto)
+    readonly VolunteeringSection: VolunteeringSectionDto;
+}
 export class CreateOrganizationDto {
     @IsNotEmpty()
     @IsString()
@@ -23,12 +52,12 @@ export class CreateOrganizationDto {
 
     readonly role: string;
 
-    @ValidateNested({ each: true })
-    @Type(() => OrganizationDto)
-    organizationDetail: OrganizationDto
+    readonly isActive: boolean;
 
+    @IsNotEmpty()
     @ValidateNested({ each: true })
-    @Type(() => OrganizationLocation)
-    location: OrganizationLocation
+    @Type(() => OrganizationDetailDto)
+    readonly organizationDetail: OrganizationDetailDto
+
 
 }

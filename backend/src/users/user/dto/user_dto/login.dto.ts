@@ -1,6 +1,4 @@
 import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested } from "class-validator";
-import { LocationDto } from "../organization_dto/location.dto";
-import { Type } from "class-transformer";
 
 export class LoginDto {
 
@@ -12,7 +10,5 @@ export class LoginDto {
     @IsNotEmpty()
     readonly password: string;
 
-    @ValidateNested({ each: true })
-    @Type(() => LocationDto)
-    location: LocationDto
+   
 }

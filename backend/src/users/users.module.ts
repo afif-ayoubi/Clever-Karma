@@ -8,8 +8,6 @@ import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organi
 
 import { VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";
 import { VolunteeringSectionService } from "./volunteering_section/volunteering_section.service";
-import { OrganizationController } from "./organization/organization.controller";
-import { OrganizationService } from "./organization/organization.service";
 import { VolunteeringSectionController } from "./volunteering_section/volunteering_section.controller";
 
 @Module({
@@ -37,8 +35,8 @@ import { VolunteeringSectionController } from "./volunteering_section/volunteeri
         ])
     ],
     providers: [
-        UsersService, VolunteeringSectionService, OrganizationService],
-    controllers: [UsersController,VolunteeringSectionController, OrganizationController],
+        UsersService, VolunteeringSectionService ],
+    controllers: [UsersController,VolunteeringSectionController],
     exports: [UsersService]
 })
 export class UserModule { }
