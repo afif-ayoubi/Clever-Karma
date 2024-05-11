@@ -8,6 +8,7 @@ import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
 import 'package:mobile/features/opportunity/presentation/pages/map_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/organizations_page.dart';
+import 'package:mobile/features/organization/presentation/pages/graph_page.dart';
 import 'package:mobile/routes/class_routes.dart';
 
 import '../features/live_streaming/presentation/pages/live_streaming.dart';
@@ -17,7 +18,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   static final GoRouter goRouter = GoRouter(
-      initialLocation: Routes.mapPage,
+      initialLocation: Routes.graphPage,
       navigatorKey: navigatorKey,
       routes: [
         GoRoute(
@@ -49,5 +50,8 @@ class AppRoutes {
             builder: ((context, state) => const MapPage())),  GoRoute(
             path: "/live",
             builder: ((context, state) => const LiveStreaming())),
+            GoRoute(
+                path: Routes.graphPage,
+                builder: ((context, state) => const GraphPage())),
       ]);
 }
