@@ -22,7 +22,8 @@ class UsersRepositoryImpl implements UsersRepository {
 
   @override
   Future<Either<Failure, Unit>> create(user) {
-   
+    final UserModel userModel = UserModel.fromUser(user);
+    return _getMessage(() => remoteDataSource.createUser(userModel));
   }
 
   @override
