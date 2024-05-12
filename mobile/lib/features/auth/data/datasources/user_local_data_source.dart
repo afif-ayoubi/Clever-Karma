@@ -26,7 +26,13 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<UserModel> getCachedUser() {
- 
+    final cachedUser = _userBox.get('user');
+    if (cachedUser != null) {
+      print('User Cached ${cachedUser} in "${_userBox.name}".');
+      return Future.value(cachedUser);
+    } else {
+      throw EmptyCacheException();
+    }
   }
 
 
