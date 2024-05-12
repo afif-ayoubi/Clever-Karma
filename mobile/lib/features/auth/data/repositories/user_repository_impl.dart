@@ -46,8 +46,8 @@ class UsersRepositoryImpl implements UsersRepository {
 
   @override
   Future<Either<Failure, Unit>> login(user) {
-    // TODO: implement login
-    throw UnimplementedError();
+    final UserModel userModel = UserModel.fromUser(user);
+    return _getMessage(() => remoteDataSource.login(userModel));
   }
 
   @override
