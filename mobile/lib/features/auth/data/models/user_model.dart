@@ -1,7 +1,7 @@
 import 'package:mobile/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
-  const UserModel(
+   UserModel(
       {required super.id,
       required super.firstName,
       required super.lastName,
