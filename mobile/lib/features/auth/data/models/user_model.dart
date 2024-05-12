@@ -7,11 +7,9 @@ class UserModel extends User {
       required super.lastName,
       required super.email,
       required super.password,
-      required super.dateOfBirth,
-      required super.phoneNumber,
-      required super.gender,
-      required super.longitude,
-      required super.latitude});
+       super.dateOfBirth,
+       super.phoneNumber,
+       super.gender,});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       id: json['id'],
@@ -22,8 +20,7 @@ class UserModel extends User {
       dateOfBirth: json['dateOfBirth'],
       phoneNumber: json['phoneNumber'],
       gender: json['gender'],
-      longitude: json['longitude'],
-      latitude: json['latitude']);
+     );
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -34,8 +31,7 @@ class UserModel extends User {
         'dateOfBirth': dateOfBirth,
         'phoneNumber': phoneNumber,
         'gender': gender,
-        'longitude': longitude,
-        'latitude': latitude
+
       };
 
   UserModel.fromUser(User user)
@@ -48,6 +44,5 @@ class UserModel extends User {
             dateOfBirth: user.dateOfBirth,
             phoneNumber: user.phoneNumber,
             gender: user.gender,
-            longitude: user.longitude,
-            latitude: user.latitude);
+          );
 }
