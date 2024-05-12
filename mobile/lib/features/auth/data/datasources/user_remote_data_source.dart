@@ -72,7 +72,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     try {
       final response = await client.post(Uri(path: '$BASE_URL/user'), body: body);
       if (response.statusCode == 201) {
-        
+        final jsonResponse = jsonDecode(response.body);
+        final String token = jsonResponse[TOKEN];
+        sharedPreferences.setString(TOKEN, token);
         return Future.value(unit);
       } else {
         throw ServerException();
