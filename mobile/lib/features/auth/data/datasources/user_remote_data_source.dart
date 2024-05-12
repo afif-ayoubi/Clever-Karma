@@ -14,9 +14,14 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
   UserRemoteDataSourceImpl({required this.client});
   @override
-  Future<Unit> createUser(UserModel user) {
-    // TODO: implement createUser
-    throw UnimplementedError();
+  Future<Unit> createUser(UserModel user) async {
+    final body = user.toJson();
+    final response = await client.post(Uri(path: '$baseURL/user'), body: body);
+    if (response.statusCode == 200) {
+      return Future.value(unit);
+    }else{
+      throw Exception();
+    }
   }
 
   @override
