@@ -11,6 +11,7 @@ import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'features/auth/data/datasources/user_local_data_source.dart';
 import 'features/auth/data/repositories/user_repository_impl.dart';
 import 'package:http/http.dart' as http;
 
@@ -48,13 +49,15 @@ Future<void> init() async {
 
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(client: sl()));
+  sl.registerLazySingleton<UserLocalDataSource>(
+      () => UserLocalDataSourceImpl(userBox: sl()));
 
   //! core
 
   sl.registerLazySingleton<NetworkInfo>(() => NetwerkInfoImpl(sl()));
 
   //! External
-  
+
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerFactory(() => http.Client());
