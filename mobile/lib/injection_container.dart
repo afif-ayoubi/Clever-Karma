@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:mobile/core/network/network_info.dart';
 import 'package:mobile/features/auth/data/datasources/user_remote_data_source.dart';
@@ -11,7 +12,9 @@ import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/constants/constants.dart';
 import 'features/auth/data/datasources/user_local_data_source.dart';
+import 'features/auth/data/models/user_model.dart';
 import 'features/auth/data/repositories/user_repository_impl.dart';
 import 'package:http/http.dart' as http;
 
@@ -48,7 +51,7 @@ Future<void> init() async {
   //DataSources
 
   sl.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSourceImpl(client: sl(), sharedPreferences: sl());
+      () => UserRemoteDataSourceImpl(client: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton<UserLocalDataSource>(
       () => UserLocalDataSourceImpl(userBox: sl()));
 
@@ -59,6 +62,7 @@ Future<void> init() async {
   //! External
 
   final sharedPreferences = await SharedPreferences.getInstance();
+  final userBox = await Hive.openBox<UserModel>(USER_BOX);
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerFactory(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker());
