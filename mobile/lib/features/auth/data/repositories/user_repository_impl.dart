@@ -33,9 +33,23 @@ class UsersRepositoryImpl implements UsersRepository {
   }
 
   @override
-  Future<Either<Failure, User>> get() {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<Either<Failure, User>> get() async{
+    if(await networkInfo.isConnected){
+      try {
+        final user = await remoteDataSource.getUser();
+        localDataSource.cacheUser(user);
+        return Right(user);
+      } on ServerException {
+        return Left(ServerFailure());
+      }
+    } else {
+      try {
+        final user = await localDataSource.getCachedUser();
+        return Right(user);
+      } on EmptyCacheException {
+        return Left(EmptyCacheFailure());
+      }
+    }
   }
 
   @override
