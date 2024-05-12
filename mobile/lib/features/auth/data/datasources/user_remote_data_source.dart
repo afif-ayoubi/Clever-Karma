@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:dartz/dartz.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/constants/constants.dart';
 import '../../../../core/error/exception.dart';
@@ -22,8 +23,9 @@ abstract class UserRemoteDataSource {
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
+  final SharedPreferences sharedPreferences;
 
-  UserRemoteDataSourceImpl({required this.client});
+  UserRemoteDataSourceImpl({required this.client,required this.sharedPreferences});
 
   @override
   Future<Unit> createUser(UserModel user) async {
@@ -31,6 +33,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     try {
       final response = await client.post(Uri(path: '$BASE_URL/user'), body: body);
       if (response.statusCode == 201) {
+        final jsonResponse = jsonDecode(response.body);
+        final String token = jsonResponse[TOKEN];
+        sharedPreferences.setString(TOKEN, token);
         return Future.value(unit);
       } else {
         throw ServerException();
@@ -67,6 +72,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     try {
       final response = await client.post(Uri(path: '$BASE_URL/user'), body: body);
       if (response.statusCode == 201) {
+        
         return Future.value(unit);
       } else {
         throw ServerException();
