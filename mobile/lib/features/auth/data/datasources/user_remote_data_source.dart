@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/error/exception.dart';
 
 abstract class UserRemoteDataSource {
@@ -18,7 +19,6 @@ abstract class UserRemoteDataSource {
   Future<UserModel> getUser();
 }
 
-const BASE_URL = "http://localhost:3000";
 
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
