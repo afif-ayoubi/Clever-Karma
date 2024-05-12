@@ -1,6 +1,10 @@
+import 'dart:convert';
+
 import 'package:dartz/dartz.dart';
 import 'package:mobile/features/auth/data/models/user_model.dart';
 import 'package:http/http.dart' as http;
+
+import '../../../../core/error/exception.dart';
 
 abstract class UserRemoteDataSource {
   Future<Unit> createUser(UserModel user);
@@ -9,25 +13,34 @@ abstract class UserRemoteDataSource {
   Future<Unit> updateUser(UserModel user);
   Future<UserModel> getUser();
 }
-const baseURL="http://localhost:3000";
+const BASE_URL="http://localhost:3000";
 class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   final http.Client client;
   UserRemoteDataSourceImpl({required this.client});
   @override
   Future<Unit> createUser(UserModel user) async {
     final body = user.toJson();
-    final response = await client.post(Uri(path: '$baseURL/user'), body: body);
-    if (response.statusCode == 200) {
+    final response = await client.post(Uri(path: '$BASE_URL/user'), body: body);
+    if (response.statusCode == 201) {
       return Future.value(unit);
     }else{
-      throw Exception();
+      throw ServerException();
     }
   }
 
   @override
-  Future<UserModel> getUser() {
-    // TODO: implement getUser
-    throw UnimplementedError();
+  Future<UserModel> getUser() async {
+    final response = await client.get(
+      Uri.parse(BASE_URL + "/user"),
+      headers: {"Content-Type": "application/json"},
+    );
+    if (response.statusCode == 200) {
+      final decodedJson = json.decode(response.body);
+      final UserModel userModel = UserModel.fromJson(decodedJson);
+      return userModel;
+    }else{
+      throw ServerException();
+    }
   }
 
   @override
