@@ -8,6 +8,8 @@ import 'package:mobile/features/auth/domain/usecases/login_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 
+import '../../../domain/entities/user.dart';
+
 part 'users_event.dart';
 part 'users_state.dart';
 
