@@ -17,7 +17,13 @@ final class LoadedUsersState extends UsersState {
 
 final class ErrorUsersState extends UsersState {
   final String message;
-  const ErrorUsersState(this.message);
+  const ErrorUsersState({required this.message});
   @override
   List<Object> get props => [];
+}
+final class SuccessUserState extends UsersState {
+  final String message;
+  const SuccessUserState({required this.message});
+  @override
+  List<Object> get props => [message];
 }
