@@ -20,7 +20,7 @@ class LoginUserEvent extends UsersEvent{
   List<Object> get props => [user];
 }
 class LogoutUserEvent extends UsersEvent{
-  
+
 }
 class UpdateUserEvent extends UsersEvent{
   final User user;
