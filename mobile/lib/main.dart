@@ -22,9 +22,7 @@ void main() async {
 
   await Hive.initFlutter(dir.path);
   Hive.registerAdapter(UserAdapter());
-  await Hive.openBox<User>(USER_BOX);
   FlutterNativeSplash.remove();
-
   await di.init();
   runApp(const MyApp());
 }

@@ -10,7 +10,7 @@ class GraphPage extends StatefulWidget {
 }
 
 class _GraphPageState extends State<GraphPage> {
-  Query dbRef = FirebaseDatabase.instance.ref().child('sensorData');
+  Query dbRef = FirebaseDatabase.instance.ref('');
 
   @override
   Widget build(BuildContext context) {
@@ -20,15 +20,21 @@ class _GraphPageState extends State<GraphPage> {
           query: dbRef,
           itemBuilder: (BuildContext context, DataSnapshot snapshot,
               Animation<double> animation, int index) {
+            print(snapshot.value);
             Map data = snapshot.value as Map;
-            if (  data.containsKey('humidity') && data.containsKey('temperature')) {
+            if (data != null) {
+              double humidity = data['humidity'];
+              double temperature = data['temperature'];
+              double ppm = data['ppm'];
+              int mq2Value = data['mq2Value'];
+
               return ListTile(
-                title: Text(data['humidity'].toString()),
-                subtitle: Text(data['temperature'].toString()),
+                title: Text('Humidity: $humidity'),
+                subtitle: Text('Temperature: $temperature\nPPM: $ppm\nMQ2 Value: $mq2Value'),
               );
             } else {
               return ListTile(
-                title: Text('Invalid Data'),
+                title: Text('No data available'),
               );
             }
           },
@@ -37,4 +43,3 @@ class _GraphPageState extends State<GraphPage> {
     );
   }
 }
-
