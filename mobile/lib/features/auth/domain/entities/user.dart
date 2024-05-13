@@ -6,11 +6,11 @@ part 'user.g.dart';
 @HiveType(typeId: 0)
 class User extends HiveObject with EquatableMixin {
   @HiveField(0)
-  final int id;
+  final int? id;
   @HiveField(1)
-  final String firstName;
+  final String? firstName;
   @HiveField(2)
-  final String lastName;
+  final String? lastName;
   @HiveField(3)
   final String email;
   @HiveField(4)
@@ -23,9 +23,9 @@ class User extends HiveObject with EquatableMixin {
   final int? phoneNumber;
 
   User({
-    required this.id,
-    required this.firstName,
-    required this.lastName,
+    this.id,
+    this.firstName,
+    this.lastName,
     required this.email,
     required this.password,
     this.dateOfBirth,
@@ -35,13 +35,13 @@ class User extends HiveObject with EquatableMixin {
 
   @override
   List<Object?> get props => [
-    id,
-    firstName,
-    lastName,
-    email,
-    password,
-    dateOfBirth,
-    phoneNumber,
-    gender,
-  ];
+        id,
+        firstName,
+        lastName,
+        email,
+        password,
+        dateOfBirth,
+        phoneNumber,
+        gender,
+      ];
 }
