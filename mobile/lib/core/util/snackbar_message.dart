@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class SnackBarMessage{
+  SnackBarMessage._();
+  static final SnackBarMessage _instance = SnackBarMessage._();
+  static SnackBarMessage get instance => _instance;
   void showSuccessSnackBar(
       {required String message, required BuildContext context}) {
     ScaffoldMessenger.of(context).showSnackBar(
