@@ -10,11 +10,6 @@ final class UsersInitial extends UsersState {}
 
 final class LoadingUsersState extends UsersState {}
 
-final class LoadedUsersState extends UsersState {
-  @override
-  List<Object> get props => [];
-}
-
 final class ErrorUsersState extends UsersState {
   final String message;
   const ErrorUsersState({required this.message});
