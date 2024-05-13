@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/core/util/snackbar_message.dart';
+import 'package:mobile/core/wdigets/loading_widget.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import '../../../../core/theme/hex_color.dart';
 import '../../../../routes/class_routes.dart';
@@ -67,23 +68,20 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildBody() {
-    return BlocConsumer<UsersBloc, UsersState>(
-        listener: (context, state) {
-          if (state is SuccessUserState) {
-           SnackBarMessage.instance.showSuccessSnackBar(
-              message: state.message,
-              context: context,
-            );
-          } else
-          if (state is ErrorUsersState) {
-            if(state is LoadingUsersState) return ;
-            SnackBarMessage.instance.showErrorSnackBar(
-              message: state.message,
-              context: context,
-            );
-          }
-        },
-        builder: (context, state) {
+    return BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
+      if (state is SuccessUserState) {
+        SnackBarMessage.instance.showSuccessSnackBar(
+          message: state.message,
+          context: context,
+        );
+      } else if (state is ErrorUsersState) {
+        SnackBarMessage.instance.showErrorSnackBar(
+          message: state.message,
+          context: context,
+        );
+      }
+    }, builder: (context, state) {
+      if (state is LoadingUsersState) return LoadingWidget();
       return Container(
         color: HexColor.primaryColor,
       );
