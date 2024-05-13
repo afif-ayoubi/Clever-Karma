@@ -42,7 +42,8 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
         emit(LoadingUsersState());
       } else if (event is UpdateUserEvent) {
         emit(LoadingUsersState());
-       
+        final failureOrDoneMessage= await updateUserUseCase(event.user);
+        emit(_eitherDoneMessageOrErrorState(failureOrDoneMessage, UPDATE_SUCCESS_MESSAGE));
       } else if (event is GetUserEvent) {
         emit(LoadingUsersState());
       }
