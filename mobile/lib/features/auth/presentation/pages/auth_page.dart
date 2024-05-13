@@ -1,12 +1,11 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/core/util/snackbar_message.dart';
-import 'package:mobile/core/wdigets/loading_widget.dart';
-import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import '../../../../core/theme/hex_color.dart';
+import '../../../../core/util/snackbar_message.dart';
+import '../../../../core/wdigets/loading_widget.dart';
 import '../../../../routes/class_routes.dart';
+import '../bloc/users/users_bloc.dart';
 import '../widgets/auth_page/auth_popup.dart';
 
 class AuthPage extends StatefulWidget {
