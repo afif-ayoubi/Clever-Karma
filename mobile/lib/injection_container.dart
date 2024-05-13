@@ -1,8 +1,10 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:mobile/core/common_domain/repository/base_repository.dart';
 import 'package:mobile/core/network/network_info.dart';
 import 'package:mobile/features/auth/data/datasources/user_remote_data_source.dart';
+import 'package:mobile/features/auth/domain/entities/user.dart';
 import 'package:mobile/features/auth/domain/repositories/user_repository.dart';
 import 'package:mobile/features/auth/domain/usecases/create_user.dart';
 import 'package:mobile/features/auth/domain/usecases/get_user.dart';

@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'core/constants/constants.dart';
 import 'features/auth/domain/entities/user.dart';
 import 'features/opportunity/core/services/notifications.dart';
 import 'injection_container.dart' as di;

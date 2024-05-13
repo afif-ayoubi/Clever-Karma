@@ -5,6 +5,7 @@ import '../../../../core/theme/hex_color.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/wdigets/loading_widget.dart';
 import '../../../../routes/class_routes.dart';
+import '../../domain/entities/user.dart';
 import '../bloc/users/users_bloc.dart';
 import '../widgets/auth_page/auth_popup.dart';
 
@@ -98,7 +99,17 @@ class _AuthPageState extends State<AuthPage> {
         forgotOnPressed: () {
           context.push(Routes.forgotPasswordRoute);
         },
-        btnOnPressed: () {},
+        btnOnPressed: () {
+          User user = User(
+            email: _emailController.text,
+            password: _passwordController.text,
+          );
+          currentAuthData == signIn
+              ? BlocProvider.of<UsersBloc>(context)
+                  .add(LoginUserEvent(user: user))
+              : BlocProvider.of<UsersBloc>(context)
+                  .add(CreateUserEvent(user: user));
+        },
         btnTextOnPressed: () {
           Navigator.of(context).pop();
           print('convert to ${currentAuthData == signIn ? signUp : signIn}');

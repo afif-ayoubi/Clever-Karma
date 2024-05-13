@@ -9,6 +9,7 @@ import 'package:mobile/features/auth/presentation/pages/reset_password_screen.da
 import 'package:mobile/features/opportunity/presentation/pages/map_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/organizations_page.dart';
 import 'package:mobile/features/organization/presentation/pages/graph_page.dart';
+import 'package:mobile/features/organization/presentation/widgets/graph_page/line_chart_widget.dart';
 import 'package:mobile/routes/class_routes.dart';
 
 import '../features/live_streaming/presentation/pages/live_streaming.dart';
@@ -18,7 +19,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   static final GoRouter goRouter = GoRouter(
-      initialLocation: Routes.graphPage,
+      initialLocation: Routes.authRoute,
       navigatorKey: navigatorKey,
       routes: [
         GoRoute(
@@ -52,6 +53,6 @@ class AppRoutes {
             builder: ((context, state) => const LiveStreaming())),
             GoRoute(
                 path: Routes.graphPage,
-                builder: ((context, state) => const GraphPage())),
+                builder: ((context, state) => const LineChartWidget())),
       ]);
 }
