@@ -1,5 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mobile/core/util/snackbar_message.dart';
+import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import '../../../../core/theme/hex_color.dart';
 import '../../../../routes/class_routes.dart';
 import '../widgets/auth_page/auth_popup.dart';
@@ -13,8 +17,9 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   late TextEditingController _emailController;
-  late TextEditingController _passwordController ;
-  late TextEditingController _confirmPasswordController ;
+  late TextEditingController _passwordController;
+
+  late TextEditingController _confirmPasswordController;
 
   Map<String, dynamic> signIn = {
     'title': "Sign In",
@@ -45,6 +50,7 @@ class _AuthPageState extends State<AuthPage> {
       _toggleAuth(context);
     });
   }
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -61,9 +67,27 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildBody() {
-    return Container(
-      color: HexColor.primaryColor,
-    );
+    return BlocConsumer<UsersBloc, UsersState>(
+        listener: (context, state) {
+          if (state is SuccessUserState) {
+           SnackBarMessage.instance.showSuccessSnackBar(
+              message: state.message,
+              context: context,
+            );
+          } else
+          if (state is ErrorUsersState) {
+            if(state is LoadingUsersState) return ;
+            SnackBarMessage.instance.showErrorSnackBar(
+              message: state.message,
+              context: context,
+            );
+          }
+        },
+        builder: (context, state) {
+      return Container(
+        color: HexColor.primaryColor,
+      );
+    });
   }
 
   void _toggleAuth(BuildContext context) {
@@ -72,7 +96,7 @@ class _AuthPageState extends State<AuthPage> {
         emailController: _emailController,
         passwordController: _passwordController,
         confirmPasswordController: _confirmPasswordController,
-        currentAuthData: currentAuthData ,
+        currentAuthData: currentAuthData,
         context: context,
         forgotOnPressed: () {
           context.push(Routes.forgotPasswordRoute);
@@ -85,7 +109,6 @@ class _AuthPageState extends State<AuthPage> {
             currentAuthData = currentAuthData == signIn ? signUp : signIn;
           });
           _recallAuth(context);
-
         },
       );
     });
