@@ -49,7 +49,7 @@ export class CreateOrganizationDto {
 
     @IsNotEmpty()
     readonly password: string;
-    readonly liveStremingId: string;
+     liveStreamingId: string;
 
     readonly role: string;
 
