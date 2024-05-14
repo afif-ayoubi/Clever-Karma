@@ -62,6 +62,22 @@ const Locations = () => {
           peopleJoined="75+ Donors"
         />
       </div>
+      <div className="flexEnd mt-10 px-6 lg:-mt-60 lg:mr-6">
+        <div className="bg-green-50 p-8 lg:max-w-[500px] xl:max-w-[734px] xl:rounded-5xl xl:px-16 xl:py-20 relative w-full overflow-hidden rounded-3xl">
+          <h2 className="regular-24 md:regular-32 2xl:regular-64 capitalize text-white">
+            <strong>Be a Lifesaver.</strong> Volunteer for Blood Donation!
+          </h2>
+          <p className="regular-14 xl:regular-16 mt-5 text-white">
+            Because every drop counts, we are here – to support blood donation efforts. Help ensure a steady supply of blood for those in need. Volunteer your time and skills at a blood donation center or drive.          </p>
+          <Image
+            src="/quote.svg"
+            alt="location-2"
+            width={186}
+            height={219}
+            className="camp-quote"
+          />
+        </div>
+      </div>
     </section>
   )
 }
