@@ -43,7 +43,11 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserUseCase(sl()));
 
   // Repository
-
+  sl.registerLazySingleton<BaseRepository>(() => UsersRepositoryImpl(
+        remoteDataSource: sl(),
+        localDataSource: sl(),
+        networkInfo: sl(),
+      ));
   sl.registerLazySingleton<UsersRepository>(() => UsersRepositoryImpl(
         remoteDataSource: sl(),
         localDataSource: sl(),
