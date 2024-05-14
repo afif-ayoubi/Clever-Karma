@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from "next/image"
+import Button from './Button'
 
 const Hero = () => {
     return (
@@ -7,7 +8,7 @@ const Hero = () => {
             <div className="hero-map" />
             <div className="relative z-20 flex flex-1 flex-col xl:w-1/2">
                 <Image
-                    src="/camp.svg"
+                    src="/logo.png"
                     alt="camp"
                     width={50}
                     height={50}
@@ -34,8 +35,45 @@ const Hero = () => {
                         120k
                         <span className="regular-16 lg:regular-20 ml-1">Excellent Reviews</span>
                     </p>
+                    <div className="flex flex-col w-full gap-3 sm:flex-row">
+                        <Button
+                            type="button"
+                            title="Download App"
+                            variant="btn_green"
+                        />
+                        <Button
+                            type="button"
+                            title="How we work?"
+                            icon="/play.svg"
+                            variant="btn_white_text"
+                        />
+                    </div>
                 </div>
+
             </div>
+            <div className="relative flex flex-1 items-start">
+        <div className="relative z-20 flex w-[268px] flex-col gap-8 rounded-3xl bg-green-90 px-7 py-8">
+
+           <div className="flex flex-col">
+            <div className="flexBetween">
+              <p className="regular-16 text-gray-20">Location</p>
+              <Image src="/close.svg" alt="close" width={24} height={24} />
+            </div>
+            <p className="bold-20 text-white">Green Earth Initiative</p>
+          </div>
+
+          <div className="flexBetween">
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Distance</p>
+              <p className="bold-20 text-white">133.25 mi</p>
+            </div>
+            <div className="flex flex-col">
+              <p className="regular-16 block text-gray-20">Elevation</p>
+              <p className="bold-20 text-white">1.531 km</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
         </section>
     )
