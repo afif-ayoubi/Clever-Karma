@@ -12,12 +12,18 @@ const Navbar = () => {
                     Clever <span className="text-green-50">Karma</span>
                 </span>
             </Link>
-            <div className="lg:flexCenter hidden">
+            <div className="lg:flexCenter hidden gap-2">
                 <Button
                     type="button"
                     title="Login"
                     icon="/user.svg"
                     variant="btn_dark_green"
+                />
+                   <Button
+                    type="button"
+                    title="Register"
+                    icon="/user.svg"
+                    variant="btn_white_text"
                 />
             </div>
             <Image
