@@ -6,5 +6,8 @@ const Footer = () => {
     </footer>
   )
 }
-
+type FooterColumnProps = {
+  title: string;
+  children: React.ReactNode;
+}
 export default Footer
