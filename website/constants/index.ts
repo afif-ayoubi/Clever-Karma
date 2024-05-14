@@ -54,11 +54,20 @@ export const FOOTER_LINKS = [
     },
   ];
   export const FOOTER_CONTACT_INFO = {
-    title: 'Contact Us',
+  title: 'Contact Us',
+  links: [
+    { label: 'Admin Officer', value: '123-456-7890' },
+    { label: 'Email Officer', value: 'hilink@akinthil.com' },
+  ],
+};
+export const SOCIALS = {
+    title: 'Social',
     links: [
-      { label: 'Admin Officer', value: '123-456-7890' },
-      { label: 'Email Officer', value: 'hilink@akinthil.com' },
+      '/facebook.svg',
+      '/instagram.svg',
+      '/twitter.svg',
+      '/youtube.svg',
+      '/wordpress.svg',
     ],
-  };
-  
+}
   
