@@ -40,7 +40,7 @@ export const FOOTER_LINKS = [
     {
       title: 'Learn More',
       links: [
-        'About Hilink',
+        'About Clever Karma',
         'Press Releases',
         'Environment',
         'Jobs',
@@ -50,14 +50,14 @@ export const FOOTER_LINKS = [
     },
     {
       title: 'Our Community',
-      links: ['Climbing xixixi', 'Hiking hilink', 'Hilink kinthill'],
+      links: ['Volunteer Together', 'Community Cleanups', 'Charity Runs'],
     },
   ];
   export const FOOTER_CONTACT_INFO = {
   title: 'Contact Us',
   links: [
     { label: 'Admin Officer', value: '123-456-7890' },
-    { label: 'Email Officer', value: 'hilink@akinthil.com' },
+    { label: 'Email Officer', value: 'cleverKarma@gmail.com' },
   ],
 };
 export const SOCIALS = {
