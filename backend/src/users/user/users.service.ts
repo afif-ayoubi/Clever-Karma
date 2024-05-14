@@ -11,7 +11,7 @@ import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
-import { OrganizationDetailDto } from "./dto/organization_dto/organization.dto";
+import { OrganizationDetailDto, OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 
 export type UserDocument = HydratedDocument<User>;
@@ -30,19 +30,19 @@ export class UsersService {
         return createdUser.save();
     }
 
-    async createOrganization(organizationDto: CreateOrganizationDto): Promise<UserDocument> {
-        const organization = (await this.userModel.findOne({ email: createOrganizationDto.email }));
+    async createOrganization(organizationDto: OrganizationDto): Promise<UserDocument> {
+        const organization = (await this.userModel.findOne({ email: organizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
 
-        const createdOrganization = new this.userModel(createOrganizationDto);
+        const createdOrganization = new this.userModel(organizationDto);
         return createdOrganization.save();
     }
-    async updateOrganization(id: string, updateUserDto: any): Promise<UserDocument> {
-        const existingUser = await this.userModel.findOne({ email: updateUserDto.email });
+    async updateOrganization(id: string, organizationDto: any): Promise<UserDocument> {
+        const existingUser = await this.userModel.findOne({ email: organizationDto.email });
         if (existingUser && existingUser._id.toString() !== id) {
             throw new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
         }
-        const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+        const user = this.userModel.findByIdAndUpdate(id, organizationDto, { new: true });
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         return user;
     }

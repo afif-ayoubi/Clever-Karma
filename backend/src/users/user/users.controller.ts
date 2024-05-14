@@ -7,15 +7,15 @@ import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
-import { OrganizationDetailDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
+import { OrganizationDto } from "./dto/organization_dto/organization.dto";
 
 @Controller('user')
 export class UsersController {
     constructor(private userService: UsersService) { }
     @Post('/create-organization')
-    async createOrganization(@Body() createOrganizationDto: OrganizationDetailDto): Promise<OrganizationAuthResponseType> {
-        const user = await this.userService.createOrganization({ ...createOrganizationDto, role: USER_ROLES.ORGANIZATION });
+    async createOrganization(@Body() organizationDto: OrganizationDto): Promise<OrganizationAuthResponseType> {
+        const user = await this.userService.createOrganization({ ...organizationDto, role: USER_ROLES.ORGANIZATION });
         return this.userService.buildCreateOrganizationResponse(user);
     }
     @Post('/create')
