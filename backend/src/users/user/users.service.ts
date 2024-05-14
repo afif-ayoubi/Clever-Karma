@@ -34,6 +34,9 @@ export class UsersService {
     async createOrganization(createOrganizationDto: CreateOrganizationDto): Promise<UserDocument> {
         const organization = (await this.userModel.findOne({ email: createOrganizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
+        
+        createOrganizationDto.liveStreamingId = generateRandomLiveStreamingId();
+
 
         const createdOrganization = new this.userModel(createOrganizationDto);
         return createdOrganization.save();
