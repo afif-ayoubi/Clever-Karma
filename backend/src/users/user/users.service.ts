@@ -11,7 +11,7 @@ import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
-import { CreateOrganizationDto } from "./dto/organization_dto/create_organization.dto";
+import { OrganizationDetailDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 
 export type UserDocument = HydratedDocument<User>;
@@ -29,12 +29,22 @@ export class UsersService {
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
-    async createOrganization(createOrganizationDto: CreateOrganizationDto): Promise<UserDocument> {
+
+    async createOrganization(organizationDto: CreateOrganizationDto): Promise<UserDocument> {
         const organization = (await this.userModel.findOne({ email: createOrganizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
 
         const createdOrganization = new this.userModel(createOrganizationDto);
         return createdOrganization.save();
+    }
+    async updateOrganization(id: string, updateUserDto: any): Promise<UserDocument> {
+        const existingUser = await this.userModel.findOne({ email: updateUserDto.email });
+        if (existingUser && existingUser._id.toString() !== id) {
+            throw new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
+        }
+        const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
+        if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
+        return user;
     }
 
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {

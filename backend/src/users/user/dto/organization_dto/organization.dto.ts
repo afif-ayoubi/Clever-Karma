@@ -34,7 +34,7 @@ export class OrganizationDetailDto {
     @Type(() => VolunteeringSectionDto)
     readonly VolunteeringSection: VolunteeringSectionDto;
 }
-export class CreateOrganizationDto {
+export class OrganizationDto {
     @IsNotEmpty()
     @IsString()
     readonly firstName: string;
