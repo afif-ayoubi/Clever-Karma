@@ -15,7 +15,9 @@ import { CreateOrganizationDto } from "./dto/organization_dto/create_organizatio
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 
 export type UserDocument = HydratedDocument<User>;
-
+function generateRandomLiveStreamingId(): string {
+    return Math.floor(1000000 + Math.random() * 9000000).toString();
+}
 
 @Injectable()
 export class UsersService {
