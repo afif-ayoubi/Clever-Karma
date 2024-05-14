@@ -15,7 +15,7 @@ export class UsersController {
     constructor(private userService: UsersService) { }
     @Post('/create-organization')
     async createOrganization(@Body() createOrganizationDto: CreateOrganizationDto): Promise<OrganizationAuthResponseType> {
-        const user = await this.userService.createOrganization({ ...createOrganizationDto, role: USER_ROLES.ORGANIZATION });
+        const user = await this.userService.createOrganization({ ...createOrganizationDto, role: USER_ROLES.ORGANIZATION});
         return this.userService.buildCreateOrganizationResponse(user);
     }
     @Post('/create')
