@@ -13,6 +13,7 @@ import { ModelConflictException, ModelUnprocessableEnitityException } from "src/
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import { OrganizationDetailDto, OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
+import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -30,7 +31,7 @@ export class UsersService {
         return createdUser.save();
     }
 
-    async createOrganization(organizationDto: OrganizationDto): Promise<UserDocument> {
+    async createOrganization(organizationDto: UpdateOrganizationDto): Promise<UserDocument> {
         const organization = (await this.userModel.findOne({ email: organizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
 
@@ -39,6 +40,7 @@ export class UsersService {
     }
     async updateOrganization(id: string, organizationDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: organizationDto.email });
+        console.log(existingUser._id);
         if (existingUser && existingUser._id.toString() !== id) {
             throw new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
         }

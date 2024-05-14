@@ -9,6 +9,7 @@ import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 import { OrganizationDto } from "./dto/organization_dto/organization.dto";
+import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
 
 @Controller('user')
 export class UsersController {
@@ -17,6 +18,12 @@ export class UsersController {
     async createOrganization(@Body() organizationDto: OrganizationDto): Promise<OrganizationAuthResponseType> {
         const user = await this.userService.createOrganization({ ...organizationDto, role: USER_ROLES.ORGANIZATION });
         return this.userService.buildCreateOrganizationResponse(user);
+    }
+    @Patch('/update-organization')
+    async updateOrganization(@Request() request: ExpressRequest, @Body() updateOrganizationDto: UpdateOrganizationDto): Promise<OrganizationAuthResponseType> {
+        const userId = request.user._id.toString();
+        const updatedUser = await this.userService.updateUser(userId, updateOrganizationDto);
+        return this.userService.buildCreateOrganizationResponse(updatedUser);
     }
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
