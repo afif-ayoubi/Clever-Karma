@@ -35,3 +35,22 @@ export const FEATURES = [
             'Utilize IoT services for enhanced safety and convenience. Monitor environmental conditions like temprature, humidy and air quality.',
     },
 ];
+// FOOTER SECTION
+export const FOOTER_LINKS = [
+    {
+      title: 'Learn More',
+      links: [
+        'About Hilink',
+        'Press Releases',
+        'Environment',
+        'Jobs',
+        'Privacy Policy',
+        'Contact Us',
+      ],
+    },
+    {
+      title: 'Our Community',
+      links: ['Climbing xixixi', 'Hiking hilink', 'Hilink kinthill'],
+    },
+  ];
+  
