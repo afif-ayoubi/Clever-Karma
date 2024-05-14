@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from './Button'
-
+import Image from 'next/image'
 const GetApp = () => {
   return (
     <section className="flexCenter w-full flex-col pb-[100px]">
@@ -24,6 +24,10 @@ const GetApp = () => {
               full
             />
           </div>
+        </div>
+        <div className="flex flex-1 items-center justify-end">
+          <Image src="/phone2.png" alt="phones" width={300} height={300} />
+          <Image src="/phone1.png" alt="phones" width={300} height={300} />
         </div>
       </div>
 
