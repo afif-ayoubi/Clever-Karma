@@ -4,36 +4,34 @@ export const PEOPLE_URL = [
     '/person-2.png',
     '/person-3.png',
     '/person-4.png',
-  ];
-  // FEATURES SECTION
+];
 export const FEATURES = [
     {
-      title: 'Real maps can be offline',
-      icon: '/map.svg',
-      variant: 'green',
-      description:
-        'We provide a solution for you to be able to use our application when climbing, yes offline maps you can use at any time there is no signal at the location',
+        title: 'Live Streaming ',
+        icon: '/live-streaming.png',
+        variant: 'green',
+        description:
+        'Experience live streaming of your organizations work and share the progress with supporters and stakeholders in real-time, making them a part of your mission.',
     },
     {
-      title: 'Set an adventure schedule',
-      icon: '/calendar.svg',
-      variant: 'green',
-      description:
-        "Schedule an adventure with friends. On holidays, there are many interesting offers from Hilink. That way, there's no more discussion",
+        title: 'Reals Maps',
+        icon: '/map.svg',
+        variant: 'green',
+        description:
+            'Seamlessly integrate with Google Maps for accurate and reliable navigation. Get real-time updates and never lose your way when heading to volunteering locations.',
     },
     {
-      title: 'Technology using augment reality',
-      icon: '/tech.svg',
-      variant: 'green',
-      description:
-        'Technology uses augmented reality as a guide to your hiking trail in the forest to the top of the mountain. Already supported by the latest technology without an internet connection',
+        title: 'Instant Notifications and Alerts',
+        icon: '/notifications.png',
+        variant: 'green',
+        description:
+            'Receive timely notifications about weather updates, trail conditions, and important alerts. Stay informed and safe during your journey.',
     },
     {
-      title: 'Many new locations every month',
-      icon: '/location.svg',
-      variant: 'orange',
-      description:
-        'Lots of new locations every month, because we have a worldwide community of climbers who share their best experiences with climbing',
+        title: 'Enhanced Safety with IoT Services',
+        icon: '/iot.png',
+        variant: 'orange',
+        description:
+            'Utilize IoT services for enhanced safety and convenience. Monitor environmental conditions like temprature, humidy and air quality.',
     },
-  ];
-  
+];
