@@ -5,6 +5,8 @@ import { OrganizationLocation, OrganizationLocationSchema } from './location.sch
 @Schema()
 export class OrganizationDetail {
     @Prop({ required: true })
+    liveStremingId: string;
+    @Prop({ required: true })
     aboutUs: string;
     @Prop({ required: true })
     howToVolunteer: string;
