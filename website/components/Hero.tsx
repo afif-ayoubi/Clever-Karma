@@ -17,7 +17,26 @@ const Hero = () => {
                 <p className="regular-16 mt-6 text-gray-30 xl:max-w-[520px]">
                     Be part of a community dedicated to making a difference. Volunteer with us to help preserve nature and enrich lives, all while experiencing incredible adventures.
                 </p>
+                <div className="my-11 flex flex-wrap gap-5">
+                    <div className="flex items-center gap-2">
+                        {Array(5).fill(1).map((_, index) => (
+                            <Image
+                                src="/star.svg"
+                                key={index}
+                                alt="star"
+                                width={24}
+                                height={24}
+                            />
+                        ))}
+                    </div>
+
+                    <p className="bold-16 lg:bold-20 text-blue-70">
+                        120k
+                        <span className="regular-16 lg:regular-20 ml-1">Excellent Reviews</span>
+                    </p>
+                </div>
             </div>
+
         </section>
     )
 }
