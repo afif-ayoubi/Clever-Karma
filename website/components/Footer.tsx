@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { FOOTER_CONTACT_INFO, FOOTER_LINKS, SOCIALS } from '@/constants'
 const Footer = () => {
   return (
     <footer className="flexCenter mb-24">
