@@ -6,7 +6,7 @@ import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volun
 export class LiveStreamingDto {
   
     readonly liveStremingId: string;
-
+    @IsIn([true, false])
     readonly isActivated: boolean;
 
 }
