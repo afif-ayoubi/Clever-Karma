@@ -1,15 +1,14 @@
 'use client'
 
-import Features from "@/components/Features";
-import Footer from "@/components/Footer";
-import GetApp from "@/components/GetApp";
-import Guide from "@/components/Guide";
-import Hero from "@/components/Hero";
-import Locations from "@/components/Locations";
-import Navbar from "@/components/Navbar";
-import { useRouter } from "next/navigation";
+import Features from "@/app/ui/home/Features";
+import Footer from "@/app/ui/home/Footer";
+import GetApp from "@/app/ui/home/GetApp";
+import Guide from "@/app/ui/home/Guide";
+import Hero from "@/app/ui/home/Hero";
+import Locations from "@/app/ui/home/Locations";
+import Navbar from "@/app/ui/home/Navbar";
 export default function Home() {
-  
+
   return (
     <>
       <Navbar />

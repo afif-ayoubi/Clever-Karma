@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import Navbar from "@/app/ui/home/Navbar";
+import Footer from "@/app/ui/home/Footer";
 
 
 export const metadata: Metadata = {
@@ -22,7 +22,7 @@ export default function RootLayout({
 
           {children}
         </main>
-    
+
 
       </body>
     </html>
