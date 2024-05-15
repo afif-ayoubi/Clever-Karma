@@ -84,6 +84,7 @@ export class UsersService {
             role: user.role,
             id: user._id,
             userInfo: user.userInfo,
+            organizationDetail: user.organizationDetail,
         };
     }
 
