@@ -10,6 +10,7 @@ import { USER_ROLES } from "./utils/user_roles_enum";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 import { OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
+import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
 
 @Controller('user')
 export class UsersController {
@@ -20,10 +21,11 @@ export class UsersController {
         return this.userService.buildCreateOrganizationResponse(user);
     }
     @Patch('/update-organization')
-    async updateOrganization(@Request() request: ExpressRequest, @Body() updateOrganizationDto: UpdateOrganizationDto): Promise<OrganizationAuthResponseType> {
+    async updateOrganization(@Request() request: ExpressRequest, @Body() updateOrganizationDto: UpdateOrganizationDto): Promise<OrganizationResponseType> {
+        console.log(updateOrganizationDto);
         const userId = request.user._id.toString();
         const updatedUser = await this.userService.updateOrganization(userId, updateOrganizationDto);
-        return this.userService.buildCreateOrganizationResponse(updatedUser);
+        return this.userService.buildOrganizationResponse(updatedUser);
     }
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {

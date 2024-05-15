@@ -14,6 +14,7 @@ import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import { OrganizationDetailDto, OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
+import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -40,7 +41,10 @@ export class UsersService {
     }
     async updateOrganization(id: string, organizationDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: organizationDto.email });
-        console.log(existingUser._id);
+        console.log(existingUser._id.toString() !== id);
+        console.log( id);
+        console.log(existingUser._id.toString() );
+        
         if (existingUser && existingUser._id.toString() !== id) {
             throw new ModelConflictException(ERROR_MESSAGES.EMAIL_ALREADY_EXISTS);;
         }
@@ -102,6 +106,20 @@ export class UsersService {
             role: user.role,
             id: user._id,
             organizationDetail: user.organizationDetail,
+            token: this.generateJwt(user),
+
+        }
+
+    }
+    buildOrganizationResponse(user: UserDocument): OrganizationResponseType {
+        return {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            role: user.role,
+            id: user._id,
+            organizationDetail: user.organizationDetail,
+
         }
 
     }
