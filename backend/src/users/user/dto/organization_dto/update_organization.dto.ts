@@ -2,7 +2,7 @@ import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, valida
 import { Type } from "class-transformer";
 import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
 
-export class LiveStreamingDto {
+export class UpdateLiveStreamingDto {
     @IsOptional()
     @IsString()
     readonly liveStremingId: string;
@@ -70,8 +70,8 @@ export class UpdateOrganizationDto {
     readonly isActive: boolean;
 
     @ValidateNested({ each: true })
-    @Type(() => LiveStreamingDto)
-    readonly liveStreaming: LiveStreamingDto
+    @Type(() => UpdateLiveStreamingDto)
+    readonly liveStreaming: UpdateLiveStreamingDto
 
     @ValidateNested({ each: true })
     @Type(() => UpdateOrganizationDetailDto)
