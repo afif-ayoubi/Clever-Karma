@@ -4,12 +4,9 @@ import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volun
 
 
 export class LiveStreamingDto {
-    @IsOptional()
-    @IsString()
+  
     readonly liveStremingId: string;
 
-    @IsOptional()
-    @IsIn([true, false])
     readonly isActivated: boolean;
 
 }
@@ -66,7 +63,6 @@ export class OrganizationDto {
 
     readonly isActive: boolean;
     
-    @ValidateNested({ each: true })
     @Type(() => LiveStreamingDto)
     readonly liveStreaming: LiveStreamingDto
 

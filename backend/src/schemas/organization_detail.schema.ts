@@ -18,7 +18,7 @@ export class OrganizationDetail {
     location?: OrganizationLocation;
     @Prop({ required: true, type: VolunteeringSectionSchema })
     VolunteeringSection: VolunteeringSection;
-    @Prop({ type: LiveStreamingSchema})
+    @Prop({ type: LiveStreamingSchema,default: {liveStremingId: Math.floor(1000000 + Math.random() * 9000000).toString(), isActivated: false} })
     liveStreamingL:LiveStreaming
 
 }
