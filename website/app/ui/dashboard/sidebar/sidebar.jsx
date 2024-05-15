@@ -17,7 +17,7 @@ import {
   
   const menuItems = [
     {
-      title: "Pages",
+      title: "Pages",   
       list: [
         {
           title: "Dashboard",
