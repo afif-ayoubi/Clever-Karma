@@ -2,6 +2,17 @@ import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, valida
 import { Type } from "class-transformer";
 import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
 
+
+export class LiveStreamingDto {
+    @IsOptional()
+    @IsString()
+    readonly liveStremingId: string;
+
+    @IsOptional()
+    @IsIn([true, false])
+    readonly isActivated: boolean;
+
+}
 export class LocationDto {
     @IsOptional()
     @IsNumber()
@@ -49,11 +60,15 @@ export class OrganizationDto {
 
     @IsNotEmpty()
     readonly password: string;
-    readonly liveStreamingId: string;
+   
 
     readonly role: string;
 
     readonly isActive: boolean;
+    
+    @ValidateNested({ each: true })
+    @Type(() => LiveStreamingDto)
+    readonly liveStreaming: LiveStreamingDto
 
     @ValidateNested({ each: true })
     @Type(() => OrganizationDetailDto)
