@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/theme/hex_color.dart';
 import '../../../../core/util/snackbar_message.dart';
@@ -63,17 +64,13 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _buildBody(),
-    );
-  }
-
-  Widget _buildBody() {
-    return BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
+        body: BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
       if (state is SuccessUserState) {
         SnackBarMessage.instance.showSuccessSnackBar(
           message: state.message,
           context: context,
         );
+        context.go(Routes.entryPage);
       } else if (state is ErrorUsersState) {
         SnackBarMessage.instance.showErrorSnackBar(
           message: state.message,
@@ -81,46 +78,54 @@ class _AuthPageState extends State<AuthPage> {
         );
       }
     }, builder: (context, state) {
-      if (state is LoadingUsersState) return LoadingWidget();
-      return Container(
-        color: HexColor.primaryColor,
-      );
-    });
+      if (state is LoadingUsersState) {
+        SizedBox(height: 100.sh, child: LoadingWidget());
+      }
+      return _buildBody();
+    }));
+  }
+
+  Widget _buildBody() {
+    return Container(
+      color: HexColor.primaryColor,
+    );
   }
 
   void _toggleAuth(BuildContext context) {
-    Future.delayed(Duration.zero, () {
-      authPopUp(
-        emailController: _emailController,
-        passwordController: _passwordController,
-        confirmPasswordController: _confirmPasswordController,
-        currentAuthData: currentAuthData,
-        context: context,
-        forgotOnPressed: () {
-          context.push(Routes.forgotPasswordRoute);
-        },
-        btnOnPressed: () {
-          User user = User(
-            email: _emailController.text,
-            password: _passwordController.text,
-          );
+    if (!(BlocProvider.of<UsersBloc>(context).state is LoadingUsersState)) {
+      Future.delayed(Duration.zero, () {
+        authPopUp(
+          emailController: _emailController,
+          passwordController: _passwordController,
+          confirmPasswordController: _confirmPasswordController,
+          currentAuthData: currentAuthData,
+          context: context,
+          forgotOnPressed: () {
+            context.push(Routes.forgotPasswordRoute);
+          },
+          btnOnPressed: () {
+            User user = User(
+              email: _emailController.text,
+              password: _passwordController.text,
+            );
 
-          currentAuthData == signIn
-              ? BlocProvider.of<UsersBloc>(context)
-                  .add(LoginUserEvent(user: user))
-              : BlocProvider.of<UsersBloc>(context)
-                  .add(CreateUserEvent(user: user));
-        },
-        btnTextOnPressed: () {
-          Navigator.of(context).pop();
-          print('convert to ${currentAuthData == signIn ? signUp : signIn}');
-          setState(() {
-            currentAuthData = currentAuthData == signIn ? signUp : signIn;
-          });
-          _recallAuth(context);
-        },
-      );
-    });
+            currentAuthData == signIn
+                ? BlocProvider.of<UsersBloc>(context)
+                    .add(LoginUserEvent(user: user))
+                : BlocProvider.of<UsersBloc>(context)
+                    .add(CreateUserEvent(user: user));
+          },
+          btnTextOnPressed: () {
+            Navigator.of(context).pop();
+            print('convert to ${currentAuthData == signIn ? signUp : signIn}');
+            setState(() {
+              currentAuthData = currentAuthData == signIn ? signUp : signIn;
+            });
+            _recallAuth(context);
+          },
+        );
+      });
+    }
   }
 
   void _recallAuth(BuildContext context) {
