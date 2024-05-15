@@ -23,15 +23,8 @@ class UserModel extends User {
      );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
-        'firstName': firstName,
-        'lastName': lastName,
         'email': email,
         'password': password,
-        'dateOfBirth': dateOfBirth,
-        'phoneNumber': phoneNumber,
-        'gender': gender,
-
       };
 
   UserModel.fromUser(User user)
