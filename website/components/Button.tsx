@@ -7,14 +7,14 @@ type ButtonProps = {
   icon?: string;
   variant: string;
   full?: boolean;
-  destination: string;
+  destination?: string;
 
 }
 
 const Button = ({ type, title, icon, variant, full, destination }: ButtonProps) => {
   const router = useRouter();
   const handleClick = () => {
-    router.push(destination);
+    router.push(destination!);
 
 
   }
