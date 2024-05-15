@@ -1,6 +1,7 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { VolunteeringSection } from './volunteering_opportunity.schema';
+import { VolunteeringSection, VolunteeringSectionSchema } from './volunteering_opportunity.schema';
 import { OrganizationLocation, OrganizationLocationSchema } from './location.schema';
+import { LiveStreaming, LiveStreamingSchema } from './live_streaming.schema';
 
 @Schema()
 export class OrganizationDetail {
@@ -15,8 +16,10 @@ export class OrganizationDetail {
     isActive: boolean;
     @Prop({ type: OrganizationLocationSchema, })
     location?: OrganizationLocation;
-    @Prop({ required: true, type: VolunteeringSection })
+    @Prop({ required: true, type: VolunteeringSectionSchema })
     VolunteeringSection: VolunteeringSection;
+    @Prop({ type: LiveStreamingSchema})
+    liveStreamingL:LiveStreaming
 
 }
 export const OrganizationDetailSchema = SchemaFactory.createForClass(OrganizationDetail);
