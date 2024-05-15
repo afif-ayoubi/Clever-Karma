@@ -2,7 +2,10 @@
 import React from 'react'
 import '../ui/global.css'
 import Card from "../ui/dashboard/card/card";
-import styles from '../ui/dashboard/dashboard.module.css'
+import Chart from "../ui/dashboard/chart/chart";
+import styles from "../ui/dashboard/dashboard.module.css";
+import Rightbar from "../ui/dashboard/rightbar/rightbar";
+import Transactions from "../ui/dashboard/transactions/transactions";
 const Dashboard = () => {
   return (
     <div>
@@ -10,9 +13,15 @@ const Dashboard = () => {
         <Card />
         <Card />
         <Card />
-      </div>  
+        </div>
+        <Transactions />
+        <Chart />
+      </div>
+      <div className={styles.side}>
+        <Rightbar />
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Dashboard
+export default Dashboard;
