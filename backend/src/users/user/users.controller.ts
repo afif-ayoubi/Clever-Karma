@@ -9,24 +9,25 @@ import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
 import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 import { OrganizationDto } from "./dto/organization_dto/organization.dto";
-import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
 import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
+import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
 
 @Controller('user')
 export class UsersController {
     constructor(private userService: UsersService) { }
     @Post('/create-organization')
-    async createOrganization(@Body() organizationDto: OrganizationDto): Promise<OrganizationAuthResponseType> {
+    async createOrganization(@Body() organizationDto: OrganizationDto): Promise<UserAuthResponseType> {
         const user = await this.userService.createOrganization({ ...organizationDto, role: USER_ROLES.ORGANIZATION });
-        return this.userService.buildCreateOrganizationResponse(user);
+        return this.userService.buildAuthUserResponse(user);
     }
     @Patch('/update-organization')
     async updateOrganization(@Request() request: ExpressRequest, @Body() updateOrganizationDto: UpdateOrganizationDto): Promise<OrganizationResponseType> {
         console.log(updateOrganizationDto);
         const userId = request.user._id.toString();
         const updatedUser = await this.userService.updateOrganization(userId, updateOrganizationDto);
-        return this.userService.buildOrganizationResponse(updatedUser);
+        return this.userService.buildUserResponse(updatedUser);
     }
+    
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
         const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.USER, });

@@ -11,10 +11,8 @@ import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
-import { OrganizationDetailDto, OrganizationDto } from "./dto/organization_dto/organization.dto";
-import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
-import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
-import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
+import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
+
 
 export type UserDocument = HydratedDocument<User>;
 
@@ -41,8 +39,7 @@ export class UsersService {
     }
     async updateOrganization(id: string, organizationDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: organizationDto.email });
-        console.log(existingUser._id.toString() !== id);
-        console.log( id);
+
         console.log(existingUser._id.toString() );
         
         if (existingUser && existingUser._id.toString() !== id) {
@@ -55,8 +52,11 @@ export class UsersService {
 
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
+        console.log(user.password);
+        console.log(loginDto.password); 
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         const isPasswordCorrect = await compare(loginDto.password, user.password);
+        console.log(isPasswordCorrect);
         if (!isPasswordCorrect) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.INCORRECT_PASSWORD);
         return user;
     }
@@ -96,34 +96,13 @@ export class UsersService {
             role: user.role,
             token: this.generateJwt(user),
             id: user._id,
+            userInfo: user.userInfo,
+            organizationDetail: user.organizationDetail,
 
         };
     }
-    buildCreateOrganizationResponse(user: UserDocument): OrganizationAuthResponseType {
-        return {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-            id: user._id,
-            organizationDetail: user.organizationDetail,
-            token: this.generateJwt(user),
 
-        }
-
-    }
-    buildOrganizationResponse(user: UserDocument): OrganizationResponseType {
-        return {
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            role: user.role,
-            id: user._id,
-            organizationDetail: user.organizationDetail,
-
-        }
-
-    }
+  
     generateJwt(user: UserDocument): string {
         const userId = user._id;
         return sign({ userId: userId }, 'JWT_SECRET');
