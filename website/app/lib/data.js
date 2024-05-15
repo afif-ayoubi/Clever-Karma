@@ -15,7 +15,7 @@ export const cards = [
     },
     {
       id: 3,
-      title: "Totoal Volunteering Opportunities",
+      title: "Total Volunteering Opportunities",
       number: 3,
       change: 18,
     },
