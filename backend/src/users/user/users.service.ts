@@ -31,7 +31,7 @@ export class UsersService {
         return createdUser.save();
     }
 
-    async createOrganization(organizationDto: UpdateOrganizationDto): Promise<UserDocument> {
+    async createOrganization(organizationDto: OrganizationDto): Promise<UserDocument> {
         const organization = (await this.userModel.findOne({ email: organizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
 
