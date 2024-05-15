@@ -1,10 +1,18 @@
 'use client'
 import React from 'react'
 import '../ui/global.css'
-const page = () => {
+import Card from "../ui/dashboard/card/card";
+import styles from '../ui/dashboard/dashboard.module.css'
+const Dashboard = () => {
   return (
-    <div>page</div>
+    <div>
+      <div className={styles.cards}>
+        <Card />
+        <Card />
+        <Card />
+      </div>  
+    </div>
   )
 }
 
-export default page
+export default Dashboard
