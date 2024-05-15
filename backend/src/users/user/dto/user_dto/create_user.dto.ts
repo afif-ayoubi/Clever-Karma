@@ -4,13 +4,7 @@ import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, valida
 
 
 export class CreateUserDto {
-    @IsNotEmpty()
-    @IsString()
-    readonly firstName: string;
 
-    @IsNotEmpty()
-    @IsString()
-    readonly lastName: string;
 
     @IsNotEmpty()
     @IsEmail({ require_tld: true }, { message: "Invalid email format" })
