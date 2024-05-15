@@ -1,4 +1,6 @@
 import Card from "../ui/dashboard/card/card";
+import { cards } from "../lib/data";
+
 import Chart from "../ui/dashboard/chart/chart";
 import styles from "../ui/dashboard/dashboard.module.css";
 import Rightbar from "../ui/dashboard/rightbar/rightbar";
