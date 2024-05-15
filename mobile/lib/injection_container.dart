@@ -14,6 +14,7 @@ import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'core/common_domain/repository/base_repo_impl.dart';
 import 'core/constants/constants.dart';
 import 'features/auth/data/datasources/user_local_data_source.dart';
 import 'features/auth/data/models/user_model.dart';
@@ -43,7 +44,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetUserUseCase(sl()));
 
   // Repository
-  sl.registerLazySingleton<BaseRepository>(() => UsersRepositoryImpl(
+  sl.registerLazySingleton<BaseRepository>(() => BaseRepositoryImpl());
+  sl.registerLazySingleton<BaseRepository<User>>(() => UsersRepositoryImpl(
         remoteDataSource: sl(),
         localDataSource: sl(),
         networkInfo: sl(),
@@ -69,6 +71,7 @@ Future<void> init() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   final userBox = await Hive.openBox<UserModel>(USER_BOX);
+  sl.registerLazySingleton(() => userBox);
   sl.registerLazySingleton(() => sharedPreferences);
   sl.registerFactory(() => http.Client());
   sl.registerLazySingleton(() => InternetConnectionChecker());
