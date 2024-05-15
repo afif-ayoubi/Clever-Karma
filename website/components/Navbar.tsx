@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import React from 'react'
 import Image from "next/image"
@@ -19,7 +21,7 @@ const Navbar = () => {
                     icon="/user.svg"
                     variant="btn_dark_green"
                 />
-                   <Button
+                <Button
                     type="button"
                     title="Register"
                     icon="/user.svg"
