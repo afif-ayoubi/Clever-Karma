@@ -22,14 +22,7 @@ export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>,
     ) { }
 
-    async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
-        const user = (await this.userModel.findOne({ email: createUserDto.email }));
-        if (user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
-
-        const createdUser = new this.userModel(createUserDto);
-        return createdUser.save();
-    }
-
+ 
     async createOrganization(organizationDto: OrganizationDto): Promise<UserDocument> {
         const organization = (await this.userModel.findOne({ email: organizationDto.email }));
         if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
@@ -49,7 +42,6 @@ export class UsersService {
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         return user;
     }
-
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
         console.log(user.password);
@@ -63,6 +55,15 @@ export class UsersService {
     getUsers(): Promise<User[]> {
         return this.userModel.find();
     }
+    async createUser(createUserDto: CreateUserDto): Promise<UserDocument> {
+        const user = (await this.userModel.findOne({ email: createUserDto.email }));
+        if (user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
+
+        const createdUser = new this.userModel(createUserDto);
+        return createdUser.save();
+    }
+
+
 
     async updateUser(id: string, updateUserDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: updateUserDto.email });

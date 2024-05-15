@@ -42,7 +42,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         sharedPreferences.setString(TOKEN, token);
         return Future.value(unit);
       } else if (response.statusCode == 422) {
-        throw EmailAlreadyExistsException();
+        throw EmailAlreadyTakenException();
       } else {
         throw ServerException();
       }
