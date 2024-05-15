@@ -30,10 +30,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   @override
   Future<Unit> createUser(UserModel user) async {
     final body = user.toJson();
-    print("User: $body");
     try {
       final response = await client.post(
-        Uri.parse('http://10.0.2.2:3000//user/create'),
+        Uri.parse('$BASE_URL/user/create'),
         body: body,
       );
       if (response.statusCode == 201) {
@@ -76,13 +75,17 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   Future<Unit> login(UserModel user) async {
     final body = user.toJson();
     try {
-      final response =
-          await client.post(Uri(path: '$BASE_URL/user'), body: body);
+      final response = await client.post(
+        Uri.parse('$BASE_URL/user/login'),
+        body: body,
+      );
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
         final String token = jsonResponse[TOKEN];
         sharedPreferences.setString(TOKEN, token);
         return Future.value(unit);
+      } else if (response.statusCode == 422) {
+        throw WrongCredentialException();
       } else {
         throw ServerException();
       }
