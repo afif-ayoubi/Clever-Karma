@@ -22,7 +22,7 @@ export class UsersController {
     @Patch('/update-organization')
     async updateOrganization(@Request() request: ExpressRequest, @Body() updateOrganizationDto: UpdateOrganizationDto): Promise<OrganizationAuthResponseType> {
         const userId = request.user._id.toString();
-        const updatedUser = await this.userService.updateUser(userId, updateOrganizationDto);
+        const updatedUser = await this.userService.updateOrganization(userId, updateOrganizationDto);
         return this.userService.buildCreateOrganizationResponse(updatedUser);
     }
     @Post('/create')
