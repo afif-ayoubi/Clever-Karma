@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile/core/util/location_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'core/constants/constants.dart';
 import 'features/auth/domain/entities/user.dart';
@@ -24,5 +27,7 @@ void main() async {
   Hive.registerAdapter(UserAdapter());
   FlutterNativeSplash.remove();
   await di.init();
+  await LocationService.determinePosition();
   runApp(const MyApp());
 }
+

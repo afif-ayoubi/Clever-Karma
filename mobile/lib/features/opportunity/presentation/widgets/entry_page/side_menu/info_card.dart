@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/core/constants/font_manager.dart';
 
 import '../../../../../../core/theme/hex_color.dart';
 
@@ -10,7 +11,7 @@ class InfoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ListTile(
+    return  ListTile(
       leading: CircleAvatar(
         backgroundColor: Colors.white24,
         child: Icon(
@@ -22,13 +23,15 @@ class InfoCard extends StatelessWidget {
         'Afif Ayoubi',
         style: TextStyle(
           color: HexColor.whiteColor,
+          fontWeight: FontWeightManager.semiBold
         ),
 
       ),
       subtitle: Text(
         'Potential Volunteer',
         style: TextStyle(
-          color: HexColor.textInputColor,
+          fontSize: FontSize.s14,
+          color: HexColor.whiteColor,
         ),
       ),
     );

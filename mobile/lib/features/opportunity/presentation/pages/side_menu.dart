@@ -33,6 +33,7 @@ class _SideMenuState extends State<SideMenu> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Gap(10.h),
                 const InfoCard(),
                 Gap(50.h),
                 Padding(

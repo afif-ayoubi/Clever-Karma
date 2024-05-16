@@ -1,5 +1,6 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationService {
   static Future<LatLng?> determinePosition() async {
@@ -30,6 +31,12 @@ class LocationService {
 
     final location = await Geolocator.getCurrentPosition();
     final currentPosition = LatLng(location.latitude, location.longitude);
+
+    // Save the current position using SharedPreferences
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('currentLat', currentPosition.latitude);
+    await prefs.setDouble('currentLng', currentPosition.longitude);
+
     return currentPosition;
   }
 }
