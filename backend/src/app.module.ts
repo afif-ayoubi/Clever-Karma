@@ -2,11 +2,27 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './users/users.module';
 import { AuthMiddleware } from './users/middlewares/auth.middleware';
-import { UsersService } from './users/user/users.service';
-
+import { MailerModule } from '@nestjs-modules/mailer';
+import { ConfigModule } from '@nestjs/config';
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://localhost/backend'),
-    UserModule
+  imports: [MongooseModule.forRoot(process.env.CONNECTION_STRING),
+    UserModule,
+    ConfigModule.forRoot(
+      {
+        cache:true,
+        isGlobal:true,
+        
+      }
+    ),
+    MailerModule.forRoot({
+      transport:{
+        host:'smtp.gmail.com',
+        auth:{
+          user:process.env.EMAIL,
+          pass:process.env.PASSWORD
+        }
+      }
+    })
   ],
   controllers: [],
   providers: [],

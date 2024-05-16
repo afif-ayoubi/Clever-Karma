@@ -2,6 +2,7 @@
 /dist
 /node_modules
 /build
+.env
 clever-karma-152f3-firebase-adminsdk-eilf9-8c028bfeec.json
 # Logs
 logs

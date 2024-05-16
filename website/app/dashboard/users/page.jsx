@@ -1,10 +1,10 @@
-import React from 'react'
 import '../../ui/global.css'
+import styles from "@/app/ui/dashboard/users/users.module.css";
 
-const page = () => {
+const UserPage = () => {
   return (
-    <div>page</div>
+    <div>UserPage</div>
   )
 }
 
-export default page
+export default UserPage
