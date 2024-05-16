@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mobile/core/extensions/text_theme.dart';
+
+import '../widgets/org_profle_page/org_profile_detail_widget.dart';
 
 class OrganizationProfilePage extends StatefulWidget {
   const OrganizationProfilePage({super.key});
@@ -19,13 +20,6 @@ class _OrganizationProfilePageState extends State<OrganizationProfilePage> {
     );
   }
   Widget _buildWidget(){
-    return Padding(
-      padding:  EdgeInsets.all(20).r,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-        ],
-      ),
-    );
+    return OrgProfileDetailWidget();
   }
 }
