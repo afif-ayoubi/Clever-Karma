@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
-import '../../core/app_theme.dart';
 
 class AnimatedBar extends StatelessWidget {
   const AnimatedBar({
