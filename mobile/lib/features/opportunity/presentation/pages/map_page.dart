@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 
+import '../../../../core/util/location_service.dart';
 import '../../core/constants/map.dart';
 import '../widgets/map_page/map_form.dart';
 
@@ -34,9 +35,11 @@ class _MapPageState extends State<MapPage> {
   }
 
   Future<void> initializeMap() async {
-    await _determinePosition();
-    // final coordinates = await fetchPolylinePoints();
-    // generatePolyLineFromPoints(coordinates);
+    currentPosition = await LocationService.determinePosition();
+    if (currentPosition != null) {
+      final coordinates = await fetchPolylinePoints();
+      generatePolyLineFromPoints(coordinates);
+    }
   }
 
   @override
