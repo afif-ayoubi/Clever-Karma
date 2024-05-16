@@ -28,10 +28,12 @@ class _GraphPageState extends State<GraphPage> {
 
     dbRef.onChildAdded.listen((event) {
       _updateLists(event.snapshot.value);
+      print(event.snapshot.value);
     });
 
     dbRef.onChildChanged.listen((event) {
       _updateLists(event.snapshot.value);
+      print(event.snapshot.value);
     });
   }
 
@@ -41,9 +43,9 @@ class _GraphPageState extends State<GraphPage> {
       backgroundColor: Colors.transparent,
       body: SafeArea(
           child: _buildWidget(
-            dbRef: dbRef,
-            list: humidityList,
-          )),
+        dbRef: dbRef,
+        list: humidityList,
+      )),
     );
   }
 
@@ -55,10 +57,7 @@ class _GraphPageState extends State<GraphPage> {
         ppmList.add(data['ppm']);
         mq2ValueList.add(data['mq2Value']);
 
-        if (humidityList.length > 7) humidityList.removeAt(0);
-        if (temperatureList.length > 7) temperatureList.removeAt(0);
-        if (ppmList.length > 7) ppmList.removeAt(0);
-        if (mq2ValueList.length > 7) mq2ValueList.removeAt(0);
+
       });
     }
   }
@@ -75,7 +74,9 @@ class _buildWidget extends StatelessWidget {
   final Query dbRef;
 
   @override
-  Widget build(BuildContext context,) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30).r,
       child: Column(
@@ -92,14 +93,15 @@ class _buildWidget extends StatelessWidget {
                   Animation<double> animation, int index) {
                 if (!snapshot.exists || snapshot.value == null)
                   return LoadingWidget();
-                List<String> leftTitles = _generateLeftTitles(2);
+                List<String> leftTitles = _generateLeftTitles(3);
 
                 return Column(
                   children: [
                     Gap(30.h),
                     SizedBox(
-                        height: 100.sh,
-                        child: LineChartWidget(list: list, leftTitles: leftTitles)),
+                        height: 400.h,
+                        child: LineChartWidget(
+                            list: list, leftTitles: leftTitles)),
                   ],
                 );
               },
@@ -112,15 +114,14 @@ class _buildWidget extends StatelessWidget {
 }
 
 List<String> _generateLeftTitles(int index) {
-
   List<String> leftTitles = [];
 
   if (index == 0) {
-    leftTitles = ['0','10', '20', '30', '40', '50'];
+    leftTitles = ['0', '40', '60', '80', '100', '120'];
   } else if (index == 1) {
-    leftTitles = ['0','5', '10', '15', '20', '25'];
-  }else if(index==2){
-    leftTitles = ['0','400', '1000', '2000', '3000', '4000'];
+    leftTitles = ['0', '5', '10', '15', '20', '25'];
+  } else if (index == 2) {
+    leftTitles = ['0', '400', '1000', '2000', '3000', '4000'];
   } else {
     leftTitles = ['0', '10', '20', '30', '40', '50'];
   }
