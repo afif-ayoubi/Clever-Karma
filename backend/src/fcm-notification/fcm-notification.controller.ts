@@ -3,16 +3,16 @@ import { FcmNotificationService } from './fcm-notification.service';
 
 @Controller('firebase')
 export class FcmNotificationController {
-  constructor(private readonly sendingNotificationService: FcmNotificationService) {}
+  constructor(private readonly fcmNotificationService: FcmNotificationService) {}
 
   @Post('send-notification')
-  async sendNotification(@Body() body: { token: string, title: string, notificationBody: string }) {
-    const { token, title, notificationBody } = body;
-    return await this.sendingNotificationService.sendNotificationToOneUser(token, title, notificationBody);
+  async sendNotification(@Body() body: { title: string, notificationBody: string }) {
+    const { title, notificationBody } = body;
+    return await this.fcmNotificationService.sendNotificationToAllUsers(title, notificationBody);
   }
+
   @Get('get-notifications')
   async getNotifications(@Query('token') token: string) {
-    return await this.sendingNotificationService.getNotificationsByUserToken(token);
+    return await this.fcmNotificationService.getNotificationsByUserToken(token);
   }
 }
-

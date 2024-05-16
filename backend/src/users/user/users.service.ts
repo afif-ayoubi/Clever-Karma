@@ -87,6 +87,7 @@ export class UsersService {
             id: user._id,
             userInfo: user.userInfo,
             organizationDetail: user.organizationDetail,
+            notifications: user.notifications,
         };
     }
 

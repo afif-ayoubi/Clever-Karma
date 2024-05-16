@@ -11,6 +11,7 @@ admin.initializeApp({
     projectId: process.env.FIREBASE_PROJECT_ID,
     clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
     privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+  
   }),
 });
 
@@ -21,9 +22,8 @@ export class FcmNotificationService {
     @InjectModel(User.name) private userModel: Model<User>
   ) {}
 
-  async sendNotificationToOneUser(token: string, title: string, body: string) {
+  async sendNotificationToAllUsers(title: string, body: string) {
     const payload = {
-      token: token,
       notification: {
         title: title,
         body: body,
@@ -35,23 +35,19 @@ export class FcmNotificationService {
     };
 
     try {
-      await admin.messaging().send(payload);
-
-      const notification = new this.notificationModel({
+      const users = await this.userModel.find().select('notifications.fcm_token');
+      const tokens = users.flatMap(user => user.notifications.map(notification => notification.fcm_token));
+      console.log(tokens);
+      const response = await admin.messaging().sendToDevice(tokens, payload);
+      const notifications = tokens.map(token => ({
         fcm_token: token,
         title: title,
         body: body,
         created_by: 'system' 
-      });
-      const user = await this.userModel.findOne({ 'notifications.fcm_token': token });
-      if (user) {
-          user.notifications.push(notification);
-          await user.save();
-      }
+      }));
+      await this.notificationModel.insertMany(notifications);
 
-      return { success: true };
-
-
+      return { success: true, response };
     } catch (error) {
       return { success: false, error: error.message };
     }
@@ -68,5 +64,5 @@ export class FcmNotificationService {
       return { success: false, error: error.message };
     }
   }
-}
 
+}
