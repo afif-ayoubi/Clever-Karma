@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
+import '../../../opportunity/domain/entities/opportunity.dart';
+
 @HiveType(typeId: 1)
 class Organization extends HiveObject with EquatableMixin {
   @HiveField(0)
@@ -24,7 +26,7 @@ class Organization extends HiveObject with EquatableMixin {
   @HiveField(9)
   final bool LiveStreamingIsActivated;
   @HiveField(10)
-
+  final Opportunity opportunity;
 
   Organization({
     this.id,
@@ -32,6 +34,12 @@ class Organization extends HiveObject with EquatableMixin {
     required this.lastName,
     required this.email,
     required this.password,
+    required this.aboutUs,
+    required this.howToVolunteer,
+    required this.image,
+    required this.liveStreamingId,
+    required this.LiveStreamingIsActivated,
+    required this.opportunity,
   });
 
   @override

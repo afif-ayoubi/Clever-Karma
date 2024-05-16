@@ -22,6 +22,7 @@ class _OrganizationProfilePageState extends State<OrganizationProfilePage> {
     return Padding(
       padding:  EdgeInsets.all(20).r,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         ],
       ),
