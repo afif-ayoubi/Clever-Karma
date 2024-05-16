@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { FcmNotificationService } from './fcm-notification.service';
 
 @Controller('firebase')
@@ -10,4 +10,9 @@ export class FcmNotificationController {
     const { token, title, notificationBody } = body;
     return await this.sendingNotificationService.sendNotificationToOneUser(token, title, notificationBody);
   }
+  @Get('get-notifications')
+  async getNotifications(@Query('token') token: string) {
+    return await this.sendingNotificationService.getNotificationsByUserToken(token);
+  }
 }
+

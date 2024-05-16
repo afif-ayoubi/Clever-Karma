@@ -56,4 +56,17 @@ export class FcmNotificationService {
       return { success: false, error: error.message };
     }
   }
+  async getNotificationsByUserToken(token: string) {
+    try {
+      const user = await this.userModel.findOne({ 'notifications.fcm_token': token }).populate('notifications');
+      if (user) {
+        return { success: true, notifications: user.notifications };
+      } else {
+        return { success: false, message: 'User not found' };
+      }
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
+  }
 }
+
