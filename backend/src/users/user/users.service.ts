@@ -12,7 +12,6 @@ import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
-import 'dotenv/config';
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -45,8 +44,8 @@ export class UsersService {
     }
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
-        console.log(user.password);
-        console.log(loginDto.password); 
+        console.log('hello');
+     
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         const isPasswordCorrect = await compare(loginDto.password, user.password);
         console.log(isPasswordCorrect);
