@@ -5,12 +5,13 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class MapBtn extends StatelessWidget {
-  const MapBtn({super.key});
+  final void Function()? onPress;
+  const MapBtn({super.key, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPress,
       style: ElevatedButton.styleFrom(
           backgroundColor: HexColor.secondaryColor,
           shape: RoundedRectangleBorder(
