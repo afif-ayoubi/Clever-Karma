@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mobile/routes/class_routes.dart';
 
 import '../../../../domain/entities/opportunity.dart';
 import 'opportunity_card.dart';
@@ -50,21 +52,8 @@ class OpportunityView extends StatelessWidget {
                 onSwipeUp: () => roomSelectorNotifier.value = index,
                 onSwipeDown: () => roomSelectorNotifier.value = -1,
                 onTap: () async {
-                  // if (isSelected) {
-                  //   await Navigator.push(
-                  //     context,
-                  //     PageRouteBuilder<void>(
-                  //       transitionDuration: const Duration(milliseconds: 800),
-                  //       reverseTransitionDuration:
-                  //       const Duration(milliseconds: 800),
-                  //       pageBuilder: (_, animation, __) => FadeTransition(
-                  //         opacity: animation,
-                  //         child: RoomDetailScreen(opportunity: opportunity),
-                  //       ),
-                  //     ),
-                  //   );
-                  //   roomSelectorNotifier.value = -1;
-                  // }
+
+                 context.push(Routes.organizationsPage);
                 },
               ),
             );
