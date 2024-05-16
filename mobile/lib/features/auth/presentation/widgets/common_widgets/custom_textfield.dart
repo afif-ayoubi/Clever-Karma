@@ -5,7 +5,7 @@ import 'package:mobile/core/theme/hex_color.dart';
 
 class CustomTextField extends StatefulWidget {
   final String? labelText;
-  final String hintText;
+  final String? hintText;
   final TextEditingController controller;
   final FormFieldValidator<String?>? validator;
   final bool? showVisibility;
@@ -13,6 +13,7 @@ class CustomTextField extends StatefulWidget {
   final bool? enable;
   final bool keyboardNumber;
   final bool isDate;
+  final int? maxLines;
 
   const CustomTextField(
       {super.key,
@@ -22,8 +23,9 @@ class CustomTextField extends StatefulWidget {
       this.isDate = false,
       required this.controller,
       this.onTap,
-      required this.hintText,
+      this.hintText,
       this.showVisibility = false,
+      this.maxLines,
       this.validator});
 
   @override
@@ -91,6 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         : null,
               ),
               validator: widget.validator,
+              maxLines: widget.maxLines,
             ),
           ),
         ],
