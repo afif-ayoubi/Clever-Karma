@@ -77,7 +77,7 @@ class _OrgEntryPageState extends State<OrgEntryPage>
     return Scaffold(
       body: SafeArea(
         child: pages[pageIndex],
-      
+
       ),
       bottomNavigationBar: Transform.translate(
         offset: Offset(0, 100 * animation.value),
