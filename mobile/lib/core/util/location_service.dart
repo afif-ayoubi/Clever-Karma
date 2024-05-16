@@ -32,7 +32,6 @@ class LocationService {
     final location = await Geolocator.getCurrentPosition();
     final currentPosition = LatLng(location.latitude, location.longitude);
 
-    // Save the current position using SharedPreferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setDouble('currentLat', currentPosition.latitude);
     await prefs.setDouble('currentLng', currentPosition.longitude);
