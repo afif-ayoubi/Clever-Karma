@@ -1,6 +1,14 @@
+import { Type } from "class-transformer";
 import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, validate } from "class-validator";
 
+export class NotificationsDto {
+    @IsNotEmpty()
+    readonly fcm_token: string;
 
+
+
+
+}
 
 
 export class CreateUserDto {
@@ -13,7 +21,12 @@ export class CreateUserDto {
     @IsNotEmpty()
     readonly password: string;
 
+    @IsNotEmpty()
+    @ValidateNested({ each: true })
+    @Type(() => NotificationsDto)
+    readonly notifications: NotificationsDto;
+
     readonly role: string;
 
-  
+
 }
