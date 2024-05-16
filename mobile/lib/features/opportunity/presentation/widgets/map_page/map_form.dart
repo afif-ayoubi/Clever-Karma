@@ -9,13 +9,11 @@ class MapForm extends StatefulWidget {
     required LatLng center,
     required this.currentPosition,
     required LatLng tripoliCoordinates,
-    required this.polylines,
   }) : _center = center, _tripoliCoordinates = tripoliCoordinates;
 
   final LatLng _center;
   final LatLng? currentPosition;
   final LatLng _tripoliCoordinates;
-  final Map<PolylineId, Polyline> polylines;
 
   @override
   State<MapForm> createState() => _MapFormState();

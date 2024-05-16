@@ -20,7 +20,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   static final GoRouter goRouter = GoRouter(
-      initialLocation: Routes.entryPage,
+      initialLocation: Routes.orgEntryPage,
       navigatorKey: navigatorKey,
       routes: [
         GoRoute(
@@ -53,9 +53,7 @@ class AppRoutes {
         GoRoute(
             path: "/live",
             builder: ((context, state) => const LiveStreaming())),
-        GoRoute(
-            path: Routes.graphPage,
-            builder: ((context, state) => const LineChartWidget())),
+
         GoRoute(
             path: Routes.orgEntryPage,
             builder: ((context, state) => const OrgEntryPage())),

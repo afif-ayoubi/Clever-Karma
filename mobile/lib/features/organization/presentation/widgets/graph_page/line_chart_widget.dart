@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 
 class LineChartWidget extends StatefulWidget {
-  const LineChartWidget({super.key});
+  final List<dynamic> list;
+  final List<String> leftTitles;
+
+  const LineChartWidget({super.key, required this.list, required this.leftTitles});
 
   @override
   State<LineChartWidget> createState() => _LineChartWidgetState();
@@ -32,7 +35,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
                 bottom: 12,
               ),
               child: LineChart(
-                showAvg ? avgData() : mainData(),
+                showAvg ? avgData(widget.list) : mainData(widget.list),
               ),
             ),
           ),
@@ -82,54 +85,28 @@ class _LineChartWidgetState extends State<LineChartWidget> {
       fontWeight: FontWeight.bold,
       fontSize: 15,
     );
-    String text;
-    switch (value.toInt()) {
-      case 1:
-        text = '10';
-        break;
-      case 2:
-        text = '20';
-        break;
-      case 3:
-        text = '30';
-      case 4:
-        text = '40';
-      case 5:
-        text = '50';
-        break;
-      default:
-        return Container();
+    if (value.toInt() >= 0 && value.toInt() < widget.leftTitles.length) {
+      return Text(widget.leftTitles[value.toInt()], style: style, textAlign: TextAlign.left);
+    } else {
+      return Container();
     }
-
-    return Text(text, style: style, textAlign: TextAlign.left);
   }
 
-  LineChartData mainData() {
-    final list = [];
+  LineChartData mainData(List<dynamic> list) {
     double getValue(int index) {
-      if (  index < list.length) {
-        return (double.parse(list[index].temperature.toString()) / 10);
+      if (index < list.length) {
+        return (double.parse(list[index].toString()) / 10);
       }
       return 0.0; // Replace null with 0
     }
+
     return LineChartData(
       gridData: FlGridData(
         show: true,
         drawVerticalLine: true,
         horizontalInterval: 1,
         verticalInterval: 1,
-        getDrawingHorizontalLine: (value) {
-          return const FlLine(
-            color: HexColor.primaryColor,
-            strokeWidth: 1,
-          );
-        },
-        getDrawingVerticalLine: (value) {
-          return const FlLine(
-            color: HexColor.primaryColor,
-            strokeWidth: 1,
-          );
-        },
+
       ),
       titlesData: FlTitlesData(
         show: true,
@@ -168,7 +145,7 @@ class _LineChartWidgetState extends State<LineChartWidget> {
         LineChartBarData(
           spots: [
             FlSpot(0, getValue(0)),
-            FlSpot(2.6,  getValue(1)),
+            FlSpot(2.6, getValue(1)),
             FlSpot(4.9, getValue(2)),
             FlSpot(6.8, getValue(3)),
             FlSpot(8, getValue(4)),
@@ -197,13 +174,12 @@ class _LineChartWidgetState extends State<LineChartWidget> {
     );
   }
 
-  LineChartData avgData() {
-    final list = [];
+  LineChartData avgData(List<dynamic> list) {
     final average = (list[0].temperature +
-        list[1].temperature +
-        list[2].temperature +
-        list[3].temperature +
-        list[4].temperature) /
+            list[1].temperature +
+            list[2].temperature +
+            list[3].temperature +
+            list[4].temperature) /
         50;
     return LineChartData(
       lineTouchData: const LineTouchData(enabled: false),
@@ -252,7 +228,16 @@ class _LineChartWidgetState extends State<LineChartWidget> {
       ),
       borderData: FlBorderData(
         show: true,
-        border: Border.all(color: const Color(0xff37434d)),
+        border: Border(
+          left: BorderSide(
+            color: const Color(0xff37434d),
+            width: 1,
+          ),
+          right: BorderSide(
+            color: const Color(0xff37434d),
+            width: 1,
+          ),
+        ),
       ),
       minX: 0,
       maxX: 11,
