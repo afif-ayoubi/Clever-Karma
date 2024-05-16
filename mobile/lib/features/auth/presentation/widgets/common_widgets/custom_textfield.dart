@@ -13,7 +13,7 @@ class CustomTextField extends StatefulWidget {
   final bool? enable;
   final bool keyboardNumber;
   final bool isDate;
-  final int? maxLines;
+  final double? maxLines;
 
   const CustomTextField(
       {super.key,
@@ -43,7 +43,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         children: [
           Text(widget.labelText ?? "", style: context.bodyMedium),
           SizedBox(
-            height: 45.h,
+            height:widget.maxLines !=null? 100.h : 45.h,
             child: TextFormField(
               readOnly: widget.isDate ? true : false,
               enabled: widget.enable,
@@ -93,7 +93,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
                         : null,
               ),
               validator: widget.validator,
-              maxLines: widget.maxLines,
+              maxLines: widget.maxLines?.toInt(),
             ),
           ),
         ],
