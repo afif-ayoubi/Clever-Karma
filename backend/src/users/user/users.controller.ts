@@ -14,7 +14,9 @@ import { UpdateOrganizationDto } from "./dto/organization_dto/update_organizatio
 
 @Controller('user')
 export class UsersController {
-    constructor(private userService: UsersService) { }
+    constructor(private userService: UsersService,
+     
+    ) { }
     @Post('/create-organization')
     async createOrganization(@Body() organizationDto: OrganizationDto): Promise<UserAuthResponseType> {
         const user = await this.userService.createOrganization({ ...organizationDto, role: USER_ROLES.ORGANIZATION });
@@ -27,7 +29,7 @@ export class UsersController {
         const updatedUser = await this.userService.updateOrganization(userId, updateOrganizationDto);
         return this.userService.buildUserResponse(updatedUser);
     }
-    
+
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
         const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.USER, });
