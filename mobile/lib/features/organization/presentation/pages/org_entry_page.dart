@@ -7,6 +7,123 @@ import '../../../../core/util/rive_utils.dart';
 import '../widgets/org_entry_page/animated_bar.dart';
 import 'graph_page.dart';
 import 'org_profile_page.dart';
+
+class OrgEntryPage extends StatefulWidget {
+  const OrgEntryPage({Key? key}) : super(key: key);
+
+  @override
+  State<OrgEntryPage> createState() => _OrgEntryPageState();
+}
+
+class _OrgEntryPageState extends State<OrgEntryPage>
+    with SingleTickerProviderStateMixin {
+  RiveAsset selectedBottomNav = bottomNavs.first;
+
+  late Animation<double> animation;
+  late AnimationController _animationController;
+  int pageIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 200),
+    );
+    animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.fastOutSlowIn,
+    ));
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  List<Widget> pages = [
+    GraphPage(),
+    OrganizationProfilePage(),
+    OrganizationProfilePage(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: pages[pageIndex],
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Material(
+          color: Colors.transparent,
+          borderRadius: const BorderRadius.all(Radius.circular(24)),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            margin: const EdgeInsets.symmetric(horizontal: 24),
+            decoration: const BoxDecoration(
+              color: HexColor.primaryColor,
+              borderRadius: BorderRadius.all(Radius.circular(24)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(
+                bottomNavs.length,
+                    (index) => GestureDetector(
+                  onTap: () {
+                    bottomNavs[index].input!.change(true);
+                    if (bottomNavs[index] != selectedBottomNav) {
+                      setState(() {
+                        selectedBottomNav = bottomNavs[index];
+                      });
+                    }
+                    Future.delayed(const Duration(seconds: 1), () {
+                      bottomNavs[index].input!.change(false);
+                    });
+                    setState(() {
+                      pageIndex = bottomNavs[index].number ?? 0;
+                    });
+                  },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      AnimatedBar(
+                        isActive: bottomNavs[index] == selectedBottomNav,
+                      ),
+                      SizedBox(
+                        height: 36,
+                        width: 36,
+                        child: Opacity(
+                          opacity: bottomNavs[index] == selectedBottomNav
+                              ? 1
+                              : 0.5,
+                          child: RiveAnimation.asset(
+                            bottomNavs[index].src,
+                            artboard: bottomNavs[index].artboard,
+                            onInit: (artboard) {
+                              StateMachineController controller =
+                              RiveUtils.getRiveController(
+                                artboard,
+                                stateMachineName:
+                                bottomNavs[index].stateMacineName,
+                              );
+                              bottomNavs[index].input =
+                              controller.findSMI("active") as SMIBool;
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
 List<RiveAsset> bottomNavs = [
   RiveAsset(
       artboard: "HOME",
@@ -33,124 +150,3 @@ List<RiveAsset> bottomNavs = [
       src: 'assets/RiveAssets/icons.riv',
       number: 2),
 ];
-class OrgEntryPage extends StatefulWidget {
-  const OrgEntryPage({super.key});
-
-  @override
-  State<OrgEntryPage> createState() => _OrgEntryPageState();
-}
-
-class _OrgEntryPageState extends State<OrgEntryPage>
-    with SingleTickerProviderStateMixin {
-  RiveAsset selectedBottomNav = bottomNavs.first;
-
-  late Animation<double> animation;
-  late AnimationController _animationController;
-  int pageIndex = 0;
-
-  @override
-  void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 200),
-    )..addListener(() {
-        setState(() {});
-      });
-    animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
-        parent: _animationController, curve: Curves.fastOutSlowIn));
-    super.initState();
-  }
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-  List pages=[
-    GraphPage(),
-    OrganizationProfilePage(),
-    OrganizationProfilePage(),
-
-
-  ];
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: pages[pageIndex],
-
-      ),
-      bottomNavigationBar: Transform.translate(
-        offset: Offset(0, 100 * animation.value),
-        child: SafeArea(
-          child: Material(
-            color: Colors.transparent,
-            borderRadius: const BorderRadius.all(Radius.circular(24)),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              margin: const EdgeInsets.symmetric(horizontal: 24),
-              decoration: const BoxDecoration(
-                  color: HexColor.primaryColor,
-                  borderRadius: BorderRadius.all(Radius.circular(24))),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ...List.generate(
-                      bottomNavs.length,
-                      (index) => GestureDetector(
-                            onTap: () {
-                              bottomNavs[index].input!.change(true);
-                              if (bottomNavs[index] != selectedBottomNav) {
-                                setState(() {
-                                  selectedBottomNav = bottomNavs[index];
-                                });
-                              }
-                              Future.delayed(const Duration(seconds: 1), () {
-                                bottomNavs[index].input!.change(false);
-                              });
-                              setState(() {
-                                pageIndex = bottomNavs[index].number ?? 0;
-                              });
-                            },
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                AnimatedBar(
-                                  isActive:
-                                      bottomNavs[index] == selectedBottomNav,
-                                ),
-                                SizedBox(
-                                  height: 36,
-                                  width: 36,
-                                  child: Opacity(
-                                    opacity:
-                                        bottomNavs[index] == selectedBottomNav
-                                            ? 1
-                                            : 0.5,
-                                    child: RiveAnimation.asset(
-                                      bottomNavs[index].src,
-                                      artboard: bottomNavs[index].artboard,
-                                      onInit: (artboard) {
-                                        StateMachineController controller =
-                                            RiveUtils.getRiveController(
-                                                artboard,
-                                                stateMachineName:
-                                                    bottomNavs[index]
-                                                        .stateMacineName);
-                                        bottomNavs[index].input = controller
-                                            .findSMI("active") as SMIBool;
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ))
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
