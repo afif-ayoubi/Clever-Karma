@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
+import 'package:mobile/routes/class_routes.dart';
 
 import '../../../../../core/constants/assets_manager.dart';
 import '../../../../../core/constants/font_manager.dart';
@@ -92,7 +94,12 @@ class _CardWidget extends StatelessWidget {
             ),
           ),
         ),
-        Positioned(right: 30.r, bottom: 0.r, child: const MapBtn()),
+        Positioned(
+            right: 30.r,
+            bottom: 0.r,
+            child: MapBtn(
+              onPress: () => context.push(Routes.mapPage),
+            )),
       ],
     );
   }

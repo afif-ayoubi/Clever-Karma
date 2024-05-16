@@ -1,9 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 
+import '../../../../routes/class_routes.dart';
 import '../widgets/entry_page/home_page/lighted_backround.dart';
 import '../widgets/entry_page/home_page/opportunity_view.dart';
 import '../widgets/entry_page/home_page/page_indicators.dart';
