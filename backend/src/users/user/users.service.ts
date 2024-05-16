@@ -12,6 +12,7 @@ import { LoginDto } from "./dto/user_dto/login.dto";
 import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
+import 'dotenv/config';
 
 
 export type UserDocument = HydratedDocument<User>;

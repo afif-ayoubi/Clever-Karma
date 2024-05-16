@@ -1,16 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body } from '@nestjs/common';
 import { FcmNotificationService } from './fcm-notification.service';
-import { CreateFcmNotificationDto } from './dto/create-fcm-notification.dto';
-import { UpdateFcmNotificationDto } from './dto/update-fcm-notification.dto';
+
 @Controller('firebase')
 export class FcmNotificationController {
-  constructor(
-    private readonly sendingNotificationService: FcmNotificationService,
-  ) { }
+  constructor(private readonly sendingNotificationService: FcmNotificationService) {}
 
   @Post('send-notification')
-  async sendNotidication(@Body() body: { token: string }) {
-    const { token } = body
-    return await this.sendingNotificationService.sendingNotificationOneUser(token)
+  async sendNotification(@Body() body: { token: string, title: string, notificationBody: string }) {
+    const { token, title, notificationBody } = body;
+    return await this.sendingNotificationService.sendNotificationToOneUser(token, title, notificationBody);
   }
 }

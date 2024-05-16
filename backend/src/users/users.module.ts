@@ -9,6 +9,8 @@ import { OrganizationDetail, OrganizationDetailSchema } from "src/schemas/organi
 import { VolunteeringSection, VolunteeringSectionSchema } from "src/schemas/volunteering_opportunity.schema";
 import { VolunteeringSectionService } from "./volunteering_section/volunteering_section.service";
 import { VolunteeringSectionController } from "./volunteering_section/volunteering_section.controller";
+import { FcmNotificationController } from "src/fcm-notification/fcm-notification.controller";
+import { FcmNotificationService } from "src/fcm-notification/fcm-notification.service";
 
 @Module({
     imports: [
@@ -35,8 +37,8 @@ import { VolunteeringSectionController } from "./volunteering_section/volunteeri
         ])
     ],
     providers: [
-        UsersService, VolunteeringSectionService ],
-    controllers: [UsersController,VolunteeringSectionController],
+        UsersService, VolunteeringSectionService ,FcmNotificationService],
+    controllers: [UsersController,VolunteeringSectionController,FcmNotificationController],
     exports: [UsersService]
 })
 export class UserModule { }

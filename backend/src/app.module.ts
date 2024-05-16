@@ -7,7 +7,6 @@ import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
 import { OtpController } from './otp/otp.controllers';
 import { OtpService } from './otp/otp.service';
-import { FcmNotificationModule } from './fcm-notification/fcm-notification.module';
 
 @Module({
   imports: [MongooseModule.forRoot(process.env.CONNECTION_STRING),
@@ -32,10 +31,10 @@ import { FcmNotificationModule } from './fcm-notification/fcm-notification.modul
     },
   
   }),
-  FcmNotificationModule
+  
   ],
-  controllers: [OtpController],
-  providers: [OtpService],
+  controllers: [OtpController,],
+  providers: [OtpService,],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
