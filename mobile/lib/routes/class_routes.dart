@@ -9,4 +9,5 @@ class Routes{
   static const String organizationsPage='/organizations';
   static const String mapPage='/map';
   static const String graphPage='/graph';
+  static const String orgEntryPage='/orgEntry';
 }
