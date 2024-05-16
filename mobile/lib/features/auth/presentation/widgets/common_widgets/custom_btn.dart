@@ -14,7 +14,7 @@ class CustomBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width ? 175.w:100.sw,
+      width: width ? 175.w:100.w,
       height: 45.h,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25.r),

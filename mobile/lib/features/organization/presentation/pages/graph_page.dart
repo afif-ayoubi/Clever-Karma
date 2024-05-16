@@ -7,6 +7,8 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/wdigets/loading_widget.dart';
 import 'package:mobile/features/organization/presentation/widgets/graph_page/line_chart_widget.dart';
 
+import '../widgets/graph_page/graph_detail_widget.dart';
+
 class GraphPage extends StatefulWidget {
   const GraphPage({Key? key}) : super(key: key);
 
@@ -77,53 +79,8 @@ class _buildWidget extends StatelessWidget {
   Widget build(
     BuildContext context,
   ) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30).r,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "DashBoard",
-            style: context.displayMedium,
-          ),
-          Expanded(
-            child: FirebaseAnimatedList(
-              query: dbRef,
-              itemBuilder: (BuildContext context, DataSnapshot snapshot,
-                  Animation<double> animation, int index) {
-                if (!snapshot.exists || snapshot.value == null)
-                  return LoadingWidget();
-                List<String> leftTitles = _generateLeftTitles(3);
-
-                return Column(
-                  children: [
-                    Gap(30.h),
-                    SizedBox(
-                        height: 400.h,
-                        child: LineChartWidget(
-                            list: list, leftTitles: leftTitles)),
-                  ],
-                );
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+    return GraphDetailWidget(dbRef: dbRef, list: list);
   }
 }
 
-List<String> _generateLeftTitles(int index) {
-  List<String> leftTitles = [];
 
-  if (index == 0) {
-    leftTitles = ['0', '40', '60', '80', '100', '120'];
-  } else if (index == 1) {
-    leftTitles = ['0', '5', '10', '15', '20', '25'];
-  } else if (index == 2) {
-    leftTitles = ['0', '400', '1000', '2000', '3000', '4000'];
-  } else {
-    leftTitles = ['0', '10', '20', '30', '40', '50'];
-  }
-  return leftTitles;
-}

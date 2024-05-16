@@ -1,6 +1,5 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:mobile/core/theme/hex_color.dart';
 
 class LineChartWidget extends StatefulWidget {
   final List<dynamic> list;
@@ -13,7 +12,7 @@ class LineChartWidget extends StatefulWidget {
   State<LineChartWidget> createState() => _LineChartWidgetState();
 }
 
-class _LineChartWidgetState extends State<LineChartWidget> {
+class _LineChartWidgetState extends State<LineChartWidget>  {
   List<Color> gradientColors = [
     Color(0xFF50E4FF),
     Color(0xFF2196F3),
