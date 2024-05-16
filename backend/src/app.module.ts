@@ -5,6 +5,9 @@ import { AuthMiddleware } from './users/middlewares/auth.middleware';
 import { MailerModule } from '@nestjs-modules/mailer';
 import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
+import { OtpController } from './otp/otp.controllers';
+import { OtpService } from './otp/otp.service';
+
 @Module({
   imports: [MongooseModule.forRoot(process.env.CONNECTION_STRING),
     UserModule,
@@ -15,16 +18,22 @@ import { ConfigModule } from '@nestjs/config';
     }),
   MailerModule.forRoot({
     transport: {
-      host: 'smtp.gmail.com',
+      host: process.env.SMTP_HOST, port: 587,
+      secure: false,
       auth: {
-        user: process.env.EMAIL,
+        user: process.env.USER,
         pass: process.env.PASSWORD
       }
-    }
+      
+    },
+    defaults: {
+      from: '"No Reply" <afif.alayoubi@gmail.com>',
+    },
+  
   })
   ],
-  controllers: [],
-  providers: [],
+  controllers: [OtpController],
+  providers: [OtpService],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

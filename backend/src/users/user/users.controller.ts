@@ -37,7 +37,8 @@ export class UsersController {
         return this.userService.buildAuthUserResponse(user);
     }
     @Post('/login')
-    async login(@Body() loginDto: LoginDto): Promise<UserAuthResponseType> {
+    async login(@Body() loginDto: LoginDto): Promise<UserAuthResponseType> { 
+        console.log(loginDto);
         const user = await this.userService.loginUser(loginDto);
         return this.userService.buildAuthUserResponse(user);
     }
