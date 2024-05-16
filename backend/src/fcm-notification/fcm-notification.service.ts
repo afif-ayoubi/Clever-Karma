@@ -17,7 +17,7 @@ admin.initializeApp({
 @Injectable()
 export class FcmNotificationService {
   constructor(
-    @InjectModel(Notifications.name) private notificationModel: Model<Notification>,
+    @InjectModel(Notifications.name) private notificationModel: Model<Notifications>,
     @InjectModel(User.name) private userModel: Model<User>
   ) {}
 
@@ -43,9 +43,15 @@ export class FcmNotificationService {
         body: body,
         created_by: 'system' 
       });
+      const user = await this.userModel.findOne({ 'notifications.fcm_token': token });
+      if (user) {
+          user.notifications.push(notification);
+          await user.save();
+      }
 
-      await notification.save();
       return { success: true };
+
+
     } catch (error) {
       return { success: false, error: error.message };
     }

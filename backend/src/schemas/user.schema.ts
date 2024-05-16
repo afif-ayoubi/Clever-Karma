@@ -24,7 +24,7 @@
         organizationDetail?: OrganizationDetail;
     
         @Prop({ type: [NotificationSchema] })
-        notification?: Notifications[];
+        notifications?: Notifications[];
         @Prop({ type: FollowerSchema, })
         followers?: Follower;
 
