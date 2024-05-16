@@ -19,7 +19,7 @@ class GraphPage extends StatefulWidget {
 class _GraphPageState extends State<GraphPage> {
   late Query dbRef;
   List<double> humidityList = [];
-  List<int> temperatureList = [];
+  List<double> temperatureList = [];
   List<double> ppmList = [];
   List<int> mq2ValueList = [];
 
