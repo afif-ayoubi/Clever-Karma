@@ -67,7 +67,13 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                           size: 140.r,
                           color: HexColor.lightColor,
                         )
-                      : Image.file(_image!), // Changed FaIcon to Icon
+                      : ClipRRect(
+                          borderRadius: BorderRadius.circular(80.0).r,
+                          child: Image.file(
+                            _image!,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                 ),
               ),
               Gap(25.h),
