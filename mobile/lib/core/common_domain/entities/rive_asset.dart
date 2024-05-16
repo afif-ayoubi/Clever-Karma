@@ -39,5 +39,31 @@ class RiveAsset {
         title: "Help",
         src: 'assets/RiveAssets/icons.riv',number: 3),
   ];
+  List<RiveAsset> bottomNavs = [
+    RiveAsset(
+        artboard: "HOME",
+        stateMacineName: "HOME_interactivity",
+        title: "Home",
+        src: 'assets/RiveAssets/icons.riv',
+        number: 0),
+    // RiveAsset(
+    //     artboard: "SEARCH",
+    //     stateMacineName: "SEARCH_Interactivity",
+    //     title: "Search",
+    //     src: 'assets/RiveAssets/icons.riv',
+    //     number: 1),
+    RiveAsset(
+        artboard: "TIMER",
+        stateMacineName: "TIMER_Interactivity",
+        title: "Timer",
+        src: 'assets/RiveAssets/icons.riv',
+        number: 1),
+    RiveAsset(
+        artboard: "USER",
+        stateMacineName: "USER_Interactivity",
+        title: "Profile",
+        src: 'assets/RiveAssets/icons.riv',
+        number: 2),
+  ];
 
 }

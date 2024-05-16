@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/hex_color.dart';
-import 'package:mobile/features/opportunity/domain/entities/rive_asset.dart';
+import 'package:mobile/core/common_domain/entities/rive_asset.dart';
 import 'package:rive/rive.dart';
 
 class SideMenuTitle extends StatelessWidget {
