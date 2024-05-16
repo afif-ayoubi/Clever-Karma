@@ -106,7 +106,7 @@ export class UsersService {
   
     generateJwt(user: UserDocument): string {
         const userId = user._id;
-        return sign({ userId: userId }, 'JWT_SECRET');
+        return sign({ userId: userId }, process.env.JWT_SECRET);
     }
     async findById(id: Types.ObjectId): Promise<UserDocument> {
 
