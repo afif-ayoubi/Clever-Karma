@@ -1,41 +1,44 @@
 import 'package:mobile/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
-   UserModel(
-      {required super.id,
-      required super.firstName,
-      required super.lastName,
-      required super.email,
-      required super.password,
-       super.dateOfBirth,
-       super.phoneNumber,
-       super.gender,});
+  UserModel({
+     super.id,
+     super.firstName,
+     super.lastName,
+    required super.email,
+    required super.password,
+    super.fcmToken,
+    super.dateOfBirth,
+    super.phoneNumber,
+    super.gender,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-      id: json['id'],
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      email: json['email'],
-      password: json['password'],
-      dateOfBirth: json['dateOfBirth'],
-      phoneNumber: json['phoneNumber'],
-      gender: json['gender'],
-     );
+        id: json['id'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        email: json['email'],
+        password: json['password'],
+        dateOfBirth: json['dateOfBirth'],
+        phoneNumber: json['phoneNumber'],
+        gender: json['gender'],
+      );
 
   Map<String, dynamic> toJson() => {
         'email': email,
         'password': password,
+        'fcmToken': fcmToken,
       };
 
   UserModel.fromUser(User user)
       : super(
-            id: user.id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            password: user.password,
-            dateOfBirth: user.dateOfBirth,
-            phoneNumber: user.phoneNumber,
-            gender: user.gender,
-          );
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          password: user.password,
+          dateOfBirth: user.dateOfBirth,
+          phoneNumber: user.phoneNumber,
+          gender: user.gender,
+        );
 }

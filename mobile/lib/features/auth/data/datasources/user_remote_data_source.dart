@@ -29,16 +29,30 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Unit> createUser(UserModel user) async {
-    final body = user.toJson();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? fcmToken = prefs.getString('fcmToken');
+
+    final userWithToken = UserModel(
+      email: user.email,
+      password: user.password,
+      fcmToken: fcmToken,
+    );
+
+    final body = jsonEncode(userWithToken.toJson());
+
     try {
       final response = await client.post(
         Uri.parse('$BASE_URL/user/create'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: body,
       );
+
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
         final String token = jsonResponse[TOKEN];
-        sharedPreferences.setString(TOKEN, token);
+        await prefs.setString(TOKEN, token);
         return Future.value(unit);
       } else if (response.statusCode == 422) {
         throw EmailAlreadyTakenException();

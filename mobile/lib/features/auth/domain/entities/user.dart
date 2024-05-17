@@ -18,6 +18,8 @@ class User extends HiveObject with EquatableMixin {
   @HiveField(5)
   final DateTime? dateOfBirth;
   @HiveField(6)
+  final String? fcmToken;
+  @HiveField(6)
   final String? gender;
   @HiveField(7)
   final int? phoneNumber;
@@ -31,6 +33,7 @@ class User extends HiveObject with EquatableMixin {
     this.dateOfBirth,
     this.phoneNumber,
     this.gender,
+    this.fcmToken
   });
 
   @override
