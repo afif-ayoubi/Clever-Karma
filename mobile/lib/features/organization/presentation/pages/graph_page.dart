@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:mobile/core/extensions/text_theme.dart';
-import 'package:mobile/core/wdigets/loading_widget.dart';
-import 'package:mobile/features/organization/presentation/widgets/graph_page/line_chart_widget.dart';
-
 import '../widgets/graph_page/graph_detail_widget.dart';
 
 class GraphPage extends StatefulWidget {

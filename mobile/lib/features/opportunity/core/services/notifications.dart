@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mobile/routes/class_routes.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../routes/app_routes.dart';
 
@@ -91,7 +92,12 @@ class NotificationService {
   Future<void> initNotifications() async {
     await _firebaseMessaging.requestPermission();
     final fcmToken = await _firebaseMessaging.getToken();
-    print('Firebase token: $fcmToken');
+
+    if (fcmToken != null) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('fcmToken', fcmToken);
+      print('Firebase token: $fcmToken');
+    }
     initPushNotifications();
     initLocalNotifications();
   }
