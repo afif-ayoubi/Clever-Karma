@@ -15,7 +15,9 @@ class OpportunityRepositoryImpl implements OpportunityRepository {
   final OpportunityLocalDataSource localDataSource;
 
   OpportunityRepositoryImpl(
-      {required this.networkInfo, this.remoteDataSource, this.localDataSource});
+      {required this.networkInfo,
+      required this.remoteDataSource,
+      required this.localDataSource});
 
   @override
   Future<Either<Failure, Unit>> create(Opportunity dto) {

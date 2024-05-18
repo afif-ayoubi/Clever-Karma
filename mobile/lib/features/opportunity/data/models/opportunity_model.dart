@@ -2,7 +2,7 @@ import '../../domain/entities/opportunity.dart';
 
 class OpportunityModel extends Opportunity {
   OpportunityModel({
-    super.id,
+    required super.id,
     required super.name,
     required super.imageUrl,
     required super.description,

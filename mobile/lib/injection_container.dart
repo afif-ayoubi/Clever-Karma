@@ -12,6 +12,8 @@ import 'package:mobile/features/auth/domain/usecases/login_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
+import 'package:mobile/features/opportunity/data/models/opportunity_model.dart';
+import 'package:mobile/features/opportunity/data/repositories/opportunity_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/constants/constants.dart';
@@ -19,6 +21,9 @@ import 'features/auth/data/datasources/user_local_data_source.dart';
 import 'features/auth/data/models/user_model.dart';
 import 'features/auth/data/repositories/user_repository_impl.dart';
 import 'package:http/http.dart' as http;
+
+import 'features/opportunity/domain/entities/opportunity.dart';
+import 'features/opportunity/domain/repositories/opportunity_repository.dart';
 
 final sl = GetIt.instance;
 
@@ -58,6 +63,23 @@ Future<void> init() async {
         localDataSource: sl(),
         networkInfo: sl(),
       ));
+  sl.registerLazySingleton<BaseRepository>(() => OpportunityRepositoryImpl(
+        remoteDataSource: sl(),
+        localDataSource: sl(),
+        networkInfo: sl(),
+      ));
+  sl.registerLazySingleton<BaseRepository<Opportunity>>(
+      () => OpportunityRepositoryImpl(
+            remoteDataSource: sl(),
+            localDataSource: sl(),
+            networkInfo: sl(),
+          ));
+  sl.registerLazySingleton<OpportunityRepository>(
+      () => OpportunityRepositoryImpl(
+            remoteDataSource: sl(),
+            localDataSource: sl(),
+            networkInfo: sl(),
+          ));
 
   //DataSources
 
