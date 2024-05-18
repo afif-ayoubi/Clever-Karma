@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/core/util/rive_utils.dart';
 import 'package:mobile/core/common_domain/entities/rive_asset.dart';
 import 'package:mobile/features/opportunity/presentation/widgets/entry_page/side_menu/side_menu_title.dart';
+import 'package:mobile/routes/class_routes.dart';
 import 'package:rive/rive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/entry_page/side_menu/info_card.dart';
 
@@ -57,7 +60,7 @@ class _SideMenuState extends State<SideMenu> {
                         });
                         switch (menu.number) {
                           case 1:
-                            print(selectedMenu == menu);
+                            context.push(Routes.profileRoute);
                             break;
                           case 2:
                             print(selectedMenu == menu);
@@ -81,7 +84,11 @@ class _SideMenuState extends State<SideMenu> {
                     child: Padding(
                       padding: const EdgeInsets.only(bottom: 50),
                       child: ListTile(
-                        onTap: () {},
+                        onTap: ()async {
+                          final SharedPreferences prefs = await SharedPreferences.getInstance();
+                          prefs.remove('token');
+                          context.go(Routes.authRoute);
+                        },
                         leading: SizedBox(
                           height: 34.h,
                           width: 34.w,

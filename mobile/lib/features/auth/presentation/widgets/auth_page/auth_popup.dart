@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
+import 'package:mobile/core/wdigets/loading_widget.dart';
 import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_textfield.dart';
 
+import '../../bloc/users/users_bloc.dart';
 import '../common_widgets/custom_btn.dart';
 
 Future<void> authPopUp(
@@ -39,6 +42,7 @@ Future<void> authPopUp(
     pageBuilder: (context, _, __) {
       final MediaQueryData mediaQuery = MediaQuery.of(context);
       final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
+      final isLoading = BlocProvider.of<UsersBloc>(context).state is LoadingUsersState;
       return Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.r),
@@ -49,7 +53,7 @@ Future<void> authPopUp(
             child: Container(
               height: 600.h,
               padding: const EdgeInsets.symmetric(horizontal: 15).r,
-              child: SingleChildScrollView(
+              child: isLoading? LoadingWidget(): SingleChildScrollView(
                 child: SafeArea(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -99,6 +103,7 @@ Future<void> authPopUp(
                       ),
                       CustomBtn(
                           text: currentAuthData['btnText'],
+                          width: true,
                           onPressed: btnOnPressed),
                       Gap(10.h),
                       Center(

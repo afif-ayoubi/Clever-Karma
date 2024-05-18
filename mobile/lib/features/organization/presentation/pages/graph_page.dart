@@ -47,8 +47,8 @@ class _GraphPageState extends State<GraphPage> {
   void _updateLists(dynamic data) {
     if (data is Map<dynamic, dynamic>) {
       setState(() {
-        humidityList.add(data['humidity']);
-        temperatureList.add(data['temperature']);
+        humidityList.add(data['humidity'].toDouble());
+        temperatureList.add(data['temperature'].toDouble());
         ppmList.add(data['ppm']);
         mq2ValueList.add(data['mq2Value']);
 

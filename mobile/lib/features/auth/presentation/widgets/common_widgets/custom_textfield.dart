@@ -13,20 +13,20 @@ class CustomTextField extends StatefulWidget {
   final bool? enable;
   final bool keyboardNumber;
   final bool isDate;
-  final double? maxLines;
+  final int maxLines; // Changed to int and set a default value
 
   const CustomTextField(
       {super.key,
-      this.keyboardNumber = false,
-      this.enable = true,
-      this.labelText,
-      this.isDate = false,
-      required this.controller,
-      this.onTap,
-      this.hintText,
-      this.showVisibility = false,
-      this.maxLines,
-      this.validator});
+        this.keyboardNumber = false,
+        this.enable = true,
+        this.labelText,
+        this.isDate = false,
+        required this.controller,
+        this.onTap,
+        this.hintText,
+        this.showVisibility = false,
+        this.maxLines = 1,
+        this.validator});
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -43,12 +43,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
         children: [
           Text(widget.labelText ?? "", style: context.bodyMedium),
           SizedBox(
-            height:widget.maxLines !=null? 100.h : 45.h,
+            height: widget.maxLines > 1 ? 100.h : 45.h,
             child: TextFormField(
               readOnly: widget.isDate ? true : false,
               enabled: widget.enable,
               onTap: widget.onTap,
-              obscureText: widget.showVisibility! ? !obscure : obscure,
+              obscureText: widget.showVisibility! ? !obscure : false,
               controller: widget.controller,
               textAlignVertical: TextAlignVertical.center,
               keyboardType: widget.keyboardNumber ? TextInputType.number : null,
@@ -58,42 +58,42 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 contentPadding: const EdgeInsets.all(8).r,
                 suffixIcon: widget.isDate
                     ? GestureDetector(
-                        onTap: () {
-                          showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(1960),
-                                  lastDate: DateTime.now())
-                              .then((value) {
-                            if (value != null) {
-                              widget.controller.text =
-                                  value.toString().substring(0, 10);
-                            }
-                          });
-                        },
-                        child: const Icon(
-                          Icons.arrow_drop_down_circle,
-                          color: HexColor.secondaryColor,
-                        ),
-                      )
+                  onTap: () {
+                    showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1960),
+                        lastDate: DateTime.now())
+                        .then((value) {
+                      if (value != null) {
+                        widget.controller.text =
+                            value.toString().substring(0, 10);
+                      }
+                    });
+                  },
+                  child: const Icon(
+                    Icons.arrow_drop_down_circle,
+                    color: HexColor.secondaryColor,
+                  ),
+                )
                     : widget.showVisibility!
-                        ? GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                obscure = !obscure;
-                              });
-                            },
-                            child: Icon(
-                              !obscure
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                              size: 27,
-                            ),
-                          )
-                        : null,
+                    ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      obscure = !obscure;
+                    });
+                  },
+                  child: Icon(
+                    !obscure
+                        ? Icons.visibility_off_outlined
+                        : Icons.visibility_outlined,
+                    size: 27,
+                  ),
+                )
+                    : null,
               ),
               validator: widget.validator,
-              maxLines: widget.maxLines?.toInt(),
+              maxLines: widget.showVisibility! ? 1 : widget.maxLines,
             ),
           ),
         ],

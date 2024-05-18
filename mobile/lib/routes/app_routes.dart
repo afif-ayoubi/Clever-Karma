@@ -20,7 +20,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 class AppRoutes {
   static final GoRouter goRouter = GoRouter(
-      initialLocation: Routes.orgEntryPage,
+      initialLocation: Routes.initRoute,
       navigatorKey: navigatorKey,
       routes: [
         GoRoute(

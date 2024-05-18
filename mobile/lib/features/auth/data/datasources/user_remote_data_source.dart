@@ -53,6 +53,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         final jsonResponse = jsonDecode(response.body);
         final String token = jsonResponse[TOKEN];
         await prefs.setString(TOKEN, token);
+        sharedPreferences.setString('role', "User");
+
         return Future.value(unit);
       } else if (response.statusCode == 422) {
         throw EmailAlreadyTakenException();
@@ -87,7 +89,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Unit> login(UserModel user) async {
-    final body = user.toJson();
+    final body = user.toJson1();
     try {
       final response = await client.post(
         Uri.parse('$BASE_URL/user/login'),
@@ -96,7 +98,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
         final String token = jsonResponse[TOKEN];
+        final String role = jsonResponse['role'];
+
         sharedPreferences.setString(TOKEN, token);
+        print(role);
+        sharedPreferences.setString('role', role);
+
         return Future.value(unit);
       } else if (response.statusCode == 422) {
         throw WrongCredentialException();

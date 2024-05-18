@@ -2,9 +2,9 @@ import 'package:mobile/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({
-     super.id,
-     super.firstName,
-     super.lastName,
+    super.id,
+    super.firstName,
+    super.lastName,
     required super.email,
     required super.password,
     super.fcmToken,
@@ -27,9 +27,15 @@ class UserModel extends User {
   Map<String, dynamic> toJson() => {
         'email': email,
         'password': password,
-        'fcmToken': fcmToken,
+        'notifications': {
+          'fcm_token': fcmToken,
+        },
       };
+  Map<String, dynamic> toJson1() => {
+    'email': email,
+    'password': password,
 
+  };
   UserModel.fromUser(User user)
       : super(
           id: user.id,

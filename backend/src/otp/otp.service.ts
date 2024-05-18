@@ -10,7 +10,7 @@ export class OtpService {
 
         try {
             const result = await this.mailService.sendMail({
-                from: 'afif.alayoubi@gmail.com',
+                from: 'demomailtrap.com',
                 to: 'afifayoubi22@gmail.com',
                 subject: `How to Send Emails with Nodemailer`,
                 text: message,

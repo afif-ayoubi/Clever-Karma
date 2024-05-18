@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/theme/hex_color.dart';
 import '../../../../core/util/snackbar_message.dart';
 import '../../../../core/wdigets/loading_widget.dart';
@@ -22,7 +23,7 @@ class _AuthPageState extends State<AuthPage> {
   late TextEditingController _passwordController;
 
   late TextEditingController _confirmPasswordController;
-
+  late String role;
   Map<String, dynamic> signIn = {
     'title': "Sign In",
     'body': "Welcome back! Sign in to continue\nmaking a difference.",
@@ -50,7 +51,14 @@ class _AuthPageState extends State<AuthPage> {
     Future.delayed(Duration.zero, () {
       currentAuthData = signIn;
       _toggleAuth(context);
+      _getRoleFromSharedPreferences();
+
     });
+  }
+
+  _getRoleFromSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    role = prefs.getString('role') ?? '';
   }
 
   @override
@@ -65,24 +73,30 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
-      if (state is SuccessUserState) {
-        SnackBarMessage.instance.showSuccessSnackBar(
-          message: state.message,
-          context: context,
-        );
-        context.go(Routes.entryPage);
-      } else if (state is ErrorUsersState) {
-        SnackBarMessage.instance.showErrorSnackBar(
-          message: state.message,
-          context: context,
-        );
-      }
-    }, builder: (context, state) {
-      if (state is LoadingUsersState) {
-        SizedBox(height: 100.sh, child: LoadingWidget());
-      }
-      return _buildBody();
-    }));
+          if (state is SuccessUserState) {
+            SnackBarMessage.instance.showSuccessSnackBar(
+              message: state.message,
+              context: context,
+            );
+            print('role: $role');
+           if(_emailController.text=='o12@gmail.com'){
+              context.go(Routes.orgEntryPage);
+           }
+           else{
+             context.go(Routes.entryPage);
+           }
+          } else if (state is ErrorUsersState) {
+            SnackBarMessage.instance.showErrorSnackBar(
+              message: state.message,
+              context: context,
+            );
+          }
+        }, builder: (context, state) {
+          if (state is LoadingUsersState) {
+            SizedBox(height: 100.sh, child: LoadingWidget());
+          }
+          return _buildBody();
+        }));
   }
 
   Widget _buildBody() {
@@ -92,7 +106,9 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   void _toggleAuth(BuildContext context) {
-    if (!(BlocProvider.of<UsersBloc>(context).state is LoadingUsersState)) {
+    if (!(BlocProvider
+        .of<UsersBloc>(context)
+        .state is LoadingUsersState)) {
       Future.delayed(Duration.zero, () {
         authPopUp(
           emailController: _emailController,
@@ -108,12 +124,11 @@ class _AuthPageState extends State<AuthPage> {
               email: _emailController.text,
               password: _passwordController.text,
             );
-
             currentAuthData == signIn
                 ? BlocProvider.of<UsersBloc>(context)
-                    .add(LoginUserEvent(user: user))
+                .add(LoginUserEvent(user: user))
                 : BlocProvider.of<UsersBloc>(context)
-                    .add(CreateUserEvent(user: user));
+                .add(CreateUserEvent(user: user));
           },
           btnTextOnPressed: () {
             Navigator.of(context).pop();

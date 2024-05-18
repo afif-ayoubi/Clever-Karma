@@ -47,7 +47,7 @@ class GraphDetailWidget extends StatelessWidget {
                   Animation<double> animation, int index) {
                 if (!snapshot.exists || snapshot.value == null)
                   return LoadingWidget();
-                List<String> leftTitles = _generateLeftTitles(3);
+                List<String> leftTitles = _generateLeftTitles(0);
 
                 return Column(
                   children: [

@@ -4,6 +4,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 // import 'package:location/location.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../core/util/location_service.dart';
 import '../../core/constants/map.dart';
@@ -31,13 +32,19 @@ class _MapPageState extends State<MapPage> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await initializeMap();
-    });
+      await Future.delayed(Duration(milliseconds: 0));
+      await initializeMap();    });
   }
 
   Future<void> initializeMap() async {
-    currentPosition = await LocationService.determinePosition();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    currentPosition = LatLng(
+      prefs.getDouble('currentLat') ?? 0.0,
+      prefs.getDouble('currentLng') ?? 0.0,
+    );
+
     print('currentPosition: $currentPosition');
   }
 

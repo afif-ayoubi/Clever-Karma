@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -9,6 +11,7 @@ import 'package:mobile/routes/class_routes.dart';
 import '../../../../../core/constants/assets_manager.dart';
 import '../../../../../core/constants/font_manager.dart';
 import '../../../../../core/theme/hex_color.dart';
+import '../../../../live_streaming/presentation/pages/live_streaming.dart';
 import 'map_btn.dart';
 
 class OrganizationCard extends StatelessWidget {
@@ -83,14 +86,17 @@ class _CardWidget extends StatelessWidget {
         Positioned(
           right: 30.r,
           top: 10.r,
-          child: Text(
-            'Check Live',
-            style: context.bodyMedium!.copyWith(
-              fontSize: FontSize.s14,
-              color: HexColor.secondaryColor,
-              decoration: TextDecoration.underline,
-              decorationColor: HexColor.secondaryColor,
-              decorationThickness: 1.0.sp,
+          child: GestureDetector(
+            onTap: () => JumpToLivePage(context, isHost: false),
+            child: Text(
+              'Check Live',
+              style: context.bodyMedium!.copyWith(
+                fontSize: FontSize.s14,
+                color: HexColor.secondaryColor,
+                decoration: TextDecoration.underline,
+                decorationColor: HexColor.secondaryColor,
+                decorationThickness: 1.0.sp,
+              ),
             ),
           ),
         ),
@@ -104,3 +110,12 @@ class _CardWidget extends StatelessWidget {
     );
   }
 }
+JumpToLivePage(BuildContext context, {required bool isHost}) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => LivePage(isHost: isHost),
+    ),
+  );
+}
+final String userID = Random().nextInt(10000).toString();
