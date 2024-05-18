@@ -3,6 +3,9 @@ import 'package:hive/hive.dart';
 
 import '../../../opportunity/domain/entities/opportunity.dart';
 
+part 'organization.g.dart';
+
+
 @HiveType(typeId: 1)
 class Organization extends HiveObject with EquatableMixin {
   @HiveField(0)

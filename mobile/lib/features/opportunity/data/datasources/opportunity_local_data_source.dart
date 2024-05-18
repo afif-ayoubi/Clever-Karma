@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:hive/hive.dart';
+import 'package:mobile/core/constants/constants.dart';
 import 'package:mobile/core/error/exception.dart';
 import 'package:mobile/features/opportunity/data/models/opportunity_model.dart';
 
@@ -10,7 +11,6 @@ abstract class OpportunityLocalDataSource {
   Future<Unit> casheOpportunities(List<OpportunityModel> opportunityModels);
 }
 
-const CACHED_OPPORTUNITY = "CACHED_USER";
 
 class OpportunityLocalDataSourceImpl implements OpportunityLocalDataSource {
   final Box<List<OpportunityModel>> opportunityBox;
@@ -18,14 +18,14 @@ class OpportunityLocalDataSourceImpl implements OpportunityLocalDataSource {
   OpportunityLocalDataSourceImpl({required this.opportunityBox});
   @override
   Future<Unit> casheOpportunities(List<OpportunityModel> opportunityModels) async {
-    await opportunityBox.put(CACHED_OPPORTUNITY, opportunityModels);
+    await opportunityBox.put(OPPORTUNITY_BOX, opportunityModels);
     print(
         'User Cached ${opportunityModels} in "${opportunityBox.name}". Length: ${opportunityBox.length}');
     return Future.value(unit);
   }
   @override
   Future<List<OpportunityModel>> getCashedOpportunities() {
-    final cashedOpportunity = opportunityBox.get(CACHED_OPPORTUNITY);
+    final cashedOpportunity = opportunityBox.get(OPPORTUNITY_BOX);
     if (cashedOpportunity != null) {
       print('User Cached ${cashedOpportunity} in "${opportunityBox.name}".');
       return Future.value(cashedOpportunity);
