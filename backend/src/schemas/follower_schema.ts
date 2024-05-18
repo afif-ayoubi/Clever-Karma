@@ -4,6 +4,6 @@ import { Types } from 'mongoose';
 @Schema()
 export class Follower{
     @Prop({ required: true })
-    organizationId: Types.ObjectId;
+    organizationId: String;
 }
 export const FollowerSchema = SchemaFactory.createForClass(Follower);

@@ -9,10 +9,12 @@ import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_type/user_response_type";
 import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
-import { ModelConflictException, ModelUnprocessableEnitityException } from "src/core/error/exception";
+import { ModelConflictException, ModelNotFoundException, ModelUnprocessableEnitityException } from "src/core/error/exception";
 import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
 import 'dotenv/config';
+import { FollowDto } from "./dto/follow_dto/follow.dto";
+import { USER_ROLES } from "./utils/user_roles_enum";
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -74,6 +76,25 @@ export class UsersService {
         const user = this.userModel.findByIdAndUpdate(id, updateUserDto, { new: true });
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         return user;
+    }
+    async followUser(userId: string, followDto: FollowDto): Promise<User> {
+        const user = await this.userModel.findById(userId);
+        const organization = await this.userModel.findById(followDto.organizationId);
+
+        if (!user || !organization) {
+            throw new ModelNotFoundException('User or Organization not found');
+        }
+
+        if (user.role !== USER_ROLES.USER || organization.role !== USER_ROLES.ORGANIZATION) {
+            throw new ModelConflictException('Invalid roles for follow action');
+        }
+
+        if (!user.followers) {
+            user.followers = [];
+        }
+
+        user.followers.push({ organizationId: followDto.organizationId });
+        return user.save();
     }
 
 
