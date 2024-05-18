@@ -5,16 +5,19 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 export class Notifications {
     @Prop({ required: true })
     fcm_token: string;
-    
-    @Prop()
+
+    @Prop({ required: true })
     title: string;
 
-    
-    @Prop()
+
+    @Prop({ required: true })
     body: string;
 
-    
-    @Prop()
+
+    @Prop({ default: new Date().toISOString() })
+    sent_at: string;
+
+    @Prop({ default: 'system' })
     created_by: string;
 
 }
