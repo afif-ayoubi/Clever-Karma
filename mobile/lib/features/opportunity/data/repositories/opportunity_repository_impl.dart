@@ -43,14 +43,14 @@ class OpportunityRepositoryImpl implements OpportunityRepository {
       try {
         final List<OpportunityModel> list =
             await remoteDataSource.getOpportunities();
-        localDataSource.casheOpportunities(list);
+        localDataSource.cacheOpportunities(list);
         return Right(list);
       } on ServerException {
         return Left(ServerFailure());
       }
     } else {
       try {
-        final opportunity = await localDataSource.getCashedOpportunities();
+        final opportunity = await localDataSource.getCachedOpportunities();
         return Right(opportunity);
       } on EmptyCacheException {
         return Left(EmptyCacheFailure());
