@@ -18,9 +18,9 @@ final class ErrorOpportunitiesState extends OrganizationState {
   List<Object> get props => [];
 }
 
-final class SuccessOpportunitiesState extends OrganizationState {
-  final String message;
-  const SuccessOpportunitiesState({required this.message});
+final class LoadedOpportunitiesState extends OrganizationState {
+final List<Opportunity>  opportunities;
+const LoadedOpportunitiesState({required this.opportunities});
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [opportunities];
 }
