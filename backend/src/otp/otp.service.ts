@@ -1,5 +1,6 @@
 import { MailerService } from "@nestjs-modules/mailer";
 import { Injectable } from "@nestjs/common";
+import 'dotenv/config';
 
 @Injectable()
 export class OtpService {
@@ -10,14 +11,14 @@ export class OtpService {
 
         try {
             const result = await this.mailService.sendMail({
-                from: 'demomailtrap.com',
-                to: 'afifayoubi22@gmail.com',
+                from: process.env.USER,
+                to: ['afif.alayoubi@gmail.com'],
                 subject: `How to Send Emails with Nodemailer`,
                 text: message,
             });
             return result;
         } catch (error) {
-            throw new Error(`Failed to send email: ${error.message}`);
+            throw new Error(`: ${error.message}`);
         }
     }
 }

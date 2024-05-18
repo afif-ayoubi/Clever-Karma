@@ -15,7 +15,7 @@ export class OtpController {
                 mail,
             });
         } catch (error) {
-            return response.status(500).json({
+            return response.status(500).json({ 
                 message: 'Failed to send email',
                 error: error.message,
             });

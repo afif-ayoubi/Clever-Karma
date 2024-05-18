@@ -7,30 +7,18 @@ import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
 import { OtpController } from './otp/otp.controllers';
 import { OtpService } from './otp/otp.service';
+import { MailModule } from './otp/otp.module';
 
 @Module({
   imports: [MongooseModule.forRoot(process.env.CONNECTION_STRING),
     UserModule,
+    MailModule,
   ConfigModule.forRoot(
     {
       cache: true,
       isGlobal: true,
     }),
-  MailerModule.forRoot({
-    transport: {
-      host: process.env.SMTP_HOST, port: 587,
-      secure: false,
-      auth: {
-        user: process.env.USER,
-        pass: process.env.PASSWORD
-      }
-      
-    },
-    defaults: {
-      from: '"No Reply" <afif.alayoubi@gmail.com>',
-    },
-  
-  }),
+
   
   ],
   controllers: [OtpController,],
