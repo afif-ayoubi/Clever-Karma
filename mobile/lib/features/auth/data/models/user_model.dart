@@ -30,6 +30,10 @@ class UserModel extends User {
     'notifications': {
       'fcm_token': fcmToken??"",
     },
+  };  Map<String, dynamic> toJson1() => {
+    'email': email,
+    'password': password,
+
   };
 
   UserModel.fromUser(User user)

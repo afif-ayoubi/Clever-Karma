@@ -87,7 +87,8 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Unit> login(UserModel user) async {
-    final body = user.toJson();
+    final body = user.toJson1();
+    print(body);
     try {
       final response = await client.post(
         Uri.parse('$BASE_URL/user/login'),
