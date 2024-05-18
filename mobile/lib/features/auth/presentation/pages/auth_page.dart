@@ -52,7 +52,6 @@ class _AuthPageState extends State<AuthPage> {
       currentAuthData = signIn;
       _toggleAuth(context);
       _getRoleFromSharedPreferences();
-
     });
   }
 
@@ -73,27 +72,23 @@ class _AuthPageState extends State<AuthPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
-          if (state is SuccessUserState) {
-            final role= state.role;
-            print('role: $role');
-           if(_emailController.text=='o12@gmail.com'){
-              context.go(Routes.orgEntryPage);
-           }
-           else{
-             context.go(Routes.entryPage);
-           }
-          } else if (state is ErrorUsersState) {
-            SnackBarMessage.instance.showErrorSnackBar(
-              message: state.message,
-              context: context,
-            );
-          }
-        }, builder: (context, state) {
-          if (state is LoadingUsersState) {
-            return SizedBox(height: 100.sh, child: LoadingWidget());
-          }
-          return _buildBody();
-        }));
+      if (state is SuccessUserState) {
+        final role = state.role;
+
+        if (role == "Organization") {
+          context.go(Routes.orgEntryPage);
+        } else {
+          context.go(Routes.entryPage);
+        }
+      } else if (state is ErrorUsersState) {
+        SnackBarMessage.instance.showErrorSnackBar(
+          message: state.message,
+          context: context,
+        );
+      }
+    }, builder: (context, state) {
+      return _buildBody();
+    }));
   }
 
   Widget _buildBody() {
@@ -103,41 +98,37 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   void _toggleAuth(BuildContext context) {
-    if (!(BlocProvider
-        .of<UsersBloc>(context)
-        .state is LoadingUsersState)) {
-      Future.delayed(Duration.zero, () {
-        authPopUp(
-          emailController: _emailController,
-          passwordController: _passwordController,
-          confirmPasswordController: _confirmPasswordController,
-          currentAuthData: currentAuthData,
-          context: context,
-          forgotOnPressed: () {
-            context.push(Routes.forgotPasswordRoute);
-          },
-          btnOnPressed: () {
-            User user = User(
-              email: _emailController.text,
-              password: _passwordController.text,
-            );
-            currentAuthData == signIn
-                ? BlocProvider.of<UsersBloc>(context)
-                .add(LoginUserEvent(user: user))
-                : BlocProvider.of<UsersBloc>(context)
-                .add(CreateUserEvent(user: user));
-          },
-          btnTextOnPressed: () {
-            Navigator.of(context).pop();
-            print('convert to ${currentAuthData == signIn ? signUp : signIn}');
-            setState(() {
-              currentAuthData = currentAuthData == signIn ? signUp : signIn;
-            });
-            _recallAuth(context);
-          },
-        );
-      });
-    }
+    Future.delayed(Duration.zero, () {
+      authPopUp(
+        emailController: _emailController,
+        passwordController: _passwordController,
+        confirmPasswordController: _confirmPasswordController,
+        currentAuthData: currentAuthData,
+        context: context,
+        forgotOnPressed: () {
+          context.push(Routes.forgotPasswordRoute);
+        },
+        btnOnPressed: () {
+          User user = User(
+            email: _emailController.text,
+            password: _passwordController.text,
+          );
+          currentAuthData == signIn
+              ? BlocProvider.of<UsersBloc>(context)
+                  .add(LoginUserEvent(user: user))
+              : BlocProvider.of<UsersBloc>(context)
+                  .add(CreateUserEvent(user: user));
+        },
+        btnTextOnPressed: () {
+          Navigator.of(context).pop();
+          print('convert to ${currentAuthData == signIn ? signUp : signIn}');
+          setState(() {
+            currentAuthData = currentAuthData == signIn ? signUp : signIn;
+          });
+          _recallAuth(context);
+        },
+      );
+    });
   }
 
   void _recallAuth(BuildContext context) {
