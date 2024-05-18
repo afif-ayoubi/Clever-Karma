@@ -41,96 +41,115 @@ Future<void> authPopUp(
     context: context,
     pageBuilder: (context, _, __) {
       final MediaQueryData mediaQuery = MediaQuery.of(context);
-      final bool keyboardIsOpen = mediaQuery.viewInsets.bottom > 0;
-      final isLoading = BlocProvider.of<UsersBloc>(context).state is LoadingUsersState;
-      return Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.r),
-          child: Material(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.w),
-            ),
-            child: Container(
-              height: 600.h,
-              padding: const EdgeInsets.symmetric(horizontal: 15).r,
-              child: isLoading? LoadingWidget(): SingleChildScrollView(
-                child: SafeArea(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        currentAuthData['title'],
-                        style: context.displayMedium,
-                      ),
-                      Gap(28.h),
-                      Text(
-                        currentAuthData['body'],
-                        textAlign: TextAlign.center,
-                        style: context.bodyMedium,
-                      ),
-                      Gap(40.h),
-                      CustomTextField(
-                          hintText: "john@gmail.com",
-                          labelText: "Email",
-                          controller: emailController),
-                      Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
-                      CustomTextField(
-                        hintText: "Password",
-                        labelText: "Password",
-                        controller: passwordController,
-                        showVisibility: true,
-                      ),
-                      Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
-                      currentAuthData['isLogin']
-                          ? GestureDetector(
-                              onTap: forgotOnPressed,
-                              child: Align(
-                                alignment: Alignment.bottomLeft,
-                                child: Text(
-                                  "Forgot Password?",
-                                  style: context.bodyMedium,
-                                ),
-                              ),
-                            )
-                          : CustomTextField(
-                              hintText: "Password",
-                              labelText: "Confirm Password",
-                              controller: confirmPasswordController,
-                              showVisibility: true,
-                            ),
-                      Gap(
-                        currentAuthData['isLogin'] ? 80.h : 30.h,
-                      ),
-                      CustomBtn(
-                          text: currentAuthData['btnText'],
-                          width: true,
-                          onPressed: btnOnPressed),
-                      Gap(10.h),
-                      Center(
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: currentAuthData['caption'],
-                                style: context.bodyMedium,
-                              ),
-                              TextSpan(
-                                  text: currentAuthData['btnText'],
-                                  style: context.bodyMedium!.copyWith(
-                                    color: HexColor.secondaryColor,
+      final isLoading =
+          BlocProvider.of<UsersBloc>(context).state is LoadingUsersState;
+      return StatefulBuilder(
+        builder:
+            (BuildContext context, void Function(void Function()) setState) =>
+                Stack(
+          children: [
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.r),
+                child: Material(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.w),
+                  ),
+                  child: Container(
+                    height: 600.h,
+                    padding: const EdgeInsets.symmetric(horizontal: 15).r,
+                    child: isLoading
+                        ? LoadingWidget()
+                        : SingleChildScrollView(
+                            child: SafeArea(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    currentAuthData['title'],
+                                    style: context.displayMedium,
                                   ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () => btnTextOnPressed()),
-                            ],
+                                  Gap(28.h),
+                                  Text(
+                                    currentAuthData['body'],
+                                    textAlign: TextAlign.center,
+                                    style: context.bodyMedium,
+                                  ),
+                                  Gap(40.h),
+                                  CustomTextField(
+                                      hintText: "john@gmail.com",
+                                      labelText: "Email",
+                                      controller: emailController),
+                                  Gap(currentAuthData['isLogin'] ? 20.h : 15.h),
+                                  CustomTextField(
+                                    hintText: "Password",
+                                    labelText: "Password",
+                                    controller: passwordController,
+                                    showVisibility: true,
+                                  ),
+                                  Gap(currentAuthData['isLogin'] ? 5.h : 15.h),
+                                  currentAuthData['isLogin']
+                                      ? GestureDetector(
+                                          onTap: forgotOnPressed,
+                                          child: Align(
+                                            alignment: Alignment.bottomLeft,
+                                            child: Text(
+                                              "Forgot Password?",
+                                              style: context.bodyMedium,
+                                            ),
+                                          ),
+                                        )
+                                      : CustomTextField(
+                                          hintText: "Password",
+                                          labelText: "Confirm Password",
+                                          controller: confirmPasswordController,
+                                          showVisibility: true,
+                                        ),
+                                  Gap(
+                                    currentAuthData['isLogin'] ? 80.h : 30.h,
+                                  ),
+                                  CustomBtn(
+                                      text: currentAuthData['btnText'],
+                                      width: true,
+                                      onPressed: btnOnPressed),
+                                  Gap(10.h),
+                                  Center(
+                                    child: RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                            text: currentAuthData['caption'],
+                                            style: context.bodyMedium,
+                                          ),
+                                          TextSpan(
+                                              text: currentAuthData['btnText'],
+                                              style:
+                                                  context.bodyMedium!.copyWith(
+                                                color: HexColor.secondaryColor,
+                                              ),
+                                              recognizer: TapGestureRecognizer()
+                                                ..onTap =
+                                                    () => btnTextOnPressed()),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
                   ),
                 ),
               ),
             ),
-          ),
+            if (isLoading)
+              Container(
+                color: Colors.black54.withOpacity(0.7),
+                height: double.infinity,
+                width: double.infinity,
+                child: LoadingWidget(),
+              )
+          ],
         ),
       );
     },
