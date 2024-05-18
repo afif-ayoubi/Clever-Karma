@@ -96,10 +96,10 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);
         final String token = jsonResponse[TOKEN];
-        final String role = jsonResponse['role'];
+        final String role = jsonResponse[ROLE];
 
         sharedPreferences.setString(TOKEN, token);
-        sharedPreferences.setString('role', role);
+        sharedPreferences.setString(ROLE, role);
 
         return Future.value(unit);
       } else if (response.statusCode == 422) {
