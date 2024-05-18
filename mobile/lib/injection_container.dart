@@ -63,11 +63,7 @@ Future<void> init() async {
         localDataSource: sl(),
         networkInfo: sl(),
       ));
-  sl.registerLazySingleton<BaseRepository>(() => OpportunityRepositoryImpl(
-        remoteDataSource: sl(),
-        localDataSource: sl(),
-        networkInfo: sl(),
-      ));
+
   sl.registerLazySingleton<BaseRepository<Opportunity>>(
       () => OpportunityRepositoryImpl(
             remoteDataSource: sl(),
@@ -96,7 +92,7 @@ Future<void> init() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   final userBox = await Hive.openBox<UserModel>(USER_BOX);
-  final opportunityBox = await Hive.openBox<UserModel>(OPPORTUNITY_BOX);
+  final opportunityBox = await Hive.openBox<OpportunityModel>(OPPORTUNITY_BOX);
   sl.registerLazySingleton(() => userBox);
   sl.registerLazySingleton(() => opportunityBox);
   sl.registerLazySingleton(() => sharedPreferences);

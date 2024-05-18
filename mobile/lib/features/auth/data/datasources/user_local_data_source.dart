@@ -18,19 +18,26 @@ class UserLocalDataSourceImpl implements UserLocalDataSource {
 
   @override
   Future<Unit> cacheUser(UserModel userModel) async {
-    await userBox.put(USER_BOX, userModel);
-    print(
-        'User Cached ${userModel} in "${userBox.name}". Length: ${userBox.length}');
-    return Future.value(unit);
+    try {
+      await userBox.put('cached_user', userModel);
+      print('User Cached ${userModel} in "${userBox.name}". Length: ${userBox.length}');
+      return Future.value(unit);
+    } catch (e) {
+      throw  EmptyCacheException();
+    }
   }
 
   @override
   Future<UserModel> getCachedUser() {
-    final cachedUser = userBox.get(USER_BOX);
-    if (cachedUser != null) {
-      print('User Cached ${cachedUser} in "${userBox.name}".');
-      return Future.value(cachedUser);
-    } else {
+    try {
+      final cachedUser = userBox.get('cached_user');
+      if (cachedUser != null) {
+        print('User Cached ${cachedUser} in "${userBox.name}".');
+        return Future.value(cachedUser);
+      } else {
+        throw EmptyCacheException();
+      }
+    } catch (e) {
       throw EmptyCacheException();
     }
   }
