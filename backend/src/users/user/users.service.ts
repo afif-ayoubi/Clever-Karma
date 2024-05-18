@@ -77,7 +77,7 @@ export class UsersService {
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         return user;
     }
-    async followUser(userId: string, followDto: FollowDto): Promise<User> {
+    async followOrganization(userId: string, followDto: FollowDto): Promise<User> {
         const user = await this.userModel.findById(userId);
         const organization = await this.userModel.findById(followDto.organizationId);
 
@@ -94,6 +94,20 @@ export class UsersService {
         }
 
         user.followers.push({ organizationId: followDto.organizationId });
+        return user.save();
+    }
+    async unfollowUser(userId: string, followDto: FollowDto): Promise<User> {
+        const user = await this.userModel.findById(userId);
+
+        if (!user) {
+            throw new ModelNotFoundException('User not found');
+        }
+
+        if (user.role !== USER_ROLES.USER) {
+            throw new ModelConflictException('Only users can unfollow organizations');
+        }
+
+        user.followers = user.followers.filter(follower => follower.organizationId.toString() !== followDto.organizationId);
         return user.save();
     }
 
