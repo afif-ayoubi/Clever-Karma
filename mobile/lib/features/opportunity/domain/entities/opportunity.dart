@@ -6,16 +6,16 @@ import '../../../../core/constants/assets_manager.dart';
 @HiveType(typeId: 1)
 class Opportunity extends HiveObject with EquatableMixin {
   @HiveField(0)
-  final int id;
+  final int? id;
   @HiveField(1)
   final String name;
   @HiveField(2)
-  final String imageUrl;
+    final String imageUrl;
   @HiveField(3)
   final String description;
 
    Opportunity({
-    required this.id,
+     this.id,
     required this.name,
     required this.imageUrl,
     required this.description,

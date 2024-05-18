@@ -10,7 +10,7 @@ class OpportunityModel extends Opportunity {
 
   factory OpportunityModel.fromJson(Map<String, dynamic> json) {
     return OpportunityModel(
-      id: json['id'],
+      id: json['_id'],
       name: json['name'],
       description: json['description'],
       imageUrl: json['imageUrl'],

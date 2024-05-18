@@ -47,7 +47,6 @@ export class UsersService {
     }
     async loginUser(loginDto: LoginDto): Promise<UserDocument> {
         const user = await this.userModel.findOne({ email: loginDto.email }).select("+password");
-        console.log('hello');
      
         if (!user) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.USER_NOT_FOUND);
         const isPasswordCorrect = await compare(loginDto.password, user.password);
