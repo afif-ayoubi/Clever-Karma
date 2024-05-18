@@ -1,41 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
+import '../../../../core/common_domain/entities/user.dart';
 
+part 'volunteer.g.dart';
 @HiveType(typeId: 0)
-class User extends HiveObject with EquatableMixin {
+class Volunteer extends HiveObject with EquatableMixin {
   @HiveField(0)
-  final int? id;
+  final User user;
   @HiveField(1)
-  final String? firstName;
+  final DateTime? dateOfBirth;
   @HiveField(2)
-  final String? lastName;
+  final String? fcmToken;
   @HiveField(3)
-  final String email;
+  final String? gender;
   @HiveField(4)
-  final String password;
-  @HiveField(5)
-  final String role;
+  final int? phoneNumber;
 
-
-  User({
-    this.id,
-    this.firstName,
-    required this.role,
-    this.lastName,
-    required this.email,
-    required this.password,
-
+  Volunteer({
+    required this.user,
+    this.dateOfBirth,
+    this.phoneNumber,
+    this.fcmToken,
+    this.gender,
   });
 
-  @override
-  List<Object?> get props => [
-        id,
-        firstName,
-        lastName,
-        email,
-        password,
-    role,
-
-      ];
+  List<Object?> get props => [user, dateOfBirth, phoneNumber, fcmToken, gender];
 }
