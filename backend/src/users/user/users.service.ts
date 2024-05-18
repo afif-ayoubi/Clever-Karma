@@ -96,7 +96,7 @@ export class UsersService {
         user.followers.push({ organizationId: followDto.organizationId });
         return user.save();
     }
-    async unfollowUser(userId: string, followDto: FollowDto): Promise<User> {
+    async unfollowOrganization(userId: string, followDto: FollowDto): Promise<User> {
         const user = await this.userModel.findById(userId);
 
         if (!user) {
@@ -123,6 +123,7 @@ export class UsersService {
             userInfo: user.userInfo,
             organizationDetail: user.organizationDetail,
             notifications: user.notifications,
+            followers: user.followers,
         };
     }
 
@@ -137,6 +138,7 @@ export class UsersService {
             userInfo: user.userInfo,
             organizationDetail: user.organizationDetail,
             notifications: user.notifications,
+            followers: user.followers,
 
         };
     }

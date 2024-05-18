@@ -7,10 +7,10 @@ import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
 import { UpdateUserDto } from "./dto/user_dto/update_user.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
-import { OrganizationAuthResponseType } from "./types/organizaiton_type/auth_organization_response_type";
 import { OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
 import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
+import { FollowDto } from "./dto/follow_dto/follow.dto";
 
 @Controller('user')
 export class UsersController {
@@ -51,6 +51,16 @@ export class UsersController {
     async currentUser(@Request() request: ExpressRequest): Promise<UserResponseType> {
         return this.userService.buildUserResponse(request.user);
 
+    }
+    
+    @Post(':id/follow')
+    async followUser( @Param('id') userId: string, @Body() followDto: FollowDto) {
+        return this.userService.followOrganization(userId, followDto);
+    }
+
+    @Post(':id/unfollow')
+    async unfollowUser( @Param('id') userId: string, @Body() followDto: FollowDto) {
+        return this.userService.unfollowOrganization(userId, followDto);
     }
 
     @Patch()
