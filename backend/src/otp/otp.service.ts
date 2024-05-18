@@ -2,23 +2,34 @@ import { MailerService } from "@nestjs-modules/mailer";
 import { Injectable } from "@nestjs/common";
 import 'dotenv/config';
 
+const OTP='otp';
 @Injectable()
 export class OtpService {
-    constructor(private readonly mailService: MailerService) {}
+    private otps = new Map<string, string>();
 
-    async sendMail() {
-        const message = `Forgot your password? If you didn't forget your password, please ignore this email!`;
+    constructor(private readonly mailService: MailerService) {}
+cs
+    async sendMail(email: string): Promise<void> {
+        const otp = this.generateOtp();
+        const message = `Your OTP code is ${otp}. If you didn't request this, please ignore this email.`;
 
         try {
-            const result = await this.mailService.sendMail({
+            await this.mailService.sendMail({
                 from: process.env.USER,
-                to: ['afif.alayoubi@gmail.com'],
-                subject: `How to Send Emails with Nodemailer`,
+                to: email,
+                subject: `Your OTP Code`,
                 text: message,
             });
-            return result;
+
+            this.otps.set(OTP, otp); 
+            console.log(this.otps) 
         } catch (error) {
-            throw new Error(`: ${error.message}`);
+            throw new Error(`Failed to send email: ${error.message}`);
         }
     }
+
+    generateOtp(): string {
+        return Math.floor(1000 + Math.random() * 9000).toString(); 
+    }
+
 }
