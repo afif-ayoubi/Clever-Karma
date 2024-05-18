@@ -74,10 +74,7 @@ class _AuthPageState extends State<AuthPage> {
     return Scaffold(
         body: BlocConsumer<UsersBloc, UsersState>(listener: (context, state) {
           if (state is SuccessUserState) {
-            SnackBarMessage.instance.showSuccessSnackBar(
-              message: state.message,
-              context: context,
-            );
+            final role= state.role;
             print('role: $role');
            if(_emailController.text=='o12@gmail.com'){
               context.go(Routes.orgEntryPage);
@@ -93,7 +90,7 @@ class _AuthPageState extends State<AuthPage> {
           }
         }, builder: (context, state) {
           if (state is LoadingUsersState) {
-            SizedBox(height: 100.sh, child: LoadingWidget());
+            return SizedBox(height: 100.sh, child: LoadingWidget());
           }
           return _buildBody();
         }));

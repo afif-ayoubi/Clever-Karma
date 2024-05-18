@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile/core/constants/constants.dart';
 import 'package:mobile/core/constants/failure.dart';
 import 'package:mobile/core/error/failures.dart';
 import 'package:mobile/features/auth/data/repositories/user_repository_impl.dart';
@@ -9,6 +10,7 @@ import 'package:mobile/features/auth/domain/usecases/get_user.dart';
 import 'package:mobile/features/auth/domain/usecases/login_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/update_user.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../../core/constants/message.dart';
 import '../../../domain/entities/user.dart';
@@ -37,7 +39,11 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
       } else if (event is LoginUserEvent) {
         emit(LoadingUsersState());
         final failureOrDoneMessage= await loginUserUseCase(event.user);
-        emit(_eitherDoneMessageOrErrorState(failureOrDoneMessage, LOGIN_SUCCESS_MESSAGE));
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        final String role= prefs.getString(ROLE) ?? '';
+
+
+        emit(_eitherDoneMessageOrErrorState(failureOrDoneMessage, role));
       } else if (event is LogoutUserEvent) {
         emit(LoadingUsersState());
       } else if (event is UpdateUserEvent) {
@@ -50,12 +56,12 @@ class UsersBloc extends Bloc<UsersEvent, UsersState> {
     });
   }
   UsersState  _eitherDoneMessageOrErrorState(
-      Either<Failure, Unit> either, String message) {
+      Either<Failure, Unit> either, String role) {
     return either.fold(
           (failure) => ErrorUsersState(
         message: _mapFailureToMessage(failure),
       ),
-          (_) => SuccessUserState(message: message),
+          (_) => SuccessUserState(role: role),
     );
   }
    String _mapFailureToMessage(Failure failure) {

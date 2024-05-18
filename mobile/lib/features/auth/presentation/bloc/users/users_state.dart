@@ -17,8 +17,8 @@ final class ErrorUsersState extends UsersState {
   List<Object> get props => [];
 }
 final class SuccessUserState extends UsersState {
-  final String message;
-  const SuccessUserState({required this.message});
+  final String role;
+  const SuccessUserState({required this.role});
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [role];
 }
