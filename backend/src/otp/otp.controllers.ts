@@ -15,5 +15,11 @@ export class OtpController {
         return { message: 'OTP sent successfully' };
     }
 
- 
+    @Post('verify')
+    verifyOtp( @Body('otp') otp: string): { isValid: boolean } {
+        
+
+        const isValid = this.otpService.verifyOtp( otp);
+        return { isValid };
+    }
 }
