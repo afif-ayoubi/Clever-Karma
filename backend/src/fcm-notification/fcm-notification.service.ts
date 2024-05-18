@@ -21,7 +21,6 @@ export class FcmNotificationService {
     @InjectModel(Notifications.name) private notificationModel: Model<Notifications>,
     @InjectModel(User.name) private userModel: Model<User>
   ) { }
-
   async sendNotificationToAllUsers(title: string, body: string) {
     const payload = {
       notification: {
@@ -33,42 +32,60 @@ export class FcmNotificationService {
         age: "21"
       }
     };
-
+  
     try {
       const users = await this.userModel.find().select('notifications.fcm_token');
       const tokens = users.flatMap(user => user.notifications.map(notification => notification.fcm_token));
-
       const uniqueTokens = [...new Set(tokens)];
-      console.log(uniqueTokens);
-
+      
       const response = await admin.messaging().sendToDevice(uniqueTokens, payload);
-
+  
       const notifications = uniqueTokens.map(token => ({
         fcm_token: token,
         title: title,
         body: body,
+        sent_at: new Date().toISOString(),
         created_by: 'system'
       }));
-
-      await this.notificationModel.insertMany(notifications);
-
-      return { success: true, response };
+  
+      await Promise.all(users.map(async user => {
+        const userTokens = user.notifications.map(notification => notification.fcm_token);
+        const userNotificationTokens = userTokens.filter(token => uniqueTokens.includes(token));
+  
+        if (userNotificationTokens.length > 0) {
+          await this.userModel.updateOne(
+            { _id: user._id },
+            {
+              $push: {
+                notifications: {
+                  $each: notifications.filter(notification => userNotificationTokens.includes(notification.fcm_token))
+                }
+              }
+            }
+          );
+        }
+      }));
+  
+      return { success: true, response, notifications };
     } catch (error) {
       return { success: false, error: error.message };
     }
   }
-
-  async getNotificationsByUserToken(token: string) {
+  
+  
+  async getUserNotifications(userId: string) {
     try {
-      const user = await this.userModel.findOne({ 'notifications.fcm_token': token }).populate('notifications');
-      if (user) {
-        return { success: true, notifications: user.notifications };
-      } else {
+      const user = await this.userModel.findById(userId).select('notifications');
+      
+      if (!user) {
         return { success: false, message: 'User not found' };
       }
+  
+      return { success: true, notifications: user.notifications };
     } catch (error) {
       return { success: false, error: error.message };
     }
   }
+  
 
 }
