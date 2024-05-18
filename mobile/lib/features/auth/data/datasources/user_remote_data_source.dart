@@ -67,10 +67,18 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<UserModel> getUser() async {
+    SharedPreferences sp;
+
+    sp = await SharedPreferences.getInstance();
+    String? token = sp.getString(TOKEN);
     try {
       final response = await client.get(
         Uri.parse(BASE_URL + "/user"),
-        headers: {"Content-Type": "application/json"},
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
       );
       if (response.statusCode == 200) {
         final decodedJson = json.decode(response.body);
@@ -87,21 +95,12 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<Unit> login(UserModel user) async {
-    SharedPreferences sp;
-
-    sp = await SharedPreferences.getInstance();
-    String? token = sp.getString(TOKEN);
     final body = user.toJson1();
     print(body);
     try {
       final response = await client.post(
         Uri.parse('$BASE_URL/user/login'),
         body: body,
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
       );
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);

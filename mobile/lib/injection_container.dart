@@ -28,7 +28,6 @@ import 'features/opportunity/domain/repositories/opportunity_repository.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-  //! Features - Users
 
   // Bloc
 
