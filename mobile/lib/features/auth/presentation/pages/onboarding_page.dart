@@ -5,9 +5,10 @@ import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:mobile/features/auth/presentation/widgets/onboarding_page/onboarding_detail_widget.dart';
 import 'package:mobile/routes/class_routes.dart';
 
-import '../bloc/obBoarding/on_boarding_bloc.dart';
-import '../bloc/obBoarding/on_boarding_event.dart';
-import '../bloc/obBoarding/on_boarding_state.dart';
+
+import '../bloc/onBoarding/on_boarding_bloc.dart';
+import '../bloc/onBoarding/on_boarding_event.dart';
+import '../bloc/onBoarding/on_boarding_state.dart';
 
 
 class OnBoardingPage extends StatelessWidget {

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
 import 'package:mobile/routes/app_routes.dart';
-import 'features/auth/presentation/bloc/obBoarding/on_boarding_bloc.dart';
+import 'features/auth/presentation/bloc/onBoarding/on_boarding_bloc.dart';
 import 'injection_container.dart' as di;
 
 class MyApp extends StatelessWidget {
