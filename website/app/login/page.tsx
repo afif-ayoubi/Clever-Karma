@@ -1,10 +1,11 @@
-import React from 'react'
-import '../ui/global.css'
-
-const page = () => {
+import styles from "@/app/ui/login/login.module.css";
+import LoginForm from "../ui/login/loginForm/loginForm";
+const LoginPage = () => {
   return (
-    <div>page</div>
-  )
-}
+    <div className={styles.container}>
+      <LoginForm/>
+    </div>
+  );
+};
 
-export default page
+export default LoginPage;
