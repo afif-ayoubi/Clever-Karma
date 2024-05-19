@@ -66,14 +66,12 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
       _emailController.text = user.email;
       _phoneController.text = user.phoneNumber ?? "";
       _dateController.text = user.dateOfBirth ?? '';
-      gender = user.gender ?? "";
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final loading = Provider.of<LoaderProvider>(context, listen: true).loading;
-    final list = Provider.of<UserProvider>(context).User;
     return Stack(
       children: [
         SafeArea(
@@ -206,7 +204,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
           CustomBtn(
             text: "Save",
             onPressed: () {
-              // Save logic here
+
             },
             width: true,
           ),
