@@ -6,6 +6,7 @@ import 'dotenv/config';
 import { ConfigService } from '@nestjs/config';
 import { OtpService } from './otp.service';
 import { OtpController } from './otp.controllers';
+import { UserModule } from 'src/users/users.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { OtpController } from './otp.controllers';
         },
       }),
     }),
+    UserModule, 
   ],
   providers: [OtpService],
   controllers: [OtpController],

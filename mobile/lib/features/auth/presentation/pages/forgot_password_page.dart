@@ -27,7 +27,7 @@ class ForgotPassword extends StatelessWidget {
         onPressed: () async {
           final SharedPreferences prefs = await SharedPreferences.getInstance();
           prefs.setString('email', _emailController.text);
-         await sendOtpApi(email: _emailController.text);
+         await sendOtpApi(email: _emailController.text, context: context);
             context.push(Routes.otpVerificationRoute);
 
         });

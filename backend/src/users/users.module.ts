@@ -39,6 +39,6 @@ import { FcmNotificationService } from "src/fcm-notification/fcm-notification.se
     providers: [
         UsersService, VolunteeringSectionService ,FcmNotificationService],
     controllers: [UsersController,VolunteeringSectionController,FcmNotificationController],
-    exports: [UsersService]
+    exports: [UsersService,MongooseModule]
 })
 export class UserModule { }

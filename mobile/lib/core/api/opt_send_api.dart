@@ -1,9 +1,14 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
+
 import '../constants/constants.dart';
 import 'package:http/http.dart' as http;
 
-Future<bool> sendOtpApi({required String email}) async {
+import '../util/snackbar_message.dart';
+
+Future<bool> sendOtpApi(
+    {required String email, required BuildContext context}) async {
   var headers = {'Content-Type': 'application/json'};
   var request = http.Request('POST', Uri.parse('$BASE_URL/otp/send'));
   request.body = json.encode({"email": "$email"});
@@ -16,6 +21,10 @@ Future<bool> sendOtpApi({required String email}) async {
     return true;
   } else {
     print(response.reasonPhrase);
+    SnackBarMessage.instance.showErrorSnackBar(
+      message: 'User not found',
+      context: context,
+    );
     return false;
   }
 }

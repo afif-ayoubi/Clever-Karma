@@ -20,9 +20,9 @@ class OtpVerificationPage extends StatelessWidget {
         body: 'check your email to see  the\nverification code',
         textBtn: 'Resend code',
         isOtpVerificationPage: true,
-        onPressed: () async{
+        onPressed: () async {
           final SharedPreferences prefs = await SharedPreferences.getInstance();
-          await sendOtpApi(email: prefs.getString('email')!);
+          await sendOtpApi(email: prefs.getString('email')!, context: context);
         });
   }
 }
