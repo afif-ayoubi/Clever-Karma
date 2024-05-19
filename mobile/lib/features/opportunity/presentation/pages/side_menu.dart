@@ -63,6 +63,8 @@ class _SideMenuState extends State<SideMenu> {
                             context.push(Routes.profileRoute);
                             break;
                           case 2:
+                            context.push(Routes.notificationPage);
+
                             print(selectedMenu == menu);
                             break;
                           case 3:

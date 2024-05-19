@@ -16,7 +16,7 @@ import 'dotenv/config';
 import { FollowDto } from "./dto/follow_dto/follow.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
 import { ChangePasswordDto } from "./dto/user_dto/change_password.dto";
-import { hash,  } from 'bcrypt';
+import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -25,16 +25,47 @@ export type UserDocument = HydratedDocument<User>;
 @Injectable()
 export class UsersService {
     constructor(@InjectModel(User.name) private userModel: Model<User>,
+    @InjectModel(VolunteeringSection.name) private volunteeringSectionModel: Model<VolunteeringSection>
     ) { }
 
  
     async createOrganization(organizationDto: OrganizationDto): Promise<UserDocument> {
-        const organization = (await this.userModel.findOne({ email: organizationDto.email }));
-        if (organization) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
-
-        const createdOrganization = new this.userModel(organizationDto);
+        const existingUser = await this.userModel.findOne({ email: organizationDto.email });
+        if (existingUser) {
+          throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.EMAIL_ALREADY_TAKEN);
+        }
+    
+        const { organizationDetail } = organizationDto;
+        const existingVolunteeringSection = await this.volunteeringSectionModel.findById(organizationDetail.volunteeringSectionId).exec();
+        if (!existingVolunteeringSection) {
+          throw new ModelUnprocessableEnitityException('Volunteering Section not found');
+        }
+    
+        const organizationDetailWithSection = {
+          ...organizationDetail,
+          VolunteeringSection: existingVolunteeringSection,
+        };
+    
+        const createdOrganization = new this.userModel({
+          ...organizationDto,
+          organizationDetail: organizationDetailWithSection,
+        });
+    
         return createdOrganization.save();
-    }
+      }
+
+
+      async findOrganizationsByVolunteeringSection(volunteeringSectionId: string): Promise<UserDocument[]> {
+        const volunteeringSection = await this.volunteeringSectionModel.findById(volunteeringSectionId);
+        if (!volunteeringSection) {
+          throw new ModelUnprocessableEnitityException('Volunteering Section not found');
+        }
+    
+        return this.userModel.find({ 'organizationDetail.VolunteeringSection': volunteeringSectionId });
+      }
+
+
+
     async updateOrganization(id: string, organizationDto: any): Promise<UserDocument> {
         const existingUser = await this.userModel.findOne({ email: organizationDto.email });
 

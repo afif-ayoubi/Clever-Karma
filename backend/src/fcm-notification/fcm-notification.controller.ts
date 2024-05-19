@@ -12,7 +12,7 @@ export class FcmNotificationController {
     return await this.fcmNotificationService.sendNotificationToAllUsers(title, body);
   }
 
-  @Get(':userId')
+  @Get('')
   async getUserNotifications(@Request() request: ExpressRequest) {
     const result = await this.fcmNotificationService.getUserNotifications(request.user._id.toString());
     if (result.success) {

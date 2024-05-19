@@ -20,7 +20,7 @@ const Navbar = () => {
                     title="Login"
                     icon="/user.svg"
                     variant="btn_dark_green"
-                    destination='/dashboard'
+                    destination='/login'
                 />
                 <Button
                     type="button"

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, HttpException, HttpStatus, Param, Patch, Post, Request } from "@nestjs/common";
-import { UsersService } from "./users.service";
+import { UserDocument, UsersService } from "./users.service";
 import { UserAuthResponseType } from "./types/user_type/auth_user_response_type";
 import { ExpressRequest } from "../middlewares/auth.middleware";
 import { UserResponseType } from "./types/user_type/user_response_type";
@@ -69,7 +69,11 @@ export class UsersController {
     async unfollowUser( @Param('id') userId: string, @Body() followDto: FollowDto) {
         return this.userService.unfollowOrganization(userId, followDto);
     }
-
+    
+    @Get('volunteering-section/:id')
+    async findByVolunteeringSection(@Param('id') volunteeringSectionId: string): Promise<UserDocument[]> {
+      return this.userService.findOrganizationsByVolunteeringSection(volunteeringSectionId);
+    }
     @Patch()
     async updateUser(@Request() request: ExpressRequest, @Body() updateUserDto: UpdateUserDto): Promise<UserResponseType> {
         const userId = request.user._id.toString();

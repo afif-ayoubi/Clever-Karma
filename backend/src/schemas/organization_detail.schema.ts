@@ -2,6 +2,7 @@ import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
 import { VolunteeringSection, VolunteeringSectionSchema } from './volunteering_opportunity.schema';
 import { OrganizationLocation, OrganizationLocationSchema } from './location.schema';
 import { LiveStreaming, LiveStreamingSchema } from './live_streaming.schema';
+import mongoose from 'mongoose';
 
 @Schema()
 export class OrganizationDetail {
@@ -16,8 +17,8 @@ export class OrganizationDetail {
     isActive: boolean;
     @Prop({ type: OrganizationLocationSchema, })
     location?: OrganizationLocation;
-    @Prop({ required: true, type: VolunteeringSectionSchema })
-    VolunteeringSection: VolunteeringSection;
+    @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'VolunteeringSection', required: true })
+    VolunteeringSection: mongoose.Types.ObjectId;
     @Prop({ type: LiveStreamingSchema,default: {liveStremingId: Math.floor(1000000 + Math.random() * 9000000).toString(), isActivated: false} })
     liveStreamingL:LiveStreaming
 

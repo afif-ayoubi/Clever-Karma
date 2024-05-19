@@ -5,23 +5,23 @@ part 'user.g.dart';
 @HiveType(typeId: 0)
 class User extends HiveObject with EquatableMixin {
   @HiveField(0)
-  final int? id;
+  final String? id;
   @HiveField(1)
-  final String? firstName;
+  late final String? firstName;
   @HiveField(2)
-  final String? lastName;
+  late final String? lastName;
   @HiveField(3)
-  final String email;
+  late final String email;
   @HiveField(4)
   final String password;
   @HiveField(5)
-  final DateTime? dateOfBirth;
+  late final String? dateOfBirth;
   @HiveField(6)
   final String? fcmToken;
   @HiveField(7)
-  final String? gender;
+  late final String? gender;
   @HiveField(8)
-  final int? phoneNumber;
+  late final String? phoneNumber;
 
   User({
     this.id,

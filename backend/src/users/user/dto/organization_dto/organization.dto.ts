@@ -1,20 +1,17 @@
-import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, validate, IsNumber, isNotEmpty } from "class-validator";
+import { IsNotEmpty, IsString, IsEmail, IsIn, ValidateNested, IsOptional, IsNumber } from "class-validator";
 import { Type } from "class-transformer";
-import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
-
 
 export class LiveStreamingDto {
-  
     readonly liveStremingId: string;
+
     @IsIn([true, false])
     readonly isActivated: boolean;
-
 }
+
 export class LocationDto {
     @IsOptional()
     @IsNumber()
     readonly longitude: number;
-
 
     @IsOptional()
     @IsNumber()
@@ -22,6 +19,7 @@ export class LocationDto {
 }
 
 export class OrganizationDetailDto {
+
     @IsString()
     @IsNotEmpty()
     readonly aboutUs: string;
@@ -33,15 +31,17 @@ export class OrganizationDetailDto {
     @IsString()
     @IsNotEmpty()
     readonly imageUrl: string;
+
     @IsNotEmpty()
     @ValidateNested({ each: true })
     @Type(() => LocationDto)
-    readonly location: LocationDto
+    readonly location: LocationDto;
 
-    @ValidateNested({ each: true })
-    @Type(() => VolunteeringSectionDto)
-    readonly VolunteeringSection: VolunteeringSectionDto;
+    @IsString()
+    @IsNotEmpty()
+    readonly volunteeringSectionId: string;
 }
+
 export class OrganizationDto {
     @IsNotEmpty()
     @IsString()
@@ -57,18 +57,14 @@ export class OrganizationDto {
 
     @IsNotEmpty()
     readonly password: string;
-   
 
     readonly role: string;
-
     readonly isActive: boolean;
-    
+
     @Type(() => LiveStreamingDto)
-    readonly liveStreaming: LiveStreamingDto
+    readonly liveStreaming: LiveStreamingDto;
 
     @ValidateNested({ each: true })
     @Type(() => OrganizationDetailDto)
-    readonly organizationDetail: OrganizationDetailDto
-
-
+    readonly organizationDetail: OrganizationDetailDto;
 }

@@ -14,19 +14,22 @@ class CustomTextField extends StatefulWidget {
   final bool keyboardNumber;
   final bool isDate;
   final int maxLines; // Changed to int and set a default value
+  final ValueChanged<String>? onChanged; // Added onChanged parameter
 
-  const   CustomTextField(
-      {super.key,
-        this.keyboardNumber = false,
-        this.enable = true,
-        this.labelText,
-        this.isDate = false,
-        required this.controller,
-        this.onTap,
-        this.hintText,
-        this.showVisibility = false,
-        this.maxLines = 1,
-        this.validator});
+  const CustomTextField({
+    Key? key, // Added key parameter
+    this.keyboardNumber = false,
+    this.enable = true,
+    this.labelText,
+    this.isDate = false,
+    required this.controller,
+    this.onTap,
+    this.hintText,
+    this.showVisibility = false,
+    this.maxLines = 1,
+    this.validator,
+    this.onChanged, // Added onChanged parameter
+  }) : super(key: key); // Added key to super constructor
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -45,6 +48,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           SizedBox(
             height: widget.maxLines > 1 ? 100.h : 45.h,
             child: TextFormField(
+              onChanged: widget.onChanged,
               readOnly: widget.isDate ? true : false,
               enabled: widget.enable,
               onTap: widget.onTap,
@@ -60,11 +64,11 @@ class _CustomTextFieldState extends State<CustomTextField> {
                     ? GestureDetector(
                   onTap: () {
                     showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(1960),
-                        lastDate: DateTime.now())
-                        .then((value) {
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(1960),
+                      lastDate: DateTime.now(),
+                    ).then((value) {
                       if (value != null) {
                         widget.controller.text =
                             value.toString().substring(0, 10);

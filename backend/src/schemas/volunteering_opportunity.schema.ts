@@ -10,4 +10,4 @@ export class VolunteeringSection {
     imageUrl: string;
 
 }
-export const VolunteeringSectionSchema = SchemaFactory.createForClass(VolunteeringSection);
+export const VolunteeringSectionSchema = SchemaFactory.createForClass(VolunteeringSection); 
