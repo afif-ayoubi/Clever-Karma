@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mobile/routes/class_routes.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../routes/class_routes.dart';
 import '../../../../domain/entities/opportunity.dart';
 import 'opportunity_card.dart';
-
 
 class OpportunityView extends StatelessWidget {
   const OpportunityView({
@@ -13,11 +13,13 @@ class OpportunityView extends StatelessWidget {
     required this.pageNotifier,
     required this.roomSelectorNotifier,
     required this.controller,
+    required this.opportunities,
   });
 
   final ValueNotifier<double> pageNotifier;
   final ValueNotifier<int> roomSelectorNotifier;
   final PageController controller;
+  final List<Opportunity> opportunities;
 
   double _getOffsetX(double percent) => percent.isNegative ? 30.0.r : -30.0.r;
 
@@ -30,16 +32,16 @@ class OpportunityView extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<double>(
       valueListenable: pageNotifier,
-      builder: (_, page, __) => ValueListenableBuilder(
+      builder: (_, page, __) => ValueListenableBuilder<int>(
         valueListenable: roomSelectorNotifier,
         builder: (_, selected, __) => PageView.builder(
           clipBehavior: Clip.none,
-          itemCount: Opportunity.fakeData.length,
+          itemCount: opportunities.length,
           controller: controller,
           itemBuilder: (_, index) {
             final percent = page - index;
             final isSelected = selected == index;
-            final opportunity = Opportunity.fakeData[index];
+            final opportunity = opportunities[index];
             return AnimatedContainer(
               duration: kThemeAnimationDuration,
               curve: Curves.fastOutSlowIn,
@@ -52,8 +54,7 @@ class OpportunityView extends StatelessWidget {
                 onSwipeUp: () => roomSelectorNotifier.value = index,
                 onSwipeDown: () => roomSelectorNotifier.value = -1,
                 onTap: () async {
-
-                 context.push(Routes.organizationsPage);
+                  context.push(Routes.organizationsPage);
                 },
               ),
             );

@@ -6,11 +6,12 @@ class PageIndicators extends StatelessWidget {
   const PageIndicators({
     super.key,
     required this.roomSelectorNotifier,
-    required this.pageNotifier,
+    required this.pageNotifier, required this.opportunities,
   });
 
   final ValueNotifier<int> roomSelectorNotifier;
   final ValueNotifier<double> pageNotifier;
+  final List<Opportunity> opportunities ;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PageIndicators extends StatelessWidget {
         valueListenable: pageNotifier,
         builder: (_, value, __) => Center(
           child: PageViewIndicators(
-            length: Opportunity.fakeData.length,
+            length: opportunities.length,
             pageIndex: value,
           ),
         ),
