@@ -2,17 +2,18 @@ import { MiddlewareConsumer, Module, RequestMethod } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserModule } from './users/users.module';
 import { AuthMiddleware } from './users/middlewares/auth.middleware';
-import { MailerModule } from '@nestjs-modules/mailer';
 import 'dotenv/config';
 import { ConfigModule } from '@nestjs/config';
 import { OtpController } from './otp/otp.controllers';
 import { OtpService } from './otp/otp.service';
 import { MailModule } from './otp/otp.module';
+import { OpenaiModule } from './openai/openai.module';
 
 @Module({
   imports: [MongooseModule.forRoot(process.env.CONNECTION_STRING),
     UserModule,
     MailModule,
+    OpenaiModule,
   ConfigModule.forRoot(
     {
       cache: true,
@@ -32,7 +33,8 @@ export class AppModule {
       { path: 'user/create-organization', method: RequestMethod.POST },
       { path: 'otp/verify', method: RequestMethod.POST},
       { path: 'otp/send', method: RequestMethod.POST},
-      { path: 'user/change-password', method: RequestMethod.PATCH}
+      { path: 'user/change-password', method: RequestMethod.PATCH},
+      { path: 'openai/chat', method: RequestMethod.POST}
     )
 
       .forRoutes({
