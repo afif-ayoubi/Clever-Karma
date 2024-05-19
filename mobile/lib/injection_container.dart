@@ -12,6 +12,8 @@ import 'package:mobile/features/auth/domain/usecases/login_user.dart';
 import 'package:mobile/features/auth/domain/usecases/logout_user.dart';
 import 'package:mobile/features/auth/domain/usecases/update_user.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
+import 'package:mobile/features/opportunity/data/datasources/opportunity_local_data_source.dart';
+import 'package:mobile/features/opportunity/data/datasources/opportunity_remote_data_source.dart';
 import 'package:mobile/features/opportunity/data/models/opportunity_model.dart';
 import 'package:mobile/features/opportunity/data/repositories/opportunity_repository_impl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,11 +26,12 @@ import 'package:http/http.dart' as http;
 
 import 'features/opportunity/domain/entities/opportunity.dart';
 import 'features/opportunity/domain/repositories/opportunity_repository.dart';
+import 'features/opportunity/domain/usecases/get_opportunity.dart';
+import 'features/opportunity/presentation/bloc/opportunity_bloc.dart';
 
 final sl = GetIt.instance;
 
 Future<void> init() async {
-
   // Bloc
 
   sl.registerFactory(() => UsersBloc(
@@ -37,6 +40,7 @@ Future<void> init() async {
       loginUserUseCase: sl(),
       logoutUserUseCase: sl(),
       updateUserUseCase: sl()));
+  sl.registerFactory(() => OpportunityBloc(getOpportunityUseCase: sl()));
 
   // UseCases
 
@@ -45,6 +49,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => LogoutUserUseCase(sl()));
   sl.registerLazySingleton(() => UpdateUserUseCase(sl()));
   sl.registerLazySingleton(() => GetUserUseCase(sl()));
+  sl.registerLazySingleton(() => GetOpportunityUseCase(sl()));
 
   // Repository
   sl.registerLazySingleton<BaseRepository>(() => UsersRepositoryImpl(
@@ -82,6 +87,10 @@ Future<void> init() async {
       () => UserRemoteDataSourceImpl(client: sl(), sharedPreferences: sl()));
   sl.registerLazySingleton<UserLocalDataSource>(
       () => UserLocalDataSourceImpl(userBox: sl()));
+  sl.registerLazySingleton<OpportunityRemoteDataSource>(() =>
+      OpportunityRemoteDataSourceImpl(client: sl(), sharedPreferences: sl()));
+  sl.registerLazySingleton<OpportunityLocalDataSource>(
+      () => OpportunityLocalDataSourceImpl(opportunityBox: sl()));
 
   //! core
 
@@ -91,7 +100,8 @@ Future<void> init() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   final userBox = await Hive.openBox<UserModel>(USER_BOX);
-  final opportunityBox = await Hive.openBox<OpportunityModel>(OPPORTUNITY_BOX);
+  final opportunityBox =
+      await Hive.openBox<List<OpportunityModel>>(OPPORTUNITY_BOX);
   sl.registerLazySingleton(() => userBox);
   sl.registerLazySingleton(() => opportunityBox);
   sl.registerLazySingleton(() => sharedPreferences);
