@@ -13,13 +13,14 @@ import 'package:provider/provider.dart';
 import '../../../../../core/api/get_user_api.dart';
 import '../../../../../core/api/providers/loader_provider.dart';
 import '../../../../../core/api/providers/notification_provider.dart';
+import '../../../../../core/api/update_user_api.dart';
 import '../../../../../core/wdigets/loading_widget.dart';
 import '../common_widgets/app_bar.dart';
 import '../common_widgets/custom_textfield.dart';
 import 'custom_dropdown.dart';
 
 class ProfileDetailWidget extends StatefulWidget {
-  const ProfileDetailWidget({super.key});
+  const ProfileDetailWidget({Key? key}) : super(key: key);
 
   @override
   State<ProfileDetailWidget> createState() => _ProfileDetailWidgetState();
@@ -28,24 +29,13 @@ class ProfileDetailWidget extends StatefulWidget {
 class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
   File? _image;
   final ImagePicker picker = ImagePicker();
-  List<String> genderList = ['male', 'female'];
+  List<String> genderList = ['Male', 'Female'];
   String? gender;
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _dateController = TextEditingController();
-
-  Future<void> getImage() async {
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (image != null) {
-        _image = File(image.path);
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
 
   UserModel user = UserModel(email: '', password: '');
 
@@ -60,12 +50,34 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
     await GetUser(context);
     Provider.of<LoaderProvider>(context, listen: false).setLoader(false);
     user = Provider.of<UserProvider>(context, listen: false).User!;
+    String formattedDateOfBirth = "";
+
+    // Parse and format dateOfBirth
+    if (user.dateOfBirth != null && user.dateOfBirth!.isNotEmpty) {
+      try {
+        // Ensure correct format
+        List<String> parts = user.dateOfBirth!.split('-');
+        if (parts.length == 3) {
+          // Pad month and day with leading zero if necessary
+          parts[1] = parts[1].padLeft(2, '0');
+          parts[2] = parts[2].padLeft(2, '0');
+          formattedDateOfBirth = parts.join('-');
+
+          // Parse the formatted date string to ensure it's valid
+          DateTime parsedDate = DateTime.parse(formattedDateOfBirth);
+          formattedDateOfBirth = "${parsedDate.year}-${parsedDate.month.toString().padLeft(2, '0')}-${parsedDate.day.toString().padLeft(2, '0')}";
+        }
+        print("Formatted dateOfBirth: $formattedDateOfBirth");
+      } catch (e) {
+        print("Error parsing date: $e");
+      }
+    }
     setState(() {
       _firstNameController.text = user.firstName ?? "";
       _lastNameController.text = user.lastName ?? "";
       _emailController.text = user.email;
       _phoneController.text = user.phoneNumber ?? "";
-      _dateController.text = user.dateOfBirth ?? '';
+      _dateController.text = formattedDateOfBirth ?? '';
     });
   }
 
@@ -96,17 +108,17 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
                       ),
                       child: _image == null
                           ? Icon(
-                              CupertinoIcons.person,
-                              size: 140.r,
-                              color: HexColor.lightColor,
-                            )
+                        CupertinoIcons.person,
+                        size: 140.r,
+                        color: HexColor.lightColor,
+                      )
                           : ClipRRect(
-                              borderRadius: BorderRadius.circular(80.0).r,
-                              child: Image.file(
-                                _image!,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                        borderRadius: BorderRadius.circular(80.0).r,
+                        child: Image.file(
+                          _image!,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                   Gap(25.h),
@@ -129,7 +141,7 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
 
   Widget _fieldSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Column(
         children: [
           CustomTextField(
@@ -178,16 +190,34 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
             },
           ),
           Gap(10.h),
-          CustomTextField(
-            hintText: 'Date of Birth',
-            controller: _dateController,
-            labelText: 'Date of Birth',
-            isDate: true,
-            onChanged: (value) {
-              setState(() {
-                user.dateOfBirth = value;
-              });
+          GestureDetector(
+            onTap: () async {
+              final DateTime? picked = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now(),
+              );
+              if (picked != null) {
+                setState(() {
+                  _dateController.text = "${picked.year}-${picked.month}-${picked.day}";
+                  user.dateOfBirth = _dateController.text;
+                });
+              }
             },
+            child: AbsorbPointer(
+              child: CustomTextField(
+                hintText: 'Date of Birth',
+                controller: _dateController,
+                labelText: 'Date of Birth',
+                isDate: true,
+                onChanged: (value) {
+                  setState(() {
+                    user.dateOfBirth = value;
+                  });
+                },
+              ),
+            ),
           ),
           Gap(10.h),
           CustomTextField(
@@ -203,8 +233,27 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
           Gap(25.h),
           CustomBtn(
             text: "Save",
-            onPressed: () {
+            onPressed: () async {
+              String dateOfBirthString = "2024-5-14";
+              List<String> parts = dateOfBirthString.split('-');
+              if (parts.length == 3 && parts[1].length == 1) {
+                parts[1] = '0${parts[1]}';
+              }
+              dateOfBirthString = parts.join('-');
+              DateTime dateOfBirth = DateTime.parse(dateOfBirthString);
+              Provider.of<LoaderProvider>(context, listen: false).setLoader(true);
+              await UpdateApi(
+                user.email,
+                user.firstName ?? "",
+                user.lastName ?? "",
+                user.phoneNumber ?? "",
+                user.gender ?? "",
+                dateOfBirth,
+                user.profileImage ?? "",
+                context,
+              );
 
+              Provider.of<LoaderProvider>(context, listen: false).setLoader(false);
             },
             width: true,
           ),
@@ -212,5 +261,16 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
         ],
       ),
     );
+  }
+
+  Future<void> getImage() async {
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (image != null) {
+        _image = File(image.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 }

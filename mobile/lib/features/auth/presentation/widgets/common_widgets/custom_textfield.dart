@@ -13,8 +13,8 @@ class CustomTextField extends StatefulWidget {
   final bool? enable;
   final bool keyboardNumber;
   final bool isDate;
-  final int maxLines; // Changed to int and set a default value
-  final ValueChanged<String>? onChanged; // Added onChanged parameter
+  final int maxLines;
+  final ValueChanged<String>? onChanged;
 
   const CustomTextField({
     Key? key, // Added key parameter
@@ -28,8 +28,8 @@ class CustomTextField extends StatefulWidget {
     this.showVisibility = false,
     this.maxLines = 1,
     this.validator,
-    this.onChanged, // Added onChanged parameter
-  }) : super(key: key); // Added key to super constructor
+    this.onChanged,
+  }) : super(key: key);
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();

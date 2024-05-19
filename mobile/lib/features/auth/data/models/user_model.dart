@@ -1,8 +1,9 @@
 import 'package:mobile/features/auth/domain/entities/user.dart';
 
 class UserModel extends User {
-  UserModel({
+  UserModel( {
     super.id,
+    super.profileImage,
     super.firstName,
     super.lastName,
     required super.email,
@@ -13,16 +14,20 @@ class UserModel extends User {
     super.gender,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
-        id: json['id'],
-        firstName: json['firstName'] ?? "",
-        lastName: json['lastName'] ?? '',
-        email: json['email'] ?? '',
-        password: json['password'] ?? '',
-        dateOfBirth: json['dateOfBirth'] ?? '',
-        phoneNumber: json['phoneNumber'] ?? '',
-        gender: json['gender'] ?? '',
-      );
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'],
+      firstName: json['firstName'] ?? '',
+      lastName: json['lastName'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      dateOfBirth: json['userInfo'] != null ? json['userInfo']['dateOfBirth'] ?? '' : '',
+      phoneNumber: json['userInfo'] != null ? json['userInfo']['phone'] ?? '' : '',
+      gender: json['userInfo'] != null ? json['userInfo']['gender'] ?? '' : '',
+      profileImage: json['userInfo'] != null ? json['userInfo']['image'] ?? '' : '',
+    );
+  }
+
 
   Map<String, dynamic> toJson() => {
         'email': email,
