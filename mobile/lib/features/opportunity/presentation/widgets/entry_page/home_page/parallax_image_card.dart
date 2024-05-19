@@ -3,16 +3,19 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/hex_color.dart';
-
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ParallaxImageCard extends StatelessWidget {
-  const ParallaxImageCard(
-      {super.key, required this.imageUrl, this.parallaxValue = 0});
+  const ParallaxImageCard({
+    super.key,
+    required this.imageUrl,
+    this.parallaxValue = 0,
+  });
 
   final String imageUrl;
   final double parallaxValue;
 
-  BoxDecoration get _perallaxUrlImageDecoration => BoxDecoration(
+  BoxDecoration get _parallaxUrlImageDecoration => BoxDecoration(
     borderRadius: BorderRadius.all(const Radius.circular(12).w),
     color: HexColor.lightColor,
     boxShadow: const [
@@ -23,7 +26,7 @@ class ParallaxImageCard extends StatelessWidget {
       ),
     ],
     image: DecorationImage(
-      image: AssetImage(imageUrl),
+      image: CachedNetworkImageProvider(imageUrl),
       fit: BoxFit.cover,
     ),
   );
@@ -41,7 +44,7 @@ class ParallaxImageCard extends StatelessWidget {
     return Stack(
       fit: StackFit.expand,
       children: [
-        DecoratedBox(decoration: _perallaxUrlImageDecoration),
+        DecoratedBox(decoration: _parallaxUrlImageDecoration),
         DecoratedBox(decoration: _vignetteDecoration),
       ],
     );
