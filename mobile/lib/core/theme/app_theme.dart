@@ -39,10 +39,18 @@ abstract class AppTheme{
       focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0.r),
           borderSide: const BorderSide(color: HexColor.lightColor)),
+      errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0.r),
+          borderSide: const BorderSide(color: Colors.red)),
       hintStyle: TextStyle(
           fontSize: FontSize.s16,
           fontWeight: FontWeightManager.regular,
           color: HexColor.textInputColor),
+      errorStyle: TextStyle(
+          fontSize: FontSize.s8,
+          fontWeight: FontWeightManager.regular,
+          color: Colors.red),
+      isDense: true,
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(

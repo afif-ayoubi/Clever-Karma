@@ -2,11 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:email_validator/email_validator.dart';
 
+import '../../../../../core/api/otp_verify_api.dart';
+import '../../../../../core/util/snackbar_message.dart';
+import '../../../../../routes/class_routes.dart';
 import '../../../core/util/validation.dart';
 import '../common_widgets/custom_btn.dart';
 import '../common_widgets/custom_textfield.dart';
@@ -20,6 +24,9 @@ class OtpDetailWidget extends StatelessWidget {
   final VoidCallback onPressed;
   final bool isOtpVerificationPage;
   final bool isResetPasswordPage;
+  final TextEditingController? emailController;
+  final TextEditingController? passwordController;
+  final TextEditingController? confirmPasswordController;
 
   const OtpDetailWidget({
     super.key,
@@ -29,14 +36,14 @@ class OtpDetailWidget extends StatelessWidget {
     this.isResetPasswordPage = false,
     required this.textBtn,
     required this.onPressed,
+    this.emailController,
+    this.passwordController,
+    this.confirmPasswordController,
   });
 
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-    final TextEditingController emailController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController confirmPasswordController = TextEditingController();
 
     return SafeArea(
       child: Padding(
@@ -71,21 +78,38 @@ class OtpDetailWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                   child: CustomTextField(
-                    controller: passwordController,
+                    controller: passwordController!,
                     hintText: "New Password",
-                    validator: (value) => Validation.validatePassword(value, context),
+                    validator: (value) =>
+                        Validation.validatePassword(value, context),
                   ),
                 )
               else if (isOtpVerificationPage)
-                const OtpVerificationField()
+                OtpVerificationField(
+                  onOtpEntered: (otp) async {
+                    print(otp);
+                    if (otp.length == 4) {
+                      final api = await verifyOtpApi(number: otp.toString());
+                      if (api) {
+                        context.push(Routes.resetPasswordRoute);
+                      } else {
+                        SnackBarMessage.instance.showErrorSnackBar(
+                          message: 'Invalid OTP, Please try again',
+                          context: context,
+                        );
+                      }
+                    }
+                  },
+                )
               else
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                   child: CustomTextField(
                     hintText: 'john@gmail.com',
                     labelText: "Email",
-                    controller: emailController,
-                    validator: (value) => Validation.validateEmail(value, context),
+                    controller: emailController!,
+                    validator: (value) =>
+                        Validation.validateEmail(value, context),
                   ),
                 ),
               if (isResetPasswordPage)
@@ -93,10 +117,10 @@ class OtpDetailWidget extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
                   child: CustomTextField(
                     hintText: "Confirm Password",
-                    controller: confirmPasswordController,
+                    controller: confirmPasswordController!,
                     validator: (value) => Validation.validateConfirmPassword(
                       value,
-                      passwordController.text,
+                      passwordController!.text,
                       context,
                     ),
                   ),

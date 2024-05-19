@@ -6,11 +6,11 @@ export class Notifications {
     @Prop({ required: true })
     fcm_token: string;
 
-    @Prop({ required: true })
+    @Prop()
     title: string;
 
 
-    @Prop({ required: true })
+    @Prop()
     body: string;
 
 

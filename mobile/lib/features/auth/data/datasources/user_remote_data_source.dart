@@ -39,7 +39,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     );
 
     final body = jsonEncode(userWithToken.toJson());
-
+print(body);
     try {
       final response = await client.post(
         Uri.parse('$BASE_URL/user/create'),
@@ -48,6 +48,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         },
         body: body,
       );
+      print(response.body);
 
       if (response.statusCode == 201) {
         final jsonResponse = jsonDecode(response.body);

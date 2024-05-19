@@ -113,6 +113,7 @@ class _AuthPageState extends State<AuthPage> {
             email: _emailController.text,
             password: _passwordController.text,
           );
+          print(user);
           currentAuthData == signIn
               ? BlocProvider.of<UsersBloc>(context)
                   .add(LoginUserEvent(user: user))

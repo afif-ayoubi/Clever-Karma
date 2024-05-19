@@ -128,7 +128,7 @@ Future<void> authPopUp({
                                     if (_formKey.currentState?.validate() ?? false) {
                                       btnOnPressed();
                                       setState(
-                                              () {}); // Force rebuild to reflect the loading state
+                                              () {});
                                     }
                                   },
                                 ),

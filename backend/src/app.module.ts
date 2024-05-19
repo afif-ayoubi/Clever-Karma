@@ -30,6 +30,8 @@ export class AppModule {
       { path: 'user/create', method: RequestMethod.POST },
       { path: 'user/login', method: RequestMethod.POST },
       { path: 'user/create-organization', method: RequestMethod.POST },
+      { path: 'otp/verify', method: RequestMethod.POST},
+      { path: 'otp/send', method: RequestMethod.POST}
     )
 
       .forRoutes({
