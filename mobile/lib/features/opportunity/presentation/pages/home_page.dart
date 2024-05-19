@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:go_router/go_router.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
-
-import '../../../../routes/class_routes.dart';
+import 'package:mobile/core/wdigets/loading_widget.dart';
+import '../bloc/opportunity_bloc.dart';
 import '../widgets/entry_page/home_page/lighted_backround.dart';
 import '../widgets/entry_page/home_page/opportunity_view.dart';
 import '../widgets/entry_page/home_page/page_indicators.dart';
@@ -25,8 +25,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    controller.addListener(pageListener);
     super.initState();
+    controller.addListener(pageListener);
+    context.read<OpportunityBloc>().add(GetOpportunitiesEvent());
   }
 
   @override
@@ -59,24 +60,44 @@ class _HomePageState extends State<HomePage> {
                   fit: StackFit.expand,
                   clipBehavior: Clip.none,
                   children: [
-                    OpportunityView(
-                      pageNotifier: pageNotifier,
-                      roomSelectorNotifier: roomSelectorNotifier,
-                      controller: controller,
+                    BlocBuilder<OpportunityBloc, OpportunityState>(
+                      builder: (context, state) {
+                        if (state is LoadingOpportunitiesState) {
+                          return const Center(child: LoadingWidget());
+                        } else if (state is ErrorOpportunitiesState) {
+                          return Center(child: Text(state.message));
+                        } else if (state is LoadedOpportunitiesState) {
+                          return OpportunityView(
+                            pageNotifier: pageNotifier,
+                            roomSelectorNotifier: roomSelectorNotifier,
+                            controller: controller,
+                            opportunities: state.opportunities,
+                          );
+                        } else {
+                          return Container(); // Handle any other unexpected state if necessary
+                        }
+                      },
                     ),
-                    Positioned.fill(
-                      top: null,
-                      child: Padding(
-                        padding:  const EdgeInsets.only(bottom: 50).r,
-                        child: Column(
-                          children: [
-                            PageIndicators(
-                              roomSelectorNotifier: roomSelectorNotifier,
-                              pageNotifier: pageNotifier,
+                    BlocBuilder<OpportunityBloc, OpportunityState>(
+                      builder: (context, state) {
+                        if (state is LoadedOpportunitiesState)
+                          return Positioned.fill(
+                            top: null,
+                            child: Padding(
+                              padding: const EdgeInsets.only(bottom: 50).r,
+                              child: Column(
+                                children: [
+                                  PageIndicators(
+                                    roomSelectorNotifier: roomSelectorNotifier,
+                                    pageNotifier: pageNotifier,
+                                    opportunities: state.opportunities,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ],
-                        ),
-                      ),
+                          );
+                        return Container();
+                      },
                     ),
                   ],
                 ),

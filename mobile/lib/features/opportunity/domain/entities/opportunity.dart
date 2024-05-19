@@ -6,7 +6,7 @@ import '../../../../core/constants/assets_manager.dart';
 @HiveType(typeId: 1)
 class Opportunity extends HiveObject with EquatableMixin {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final String name;
   @HiveField(2)
@@ -23,11 +23,11 @@ class Opportunity extends HiveObject with EquatableMixin {
 
   static List<Opportunity> fakeData = [
      Opportunity(
-        id: 1, name: 'blood Donation', imageUrl: AppImages.imgImg1, description: ''),
+        id: '1', name: 'blood Donation', imageUrl: AppImages.imgImg1, description: ''),
      Opportunity(
-        id: 2, name: 'blood Section', imageUrl: AppImages.onBoardingImg3, description: ''),
+        id: '2', name: 'blood Section', imageUrl: AppImages.onBoardingImg3, description: ''),
      Opportunity(
-        id: 3, name: 'blood Room', imageUrl: AppImages.onBoardingImg1, description: ''),
+        id: '3', name: 'blood Room', imageUrl: AppImages.onBoardingImg1, description: ''),
   ];
 
   @override

@@ -39,6 +39,7 @@ class OpportunityRepositoryImpl implements OpportunityRepository {
 
   @override
   Future<Either<Failure, List<Opportunity>>> getAll() async {
+    print('begin');
     if (await networkInfo.isConnected) {
       try {
         final List<OpportunityModel> list =

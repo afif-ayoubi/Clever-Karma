@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
+import 'package:mobile/features/opportunity/presentation/bloc/opportunity_bloc.dart';
 import 'package:mobile/routes/app_routes.dart';
 import 'features/auth/presentation/bloc/onBoarding/on_boarding_bloc.dart';
 import 'injection_container.dart' as di;
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [BlocProvider(create: (_) => di.sl<UsersBloc>()),
+        BlocProvider(create: (_) => di.sl<OpportunityBloc>()),
       BlocProvider(create: (_) =>OnboardingBloc())
       ],
       child: ScreenUtilInit(
