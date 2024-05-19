@@ -15,7 +15,7 @@ class CustomTextField extends StatefulWidget {
   final bool isDate;
   final int maxLines; // Changed to int and set a default value
 
-  const CustomTextField(
+  const   CustomTextField(
       {super.key,
         this.keyboardNumber = false,
         this.enable = true,
