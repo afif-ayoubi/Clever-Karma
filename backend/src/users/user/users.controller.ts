@@ -11,6 +11,7 @@ import { OrganizationDto } from "./dto/organization_dto/organization.dto";
 import { OrganizationResponseType } from "./types/organizaiton_type/organization_response_type";
 import { UpdateOrganizationDto } from "./dto/organization_dto/update_organization.dto";
 import { FollowDto } from "./dto/follow_dto/follow.dto";
+import { ChangePasswordDto } from "./dto/user_dto/change_password.dto";
 
 @Controller('user')
 export class UsersController {
@@ -53,6 +54,12 @@ export class UsersController {
 
     }
     
+    @Patch('/change-password')
+    async changePassword(@Body() changePasswordDto: ChangePasswordDto): Promise<UserResponseType> {
+      const user = await this.userService.changePassword(changePasswordDto);
+      return this.userService.buildUserResponse(user);
+    }
+
     @Post(':id/follow')
     async followUser( @Param('id') userId: string, @Body() followDto: FollowDto) {
         return this.userService.followOrganization(userId, followDto);

@@ -15,6 +15,8 @@ import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
 import 'dotenv/config';
 import { FollowDto } from "./dto/follow_dto/follow.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
+import { ChangePasswordDto } from "./dto/user_dto/change_password.dto";
+import { hash,  } from 'bcrypt';
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -54,6 +56,20 @@ export class UsersService {
         if (!isPasswordCorrect) throw new ModelUnprocessableEnitityException(ERROR_MESSAGES.INCORRECT_PASSWORD);
         return user;
     }
+    async changePassword(changePasswordDto: ChangePasswordDto): Promise<UserDocument> {
+        const user = await this.userModel.findOne({ email: changePasswordDto.email }).select('+password');
+        if (!user) {
+          throw new ModelNotFoundException(ERROR_MESSAGES.USER_NOT_FOUND);
+        }
+    
+        user.password = changePasswordDto.newPassword;
+        await user.save();
+    
+        console.log(`New password for user ${user.email} is: ${changePasswordDto.newPassword}`);
+    
+        return user;
+      }
+    
     getUsers(): Promise<User[]> {
         return this.userModel.find();
     }
