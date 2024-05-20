@@ -7,13 +7,13 @@ class MapForm extends StatefulWidget {
   const MapForm({
     super.key,
     required LatLng center,
-    required this.currentPosition,
-    required LatLng tripoliCoordinates,
-  }) : _center = center, _tripoliCoordinates = tripoliCoordinates;
+    required this.currentPosition, required this.title, required this.snippet,
+  }) : _center = center;
 
   final LatLng _center;
   final LatLng? currentPosition;
-  final LatLng _tripoliCoordinates;
+  final String title ;
+  final String snippet;
 
   @override
   State<MapForm> createState() => _MapFormState();
@@ -40,27 +40,18 @@ class _MapFormState extends State<MapForm> {
           position: widget.currentPosition!,
           infoWindow: const InfoWindow(
             title: 'Here you are!',
-            snippet: 'My location',
           ),
         ),
         Marker(
           markerId: const MarkerId('1'),
           icon: BitmapDescriptor.defaultMarker,
           position: widget._center,
-          infoWindow: const InfoWindow(
-            title: 'Central City Blood Donation Center',
-            snippet: 'Lebanon, Beirut - 1.1 km from you',
+          infoWindow:  InfoWindow(
+            title: widget.title,
+            snippet: "${widget.snippet} km from you",
           ),
         ),
-        Marker(
-          markerId: const MarkerId('2'),
-          icon: BitmapDescriptor.defaultMarker,
-          position: widget._tripoliCoordinates,
-          infoWindow: const InfoWindow(
-            title: 'Central City Blood Donation Center',
-            snippet: 'Lebanon, Beirut - 1.1 km from you',
-          ),
-        ),
+
       },
       // polylines: Set<Polyline>.of(widget.polylines.values),
     );

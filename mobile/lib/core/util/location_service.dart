@@ -3,7 +3,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocationService {
-  static Future<LatLng?> determinePosition() async {
+  static Future<Position> determinePosition() async {
     bool serviceEnabled;
     LocationPermission permission;
 
@@ -36,6 +36,6 @@ class LocationService {
     await prefs.setDouble('currentLat', currentPosition.latitude);
     await prefs.setDouble('currentLng', currentPosition.longitude);
 
-    return currentPosition;
+    return location;
   }
 }

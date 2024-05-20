@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile/features/auth/presentation/pages/auth_page.dart';
 import 'package:mobile/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:mobile/features/auth/presentation/pages/onboarding_page.dart';
@@ -49,14 +50,21 @@ class AppRoutes {
             path: Routes.organizationsPage,
             builder: ((context, state) => const OrganizationsPage())),
         GoRoute(
-            path: Routes.mapPage,
-            builder: ((context, state) => const MapPage())),        GoRoute(
+          path: Routes.mapPage,
+          builder: (context, state) {
+            return MapPage(
+                realDistance: state.uri.queryParameters['realDistance']!,
+                longitude: state.uri.queryParameters['longitude']!,
+                latitude: state.uri.queryParameters['latitude']!,
+            organizationLatitude: state.uri.queryParameters['organizationLatitude']!,
+            organizationLongitude: state.uri.queryParameters['organizationLongitude']!,
+            title: state.uri.queryParameters['title']!);
+
+          },
+        ),
+        GoRoute(
             path: Routes.notificationPage,
             builder: ((context, state) => const NotificationPage())),
-        GoRoute(
-            path: "/live",
-            builder: ((context, state) => const LiveStreaming())),
-
         GoRoute(
             path: Routes.orgEntryPage,
             builder: ((context, state) => const OrgEntryPage())),

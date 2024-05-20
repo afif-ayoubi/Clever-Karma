@@ -6,7 +6,9 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/api/providers/loader_provider.dart';
 import '../../../../core/api/providers/organization_provider.dart';
+import '../../../../core/wdigets/loading_widget.dart';
 import '../widgets/organization_page/custom_app_bar.dart';
 import '../widgets/organization_page/organization_card.dart';
 import '../widgets/organization_page/search_form.dart';
@@ -16,8 +18,20 @@ class OrganizationsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildBody(context),
+    final loading = Provider.of<LoaderProvider>(context).loading;
+    return Stack(
+      children: [
+        Scaffold(
+          body: _buildBody(context),
+        ),
+        if (loading)
+          Container(
+            color: Colors.black54.withOpacity(0.7),
+            height: double.infinity,
+            width: 100.sw,
+            child: LoadingWidget(),
+          )
+      ],
     );
   }
 
