@@ -2,7 +2,7 @@ import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch,
 import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
 import { VolunteeringSectionService } from "./volunteering_section.service";
 import { SUCCESS_METHODS } from "src/core/constants/success_message";
-import { VolunteeringSectionDto } from "./dto/volunteering_section.dto";
+import { VolunteeringSectionDto } from "src/users/volunteering_section/dto/volunteering_section.dto";
 
 @Controller('section')
 export class VolunteeringSectionController {
