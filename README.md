@@ -51,13 +51,13 @@
 
 > We designed Clever Karma using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
 
-- Project Figma design [figma](https://www.figma.com/design/pJ9cNPuxpHaJypbE0hL5uY/Clever-Karma?node-id=1-3&t=9RXBRQhugzzC8bzy-0)
+- Project Figma design [figma](https://www.figma.com/file/LsuOx5Wnh5YTGSEtrgvz4l/Purrfect-Pals?type=design&node-id=257%3A79&mode=design&t=adzbABt5hbb91ucZ-1)
 
 ### Mockups
 
-| Home screen                             | Menu Screen                           | Order Screen                          |
+| SignUp screen                             | Home Screen                           | OnBoarding Screen                          |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/demo/signup.png) | ![fsdaf](./readme/demo/home.png) | ![fsdaf](./readme/demo/onboarding.png) |
 
 <br><br>
 
