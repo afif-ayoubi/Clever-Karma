@@ -1,12 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../core/api/providers/organization_provider.dart';
 import '../widgets/organization_page/custom_app_bar.dart';
 import '../widgets/organization_page/organization_card.dart';
 import '../widgets/organization_page/search_form.dart';
@@ -52,27 +52,39 @@ class OrganizationsPage extends StatelessWidget {
                         style: context.displayLarge!
                             .copyWith(fontSize: FontSize.s20),
                       ),
-                      Gap(45.w)
+                      Gap(45.w),
                     ],
                   ),
                 ),
                 Positioned(
-                    bottom: 0.r,
-                    left: 10.r,
-                    right: 10.r,
-                    child: const SearchForm(inSearchScreen: true)),
+                  bottom: 0.r,
+                  left: 10.r,
+                  right: 10.r,
+                  child: const SearchForm(inSearchScreen: true),
+                ),
               ],
             ),
           ),
           Gap(10.h),
           Expanded(
-            child: ListView.separated(
-              itemCount: 4,
-              itemBuilder: (context, index) {
-                return const OrganizationCard();
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Gap(10.h);
+            child: Consumer<OrganizationsProvider>(
+              builder: (context, provider, child) {
+                final list = provider.organizations;
+                if (list.isEmpty) {
+                  return Center(
+                    child: Text('No results found.', style: context.bodyMedium),
+                  );
+                }
+
+                return ListView.separated(
+                  itemCount: list.length,
+                  itemBuilder: (context, index) {
+                    return OrganizationCard(organization: list[index]);
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Gap(10.h);
+                  },
+                );
               },
             ),
           ),

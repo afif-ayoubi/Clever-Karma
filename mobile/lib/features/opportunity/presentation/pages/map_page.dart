@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// import 'package:location/location.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../../../core/util/location_service.dart';
-import '../../core/constants/map.dart';
 import '../widgets/map_page/map_form.dart';
 
 class MapPage extends StatefulWidget {

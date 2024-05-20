@@ -9,6 +9,7 @@ import 'package:mobile/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import 'core/api/providers/loader_provider.dart';
 import 'core/api/providers/notification_provider.dart';
+import 'core/api/providers/organization_provider.dart';
 import 'features/auth/presentation/bloc/onBoarding/on_boarding_bloc.dart';
 import 'injection_container.dart' as di;
 
@@ -28,6 +29,8 @@ class MyApp extends StatelessWidget {
           create: (_) => LoaderProvider(),
         ),  ChangeNotifierProvider(
           create: (_) => UserProvider(),
+        ),ChangeNotifierProvider(
+          create: (_) => OrganizationsProvider(),
         ),
       ],
       child: ScreenUtilInit(

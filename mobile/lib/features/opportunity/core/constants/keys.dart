@@ -1,0 +1,2 @@
+const String  GOOGLE_API_KEY = 'AIzaSyAFBP8IxHviL2NHIiPyRgFC1Wsx8nO83bM';
+const String APP_SIGN = '09eebeedac491a910433d44e02ed00a525a2316ced7bc8e0c6d5c57006030af8';

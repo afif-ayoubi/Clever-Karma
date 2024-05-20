@@ -3,6 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
 
+import '../../../opportunity/core/constants/keys.dart';
+
 class LiveStreaming extends StatelessWidget {
   const LiveStreaming({super.key});
 
@@ -13,49 +15,62 @@ class LiveStreaming extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () =>JumpToLivePage(context, isHost: true),
-            child: Text(
-              'Start Live Streaming',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          ElevatedButton(
-            onPressed: ()=> JumpToLivePage(context, isHost: false),
-            child: Text(
-              'Join Live Streaming',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
+
+          // ElevatedButton(
+          //   onPressed: () => JumpToLivePage(context, isHost: false),
+          //   child: Text(
+          //     'Join Live Streaming',
+          //     style: TextStyle(color: Colors.white),
+          //   ),
+          // ),
         ],
       ),
     );
-
   }
 }
-JumpToLivePage(BuildContext context, {required bool isHost}) {
+
+JumpToLivePage(
+    {required BuildContext context,
+    required bool isHost,
+    required String username,
+    required String liveId,
+    required String userID}) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => LivePage(isHost: isHost),
+      builder: (context) => LivePage(
+        isHost: isHost,
+        username: username,
+        liveId: liveId,
+        userID: userID,
+      ),
     ),
   );
 }
-final String userID = Random().nextInt(10000).toString();
+// final String userID = Random().nextInt(10000).toString();
 
 class LivePage extends StatelessWidget {
-  const LivePage({Key? key, this.isHost = false}) : super(key: key);
+  const LivePage(
+      {Key? key,
+      this.isHost = false,
+      required this.username,
+      required this.liveId,
+      required this.userID})
+      : super(key: key);
   final bool isHost;
+  final String username;
+  final String liveId;
+  final String userID;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: ZegoUIKitPrebuiltLiveStreaming(
         appID: 529730141,
-        appSign: '09eebeedac491a910433d44e02ed00a525a2316ced7bc8e0c6d5c57006030af8',
+        appSign: APP_SIGN,
         userID: userID,
-        userName: 'user_$userID',
-        liveID: 'testLiveID',
+        userName: username,
+        liveID: liveId,
         config: isHost
             ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
             : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),

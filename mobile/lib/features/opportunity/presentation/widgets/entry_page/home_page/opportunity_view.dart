@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../../core/api/get_organization_api.dart';
+import '../../../../../../core/api/providers/loader_provider.dart';
 import '../../../../../../routes/class_routes.dart';
 import '../../../../domain/entities/opportunity.dart';
 import 'opportunity_card.dart';
@@ -54,7 +56,14 @@ class OpportunityView extends StatelessWidget {
                 onSwipeUp: () => roomSelectorNotifier.value = index,
                 onSwipeDown: () => roomSelectorNotifier.value = -1,
                 onTap: () async {
-                  context.push(Routes.organizationsPage);
+                  Provider.of<LoaderProvider>(context, listen: false)
+                      .setLoader(true);
+                  final api = await GetOrganizations(context, opportunity.id);
+                  Provider.of<LoaderProvider>(context, listen: false)
+                      .setLoader(false);
+                  if (api) {
+                    context.push(Routes.organizationsPage);
+                  }
                 },
               ),
             );

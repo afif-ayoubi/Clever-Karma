@@ -6,6 +6,9 @@ import 'package:gap/gap.dart';
 import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/wdigets/loading_widget.dart';
+import 'package:provider/provider.dart';
+import '../../../../core/api/get_organization_api.dart';
+import '../../../../core/api/providers/loader_provider.dart';
 import '../bloc/opportunity_bloc.dart';
 import '../widgets/entry_page/home_page/lighted_backround.dart';
 import '../widgets/entry_page/home_page/opportunity_view.dart';
@@ -42,69 +45,85 @@ class _HomePageState extends State<HomePage> {
     pageNotifier.value = controller.page ?? 0;
   }
 
+
+
   @override
   Widget build(BuildContext context) {
+    final loading = Provider.of<LoaderProvider>(context, listen: true).loading;
+
     return LightedBackground(
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: SafeArea(
-          child: Column(
-            children: [
-              Gap(140.h),
-              Text("Select Your Cause",
-                  style: context.displayLarge!.copyWith(
-                      fontWeight: FontWeightManager.regular,
-                      fontSize: FontSize.s30)),
-              Expanded(
-                child: Stack(
-                  fit: StackFit.expand,
-                  clipBehavior: Clip.none,
-                  children: [
-                    BlocBuilder<OpportunityBloc, OpportunityState>(
-                      builder: (context, state) {
-                        if (state is LoadingOpportunitiesState) {
-                          return const Center(child: LoadingWidget());
-                        } else if (state is ErrorOpportunitiesState) {
-                          return Center(child: Text(state.message));
-                        } else if (state is LoadedOpportunitiesState) {
-                          return OpportunityView(
-                            pageNotifier: pageNotifier,
-                            roomSelectorNotifier: roomSelectorNotifier,
-                            controller: controller,
-                            opportunities: state.opportunities,
-                          );
-                        } else {
-                          return Container(); // Handle any other unexpected state if necessary
-                        }
-                      },
-                    ),
-                    BlocBuilder<OpportunityBloc, OpportunityState>(
-                      builder: (context, state) {
-                        if (state is LoadedOpportunitiesState)
-                          return Positioned.fill(
-                            top: null,
-                            child: Padding(
-                              padding: const EdgeInsets.only(bottom: 50).r,
-                              child: Column(
-                                children: [
-                                  PageIndicators(
-                                    roomSelectorNotifier: roomSelectorNotifier,
-                                    pageNotifier: pageNotifier,
-                                    opportunities: state.opportunities,
+      child: Stack(
+        children: [
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Gap(140.h),
+                  Text("Select Your Cause",
+                      style: context.displayLarge!.copyWith(
+                          fontWeight: FontWeightManager.regular,
+                          fontSize: FontSize.s30)),
+                  Expanded(
+                    child: Stack(
+                      fit: StackFit.expand,
+                      clipBehavior: Clip.none,
+                      children: [
+                        BlocBuilder<OpportunityBloc, OpportunityState>(
+                          builder: (context, state) {
+                            if (state is LoadingOpportunitiesState) {
+                              return const Center(child: LoadingWidget());
+                            } else if (state is ErrorOpportunitiesState) {
+                              return Center(child: Text(state.message));
+                            } else if (state is LoadedOpportunitiesState) {
+                              return OpportunityView(
+                                pageNotifier: pageNotifier,
+                                roomSelectorNotifier: roomSelectorNotifier,
+                                controller: controller,
+                                opportunities: state.opportunities,
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
+                        ),
+                        BlocBuilder<OpportunityBloc, OpportunityState>(
+                          builder: (context, state) {
+                            if (state is LoadedOpportunitiesState)
+                              return Positioned.fill(
+                                top: null,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 50).r,
+                                  child: Column(
+                                    children: [
+                                      PageIndicators(
+                                        roomSelectorNotifier:
+                                            roomSelectorNotifier,
+                                        pageNotifier: pageNotifier,
+                                        opportunities: state.opportunities,
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                          );
-                        return Container();
-                      },
+                                ),
+                              );
+                            return Container();
+                          },
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+          if (loading)
+            Container(
+              color: Colors.black54.withOpacity(0.7),
+              height: double.infinity,
+              width: 100.sw,
+              child: LoadingWidget(),
+            )
+        ],
       ),
     );
   }
