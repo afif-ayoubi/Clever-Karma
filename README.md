@@ -40,7 +40,7 @@
 - Our app brings geographical contexts to life using the [Google Maps SDK](https://developers.google.com/maps/documentation). This integration allows us to display detailed maps, complete with interactive markers for each destination.
 - This Project uses NestJs(https://docs.nestjs.com) framework for backend, NestJS is a progressive Node.js framework for building efficient, reliable, and scalable server-side applications. It leverages TypeScript and brings powerful features such as dependency injection, routing, middleware, and more, making it ideal for enterprise-grade development and API integration.
 - To enhance user engagement, our app integrates an advanced [OpenAI](https://platform.openai.com/docs/introduction) endpoint powered by the GPT-3.5-turbo-instruct model. This AI-driven feature predicts the most needed type of blood, delivering valuable insights to administrators, who can then notify users via notifications.
-- This project integrates data visualization through IoT using [Esp32](https://en.wikipedia.org/wiki/ESP32). Sensor data is sent in real-time to Firebase using [real time db](https://firebase.google.com/docs/database), and it is integrated with Flutter using [firebase_database](https://pub.dev/packages/firebase_database) package to display graphical representations
+- This project integrates data visualization through IoT using [Esp32](https://en.wikipedia.org/wiki/ESP32). Sensor data is sent in real-time to Firebase using [Real Time DB](https://firebase.google.com/docs/database), and it is integrated with Flutter using [firebase_database](https://pub.dev/packages/firebase_database) package to display graphical representations
 
 <br><br>
 
