@@ -62,7 +62,7 @@ class OpportunityView extends StatelessWidget {
                   Provider.of<LoaderProvider>(context, listen: false)
                       .setLoader(false);
                   if (api) {
-                    context.push(Routes.organizationsPage);
+                    context.push("${Routes.organizationsPage}?name=${opportunity.name}");
                   }
                 },
               ),

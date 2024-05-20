@@ -80,18 +80,7 @@ class _SearchFormState extends State<SearchForm> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 15.0).r,
-                child: GestureDetector(
-                  onTap: () {
-                  },
-                  child: Icon(
-                    IconManager.filter,
-                    size: 30.sp,
-                    color: HexColor.searchColor,
-                  ),
-                ),
-              ),
+
             ],
           ),
         ),

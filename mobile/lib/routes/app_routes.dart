@@ -48,7 +48,7 @@ class AppRoutes {
             builder: ((context, state) => const EntryPage())),
         GoRoute(
             path: Routes.organizationsPage,
-            builder: ((context, state) => const OrganizationsPage())),
+            builder: ((context, state) =>  OrganizationsPage(name: state.uri.queryParameters['name']!,))),
         GoRoute(
           path: Routes.mapPage,
           builder: (context, state) {

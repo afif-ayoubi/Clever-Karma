@@ -11,4 +11,8 @@ abstract class IconManager{
   static const IconData search = Icons.search;
   static const IconData filter = Icons.filter_alt;
   static const IconData location= Icons.location_on_outlined;
+  static const IconData add= Icons.add_circle_outline_sharp;
+  static const IconData call=Icons.call ;
+  static const IconData sms=Icons.sms_outlined ;
+
 }

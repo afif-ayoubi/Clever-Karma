@@ -10,6 +10,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/features/opportunity/domain/repositories/organization.dart';
+import 'package:mobile/features/opportunity/presentation/widgets/organization_page/show_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../core/api/providers/user_provider.dart';
@@ -94,49 +95,55 @@ class _OrganizationCardState extends State<OrganizationCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: 185.h,
-          child: _CardWidget(
-            liveId: widget.organization.liveStreamingId,
-            userLocation: userLocation ?? LatLng(0, 0),
-            realDistance: realDistance,
-            organizationLocation: organizationLocation ?? LatLng(0, 0),
-            title: widget.organization.name,
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20).r,
-          child: Text(
-            widget.organization.name,
-            style: context.bodyMedium!.copyWith(
-              fontWeight: FontWeightManager.bold,
+    return GestureDetector(
+      onTap: () {
+        return customShowBottomSheet(context, widget.organization.name,
+            widget.organization.aboutUs, widget.organization.howToVolunteer);
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 185.h,
+            child: _CardWidget(
+              liveId: widget.organization.liveStreamingId,
+              userLocation: userLocation ?? LatLng(0, 0),
+              realDistance: realDistance,
+              organizationLocation: organizationLocation ?? LatLng(0, 0),
+              title: widget.organization.name,
             ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 15).r,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Icon(
-                IconManager.location,
-                size: 25.sp,
+          Padding(
+            padding: const EdgeInsets.only(left: 20).r,
+            child: Text(
+              widget.organization.name,
+              style: context.bodyMedium!.copyWith(
+                fontWeight: FontWeightManager.bold,
               ),
-              Text(distanceText),
-            ],
+            ),
           ),
-        ),
-        Gap(10.h),
-        Divider(
-          color: Colors.black,
-          thickness: 1.0.sp,
-          indent: 20.r,
-          endIndent: 20.r,
-        ),
-      ],
+          Padding(
+            padding: const EdgeInsets.only(left: 15).r,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(
+                  IconManager.location,
+                  size: 25.sp,
+                ),
+                Text(distanceText),
+              ],
+            ),
+          ),
+          Gap(10.h),
+          Divider(
+            color: Colors.black,
+            thickness: 1.0.sp,
+            indent: 20.r,
+            endIndent: 20.r,
+          ),
+        ],
+      ),
     );
   }
 }
@@ -205,7 +212,8 @@ class _CardWidget extends StatelessWidget {
   }
 
   void _jumpToLivePage(BuildContext context, User? user) {
-    final String username = user?.firstName ?? "user_${Random().nextInt(10000)}";
+    final String username =
+        user?.firstName ?? "user_${Random().nextInt(10000)}";
     final String userID = user?.id ?? Random().nextInt(10000).toString();
     Navigator.push(
       context,

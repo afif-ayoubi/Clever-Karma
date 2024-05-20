@@ -14,7 +14,8 @@ import '../widgets/organization_page/organization_card.dart';
 import '../widgets/organization_page/search_form.dart';
 
 class OrganizationsPage extends StatelessWidget {
-  const OrganizationsPage({super.key});
+  final String name;
+  const OrganizationsPage({super.key,required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class OrganizationsPage extends StatelessWidget {
                     children: [
                       const CustomAppBar(),
                       Text(
-                        'Organizations',
+                        '$name',
                         style: context.displayLarge!
                             .copyWith(fontSize: FontSize.s20),
                       ),
