@@ -26,6 +26,7 @@ const Navbar = () => {
                     type="button"
                     title="Register"
                     icon="/user.svg"
+                    destination='/sign'
                     variant="btn_white_text"
                 />
             </div>
