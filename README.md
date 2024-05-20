@@ -31,7 +31,7 @@
 <!-- Tech stack -->
 <img src="./readme/title3.svg"/>
 
-### Coffee Express is built using the following technologies:
+### Clever Karma is built using the following technologies:
 
 - This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
 - For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
@@ -50,6 +50,8 @@
 <img src="./readme/title4.svg"/>
 
 > We designed Clever Karma using wireframes and mockups, iterating on the design until we reached the ideal layout for easy navigation and a seamless user experience.
+
+<img src="./readme/demo/cover.png"/>
 
 - Project Figma design [figma](https://www.figma.com/file/LsuOx5Wnh5YTGSEtrgvz4l/Purrfect-Pals?type=design&node-id=257%3A79&mode=design&t=adzbABt5hbb91ucZ-1)
 
@@ -105,6 +107,9 @@
 ### Seamless Prompt Formulation:
 - Next, the extracted keywords are skillfully integrated into a carefully crafted prompt.
 
+<img src="./readme/demo/1.png"/>
+<img src="./readme/demo/2.png"/>
+
 ### Context-Aware Responses from AI:
 - Once the prompt, enriched with the user's accident-related keywords, is fed into OpenAI's GPT model, the magic happens. The model processes the input, drawing from its vast knowledge base and the specific context provided. It then generates responses that are not just accurate but also tailored to the user's query.
 
@@ -159,13 +164,13 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 3. Run the following command to install the dependencies listed in package.json:
     ```sh
-   npm install npm@latest -g
+   npm install 
    ```
 4. Run the following command to to run the project:
     ```sh
    npm run dev
    ```
-### Mobile (Flutte)
+### Mobile (Flutter)
 
 1. Navigate to the mobile directory
    ```sh
@@ -178,6 +183,34 @@ _Below is an example of how you can instruct your audience on installing and set
 3. Run the project
    ```sh
    flutter run
+   ```
+### Backend (NestJs)
+
+1. Navigate to the Backend directory
+   ```sh
+   cd backend
+   ```
+2. Install the dependencies:
+   ```sh
+   npm install
+   ```
+3. Run the project
+   ```sh
+   npm run start:dev
+   ```
+### Iot (Esp32)
+
+1. Navigate to the Backend directory
+   ```sh
+   cd backend
+   ```
+2. Install the dependencies:
+   ```sh
+   npm install
+   ```
+3. Run the project
+   ```sh
+   npm run start:dev
    ```
 
 
