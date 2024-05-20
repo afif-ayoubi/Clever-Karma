@@ -9,16 +9,11 @@ export class OpenaiController {
   @HttpCode(200)
   async getChatOpenai(@Body() request: IChatRequest = {}): Promise<IChatResponse> {
     const accidentData = request.accidentData || {};
+    const predictedBloodType = this.openaiService.predictBloodType(accidentData);
 
-    try {
-      const aiResponse = await this.openaiService.getAIResponse(accidentData);
-      return aiResponse;
-    } catch (error) {
-      console.error('Error in OpenaiController:', error);
-      return {
-        success: false,
-        result: 'Failed to generate AI response',
-      };
-    }
+    return {
+      success: true,
+      result: predictedBloodType,
+    };
   }
 }

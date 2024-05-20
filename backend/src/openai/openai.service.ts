@@ -73,31 +73,31 @@ openAiService: OpenAI;
 
     return this.aggregateData(season, country);
   }
-  private async generatePrompt(accidentData: AccidentData): Promise<string> {
-    const season = accidentData.season || this.getCurrentSeason();
-    const accidents = accidentData.accidents ?? 'unknown number of';
-    const demographicFactor = accidentData.demographicFactor || 'various demographics';
-    const locationType = accidentData.locationType || 'different location types';
+  // private async generatePrompt(accidentData: AccidentData): Promise<string> {
+  //   const season = accidentData.season || this.getCurrentSeason();
+  //   const accidents = accidentData.accidents ?? 'unknown number of';
+  //   const demographicFactor = accidentData.demographicFactor || 'various demographics';
+  //   const locationType = accidentData.locationType || 'different location types';
 
-    return `In ${season}, there have been ${accidents} accidents involving ${demographicFactor} in ${locationType}. Considering historical data, predict the most likely blood type needed for transfusions in these scenarios.`;
-  }
+  //   return `In ${season}, there have been ${accidents} accidents involving ${demographicFactor} in ${locationType}. Considering historical data, predict the most likely blood type needed for transfusions in these scenarios.`;
+  // }
 
-  public async getAIResponse(accidentData: AccidentData): Promise<IChatResponse> {
-    const prompt = await this.generatePrompt(accidentData);
+  // public async getAIResponse(accidentData: AccidentData): Promise<IChatResponse> {
+  //   const prompt = await this.generatePrompt(accidentData);
 
-    try {
-      const response = await this.openAiService.completions.create({
-        model: process.env.OPENAI_API_MODEL ,
-        prompt: prompt,
-        max_tokens: 100,
-        temperature: 0.7,
-      });
+  //   try {
+  //     const response = await this.openAiService.completions.create({
+  //       model: process.env.OPENAI_API_MODEL ,
+  //       prompt: prompt,
+  //       max_tokens: 100,
+  //       temperature: 0.7,
+  //     });
 
-      const aiResponse = response.choices[0].text.trim();
-      return { success: true, result: aiResponse };
-    } catch (error) {
-      console.error('Error generating AI response:', error);
-      return { success: false, result: 'Failed to generate AI response' };
-    }
-  }
+  //     const aiResponse = response.choices[0].text.trim();
+  //     return { success: true, result: aiResponse };
+  //   } catch (error) {
+  //     console.error('Error generating AI response:', error);
+  //     return { success: false, result: 'Failed to generate AI response' };
+  //   }
+  // }
 }

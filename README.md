@@ -98,7 +98,19 @@
 
 ### Mastering AI Interaction: Unveiling the Power of Prompt Engineering:
 
-- This project uses advanced prompt engineering techniques to optimize the interaction with natural language processing models. By skillfully crafting input instructions, we tailor the behavior of the models to achieve precise and efficient language understanding and generation for various tasks and preferences.
+ 
+### User-Driven Keyword Extraction:
+- The journey begins with a tailored questionnaire presented to our users. As they interact with these questions, their responses are meticulously analyzed to extract key phrases and words related to accident data.
+
+### Seamless Prompt Formulation:
+- Next, the extracted keywords are skillfully integrated into a carefully crafted prompt.
+
+### Context-Aware Responses from AI:
+- Once the prompt, enriched with the user's accident-related keywords, is fed into OpenAI's GPT model, the magic happens. The model processes the input, drawing from its vast knowledge base and the specific context provided. It then generates responses that are not just accurate but also tailored to the user's query.
+
+### Location and Data Integration:
+- What sets our application apart is how these AI-generated responses are seamlessly integrated with location-specific data and other relevant information from our app's database. For instance, our historical data includes accident thresholds categorized by season, demographic factors, and location types, enabling precise predictions and recommendations.
+
 
 <br><br>
 
