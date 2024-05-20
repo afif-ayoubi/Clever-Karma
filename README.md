@@ -11,12 +11,20 @@
 
 ### User Stories
 
-- As a Potential Volunteer: I want to explore a variety of charity work opportunities (volunteering, fundraising, advocacy) and refine my search using filters (location, cause, skills, time commitment) to find opportunities that align with my interests and availability.
-- As Someone Taking Action: When I find an interesting opportunity, I want to see clear details (description, cause, organization, time commitment) and easy participation options (sign-up, donation link, live stream access) so I can get involved seamlessly.
-- As a Dedicated Volunteer: I want to follow organizations I care about to receive notifications about new opportunities and stay updated on their work.
-- As an Admin: I want to create, edit, and publish a variety of charity work opportunities (volunteering, fundraising, advocacy) on the platform, including clear descriptions, category designations, and participation details.
-- As an Analytics-Driven Admin: I want to access analytics that track user engagement with opportunities (views, sign-ups, donations) to understand what resonates with volunteers and optimize future offerings.
-- As a Communicative Admin: I want to send targeted notifications to users who follow my organization about upcoming events, new opportunities, and relevant updates.
+### Volunteer
+- As a Volunteer, I want to receive notifications about upcoming volunteering events, fundraising campaigns, and advocacy initiatives from organizations I follow.
+- As a Volunteer, I want to be able to easily access details about the organization, including their location and mission, to decide if it aligns with my interests.
+- As a Volunteer, I want to be able to follow organizations to receive future notifications and easily join any live streams they host.
+
+### Organization
+- As an Organization, I want to access a comprehensive dashboard that includes real-time data visualizations from multiple sensors deployed in relevant locations (e.g., temperature, humidity, air quality).
+- As an Organization, I want the platform to facilitate the sending of targeted notifications to relevant volunteers, outlining the situation and requesting their assistance.
+- I want the ability to initiate live streams directly from the dashboard, showcasing the situation in real-time and further engaging potential volunteers who might be geographically dispersed.
+
+### Admin
+- As an Admin, I want to have a comprehensive user management system that allows me to send notifications to all users.
+- As an Admin, I want the ability to create dedicated sections within the app for specific types of organizations.
+- As an Admin, I want to integrate OpenAI capabilities within the platform for functionalities like predicting blood donation needs.
 
 <br><br>
 
