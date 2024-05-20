@@ -35,9 +35,11 @@
 
 - This project uses the [Flutter app development framework](https://flutter.dev/). Flutter is a cross-platform hybrid app development platform which allows us to use a single codebase for apps on mobile, desktop, and the web.
 - For persistent storage (database), the app uses the [Hive](https://hivedb.dev/) package which allows the app to create a custom storage schema and save it to a local database.
-- To send local push notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) package which supports Android, iOS, and macOS.
-  - 🚨 Currently, notifications aren't working on macOS. This is a known issue that we are working to resolve!
-- The app uses the font ["Work Sans"](https://fonts.google.com/specimen/Work+Sans) as its main font, and the design of the app adheres to the material design guidelines.
+   - 🚨 Currently, we're working on extending it to cover the entire app!
+- To send  notifications, the app uses the [flutter_local_notifications](https://pub.dev/packages/flutter_local_notifications) with [firebase_messaging](https://pub.dev/packages/firebase_messaging) packages which supports Android, iOS, and macOS.
+- Our app brings geographical contexts to life using the [Google Maps SDK](https://developers.google.com/maps/documentation). This integration allows us to display detailed maps, complete with interactive markers for each destination.
+- This Project uses NestJs(https://docs.nestjs.com) framework for backend, NestJS is a progressive Node.js framework for building efficient, reliable, and scalable server-side applications. It leverages TypeScript and brings powerful features such as dependency injection, routing, middleware, and more, making it ideal for enterprise-grade development and API integration.
+- To enhance user engagement, our app integrates an advanced [OpenAI](https://platform.openai.com/docs/introduction) endpoint powered by the GPT-3.5-turbo-instruct model. This AI-driven feature predicts the most needed type of blood, delivering valuable insights to administrators, who can then notify users via notifications.
 
 <br><br>
 
