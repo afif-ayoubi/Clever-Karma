@@ -59,7 +59,7 @@
 
 | SignUp screen                             | Home Screen                           | OnBoarding Screen                          |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/signup.svg) | ![fsdaf](./readme/demo/home.svg) | ![fsdaf](./readme/demo/onboarding.svg) |
+| ![Landing](./readme/demo/signin.svg) | ![fsdaf](./readme/demo/home.svg) | ![fsdaf](./readme/demo/onboarding.svg) |
 
 <br><br>
 
