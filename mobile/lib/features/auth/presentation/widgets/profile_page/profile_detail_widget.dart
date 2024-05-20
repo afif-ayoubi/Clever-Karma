@@ -52,18 +52,14 @@ class _ProfileDetailWidgetState extends State<ProfileDetailWidget> {
     user = Provider.of<UserProvider>(context, listen: false).User!;
     String formattedDateOfBirth = "";
 
-    // Parse and format dateOfBirth
     if (user.dateOfBirth != null && user.dateOfBirth!.isNotEmpty) {
       try {
-        // Ensure correct format
         List<String> parts = user.dateOfBirth!.split('-');
         if (parts.length == 3) {
-          // Pad month and day with leading zero if necessary
           parts[1] = parts[1].padLeft(2, '0');
           parts[2] = parts[2].padLeft(2, '0');
           formattedDateOfBirth = parts.join('-');
 
-          // Parse the formatted date string to ensure it's valid
           DateTime parsedDate = DateTime.parse(formattedDateOfBirth);
           formattedDateOfBirth = "${parsedDate.year}-${parsedDate.month.toString().padLeft(2, '0')}-${parsedDate.day.toString().padLeft(2, '0')}";
         }

@@ -7,14 +7,15 @@ class RiveAsset {
 
   RiveAsset(
       {required this.artboard,
-        this.number,
-        required this.stateMacineName,
-        required this.title,
-        required this.src});
+      this.number,
+      required this.stateMacineName,
+      required this.title,
+      required this.src});
 
   set setInput(SMIBool status) {
     input = status;
   }
+
   static List<RiveAsset> sideMenus = [
     RiveAsset(
         artboard: "HOME",
@@ -27,18 +28,17 @@ class RiveAsset {
         title: "Following",
         src: 'assets/RiveAssets/icons.riv',
         number: 1),
-
     RiveAsset(
         artboard: "BELL",
         stateMacineName: "BELL_Interactivity",
         title: "Notifications",
-        src: 'assets/RiveAssets/icons.riv',number: 2),
+        src: 'assets/RiveAssets/icons.riv',
+        number: 2),
     RiveAsset(
-        artboard: "CHAT",
-        stateMacineName: "CHAT_Interactivity",
-        title: "Help",
-        src: 'assets/RiveAssets/icons.riv',number: 3),
+        artboard: "USER",
+        stateMacineName: "USER_Interactivity",
+        title: "Profile",
+        src: 'assets/RiveAssets/icons.riv',
+        number: 3),
   ];
-
-
 }

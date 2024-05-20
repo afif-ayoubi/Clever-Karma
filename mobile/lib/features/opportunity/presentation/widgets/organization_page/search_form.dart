@@ -5,7 +5,7 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/core/constants/icons_manager.dart';
 
-import '../../../../../core/api/providers/organization_provider.dart';
+import '../../../../../core/api/providers/organization_providers.dart';
 
 class SearchForm extends StatefulWidget {
   const SearchForm({super.key, this.inSearchScreen});

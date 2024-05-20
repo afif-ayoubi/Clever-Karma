@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:mobile/core/api/providers/followProvider.dart';
 import 'package:mobile/core/api/providers/user_provider.dart';
 import 'package:mobile/core/theme/app_theme.dart';
 import 'package:mobile/features/auth/presentation/bloc/users/users_bloc.dart';
@@ -9,7 +10,8 @@ import 'package:mobile/routes/app_routes.dart';
 import 'package:provider/provider.dart';
 import 'core/api/providers/loader_provider.dart';
 import 'core/api/providers/notification_provider.dart';
-import 'core/api/providers/organization_provider.dart';
+import 'core/api/providers/organization_providers.dart';
+import 'core/api/providers/single_organization.dart';
 import 'features/auth/presentation/bloc/onBoarding/on_boarding_bloc.dart';
 import 'injection_container.dart' as di;
 
@@ -31,6 +33,10 @@ class MyApp extends StatelessWidget {
           create: (_) => UserProvider(),
         ),ChangeNotifierProvider(
           create: (_) => OrganizationsProvider(),
+        ),ChangeNotifierProvider(
+          create: (_) => FollowedOrganizationsProvider(),
+        ),ChangeNotifierProvider(
+          create: (_) => OrganizationProvider(),
         ),
       ],
       child: ScreenUtilInit(

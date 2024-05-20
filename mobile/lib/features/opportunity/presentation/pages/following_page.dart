@@ -6,16 +6,15 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../core/api/providers/followProvider.dart';
 import '../../../../core/api/providers/loader_provider.dart';
-import '../../../../core/api/providers/organization_providers.dart';
 import '../../../../core/wdigets/loading_widget.dart';
 import '../widgets/organization_page/custom_app_bar.dart';
 import '../widgets/organization_page/organization_card.dart';
 import '../widgets/organization_page/search_form.dart';
 
-class OrganizationsPage extends StatelessWidget {
-  final String name;
-  const OrganizationsPage({super.key,required this.name});
+class FollowingPage extends StatelessWidget {
+  const FollowingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +62,7 @@ class OrganizationsPage extends StatelessWidget {
                     children: [
                       const CustomAppBar(),
                       Text(
-                        '$name',
+                        'Following Organizations',
                         style: context.displayLarge!
                             .copyWith(fontSize: FontSize.s20),
                       ),
@@ -82,9 +81,9 @@ class OrganizationsPage extends StatelessWidget {
           ),
           Gap(10.h),
           Expanded(
-            child: Consumer<OrganizationsProvider>(
+            child: Consumer<FollowedOrganizationsProvider>(
               builder: (context, provider, child) {
-                final list = provider.organizations;
+                final list = provider.followedOrganizations;
                 if (list.isEmpty) {
                   return Center(
                     child: Text('No results found.', style: context.bodyMedium),

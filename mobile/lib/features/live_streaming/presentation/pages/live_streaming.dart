@@ -29,26 +29,6 @@ class LiveStreaming extends StatelessWidget {
   }
 }
 
-JumpToLivePage(
-    {required BuildContext context,
-    required bool isHost,
-    required String username,
-    required String liveId,
-    required String userID}) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => LivePage(
-        isHost: isHost,
-        username: username,
-        liveId: liveId,
-        userID: userID,
-      ),
-    ),
-  );
-}
-// final String userID = Random().nextInt(10000).toString();
-
 class LivePage extends StatelessWidget {
   const LivePage(
       {Key? key,

@@ -1,43 +1,74 @@
-import 'dart:math';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
+import 'package:mobile/core/constants/font_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/features/auth/presentation/widgets/common_widgets/custom_btn.dart';
-import 'package:zego_uikit_prebuilt_live_streaming/zego_uikit_prebuilt_live_streaming.dart';
-
-import '../../../../../core/wdigets/loading_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:go_router/go_router.dart';
 import 'line_chart_widget.dart';
 
 class GraphDetailWidget extends StatelessWidget {
   const GraphDetailWidget({
-    super.key,
+    Key? key,
     required this.dbRef,
-    required this.list,
-  });
+    required this.humidityList,
+    required this.temperatureList,
+    required this.ppmList,
+    required this.mq2ValueList,
+  }) : super(key: key);
 
   final Query dbRef;
-  final List list;
+  final List<double> humidityList;
+  final List<double> temperatureList;
+  final List<double> ppmList;
+  final List<int> mq2ValueList;
 
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> graphConfigs = [
+      {
+        'title': 'Humidity',
+        'list': humidityList,
+        'leftTitles': ['0', '20', '40', '60', '80', '100']
+      },
+      {
+        'title': 'Temperature',
+        'list': temperatureList,
+        'leftTitles': ['0', '10', '20', '30', '40', '50']
+      },
+      {
+        'title': 'PPM',
+        'list': ppmList,
+        'leftTitles': ['0', '500', '1000', '1500', '2000']
+      },
+      {
+        'title': 'MQ2 Value',
+        'list': mq2ValueList,
+        'leftTitles': ['0', '100', '200', '300', '400']
+      },
+    ];
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30).r,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                "DashBoard",
-                style: context.displayMedium,
+              Text("DashBoard", style:context.displayMedium!.copyWith(fontWeight: FontWeightManager.bold,color: Colors.black)),
+              CustomBtn(
+                onPressed: () async {
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  await prefs.remove('token');
+                  context.go('/auth');
+                },
+                width: true,
+                text: 'Sign out',
+
               ),
-              CustomBtn(text: "Start Live", onPressed: ()=>JumpToLivePage(context, isHost: true),width: true,)
             ],
           ),
           Expanded(
@@ -45,68 +76,34 @@ class GraphDetailWidget extends StatelessWidget {
               query: dbRef,
               itemBuilder: (BuildContext context, DataSnapshot snapshot,
                   Animation<double> animation, int index) {
-                if (!snapshot.exists || snapshot.value == null)
-                  return LoadingWidget();
-                List<String> leftTitles = _generateLeftTitles(0);
+                if (!snapshot.exists || snapshot.value == null) {
+                  return Center(child: CircularProgressIndicator());
+                }
 
                 return Column(
-                  children: [
-                    Gap(30.h),
-                    SizedBox(
-                        height: 400.h,
-                        child: LineChartWidget(
-                            list: list, leftTitles: leftTitles)),
-                  ],
+                  children: graphConfigs.map((config) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(height: 30),
+                        Text(config['title'],
+                            style: context.bodyMedium!
+                                .copyWith(fontWeight: FontWeightManager.bold)),
+                        SizedBox(
+                          height: 300,
+                          child: LineChartWidget(
+                            list: config['list'],
+                            leftTitles: config['leftTitles'],
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
                 );
               },
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-List<String> _generateLeftTitles(int index) {
-  List<String> leftTitles = [];
-
-  if (index == 0) {
-    leftTitles = ['0', '40', '60', '80', '100', '120'];
-  } else if (index == 1) {
-    leftTitles = ['0', '5', '10', '15', '20', '25'];
-  } else if (index == 2) {
-    leftTitles = ['0', '400', '1000', '2000', '3000', '4000'];
-  } else {
-    leftTitles = ['0', '10', '20', '30', '40', '50'];
-  }
-  return leftTitles;
-}
-JumpToLivePage(BuildContext context, {required bool isHost}) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => LivePage(isHost: isHost),
-    ),
-  );
-}
-final String userID = Random().nextInt(10000).toString();
-
-class LivePage extends StatelessWidget {
-  const LivePage({Key? key, this.isHost = false}) : super(key: key);
-  final bool isHost;
-
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: ZegoUIKitPrebuiltLiveStreaming(
-        appID: 529730141,
-        appSign: '09eebeedac491a910433d44e02ed00a525a2316ced7bc8e0c6d5c57006030af8',
-        userID: userID,
-        userName: 'user_$userID',
-        liveID: 'testLiveID',
-        config: isHost
-            ? ZegoUIKitPrebuiltLiveStreamingConfig.host()
-            : ZegoUIKitPrebuiltLiveStreamingConfig.audience(),
       ),
     );
   }

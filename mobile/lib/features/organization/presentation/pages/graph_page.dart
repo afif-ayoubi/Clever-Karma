@@ -22,14 +22,23 @@ class _GraphPageState extends State<GraphPage> {
     dbRef = FirebaseDatabase.instance.ref();
 
     dbRef.onChildAdded.listen((event) {
-      _updateLists(event.snapshot.value);
-      print(event.snapshot.value);
+      _updateLists(event.snapshot.value as Map<dynamic, dynamic>?);
     });
 
     dbRef.onChildChanged.listen((event) {
-      _updateLists(event.snapshot.value);
-      print(event.snapshot.value);
+      _updateLists(event.snapshot.value as Map<dynamic, dynamic>?);
     });
+  }
+
+  void _updateLists(Map<dynamic, dynamic>? data) {
+    if (data != null) {
+      setState(() {
+        humidityList.add((data['humidity'] as num).toDouble());
+        temperatureList.add((data['temperature'] as num).toDouble());
+        ppmList.add((data['ppm'] as num).toDouble());
+        mq2ValueList.add(data['mq2Value'] as int);
+      });
+    }
   }
 
   @override
@@ -37,43 +46,14 @@ class _GraphPageState extends State<GraphPage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SafeArea(
-          child: _buildWidget(
-        dbRef: dbRef,
-        list: humidityList,
-      )),
+        child: GraphDetailWidget(
+          dbRef: dbRef,
+          humidityList: humidityList,
+          temperatureList: temperatureList,
+          ppmList: ppmList,
+          mq2ValueList: mq2ValueList,
+        ),
+      ),
     );
   }
-
-  void _updateLists(dynamic data) {
-    if (data is Map<dynamic, dynamic>) {
-      setState(() {
-        humidityList.add(data['humidity'].toDouble());
-        temperatureList.add(data['temperature'].toDouble());
-        ppmList.add(data['ppm']);
-        mq2ValueList.add(data['mq2Value']);
-
-
-      });
-    }
-  }
 }
-
-class _buildWidget extends StatelessWidget {
-  const _buildWidget({
-    required this.dbRef,
-    required this.list,
-  });
-
-  final List<dynamic> list;
-
-  final Query dbRef;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return GraphDetailWidget(dbRef: dbRef, list: list);
-  }
-}
-
-

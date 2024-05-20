@@ -6,12 +6,16 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mobile/core/constants/font_manager.dart';
+import 'package:mobile/core/api/providers/single_organization.dart';
+import 'package:mobile/core/api/update_org_api.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../core/api/providers/loader_provider.dart';
 import '../../../../../core/theme/hex_color.dart';
 import '../../../../auth/presentation/widgets/common_widgets/custom_btn.dart';
 import '../../../../auth/presentation/widgets/common_widgets/custom_textfield.dart';
+import '../../../../opportunity/domain/repositories/organization.dart';
 
 class OrgProfileDetailWidget extends StatefulWidget {
   const OrgProfileDetailWidget({super.key});
@@ -28,7 +32,17 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _aboutUsController = TextEditingController();
   final TextEditingController _howToVolunteerController =
-      TextEditingController();
+  TextEditingController();
+  Organization user = Organization(
+      id: '',
+      name: '',
+      email: '',
+      aboutUs: '',
+      howToVolunteer: '',
+      imageUrl: '',
+      longitude: 0,
+      latitude: 0,
+      liveStreamingId: '');
 
   Future<void> getImage() async {
     final XFile? image = await picker.pickImage(source: ImageSource.gallery);
@@ -41,11 +55,34 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
     });
   }
 
+  Future<void> _callApi() async {
+    user = Provider
+        .of<OrganizationProvider>(context, listen: false)
+        .organizations!;
+
+    setState(() {
+      _firstNameController.text = user.name ?? "";
+      _lastNameController.text = user.name ?? "";
+      _emailController.text = user.email;
+      _aboutUsController.text = user.aboutUs ?? "";
+      _howToVolunteerController.text = user.howToVolunteer;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _callApi();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30).r,
+        padding: EdgeInsets
+            .symmetric(horizontal: 20, vertical: 30)
+            .r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,12 +90,19 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Red Cross',
+                  user.name,
                   style: context.displayMedium,
                 ),
                 CustomBtn(
                   text: "Save",
-                  onPressed: () {},
+                  onPressed: () async {
+                    Provider.of<LoaderProvider>(context, listen: false)
+                        .setLoader(true);
+                    await UpdateOrgApi(user.email, user.name, user.aboutUs,
+                        user.howToVolunteer, context);
+                    Provider.of<LoaderProvider>(context, listen: false)
+                        .setLoader(false);
+                  },
                   width: true,
                 ),
               ],
@@ -79,24 +123,19 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
                     ),
                     child: _image == null
                         ? Icon(
-                            CupertinoIcons.person,
-                            size: 60.r,
-                            color: HexColor.lightColor,
-                          )
+                      CupertinoIcons.person,
+                      size: 60.r,
+                      color: HexColor.lightColor,
+                    )
                         : ClipRRect(
-                            borderRadius: BorderRadius.circular(40.0).r,
-                            child: Image.file(
-                              _image!,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                  ),
-                ),
-                Text(
-                  'Blood Donation',
-                  style: context.bodyMedium!.copyWith(
-                    color: Colors.black,
-                    fontWeight: FontWeightManager.semiBold,
+                      borderRadius: BorderRadius
+                          .circular(40.0)
+                          .r,
+                      child: Image.file(
+                        _image!,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ],
@@ -111,34 +150,51 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
 
   Widget _fieldSection() {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15.0).r,
+      padding: EdgeInsets.symmetric(horizontal: 15.w),
       child: Column(
         children: [
           CustomTextField(
             controller: _firstNameController,
             labelText: 'First Name',
+            onChanged: (value) {
+              setState(() {
+                user.name = value;
+              });
+            },
           ),
           Gap(10.h),
-          CustomTextField(
-            controller: _lastNameController,
-            labelText: 'Last Name',
-          ),
           Gap(10.h),
           CustomTextField(
             controller: _emailController,
             labelText: 'Email',
+            onChanged: (value) {
+              setState(() {
+                user.email = value;
+              });
+            },
           ),
           Gap(10.h),
           CustomTextField(
             controller: _aboutUsController,
-            labelText: 'AboutUs',
+            labelText: 'About Us',
             maxLines: 4,
+            onChanged: (value) {
+              setState(() {
+                user.aboutUs = value;
+              });
+            },
           ),
           Gap(10.h),
           CustomTextField(
             controller: _howToVolunteerController,
             labelText: 'How to Volunteer',
             maxLines: 4,
+            onChanged: (value) {
+              setState(() {
+                user.howToVolunteer =
+                    value;
+              });
+            },
           ),
         ],
       ),

@@ -11,4 +11,5 @@ class Routes{
   static const String graphPage='/graph';
   static const String orgEntryPage='/orgEntry';
   static const String notificationPage='/notification';
+  static const String followingPage='/following';
 }

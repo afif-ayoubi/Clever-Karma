@@ -7,8 +7,10 @@ import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/core/constants/assets_manager.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../core/api/otp_verify_api.dart';
+import '../../../../../core/api/providers/loader_provider.dart';
 import '../../../../../core/util/snackbar_message.dart';
 import '../../../../../routes/class_routes.dart';
 import '../../../core/util/validation.dart';
@@ -80,6 +82,7 @@ class OtpDetailWidget extends StatelessWidget {
                   child: CustomTextField(
                     controller: passwordController!,
                     hintText: "New Password",
+                    showVisibility: true,
                     validator: (value) =>
                         Validation.validatePassword(value, context),
                   ),
@@ -89,7 +92,11 @@ class OtpDetailWidget extends StatelessWidget {
                   onOtpEntered: (otp) async {
                     print(otp);
                     if (otp.length == 4) {
+                      Provider.of<LoaderProvider>(context, listen: false).setLoader(true);
+
                       final api = await verifyOtpApi(number: otp.toString());
+                      Provider.of<LoaderProvider>(context, listen: false).setLoader(false);
+
                       if (api) {
                         context.push(Routes.resetPasswordRoute);
                       } else {
@@ -118,6 +125,7 @@ class OtpDetailWidget extends StatelessWidget {
                   child: CustomTextField(
                     hintText: "Confirm Password",
                     controller: confirmPasswordController!,
+                    showVisibility: true,
                     validator: (value) => Validation.validateConfirmPassword(
                       value,
                       passwordController!.text,

@@ -13,6 +13,7 @@ import 'package:mobile/features/opportunity/domain/repositories/organization.dar
 import 'package:mobile/features/opportunity/presentation/widgets/organization_page/show_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../../core/api/providers/followProvider.dart';
 import '../../../../../core/api/providers/user_provider.dart';
 import '../../../../../core/constants/assets_manager.dart';
 import '../../../../../core/constants/font_manager.dart';
@@ -77,7 +78,7 @@ class _OrganizationCardState extends State<OrganizationCard> {
 
   double _calculateHaversineDistance(
       double lat1, double lon1, double lat2, double lon2) {
-    const R = 6371; // Radius of the Earth in km
+    const R = 6371;
     final dLat = _degreesToRadians(lat2 - lat1);
     final dLon = _degreesToRadians(lon2 - lon1);
     final a = sin(dLat / 2) * sin(dLat / 2) +
@@ -95,10 +96,19 @@ class _OrganizationCardState extends State<OrganizationCard> {
 
   @override
   Widget build(BuildContext context) {
+    final followedOrganizationsProvider =
+    Provider.of<FollowedOrganizationsProvider>(context);
+    final isFollowed = followedOrganizationsProvider
+        .isOrganizationFollowed(widget.organization);
+
     return GestureDetector(
       onTap: () {
-        return customShowBottomSheet(context, widget.organization.name,
-            widget.organization.aboutUs, widget.organization.howToVolunteer);
+        customShowBottomSheet(
+          context,
+          widget.organization,
+          distanceText,
+
+        );
       },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,6 +157,7 @@ class _OrganizationCardState extends State<OrganizationCard> {
     );
   }
 }
+
 
 class _CardWidget extends StatelessWidget {
   const _CardWidget({

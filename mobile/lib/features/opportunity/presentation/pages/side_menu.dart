@@ -60,7 +60,7 @@ class _SideMenuState extends State<SideMenu> {
                         });
                         switch (menu.number) {
                           case 1:
-                            context.push(Routes.profileRoute);
+                            context.push(Routes.followingPage);
                             break;
                           case 2:
                             context.push(Routes.notificationPage);
@@ -69,6 +69,8 @@ class _SideMenuState extends State<SideMenu> {
                             break;
                           case 3:
                             print(selectedMenu == menu);
+                            context.push(Routes.profileRoute);
+
                             break;
                         }
                       },

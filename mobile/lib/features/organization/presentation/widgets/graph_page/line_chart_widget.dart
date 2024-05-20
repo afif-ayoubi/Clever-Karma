@@ -35,7 +35,7 @@ class _LineChartWidgetState extends State<LineChartWidget>  {
                 bottom: 12,
               ),
               child: LineChart(
-                showAvg ? avgData(widget.list) : mainData(widget.list),
+                 mainData(widget.list),
               ),
             ),
           ),

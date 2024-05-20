@@ -21,10 +21,12 @@ class CustomBtn extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: onPressed,
-        child: Text(text,
-            style: context.bodyMedium!.copyWith(
-                color: HexColor.whiteColor,
-                fontWeight: FontWeightManager.semiBold)),
+        child: FittedBox(
+          child: Text(text,
+              style: context.bodyMedium!.copyWith(
+                  color: HexColor.whiteColor,
+                  fontWeight: FontWeightManager.semiBold)),
+        ),
       ),
     );
   }

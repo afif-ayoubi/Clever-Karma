@@ -16,10 +16,11 @@ Future<bool> sendOtpApi(
 
   http.StreamedResponse response = await request.send();
 
-  if (response.statusCode == 200) {
+  if (response.statusCode == 201) {
     print(await response.stream.bytesToString());
     return true;
   } else {
+
     print(response.reasonPhrase);
     SnackBarMessage.instance.showErrorSnackBar(
       message: 'User not found',

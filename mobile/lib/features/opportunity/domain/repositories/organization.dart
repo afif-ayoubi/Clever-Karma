@@ -1,13 +1,13 @@
 class Organization {
-  final String id;
-  final String name;
-  final String email;
-  final String aboutUs;
-  final String howToVolunteer;
-  final String imageUrl;
-  final double longitude;
-  final double latitude;
-  final String liveStreamingId;
+   String id;
+   String name;
+   String email;
+   String aboutUs;
+   String howToVolunteer;
+   String imageUrl;
+   double longitude;
+   double latitude;
+   String liveStreamingId;
 
   Organization({
     required this.id,
@@ -34,7 +34,7 @@ class Organization {
     }
 
     return Organization(
-      id: json['_id'] ,
+      id: json['_id']?? json['id'],
       name: json['firstName'] ,
       email: json['email'] ,
       aboutUs: json['organizationDetail']['aboutUs'] ,

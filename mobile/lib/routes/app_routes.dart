@@ -7,6 +7,7 @@ import 'package:mobile/features/auth/presentation/pages/onboarding_page.dart';
 import 'package:mobile/features/auth/presentation/pages/otp_verification_screen.dart';
 import 'package:mobile/features/auth/presentation/pages/profile_page.dart';
 import 'package:mobile/features/auth/presentation/pages/reset_password_screen.dart';
+import 'package:mobile/features/opportunity/presentation/pages/following_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/map_page.dart';
 import 'package:mobile/features/opportunity/presentation/pages/organizations_page.dart';
 import 'package:mobile/features/organization/presentation/pages/graph_page.dart';
@@ -68,5 +69,8 @@ class AppRoutes {
         GoRoute(
             path: Routes.orgEntryPage,
             builder: ((context, state) => const OrgEntryPage())),
+        GoRoute(
+            path: Routes.followingPage,
+            builder: ((context, state) => const FollowingPage())),
       ]);
 }

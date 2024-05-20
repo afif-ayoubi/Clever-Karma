@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:mobile/core/api/providers/loader_provider.dart';
 import 'package:mobile/core/api/providers/notification_provider.dart';
-import 'package:mobile/core/api/providers/organization_provider.dart';
+import 'package:mobile/core/api/providers/organization_providers.dart';
 import 'package:mobile/features/opportunity/domain/entities/notifications.dart';
 import 'package:mobile/features/opportunity/domain/repositories/organization.dart';
 import 'package:provider/provider.dart';
