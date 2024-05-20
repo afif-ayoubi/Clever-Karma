@@ -160,8 +160,6 @@
 
 
 <br><br>
-
-<!-- Unit Testing -->
 <img src="./readme/title9.svg"/>
 
 ### Precision in Development: Harnessing the Power of Unit Testing:
@@ -173,7 +171,7 @@
 <!-- How to run -->
 <img src="./readme/title10.svg"/>
 
-> To set up Coffee Express locally, follow these steps:
+> To set up Clever Karma Express locally, follow these steps:
 
 ### Prerequisites
 
@@ -250,4 +248,4 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 
-Now, you should be able to run Coffee Express locally and explore its features.
+Now, you should be able to run Clever Karma  locally and explore its features.
