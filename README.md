@@ -141,25 +141,44 @@
 
 This is an example of how to list things you need to use the software and how to install them.
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+1. Install [FLutter SDK](https://docs.flutter.dev/release/archive?tab=windows) and Add it to your PATH.
+2. Install [Node & NPM](https://nodejs.org/en/download/package-manager)
+3. Install [Arduino IDE](https://www.arduino.cc/en/software)
 
 ### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
+### Website (NextJs) 
 
-1. Get a free API Key at [example](https://example.com)
-2. Clone the repo
-   git clone [github](https://github.com/your_username_/Project-Name.git)
-3. Install NPM packages
+1. Clone the repo
+   git clone [github](https://github.com/afif-ayoubi/Clever-Karma/tree/main?tab=readme-ov-file)
+
+2. Navigate to the website directory  
+    ```sh
+   cd website
+   ```
+3. Run the following command to install the dependencies listed in package.json:
+    ```sh
+   npm install npm@latest -g
+   ```
+4. Run the following command to to run the project:
+    ```sh
+   npm run dev
+   ```
+### Mobile (Flutte)
+
+1. Navigate to the mobile directory
    ```sh
-   npm install
+   cd mobile
    ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = "ENTER YOUR API";
+2. Run the following command to get all the required dependencies:
+   ```sh
+   flutter pub get
    ```
+3. Run the project
+   ```sh
+   flutter run
+   ```
+
 
 Now, you should be able to run Coffee Express locally and explore its features.
