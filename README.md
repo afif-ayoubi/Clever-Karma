@@ -66,7 +66,9 @@
 
 ### Architecting Data Excellence: Innovative Database Design Strategies:
 
-- (./readme/demo/diagram.svg)
+
+<img src="./readme/demo/diagram.svg"/>
+
 
 <br><br>
 
