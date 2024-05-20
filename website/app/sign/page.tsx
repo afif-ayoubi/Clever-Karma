@@ -1,5 +1,5 @@
-'use client'
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios
 import '../ui/global.css'; 
 import styles from '../ui/sign/sign.module.css';
 
@@ -25,13 +25,47 @@ const Register = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Submitted data:', formData);
-    // Add your form submission logic here
+    
+    
+    let data = {
+      firstName: formData.name,
+      lastName: '', 
+      email: formData.email,
+      password: formData.password,
+      role: 'Organization',
+      isActive: true,
+      organizationDetail: {
+        aboutUs: formData.aboutus,
+        howToVolunteer: formData.volunteer,
+        imageUrl: formData.image,
+        location: {
+          longitude: parseFloat(formData.longitude),
+          latitude: parseFloat(formData.latitude)
+        },
+        volunteeringSectionId: '664943ac69b541102c576877' 
+      },
+      liveStreaming: {
+        liveStremingId: '1234567',
+        isActivated: false
+      }
+    };
+
+    axios.post('http://localhost:3000/user/create-organization', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log('Response:', response.data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
   };
 
   return (
-    <div className="container">
-      <div >
+    <div className={styles.container}>
+      <div className={styles.formContainer}>
         <h2 className={styles.title}>Register</h2>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formGroup}>
