@@ -200,18 +200,21 @@ _Below is an example of how you can instruct your audience on installing and set
    ```
 ### Iot (Esp32)
 
-1. Navigate to the Backend directory
+1. Add ESP32 Board Manager URL:
+   - Go to File > Preferences.
    ```sh
    cd backend
    ```
-2. Install the dependencies:
-   ```sh
-   npm install
-   ```
-3. Run the project
-   ```sh
-   npm run start:dev
-   ```
+2. Install ESP32 Board Package:
+   - Go to Tools > Board > Boards Manager....
+   - Search for "esp32" and install "ESP32 by Espressif Systems".
+
+3. Go to Tools > Board and select your ESP32 board from the list
+
+4. Select Upload Speed and Port:
+   - Go to Tools > Upload Speed and select the appropriate baud rate (usually 115200).
+   
+
 
 
 Now, you should be able to run Coffee Express locally and explore its features.
