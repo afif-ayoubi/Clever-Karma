@@ -43,7 +43,7 @@ class BackgroundCard extends StatelessWidget {
             const _OpportunityInfoRow(
               icon: Icon(IconManager.people),
               label: Text('Organizations'),
-              data: '180%',
+              data: '180',
             ),
             Gap(5.h),
             const _OpportunityInfoRow(
