@@ -126,6 +126,39 @@
 
 - This project leverages AWS deployment strategies to seamlessly integrate and deploy natural language processing models. With a focus on scalability, reliability, and performance, we ensure that AI applications powered by these models deliver robust and responsive solutions for diverse use cases.
 
+### AWS Deployment Steps
+
+1. Clone the Repository:
+    - SSH into your EC2 instance.Clone the Repository.
+    - Clone the repository using Git:
+      ```sh
+      https://github.com/afif-ayoubi/Clever-Karma.git
+      ```
+2. Create Docker Image:
+    - Navigate to the backend directory where the Dockerfile is located:
+         ```sh
+         cd Clever-Karma/backend
+         ```
+    - Ensure that your Dockerfile is correctly defined to set up the Docker image.
+
+3. Build and Run Docker Image:
+    - Build the Docker image using the docker build command:
+         ```sh
+         docker build -t cue-backend 
+         ```
+    - Run the Docker container, mapping the appropriate ports (80 for HTTP, 443 for HTTPS):
+         ```sh
+         docker run -d -p 80:80 -p 443:443 cue-backend
+         ```
+### Notes:
+- Docker Installation: Docker must be installed and running on your EC2 instance. You can install Docker using:
+      ```sh
+      sudo apt-get update
+      sudo apt-get install docker.io
+      ```
+  
+
+
 <br><br>
 
 <!-- Unit Testing -->
@@ -206,14 +239,14 @@ _Below is an example of how you can instruct your audience on installing and set
    cd backend
    ```
 2. Install ESP32 Board Package:
-   - Go to Tools > Board > Boards Manager....
-   - Search for "esp32" and install "ESP32 by Espressif Systems".
+    - Go to Tools > Board > Boards Manager....
+    - Search for "esp32" and install "ESP32 by Espressif Systems".
 
 3. Go to Tools > Board and select your ESP32 board from the list
 
 4. Select Upload Speed and Port:
-   - Go to Tools > Upload Speed and select the appropriate baud rate (usually 115200).
-   
+    - Go to Tools > Upload Speed and select the appropriate baud rate (usually 115200).
+
 
 
 
