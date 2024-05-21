@@ -7,6 +7,7 @@ import 'package:mobile/core/constants/icons_manager.dart';
 import 'package:mobile/core/extensions/text_theme.dart';
 import 'package:mobile/core/theme/hex_color.dart';
 import 'package:mobile/features/opportunity/domain/entities/opportunity.dart';
+import 'dart:math';
 
 class BackgroundCard extends StatelessWidget {
   const BackgroundCard(
@@ -17,6 +18,11 @@ class BackgroundCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final random = Random();
+
+    final int livesSaved = 100 + random.nextInt(101);
+    final int organizations = 3 + random.nextInt(8);
+    final int volunteers = 50 + random.nextInt(51);
     return Transform(
       transform: Matrix4.translationValues(0, 80 * translation, 0),
       child: DecoratedBox(
@@ -34,21 +40,21 @@ class BackgroundCard extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            const _OpportunityInfoRow(
+            _OpportunityInfoRow(
               icon: Icon(IconManager.favorite),
-              label: Text('Lived Saved'),
+              label: Text('$livesSaved '),
               data: '180',
             ),
             Gap(5.h),
-            const _OpportunityInfoRow(
+            _OpportunityInfoRow(
               icon: Icon(IconManager.people),
-              label: Text('Organizations'),
+              label: Text('$organizations'),
               data: '180',
             ),
             Gap(5.h),
-            const _OpportunityInfoRow(
+            _OpportunityInfoRow(
               icon: Icon(IconManager.organization),
-              label: Text('Volunteers '),
+              label: Text('$volunteers '),
               data: "100",
             ),
             const SizedBox(
@@ -60,9 +66,10 @@ class BackgroundCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 35,vertical: 10).r,
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 35, vertical: 10).r,
               child: Text(
-                "Donate blood. Save lives. 180 lives saved this month. 10 Blood Donation Centers ready to welcome you.  180  Volunteers donated blood this month. Be a hero!",
+                "$livesSaved lives saved this month. $organizations organizations ready to welcome you.  $volunteers  Volunteers participate this month. Be a hero!",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 12.sp,
