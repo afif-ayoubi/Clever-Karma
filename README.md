@@ -89,10 +89,9 @@
 
 ### Website
 
-| info screen                            | Dashboard screen                        |
-| --------------------------------------- | ------------------------------------- |
-| <img src="./readme/demo/info.gif" width="300"> | <img src="./readme/demo/dashboard.png" width="300"> |
-
+| info screen                            | Login screen                       | Dashboard screen                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| <img src="./readme/demo/info.gif" width="300"> | <img src="./readme/demo/org_login.png" width="300"> | <img src="./readme/demo/dashboard.png" width="300"> |
 
 <br><br>
 
