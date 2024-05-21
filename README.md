@@ -79,7 +79,7 @@
 
 ### User Screens (Mobile)
 
-| OnBoarding screen                              | Auth screens                         | Forgot Pass screen                          | Otp $ Change pass screen                          |
+| OnBoarding screen                              | Auth screens                         | Forgot Pass screen                          | Otp & Change pass screen                          |
 | ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
 | ![Landing](./readme/demo/organization.gif) | ![fsdaf](./readme/demo/auth.gif) | ![fsdaf](./readme/demo/forgot.gif) | ![fsdaf](./readme//demo/otpandchange_password-speed.gif) |
 | Home screen                               | Organization Screen                             | Map Screen                            | Following Screen                         |
