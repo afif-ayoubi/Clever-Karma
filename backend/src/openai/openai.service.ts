@@ -56,16 +56,23 @@ openAiService: OpenAI;
   private aggregateData(season: string, country: string): string {
     const relevantData = this.historicalData.filter(
       data => data.season === season && data.country === country
-    );
-
+    ); 
+  
+    if (relevantData.length === 0) {
+      throw new Error('No relevant data found for the given season and country.');
+    }
+  
     const bloodTypeCounts = relevantData.reduce((acc, data) => {
       if (!acc[data.bloodType]) acc[data.bloodType] = 0;
       acc[data.bloodType]++;
       return acc;
     }, {});
-
-    return Object.entries(bloodTypeCounts).reduce((max, curr) => curr[1] > max[1] ? curr : max)[0];
+  
+    return Object.entries(bloodTypeCounts).reduce((max, curr) => 
+      curr[1] > max[1] ? curr : max
+    )[0];
   }
+  
 
   predictBloodType(accidentData: AccidentData): string {
     const season = accidentData.season || this.getCurrentSeason();
