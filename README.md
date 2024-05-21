@@ -84,14 +84,14 @@
 | ![Landing](./readme/demo/organization.gif) | ![fsdaf](./readme/demo/auth.gif) | ![fsdaf](./readme/demo/forgot.gif) | ![fsdaf](./readme//demo/otpandchange_password-speed.gif) |
 | Home screen                               | Organization Screen                             | Map Screen                            | Following Screen                         |
 | ![Landing](./readme/demo/home.gif) | ![fsdaf](/readme/demo/organization.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
-| Profile screen                               | Organization Screen                             | Map Screen                            | Notifications Screen                         |
+| Profile screen                               | Organization Screen                             | Organization Dashboard Screen                            | Organization Main Screen                         |
 | ![Landing](./readme/demo/profile.gif) | ![fsdaf](/readme/demo/notifications.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
 
 ### Admin Screens (Web)
 
-| Login screen                            | Register screen                       | Landing screen                        |
+| info screen                            | Register screen                       | Landing screen                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
+| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 | Home screen                             | Menu Screen                           | Order Screen                          |
 | ![Landing](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) | ![fsdaf](./readme/demo/1440x1024.png) |
 
