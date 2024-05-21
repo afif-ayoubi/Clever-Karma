@@ -116,6 +116,7 @@ class _OrganizationCardState extends State<OrganizationCard> {
           SizedBox(
             height: 185.h,
             child: _CardWidget(
+              organization: widget.organization,
               liveId: widget.organization.liveStreamingId,
               userLocation: userLocation ?? LatLng(0, 0),
               realDistance: realDistance,
@@ -166,7 +167,7 @@ class _CardWidget extends StatelessWidget {
     required this.userLocation,
     required this.realDistance,
     required this.organizationLocation,
-    required this.title,
+    required this.title, required this.organization,
   }) : super(key: key);
 
   final String liveId;
@@ -174,6 +175,7 @@ class _CardWidget extends StatelessWidget {
   final String realDistance;
   final LatLng organizationLocation;
   final String title;
+  final Organization organization;
 
   @override
   Widget build(BuildContext context) {
@@ -188,8 +190,8 @@ class _CardWidget extends StatelessWidget {
           decoration: BoxDecoration(
             color: HexColor.primaryColor,
             borderRadius: BorderRadius.circular(12).w,
-            image: const DecorationImage(
-              image: AssetImage(AppImages.imgImg1),
+            image:  DecorationImage(
+              image: NetworkImage(organization.imageUrl),
               fit: BoxFit.cover,
             ),
           ),

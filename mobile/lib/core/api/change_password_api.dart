@@ -20,12 +20,16 @@ Future<bool> changePasswordApi(
   http.StreamedResponse response = await request.send();
 
   if (response.statusCode == 200) {
+    SnackBarMessage.instance.showSuccessSnackBar(
+      message: 'Password change successfully ',
+      context: context,
+    );
     print(await response.stream.bytesToString());
     return true;
   } else {
     print(response.reasonPhrase);
     SnackBarMessage.instance.showErrorSnackBar(
-      message: 'Something Wrong',
+       message: 'Something Wrong',
       context: context,
     );
     return false;

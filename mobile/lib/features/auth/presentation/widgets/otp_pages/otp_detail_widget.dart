@@ -94,7 +94,7 @@ class OtpDetailWidget extends StatelessWidget {
                     if (otp.length == 4) {
                       Provider.of<LoaderProvider>(context, listen: false).setLoader(true);
 
-                      final api = await verifyOtpApi(number: otp.toString());
+                      final api = await verifyOtpApi(number: otp.toString(),context: context);
                       Provider.of<LoaderProvider>(context, listen: false).setLoader(false);
 
                       if (api) {

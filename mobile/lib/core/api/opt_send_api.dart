@@ -18,6 +18,10 @@ Future<bool> sendOtpApi(
 
   if (response.statusCode == 201) {
     print(await response.stream.bytesToString());
+    SnackBarMessage.instance.showSuccessSnackBar(
+      message: 'Check Your Email ',
+      context: context,
+    );
     return true;
   } else {
 

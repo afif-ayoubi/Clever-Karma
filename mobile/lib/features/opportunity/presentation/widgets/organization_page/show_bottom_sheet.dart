@@ -22,7 +22,8 @@ void customShowBottomSheet(
 ) {
   final randomNumber = Random().nextInt(90000000) + 10000000;
 
-  showModalBottomSheet(
+  showModalBottomSheet<dynamic>(
+    isScrollControlled: true,
     context: context,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(
@@ -37,6 +38,7 @@ void customShowBottomSheet(
                   .isOrganizationFollowed(organization);
           return Container(
             width: double.infinity,
+            height: 600.h,
             decoration: BoxDecoration(
               color: Color(0xffE9E7E7),
               borderRadius: BorderRadius.vertical(
