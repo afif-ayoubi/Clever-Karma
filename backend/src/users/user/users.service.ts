@@ -1,7 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model, Types } from "mongoose";
-import { User } from "src/schemas/user.schema";
 import { UserAuthResponseType } from "./types/user_type/auth_user_response_type";
 import { compare } from "bcrypt";
 import { sign } from 'jsonwebtoken';
@@ -9,14 +8,17 @@ import { HydratedDocument } from 'mongoose';
 import { UserResponseType } from "./types/user_type/user_response_type";
 import { CreateUserDto } from "./dto/user_dto/create_user.dto";
 import { LoginDto } from "./dto/user_dto/login.dto";
-import { ModelConflictException, ModelNotFoundException, ModelUnprocessableEnitityException } from "src/core/error/exception";
-import { ERROR_MESSAGES } from "src/core/constants/error_message";
 import {  OrganizationDto } from "./dto/organization_dto/organization.dto";
 import 'dotenv/config';
 import { FollowDto } from "./dto/follow_dto/follow.dto";
 import { USER_ROLES } from "./utils/user_roles_enum";
 import { ChangePasswordDto } from "./dto/user_dto/change_password.dto";
-import { VolunteeringSection } from "src/schemas/volunteering_opportunity.schema";
+import { User } from "../../schemas/user.schema";
+import { ModelConflictException, ModelNotFoundException, ModelUnprocessableEnitityException } from "../../core/error/exception";
+import { ERROR_MESSAGES } from "../../core/constants/error_message";
+import { VolunteeringSection } from "../../schemas/volunteering_opportunity.schema";
+
+
 
 
 export type UserDocument = HydratedDocument<User>;
@@ -36,7 +38,7 @@ export class UsersService {
         }
     
         const { organizationDetail } = organizationDto;
-        const existingVolunteeringSection = await this.volunteeringSectionModel.findById(organizationDetail.volunteeringSectionId).exec();
+        const existingVolunteeringSection = await this.volunteeringSectionModel.findById(organizationDetail.volunteeringSectionId);
         if (!existingVolunteeringSection) {
           throw new ModelUnprocessableEnitityException('Volunteering Section not found');
         }

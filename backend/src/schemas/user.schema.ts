@@ -1,5 +1,5 @@
         import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-        import { USER_ROLES } from 'src/users/user/utils/user_roles_enum';
+        import { USER_ROLES } from '../users/user/utils/user_roles_enum';
         import { NotificationSchema, Notifications } from './notification.schema';
         import { UserInfo } from './user_info.schema';
         import { OrganizationDetail, OrganizationDetailSchema } from './organization_detail.schema';

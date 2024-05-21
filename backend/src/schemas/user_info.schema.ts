@@ -1,5 +1,5 @@
 import { Schema, Prop, SchemaFactory } from '@nestjs/mongoose';
-import { USER_GENDERS } from 'src/users/user/utils/user_genders_enum';
+import { USER_GENDERS } from '../users/user/utils/user_genders_enum';
 
 export class UserInfo {
     @Prop()
