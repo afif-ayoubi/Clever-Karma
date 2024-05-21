@@ -79,11 +79,13 @@
 
 ### User Screens (Mobile)
 
-| Login screen                              | Register screen                         | Landing screen                          | Loading screen                          |
+| OnBoarding screen                              | Auth screens                         | Forgot Pass screen                          | Otp $ Change pass screen                          |
 | ----------------------------------------- | --------------------------------------- | --------------------------------------- | --------------------------------------- |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
-| Home screen                               | Menu Screen                             | Order Screen                            | Checkout Screen                         |
-| ![Landing](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) | ![fsdaf](https://placehold.co/900x1600) |
+| ![Landing](./readme/demo/organization.gif) | ![fsdaf](./readme/demo/auth.gif) | ![fsdaf](./readme/demo/forgot.gif) | ![fsdaf](./readme//demo/otpandchange_password-speed.gif) |
+| Home screen                               | Organization Screen                             | Map Screen                            | Following Screen                         |
+| ![Landing](./readme/demo/home.gif) | ![fsdaf](/readme/demo/organization.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
+| Profile screen                               | Organization Screen                             | Map Screen                            | Notifications Screen                         |
+| ![Landing](./readme/demo/profile.gif) | ![fsdaf](/readme/demo/notifications.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
 
 ### Admin Screens (Web)
 
