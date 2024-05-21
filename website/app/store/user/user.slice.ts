@@ -1,31 +1,31 @@
 import { sendRequest } from '@/app/core/tools/request';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { rejects } from 'assert';
-import axios, { Method } from 'axios';
+
 
 const initialState = {
     user: null,
     loading: false,
     error: null,
 };
+
 export const loginUser = createAsyncThunk(
-    'user/loginUser', async (credentials, { rejectWithValue }) => {
+    'user/loginUser',
+    async (credentials: { email: string; password: string }, { rejectWithValue }) => {
         try {
             const response = await sendRequest({
                 method: 'POST',
-                route: "/user/login",
+                route: '/user/login',
                 body: credentials,
             });
-            if (response.status === 201) {
-                localStorage.setItem("token", response.data.token);
-                return response.data;
-            }
 
-        } catch (error) {
-            return rejectWithValue((error as any).response.data);
+            localStorage.setItem('token', response.token);
+
+            return response; 
+        } catch (error:any) {
+            return rejectWithValue(error.response?.data); 
         }
     }
-)
+);
 const userSlice = createSlice({
     name: 'user',
     initialState,
@@ -49,6 +49,6 @@ const userSlice = createSlice({
                 state.error = action.payload?.message ?? 'An error occurred';
             });
     },
-});
+}); 
 
 export default userSlice.reducer;

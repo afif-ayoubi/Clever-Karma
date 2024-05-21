@@ -17,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <main className="relative overflow-hidden">
-        <StoreProvider>
-          {children}
-        </StoreProvider>
+        <body>
+          <StoreProvider>
+            {children}
+          </StoreProvider>
+        </body>
       </main>
 
 

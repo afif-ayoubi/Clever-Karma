@@ -75,7 +75,7 @@ const Sidebar =  () => {
             height="50"
           />
           <div className={styles.userDetail}>
-            <span className={styles.username}>{"Afif"}</span>
+            <span className={styles.username}>{"Admin"}</span>
             <span className={styles.userTitle}>Administrator</span>
           </div>
         </div>

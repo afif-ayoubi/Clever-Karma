@@ -29,3 +29,6 @@
     cursor: pointer;
     border-radius: 5px;
   }
+  .error{
+    color: red;
+  } 
