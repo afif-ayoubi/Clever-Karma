@@ -8,7 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../routes/app_routes.dart';
 
-void notificationTapBackground(NotificationResponse notificationResponse) {
+void notificationTapBackground(
+    NotificationResponse notificationResponse) async {
   print('notification(${notificationResponse.id}) action tapped: '
       '${notificationResponse.actionId} with'
       ' payload: ${notificationResponse.payload}');
@@ -16,7 +17,13 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
     print(
         'notification action tapped with input: ${notificationResponse.input}');
   }
-  navigatorKey.currentContext!.go(Routes.entryPage);
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final token = prefs.getString('token');
+  if (token == null) {
+    navigatorKey.currentContext!.go(Routes.authRoute);
+  } else {
+    navigatorKey.currentContext!.go(Routes.entryPage);
+  }
 }
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {
