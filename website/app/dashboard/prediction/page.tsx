@@ -29,7 +29,6 @@ const Prediction = () => {
       maxBodyLength: Infinity,
       url: 'http://localhost:3000/openai/chat',
       headers: {
-        'Authorization': 'Bearer sk-proj-xsubwmvi8OI9OMOc0X0DT3BlbkFJLuajODlwe8qXGgn0dwON',
         'Content-Type': 'application/json'
       },
       data: data
