@@ -91,7 +91,8 @@
 
 | info screen                            | Dashboard screen                        |
 | --------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/dashboard.png) |
+| <img src="./readme/demo/info.gif" width="300"> | <img src="./readme/demo/dashboard.png" width="300"> |
+
 
 <br><br>
 
