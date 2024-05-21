@@ -75,7 +75,6 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
     _callApi();
   }
 
-  // Helper function to get the first two words
   String _getFirstTwoWords(String name) {
     List<String> words = name.split(' ');
     if (words.length <= 2) {
@@ -150,6 +149,7 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
                       ),
                     ),
                   ),
+                ),
               ],
             ),
             Gap(25.h),
@@ -158,7 +158,6 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
         ),
       ),
     );
-    ),
   }
   Widget _fieldSection() {
     return Padding(

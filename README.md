@@ -87,7 +87,7 @@
 | Profile screen                               | Organization Screen                             | Organization Dashboard Screen                            | Organization Main Screen                         |
 | ![Landing](./readme/demo/profile.gif) | ![fsdaf](/readme/demo/notifications.gif) | ![fsdaf](/readme/demo/org_dash.gif) | ![fsdaf](./readme/demo/main.gif) |
 
-### Website
+### Website 
 
 | info screen                            | Login screen                       | Dashboard screen                        |
 | --------------------------------------- | ------------------------------------- | ------------------------------------- |

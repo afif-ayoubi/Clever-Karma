@@ -92,7 +92,7 @@ const Sidebar =  () => {
         <form
        
         >
-          <button className={styles.logout}>
+          <button className={styles.logout} >
             <MdLogout />
             Logout
           </button>

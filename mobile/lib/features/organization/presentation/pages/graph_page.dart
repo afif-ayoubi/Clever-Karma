@@ -37,6 +37,10 @@ class _GraphPageState extends State<GraphPage> {
         temperatureList.add((data['temperature'] as num).toDouble());
         ppmList.add((data['ppm'] as num).toDouble());
         mq2ValueList.add(data['mq2Value'] as int);
+        if (humidityList.length >= 8) humidityList.clear();
+        if (temperatureList.length >= 8) temperatureList.clear();
+        if (ppmList.length >= 8) ppmList.clear();
+        if (mq2ValueList.length >= 8) mq2ValueList.clear();
       });
     }
   }
