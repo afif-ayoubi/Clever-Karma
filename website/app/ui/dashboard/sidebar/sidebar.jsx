@@ -31,17 +31,17 @@ const menuItems = [
       },
       {
         title: "Sections",
-        path: "/dashboard/products",
+        path: "/dashboard/Sections",
         icon: <MdWork />,
       },
       {
         title: "Notification",
-        path: "/dashboard/transactions",
+        path: "/dashboard/Notification",
         icon: <MdPeople />,
       },
       {
         title: "Ai prediction",
-        path: "/dashboard/transactions",
+        path: "/dashboard/prediction",
         icon: <MdAnalytics />,
       },
     ],
@@ -52,12 +52,12 @@ const menuItems = [
     list: [
       {
         title: "Settings",
-        path: "/dashboard/settings",
+        path: "/dashboard/Settings",
         icon: <MdOutlineSettings />,
       },
       {
         title: "Help",
-        path: "/dashboard/help",
+        path: "/dashboard/Help",
         icon: <MdHelpCenter />,
       },
     ],
