@@ -85,7 +85,7 @@
 | Home screen                               | Organization Screen                             | Map Screen                            | Following Screen                         |
 | ![Landing](./readme/demo/home.gif) | ![fsdaf](/readme/demo/organization.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
 | Profile screen                               | Organization Screen                             | Organization Dashboard Screen                            | Organization Main Screen                         |
-| ![Landing](./readme/demo/profile.gif) | ![fsdaf](/readme/demo/notifications.gif) | ![fsdaf](/readme/demo/map.gif) | ![fsdaf](./readme/demo/following.gif) |
+| ![Landing](./readme/demo/profile.gif) | ![fsdaf](/readme/demo/notifications.gif) | ![fsdaf](/readme/demo/org_dash.gif) | ![fsdaf](./readme/demo/main.gif) |
 
 ### Website
 

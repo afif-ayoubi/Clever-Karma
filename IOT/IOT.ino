@@ -5,8 +5,8 @@
   #include "addons/TokenHelper.h"
   #include "addons/RTDBHelper.h"
 
-  #define WIFI_SSID "SE Factory"
-  #define WIFI_PASSWORD "SE-F@tory1243%"
+  #define WIFI_SSID "Ayoubi"
+  #define WIFI_PASSWORD "81239192$$"
   #define API_KEY "AIzaSyDPRwvbtTPWoZoMuZiXMwePaJHsbIuwzf8"
   #define DATABASE_URL "https://clever-karma-152f3-default-rtdb.europe-west1.firebasedatabase.app/"
 

@@ -71,18 +71,25 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _callApi();
+  }
+
+  // Helper function to get the first two words
+  String _getFirstTwoWords(String name) {
+    List<String> words = name.split(' ');
+    if (words.length <= 2) {
+      return name;
+    } else {
+      return '${words[0]} ${words[1]}';
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: EdgeInsets
-            .symmetric(horizontal: 20, vertical: 30)
-            .r,
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30).r,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -90,7 +97,7 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  user.name,
+                  _getFirstTwoWords(user.name ?? ""),
                   style: context.displayMedium,
                 ),
                 CustomBtn(
@@ -122,22 +129,27 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
                       border: Border.all(color: HexColor.borderColor),
                     ),
                     child: _image == null
-                        ? Icon(
+                        ? (user.imageUrl != null && user.imageUrl.isNotEmpty
+                        ? ClipRRect(
+                      borderRadius: BorderRadius.circular(40.0).r,
+                      child: Image.network(
+                        user.imageUrl,
+                        fit: BoxFit.cover,
+                      ),
+                    )
+                        : Icon(
                       CupertinoIcons.person,
                       size: 60.r,
                       color: HexColor.lightColor,
-                    )
+                    ))
                         : ClipRRect(
-                      borderRadius: BorderRadius
-                          .circular(40.0)
-                          .r,
+                      borderRadius: BorderRadius.circular(40.0).r,
                       child: Image.file(
                         _image!,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                ),
               ],
             ),
             Gap(25.h),
@@ -146,8 +158,8 @@ class _OrgProfileDetailWidgetState extends State<OrgProfileDetailWidget> {
         ),
       ),
     );
+    ),
   }
-
   Widget _fieldSection() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 15.w),
