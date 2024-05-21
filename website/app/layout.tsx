@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import { StoreProvider } from "./store/storeProvider";
 
 
 export const metadata: Metadata = {
@@ -16,14 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <main className="relative overflow-hidden">
-
+      <main className="relative overflow-hidden">
+        <StoreProvider>
           {children}
-        </main>
+        </StoreProvider>
+      </main>
 
 
-      </body>
     </html>
   );
 }
