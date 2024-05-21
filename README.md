@@ -89,9 +89,9 @@
 
 ### Admin Screens (Web)
 
-| info screen                            | Login screen                       | |
-| --------------------------------------- | ------------------------------------- | 
-| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/org_login.png) |
+| info screen                            | Login screen                       | Dashboard screen                        |
+| --------------------------------------- | ------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/org_login.png) | ![fsdaf](./readme/demo/dashboard.png) |
 
 
 <br><br>
