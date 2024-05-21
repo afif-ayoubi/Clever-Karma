@@ -89,10 +89,9 @@
 
 ### Website
 
-| info screen                             | Login screen                       | Dashboard screen                        |
-| ---------------------------------------       | ------------------------------------- | ------------------------------------- |
-| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/org_login.png) | ![fsdaf](./readme/demo/dashboard.png) |
-
+| info screen                            | Dashboard screen                        |
+| --------------------------------------- | ------------------------------------- |
+| ![Landing](./readme/demo/info.gif) | ![fsdaf](./readme/demo/dashboard.png) |
 
 <br><br>
 
