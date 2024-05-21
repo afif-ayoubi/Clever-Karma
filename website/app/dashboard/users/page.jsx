@@ -8,7 +8,7 @@ import Pagination from "@/app/ui/dashboard/pagination/pagination";
 const users = [
   {
     id: 1,
-    img: "/noavatar.png",
+    img: "/user1.png", 
     username: "John Doe",
     email: "john@example.com",
     createdAt: new Date(),
@@ -17,8 +17,8 @@ const users = [
   },
   {
     id: 2,
-    img: "/noavatar.png",
-    username: "Jane Smith",
+    img: "/user2.png",
+    username: "Jane Smith", 
     email: "jane@example.com",
     createdAt: new Date(),
     isAdmin: false,
@@ -41,7 +41,6 @@ const UserPage = () => {
             <td>Email</td>
             <td>Created At</td>
             <td>Role</td>
-            <td>Status</td>
             <td>Action</td>
           </tr>
         </thead>
@@ -54,7 +53,7 @@ const UserPage = () => {
                     src={user.img || "/noavatar.png"}
                     alt=""
                     width={40}
-                    height={40}
+                    height={50} 
                     className={styles.userImage}
                   />
                   {user.username}
@@ -62,8 +61,7 @@ const UserPage = () => {
               </td>
               <td>{user.email}</td>
               <td>{user.createdAt?.toString().slice(4, 16)}</td>
-              <td>{user.isAdmin ? "Admin" : "Client"}</td>
-              <td>{user.isActive ? "active" : "passive"}</td>
+              <td>{user.isAdmin ? "Admin" : "Volunteer"}</td>
               <td>
                 <div className={styles.buttons}>
                   <Link href={`/dashboard/users/${user.id}`}>
