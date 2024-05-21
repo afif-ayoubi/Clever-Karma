@@ -1,41 +1,54 @@
 .container {
-    background-color: var(--bgSoft);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-  }
-  
-  .form {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .form input,
-  .form textarea,
-  .form select {
-    padding: 30px;
-    background-color: var(--bg);
-    color: var(--text);
-    border: 2px solid #2e374a;
-    border-radius: 5px;
-    margin-bottom: 30px;
-  }
-  
-  .form input, .form select {
-    width: 45%;
-  }
-  
-  .form textarea{
-    width: 100%;
-  }
-  
-  .form button{
-    width: 100%;
-    padding: 30px;
-    background-color: teal;
-    color: var(--text);
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
+  background-color: var(--bgSoft);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.input {
+  padding: 10px;
+  background-color: var(--bg);
+  color: var(--text);
+  border: 2px solid #2e374a;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 16px;
+  width: calc(45% - 10px); 
+}
+
+.button {
+  width: 100%;
+  padding: 10px;
+  background-color: teal;
+  color: var(--text);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.resultContainer {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+}
+
+.resultText {
+  font-size: 14px;
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.errorText {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}

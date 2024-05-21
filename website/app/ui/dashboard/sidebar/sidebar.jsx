@@ -31,12 +31,12 @@ const menuItems = [
       },
       {
         title: "Sections",
-        path: "/dashboard/Sections",
+        path: "/dashboard/sections",
         icon: <MdWork />,
       },
       {
         title: "Notification",
-        path: "/dashboard/Notification",
+        path: "/dashboard/notification",
         icon: <MdPeople />,
       },
       {

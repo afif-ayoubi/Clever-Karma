@@ -1,0 +1,37 @@
+.predictionContainer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .generateButton {
+    padding: 10px 20px;
+    background-color: teal;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .generateButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }
+  
+  .resultContainer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
+  }
+  
+  .resultText {
+    font-size: 14px;
+    white-space: pre-wrap;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  

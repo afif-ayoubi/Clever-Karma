@@ -1,7 +1,8 @@
+'use client';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../store/user/user.slice';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import styles from './loginForm.module.css';
 import { AppDispatch } from '@/app/store/store';
 

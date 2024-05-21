@@ -1,0 +1,99 @@
+'use client'
+import React, { useState } from 'react';
+import axios from 'axios';
+import styles from '../../ui/dashboard/users/addUser/addUser.module.css';
+
+const Prediction = () => {
+  const [season, setSeason] = useState('');
+  const [accidents, setAccidents] = useState();
+  const [demographicFactor, setDemographicFactor] = useState('');
+  const [location, setLocation] = useState('');
+  const [predictionResult, setPredictionResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleGeneratePrediction = () => {
+    setLoading(true);
+
+    let data = JSON.stringify({
+      "accidentData": {
+        "season": season,
+        "accidents": accidents,
+        "demographicFactor": demographicFactor,
+        "location": location
+      }
+    });
+
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'http://localhost:3000/openai/chat',
+      headers: {
+        'Authorization': 'Bearer sk-proj-xsubwmvi8OI9OMOc0X0DT3BlbkFJLuajODlwe8qXGgn0dwON',
+        'Content-Type': 'application/json'
+      },
+      data: data
+    };
+
+    axios.request(config)
+      .then((response) => {
+        console.log(response.data);
+        setPredictionResult(response.data);
+        setLoading(false);
+        setError('');
+      })
+      .catch((error) => {
+        console.error('Error fetching prediction:', error);
+        setLoading(false);
+        setError('Error generating prediction. Please try again.');
+      });
+  };
+
+  return (
+    <div className={styles.container}>
+      <h2>Prediction</h2>
+      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+        <input
+          type="text"
+          placeholder="Season"
+          value={season}
+          onChange={(e) => setSeason(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="number"
+          placeholder="Accidents"
+          value={accidents}
+          onChange={(e:any) => setAccidents(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Demographic Factor"
+          value={demographicFactor}
+          onChange={(e) => setDemographicFactor(e.target.value)}
+          className={styles.input}
+        />
+        <input
+          type="text"
+          placeholder="Location"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className={styles.input}
+        />
+        <button className={styles.button} onClick={handleGeneratePrediction} disabled={loading}>
+          {loading ? 'Generating...' : 'Generate Prediction'}
+        </button>
+      </form>
+      {error && <p className={styles.errorText}>{error}</p>}
+      {predictionResult && (
+        <div className={styles.resultContainer}>
+          <h3>Prediction Result:</h3>
+          <pre className={styles.resultText}>{JSON.stringify(predictionResult, null, 2)}</pre>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Prediction;
