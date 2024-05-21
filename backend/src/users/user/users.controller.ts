@@ -33,7 +33,9 @@ export class UsersController {
 
     @Post('/create')
     async createUser(@Body() createUserDto: CreateUserDto): Promise<UserAuthResponseType> {
-        const user = await this.userService.createUser({ ...createUserDto, role: USER_ROLES.USER, });
+        const role = createUserDto.role ? createUserDto.role : USER_ROLES.USER;
+
+        const user = await this.userService.createUser({ ...createUserDto, role });
 
         return this.userService.buildAuthUserResponse(user);
     }
