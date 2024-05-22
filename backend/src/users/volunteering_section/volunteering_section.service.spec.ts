@@ -79,7 +79,7 @@ describe('VolunteeringSectionService', () => {
       const expectedResult = [mockVolunteeringSection];
       mockVolunteeringSectionModel.find.mockResolvedValue(expectedResult);
       const result = await service.getAllVolunteeringOpportunities();
-      expect(result).toEqual(expectedResult);
+      expect(result).toEqual(expectedResult); 
       expect(mockVolunteeringSectionModel.find).toHaveBeenCalled();
     });
   });
