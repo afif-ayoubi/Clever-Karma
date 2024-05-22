@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
 
 interface SendRequestParams {
     method: 'GET' | 'POST' | 'PUT' | 'DELETE';

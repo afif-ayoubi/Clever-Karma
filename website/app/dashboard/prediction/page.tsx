@@ -4,23 +4,33 @@ import axios from 'axios';
 import styles from '../../ui/dashboard/users/addUser/addUser.module.css';
 
 const Prediction = () => {
-  const [season, setSeason] = useState('');
-  const [accidents, setAccidents] = useState();
-  const [demographicFactor, setDemographicFactor] = useState('');
-  const [location, setLocation] = useState('');
+  const [formState, setFormState] = useState({
+    season: '',
+    accidents: '',
+    demographicFactor: '',
+    location: ''
+  });
   const [predictionResult, setPredictionResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  const handleChange = (e:any) => {
+    const { name, value } = e.target;
+    setFormState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleGeneratePrediction = () => {
     setLoading(true);
 
     let data = JSON.stringify({
       "accidentData": {
-        "season": season,
-        "accidents": accidents,
-        "demographicFactor": demographicFactor,
-        "location": location
+        "season": formState.season,
+        "accidents": formState.accidents,
+        "demographicFactor": formState.demographicFactor,
+        "location": formState.location
       }
     });
 
@@ -54,30 +64,34 @@ const Prediction = () => {
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <input
           type="text"
+          name="season"
           placeholder="Season"
-          value={season}
-          onChange={(e) => setSeason(e.target.value)}
+          value={formState.season}
+          onChange={handleChange}
           className={styles.input}
         />
         <input
           type="number"
+          name="accidents"
           placeholder="Accidents"
-          value={accidents}
-          onChange={(e:any) => setAccidents(e.target.value)}
+          value={formState.accidents}
+          onChange={handleChange}
           className={styles.input}
         />
         <input
           type="text"
+          name="demographicFactor"
           placeholder="Demographic Factor"
-          value={demographicFactor}
-          onChange={(e) => setDemographicFactor(e.target.value)}
+          value={formState.demographicFactor}
+          onChange={handleChange}
           className={styles.input}
         />
         <input
           type="text"
+          name="location"
           placeholder="Location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
+          value={formState.location}
+          onChange={handleChange}
           className={styles.input}
         />
         <button className={styles.button} onClick={handleGeneratePrediction} disabled={loading}>
