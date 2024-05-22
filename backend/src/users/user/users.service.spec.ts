@@ -234,12 +234,12 @@ describe('UsersService', () => {
   describe('followOrganization', () => {
     const followDto: FollowDto = { organizationId: '61c0ccf11d7bf83d153d7c07' };
 
-    it('should follow an organization', async () => { 
+    it('should follow an organization', async () => {  
       const user = { ...mockUser, role: USER_ROLES.USER, followers: [], save: jest.fn().mockResolvedValue(mockUser) };
       const organization = { ...mockUser, _id: '61c0ccf11d7bf83d153d7c07', role: USER_ROLES.ORGANIZATION };
 
       mockUserModel.findById.mockResolvedValueOnce(user).mockResolvedValueOnce(organization);
-
+ 
       const result = await service.followOrganization(mockUser._id, followDto);
 
       expect(mockUserModel.findById).toHaveBeenCalledWith(mockUser._id);
