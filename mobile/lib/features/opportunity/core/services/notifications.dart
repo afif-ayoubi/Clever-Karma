@@ -21,7 +21,7 @@ void notificationTapBackground(
   final token = prefs.getString('token');
   if (token == null) {
     navigatorKey.currentContext!.go(Routes.authRoute);
-  } else {
+  } else { 
     navigatorKey.currentContext!.go(Routes.entryPage);
   }
 }
